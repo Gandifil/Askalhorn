@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askalhorn", "Askalhorn\Askalhorn.csproj", "{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Askalhorn", "Askalhorn\Askalhorn.csproj", "{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Askalhorn.Mechanics", "Askalhorn.Mechanics\Askalhorn.Mechanics.csproj", "{1472002D-BC09-414D-9ECE-A80C73ADAB89}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Askalhorn.Mechanics.Tests", "Askalhorn.Mechanics.Tests\Askalhorn.Mechanics.Tests.csproj", "{EE661360-FD93-4BEF-A5B2-5200BD1D44DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askalhorn.Mechanics.CUITests", "Askalhorn.Mechanics.CUITests\Askalhorn.Mechanics.CUITests.csproj", "{0AFFD710-8903-46D6-AE72-82E7A14F30FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE661360-FD93-4BEF-A5B2-5200BD1D44DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE661360-FD93-4BEF-A5B2-5200BD1D44DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE661360-FD93-4BEF-A5B2-5200BD1D44DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE661360-FD93-4BEF-A5B2-5200BD1D44DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AFFD710-8903-46D6-AE72-82E7A14F30FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFFD710-8903-46D6-AE72-82E7A14F30FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFFD710-8903-46D6-AE72-82E7A14F30FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFFD710-8903-46D6-AE72-82E7A14F30FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
