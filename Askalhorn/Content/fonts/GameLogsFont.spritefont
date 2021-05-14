@@ -50,11 +50,15 @@ with.
     character set. The characters are ordered according to the Unicode standard.
     See the documentation for more information.
     -->
-    <CharacterRegions>
+   <CharacterRegions>
       <CharacterRegion>
-        <Start>&#32;</Start>
-        <End>&#126;</End>
+        <Start>32</Start>
+        <End>127</End>
       </CharacterRegion>
-    </CharacterRegions>
+  <CharacterRegion>
+    <Start>&#1040;</Start>
+    <End>&#1112;</End>
+    </CharacterRegion>
+        </CharacterRegions>
   </Asset>
 </XnaContent>

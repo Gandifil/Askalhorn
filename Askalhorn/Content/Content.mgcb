@@ -14,6 +14,13 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin fonts/GameLogsFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/GameLogsFont.spritefont
+
 #begin fonts/MenuGame.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
