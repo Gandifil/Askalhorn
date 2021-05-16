@@ -3,6 +3,7 @@ using Askalhorn.Common;
 using Askalhorn.Common.Characters;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
+using Askalhorn.Logging;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,6 +13,7 @@ using MonoGame.Extended.Screens;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.ViewportAdapters;
+using Serilog;
 
 namespace AmbrosiaGame.Screens
 {
@@ -24,6 +26,7 @@ namespace AmbrosiaGame.Screens
 
         private ILocation location;
         private ICharacter player;
+        private GameLog log;
 
         public GameProcessScreen(Game game)
             : base(game)
@@ -54,24 +57,21 @@ namespace AmbrosiaGame.Screens
                 shift = new Point(0, 1);
 
             if (e.Key == Keys.A)
-                shift = new Point(1, 0);
-
-            if (e.Key == Keys.D)
                 shift = new Point(-1, 0);
 
-            //location.TiledMap.Layers.
-             if (shift.HasValue)
-            //     if (CheckCell(world.GetPlayer().Position + shift.Value))
-                     player.Position.Move(shift.Value);
+            if (e.Key == Keys.D)
+                shift = new Point(1, 0);
+
+            if (shift.HasValue)
+            {
+                player.Position.Move(shift.Value);
+                Log.Information("Shift player to {Point}", player.Position.Point);
+            }
         }
-        //
-        // private bool CheckCell(Point point)
-        // {
-        //     return world.IsFreeCell(point.X, point.Y);
-        // }
-        //
+        
         public override void LoadContent()
         {
+            log = new GameLog(GraphicsDevice);
             location = new TiledMapLocation("start");
             player = new StaticCharacter()
             {
@@ -116,7 +116,7 @@ namespace AmbrosiaGame.Screens
             spriteBatch.Begin(transformMatrix: matrix, samplerState: SamplerState.PointClamp);
             mapRenderer.Draw(matrix);
             player.Draw(spriteBatch, matrix);
-            GameLog.Draw(spriteBatch);
+            log.Draw();
             spriteBatch.End();
         }
     }

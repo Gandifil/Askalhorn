@@ -1,6 +1,7 @@
 ﻿using AmbrosiaGame.Screens;
 using AmbrosiaGame.Utils;
 using Askalhorn.Common;
+using Askalhorn.Logging;
 using Askalhorn.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,7 +47,6 @@ namespace Askalhorn
             IsMouseVisible = true;
 
             Storage.Initialize(Content);
-            GameLog.Initialize(Content);
             LineRenderer.Initialize(GraphicsDevice);
 
             SpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -54,7 +54,6 @@ namespace Askalhorn
             var style = new UntexturedStyle(SpriteBatch)
             {
                 Font = new GenericSpriteFont(Content.Load<SpriteFont>("fonts/MenuGame")),
-                //ButtonTexture = new NinePatch(Content.Load<Texture2D>("Textures/ExampleTexture"), padding: 1)
             };
             UiSystem = new UiSystem(Window, GraphicsDevice, style);
         }
@@ -63,7 +62,6 @@ namespace Askalhorn
         {
             base.LoadContent();
 
-            GameLog.Write("Loading");
             ScreenManager.LoadScreen(new MainMenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black, 0.5f));    
         }
 

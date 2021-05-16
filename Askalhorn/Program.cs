@@ -1,4 +1,6 @@
 ﻿using System;
+using Askalhorn.Logging;
+using Serilog;
 
 namespace Askalhorn
 {
@@ -7,6 +9,11 @@ namespace Askalhorn
         [STAThread]
         static void Main()
         {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.GameLog()
+                .CreateLogger();
+            
             using (var game = new AskalhornGame())
                 game.Run();
         }
