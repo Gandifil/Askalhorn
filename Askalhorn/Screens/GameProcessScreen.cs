@@ -2,6 +2,7 @@
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
 using Askalhorn.Logging;
+using Askalhorn.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,6 +20,7 @@ namespace AmbrosiaGame.Screens
     {
         private SpriteBatch spriteBatch;
         private TiledMapRenderer mapRenderer;
+        private CharacterRenderer characterRenderer;
         private OrthographicCamera camera;
         private KeyboardListener keyboardListener;
 
@@ -38,6 +40,7 @@ namespace AmbrosiaGame.Screens
             var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 1280, 1024);
             camera = new OrthographicCamera(viewportAdapter);
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
+            characterRenderer = new CharacterRenderer();
             log = new GameLog(GraphicsDevice);
             keyboardListener = new KeyboardListener();
 
@@ -108,7 +111,7 @@ namespace AmbrosiaGame.Screens
             spriteBatch.Begin(transformMatrix: matrix, samplerState: SamplerState.PointClamp);
             mapRenderer.Draw(matrix);
             foreach (var item in world.Characters)
-                item.Draw(spriteBatch, matrix);
+                characterRenderer.Draw(spriteBatch, item);
             log.Draw();
             spriteBatch.End();
         }
