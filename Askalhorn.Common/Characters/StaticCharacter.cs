@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Geography.Local;
+﻿using Askalhorn.Common.Control;
+using Askalhorn.Common.Geography.Local;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,6 +7,7 @@ namespace Askalhorn.Common.Characters
 {
     public class StaticCharacter: ICharacter
     {
+        public IController Controller { get; set; }
         public Texture2D Texture { get; set; }
 
         public Position Position { get; set; }

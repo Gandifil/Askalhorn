@@ -1,6 +1,7 @@
 ﻿using AmbrosiaGame.Utils;
 using Askalhorn.Common;
 using Askalhorn.Common.Characters;
+using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Logging;
@@ -64,8 +65,8 @@ namespace AmbrosiaGame.Screens
 
             if (shift.HasValue)
             {
-                world.player.Position.Move(shift.Value);
-                Log.Information("Shift player to {Point}", world.player.Position.Point);
+                world.playerController.AddMove(new MovementMove(shift.Value));
+                world.Turn();
             }
         }
         
