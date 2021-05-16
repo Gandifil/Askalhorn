@@ -24,9 +24,8 @@ namespace AmbrosiaGame.Screens
         private OrthographicCamera camera;
         private KeyboardListener keyboardListener;
 
-        private ILocation location;
-        private ICharacter player;
         private GameLog log;
+        private World world;
 
         public GameProcessScreen(Game game)
             : base(game)
@@ -41,6 +40,7 @@ namespace AmbrosiaGame.Screens
             var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 1280, 1024);
             camera = new OrthographicCamera(viewportAdapter);
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
+            log = new GameLog(GraphicsDevice);
             keyboardListener = new KeyboardListener();
 
             keyboardListener.KeyReleased += KeyRelease;
@@ -64,21 +64,15 @@ namespace AmbrosiaGame.Screens
 
             if (shift.HasValue)
             {
-                player.Position.Move(shift.Value);
-                Log.Information("Shift player to {Point}", player.Position.Point);
+                world.player.Position.Move(shift.Value);
+                Log.Information("Shift player to {Point}", world.player.Position.Point);
             }
         }
         
         public override void LoadContent()
         {
-            log = new GameLog(GraphicsDevice);
-            location = new TiledMapLocation("start");
-            player = new StaticCharacter()
-            {
-                Texture = Storage.Content.Load<Texture2D>("images/mage"),
-                Position = new Position(0, 0),
-            };
-            mapRenderer.LoadMap(location.TiledMap);
+            world = new World();
+            mapRenderer.LoadMap(world.Location.TiledMap);
         }
 
         public override void UnloadContent()
@@ -115,7 +109,8 @@ namespace AmbrosiaGame.Screens
             var matrix = camera.GetViewMatrix();
             spriteBatch.Begin(transformMatrix: matrix, samplerState: SamplerState.PointClamp);
             mapRenderer.Draw(matrix);
-            player.Draw(spriteBatch, matrix);
+            foreach (var item in world.Characters)
+                item.Draw(spriteBatch, matrix);
             log.Draw();
             spriteBatch.End();
         }
