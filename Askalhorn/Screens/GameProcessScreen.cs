@@ -1,9 +1,6 @@
 ﻿using AmbrosiaGame.Utils;
 using Askalhorn.Common;
-using Askalhorn.Common.Characters;
 using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Geography;
-using Askalhorn.Common.Geography.Local;
 using Askalhorn.Logging;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

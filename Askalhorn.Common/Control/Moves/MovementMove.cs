@@ -1,5 +1,4 @@
-﻿using Askalhorn.Common.Characters;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Serilog;
 
 namespace Askalhorn.Common.Control.Moves
@@ -19,9 +18,9 @@ namespace Askalhorn.Common.Control.Moves
             this.offset = offset;
         }
         
-        public void Make(World world, ICharacter character)
+        void IMove.Make(World world, Character character)
         {
-            character.Position.Move(offset);
+            character.Position.Point += offset;
             
             Log.Verbose("Shift player with offset {offset} to {Point}", offset, character.Position.Point);
         }

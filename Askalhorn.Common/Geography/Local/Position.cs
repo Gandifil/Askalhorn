@@ -2,7 +2,7 @@
 
 namespace Askalhorn.Common.Geography.Local
 {
-    public class Position
+    internal class Position: IPosition
     {
         public Point Point { get; set; }
 
@@ -13,12 +13,6 @@ namespace Askalhorn.Common.Geography.Local
         public Position(int x, int y)
         {
             Point = new Point(x, y);
-        }
-
-        public void Move(Point shift)
-        {
-            Point += shift;
-            //GameLog.Write("Object has been moved " + Position.ToString());
         }
 
         private static readonly Vector2 xi = new Vector2(32, 16);

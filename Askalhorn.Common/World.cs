@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
-using Askalhorn.Common.Characters;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
@@ -14,7 +13,11 @@ namespace Askalhorn.Common
     {
         public ILocation Location { get; protected set; }
 
-        public IEnumerable<ICharacter> Characters { get; protected set; } = new List<ICharacter>();
+        //public IEnumerable<ICharacter> Characters { get; protected set; } = new List<ICharacter>();
+
+        public IEnumerable<ICharacter> Characters => _characters;
+
+        private List<Character> _characters;// = new List<Character>();
 
         public readonly BufferController playerController = new BufferController();
         
@@ -25,15 +28,15 @@ namespace Askalhorn.Common
         {
             Location = new TiledMapLocation("start");
             
-            Characters = new List<ICharacter>
+            _characters = new List<Character>
             {
-                new StaticCharacter()
+                new Character()
                 {
                     Texture = Storage.Content.Load<Texture2D>("images/mage"),
                     Position = new Position(0, 0),
                     Controller = playerController,
                 },
-                new StaticCharacter()
+                new Character()
                 {
                     Texture = Storage.Content.Load<Texture2D>("images/mage2"),
                     Position = new Position(2, 2),
@@ -46,7 +49,7 @@ namespace Askalhorn.Common
         {
             Log.Information("Run moves from all Controllers.");
 
-            foreach (var character in Characters)
+            foreach (var character in _characters)
             foreach (var move in character.Controller.Moves)
                 move.Make(this, character);
         }
