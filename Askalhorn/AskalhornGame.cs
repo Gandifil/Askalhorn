@@ -1,6 +1,6 @@
-﻿using AmbrosiaGame.Resources;
-using AmbrosiaGame.Screens;
+﻿using AmbrosiaGame.Screens;
 using AmbrosiaGame.Utils;
+using Askalhorn.Common;
 using Askalhorn.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -45,7 +45,7 @@ namespace Askalhorn
             Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>("images/cursor"), 0, 0));
             IsMouseVisible = true;
 
-            InfoManager.Initialize(Content);
+            Storage.Initialize(Content);
             GameLog.Initialize(Content);
             LineRenderer.Initialize(GraphicsDevice);
 
@@ -63,6 +63,7 @@ namespace Askalhorn
         {
             base.LoadContent();
 
+            GameLog.Write("Loading");
             ScreenManager.LoadScreen(new MainMenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black, 0.5f));    
         }
 
@@ -85,6 +86,8 @@ namespace Askalhorn
             // TODO: Add your drawing code here
             // Call Draw at the end to draw the Ui on top of your game
             UiSystem.Draw(gameTime, SpriteBatch);
+            //GameLog.Draw(SpriteBatch);
+            //LineRenderer.Draw(SpriteBatch, );
         }
     }
 }

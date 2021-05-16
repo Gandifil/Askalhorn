@@ -1,7 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Reflection.Metadata;
+using AmbrosiaGame.Screens;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MLEM.Font;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
+using MLEM.Ui.Style;
 using MonoGame.Extended.Screens;
 
 namespace Askalhorn.Screens
@@ -22,20 +26,25 @@ namespace Askalhorn.Screens
         }
 
         public override void LoadContent() { 
-            //font = game.Content.Load<SpriteFont>("fonts/GameLogsFont");
-            var box = new Panel(Anchor.AutoCenter, new Vector2(0.5f, 0.5f), Vector2.Zero, setHeightBasedOnChildren: true);
-            var startButton = new Button(Anchor.Center, new Vector2(0.5F, 40), "Okay", "Okay", 200)
+            var style = new UntexturedStyle(game.SpriteBatch) {
+                Font = new GenericSpriteFont(game.Content.Load<SpriteFont>("fonts/GameLogsFont")),
+
+            };
+            game.UiSystem.Style = style;
+            
+            var box = new Panel(Anchor.Center, new Vector2(0.5f, 0.5f), Vector2.Zero, setHeightBasedOnChildren: true);
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Новая карта", "Okay", 200)
             {
                 OnPressed = element => ScreenManager.LoadScreen(new WorldGenerationScreen(game)),
-                PositionOffset = new Vector2(0, 1)
-            };
-            var exitButton = new Button(Anchor.Center, new Vector2(0.5F, 40), "Exit")
+            });
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Играть", "Okay", 200)
             {
-                //OnPressed = element => game.UiSystem.Remove("InfoBox"),
-                PositionOffset = new Vector2(0, 100)
-            };
-            box.AddChild(startButton);
-            box.AddChild(exitButton);
+                OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game)),
+            });
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход", "Okay", 200)
+            {
+                OnPressed = element => game.Exit(),
+            });
             game.UiSystem.Add("MainMenuBox", box);
         }
 

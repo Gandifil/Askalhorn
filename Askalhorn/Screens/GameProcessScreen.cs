@@ -1,5 +1,8 @@
-﻿using AmbrosiaGame.GameWorld;
-using AmbrosiaGame.Utils;
+﻿using AmbrosiaGame.Utils;
+using Askalhorn.Common;
+using Askalhorn.Common.Characters;
+using Askalhorn.Common.Geography;
+using Askalhorn.Common.Geography.Local;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,8 +22,8 @@ namespace AmbrosiaGame.Screens
         private OrthographicCamera camera;
         private KeyboardListener keyboardListener;
 
-        private IWorld world;
-
+        private ILocation location;
+        private ICharacter player;
 
         public GameProcessScreen(Game game)
             : base(game)
@@ -32,7 +35,7 @@ namespace AmbrosiaGame.Screens
             base.Initialize();
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 800, 600);
+            var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 1280, 1024);
             camera = new OrthographicCamera(viewportAdapter);
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
             keyboardListener = new KeyboardListener();
@@ -56,20 +59,26 @@ namespace AmbrosiaGame.Screens
             if (e.Key == Keys.D)
                 shift = new Point(-1, 0);
 
-            if (shift.HasValue)
-                if (CheckCell(world.GetPlayer().Position + shift.Value))
-                    world.GetPlayer().Move(shift.Value);
+            //location.TiledMap.Layers.
+             if (shift.HasValue)
+            //     if (CheckCell(world.GetPlayer().Position + shift.Value))
+                     player.Position.Move(shift.Value);
         }
-
-        private bool CheckCell(Point point)
-        {
-            return world.IsFreeCell(point.X, point.Y);
-        }
-        
+        //
+        // private bool CheckCell(Point point)
+        // {
+        //     return world.IsFreeCell(point.X, point.Y);
+        // }
+        //
         public override void LoadContent()
         {
-            world = new LocalWorld(Content.Load<TiledMap>("maps/start"));
-            mapRenderer.LoadMap(world.GetTiledMap());
+            location = new TiledMapLocation("start");
+            player = new StaticCharacter()
+            {
+                Texture = Storage.Content.Load<Texture2D>("images/mage"),
+                Position = new Position(0, 0),
+            };
+            mapRenderer.LoadMap(location.TiledMap);
         }
 
         public override void UnloadContent()
@@ -103,18 +112,11 @@ namespace AmbrosiaGame.Screens
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(transformMatrix: camera.GetViewMatrix(), samplerState: SamplerState.PointClamp);
-            mapRenderer.Draw(camera.GetViewMatrix());
-
-            foreach (var obj in world.GetGameObjects())
-                obj.Draw(spriteBatch);
-
-            spriteBatch.End();
-
-            spriteBatch.Begin();
-
+            var matrix = camera.GetViewMatrix();
+            spriteBatch.Begin(transformMatrix: matrix, samplerState: SamplerState.PointClamp);
+            mapRenderer.Draw(matrix);
+            player.Draw(spriteBatch, matrix);
             GameLog.Draw(spriteBatch);
-
             spriteBatch.End();
         }
     }
