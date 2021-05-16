@@ -26,7 +26,7 @@ namespace Askalhorn.Common
         /// </summary>
         public World()
         {
-            Location = new TiledMapLocation("start");
+            Location = new ManagedLocation();//new TiledMapLocation("start");
             
             _characters = new List<Character>
             {

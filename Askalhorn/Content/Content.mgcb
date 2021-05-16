@@ -76,6 +76,11 @@
 /processorParam:TextureFormat=Color
 /build:maps/grassland_tiles.png
 
+#begin maps/grassland_tiles.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:maps/grassland_tiles.tsx
+
 #begin maps/start.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
