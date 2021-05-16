@@ -52,7 +52,7 @@
 /processorParam:TextureFormat=Color
 /build:images/mage.png
 
-#begin images/player.png
+#begin images/mage2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -62,7 +62,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/player.png
+/build:images/mage2.png
 
 #begin maps/grassland_tiles.png
 /importer:TextureImporter
