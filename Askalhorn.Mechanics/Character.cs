@@ -18,8 +18,6 @@ namespace Askalhorn.Mechanics
 
         int ICharacter.Energy => throw new System.NotImplementedException();
 
-        IEnumerable<IAbility> ICharacter.Abilities => throw new System.NotImplementedException();
-
         public bool IsAlive => true;
 
         public Attributes<BaseAttributeTypes> Primary { get; private set; } = new Attributes<BaseAttributeTypes>();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Maths;
+using Askalhorn.Common.Mechanics;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common
@@ -18,5 +19,7 @@ namespace Askalhorn.Common
         IPosition Position { get; }
         
         IEnumerable<IPosition> CanMoveTo { get; }
+        
+        IEnumerable<IAbility> Abilities { get; }
     }
 }

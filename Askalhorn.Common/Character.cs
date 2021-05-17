@@ -3,6 +3,8 @@ using System.Linq;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Maths;
+using Askalhorn.Common.Mechanics;
+using Askalhorn.Common.Mechanics.Abilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -33,5 +35,13 @@ namespace Askalhorn.Common
             {
                 Point = Position.Point + x,
             });
+
+        IEnumerable<IAbility> ICharacter.Abilities => Abilities;
+
+        public List<IAbility> Abilities { get; set; } = new List<IAbility>()
+        {
+            new FireBall()
+                { }
+        };
     }
 }

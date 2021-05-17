@@ -9,6 +9,8 @@ using Askalhorn.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MLEM.Ui;
+using MLEM.Ui.Elements;
 using MonoGame.Extended;
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
@@ -19,6 +21,7 @@ namespace AmbrosiaGame.Screens
 {
     public class GameProcessScreen: GameScreen
     {
+        public AskalhornGame game;
         private SpriteBatch spriteBatch;
         private OrthographicCamera camera;
         
@@ -32,6 +35,7 @@ namespace AmbrosiaGame.Screens
         public GameProcessScreen(AskalhornGame game)
             : base(game)
         {
+            this.game = game;
         }
 
         public override void Initialize()
@@ -95,6 +99,21 @@ namespace AmbrosiaGame.Screens
             world = new World();
             mapRenderer.LoadMap(world.Location.TiledMap);
             movements = new MovementTiles(world.Characters.First());
+            
+            
+            var box = new Panel(Anchor.BottomCenter, new Vector2(0.75f, 0.1f), Vector2.Zero);
+
+            foreach (var item in world.Characters.First().Abilities)
+            {
+                var image = new Image(Anchor.Center, new Vector2(0.6F, 0.75F), new MLEM.Textures.TextureRegion(item.Icon));
+                image.CanBeMoused = true;
+                var tooltip = new Tooltip(200, item.Name + "\n" + item.Description, image);
+                tooltip.MouseOffset = new Vector2(32, -64);
+                tooltip.AddChild(new Image(Anchor.Center, new Vector2(0.6F, 0.75F), new MLEM.Textures.TextureRegion(item.Icon)));
+                tooltip.AddChild(new Button(Anchor.BottomCenter, Vector2.Zero, "test"));
+                box.AddChild(image);
+            }
+            game.UiSystem.Add("box", box);
         }
 
         public override void UnloadContent()

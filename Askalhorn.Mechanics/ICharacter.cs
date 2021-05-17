@@ -32,8 +32,6 @@ namespace Askalhorn.Mechanics
 
         int Energy { get; }
 
-        IEnumerable<IAbility> Abilities { get; }
-
         bool IsAlive { get; }
 
         IAttributes<BaseAttributeTypes> Primary { get; }
