@@ -2,9 +2,9 @@
 
 namespace Askalhorn.Common.Maths
 {
-    public interface IObservedParameter
+    public interface IObservedParameter<T>
     {
-        int Value { get; set; }
+        T Value { get; set; }
         event Action Changed;
     }
 }

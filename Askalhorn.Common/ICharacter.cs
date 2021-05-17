@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Geography.Local;
+﻿using System.Collections.Generic;
+using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Maths;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,12 +9,14 @@ namespace Askalhorn.Common
     {
         string Name { get; }
         
-        IObservedParameter HP { get; }
+        IObservedParameter<uint> HP { get; }
         
-        IObservedParameter MaxHP { get; }
+        IObservedParameter<uint> MaxHP { get; }
         
         Texture2D Texture { get; }
         
         IPosition Position { get; }
+        
+        IEnumerable<IPosition> CanMoveTo { get; }
     }
 }

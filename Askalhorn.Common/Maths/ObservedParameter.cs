@@ -2,24 +2,21 @@
 
 namespace Askalhorn.Common.Maths
 {
-    public class ObservedParameter : IObservedParameter
+    public class ObservedParameter<T> : IObservedParameter<T>
     {
-        private int _value = 0;
+        private T _value;
 
-        public int Value
+        public T Value
         {
             get { return _value; }
             set
             {
-                if (value != _value)
-                {
-                    _value = value;
-                    OnChanged();
-                }
+                _value = value;
+                OnChanged();
             }
         }
 
-        public ObservedParameter(int x)
+        public ObservedParameter(T x)
         {
             _value = x;
         }
@@ -31,7 +28,7 @@ namespace Askalhorn.Common.Maths
 
         public event Action Changed;
 
-        public static implicit operator int(ObservedParameter p)
+        public static implicit operator T(ObservedParameter<T> p)
         {
             return p._value;
         }

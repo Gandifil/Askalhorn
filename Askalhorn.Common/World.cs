@@ -36,16 +36,16 @@ namespace Askalhorn.Common
                     Texture = Storage.Content.Load<Texture2D>("images/mage"),
                     Position = new Position(0, 0),
                     Controller = playerController,
-                    HP = new ObservedParameter(100),
-                    MaxHP = new ObservedParameter(100),
+                    HP = new ObservedParameter<uint>(100),
+                    MaxHP = new ObservedParameter<uint>(100),
                 },
                 new Character()
                 {
                     Texture = Storage.Content.Load<Texture2D>("images/mage2"),
                     Position = new Position(2, 2),
                     Controller = new RandomMovementController(),
-                    HP = new ObservedParameter(20),
-                    MaxHP = new ObservedParameter(100),
+                    HP = new ObservedParameter<uint>(20),
+                    MaxHP = new ObservedParameter<uint>(100),
                 },
             };
         }
