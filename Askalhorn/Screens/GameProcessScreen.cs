@@ -1,6 +1,10 @@
-﻿using AmbrosiaGame.Utils;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AmbrosiaGame.Utils;
 using Askalhorn.Common;
+using Askalhorn.Common.Control;
 using Askalhorn.Common.Control.Moves;
+using Askalhorn.Common.Geography.Local;
 using Askalhorn.Logging;
 using Askalhorn.Render;
 using Microsoft.Xna.Framework;
@@ -103,13 +107,38 @@ namespace AmbrosiaGame.Screens
             mapRenderer.Update(gameTime);
         }
         
+        private static readonly List<Point> Variants = new List<Point>
+        {
+            new Point(0, -1),
+            new Point(0, 1),
+            new Point(1, 0),
+            new Point(-1, 0),
+        };
+        
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            var texture = Content.Load<Texture2D>("images/movement");
+            var texture2 = Content.Load<Texture2D>("images/movement_selected");
 
             var matrix = camera.GetViewMatrix();
             spriteBatch.Begin(transformMatrix: matrix, samplerState: SamplerState.PointClamp);
             mapRenderer.Draw(matrix);
+            var player = world.Characters.First();
+            foreach (var item in Variants)
+            {
+                
+                var pos = new Position()
+                {
+                    Point = player.Position.Point + item,
+                };
+                var r = Vector2.Transform(pos.RenderVectorOrigin, matrix);
+                if ((r - Mouse.GetState().Position.ToVector2()).Length() < 40)
+                    spriteBatch.Draw(texture2, pos.RenderVector, Color.White);
+                else
+                    spriteBatch.Draw(texture, pos.RenderVector, Color.White);
+            }
+            
             foreach (var item in world.Characters)
                 characterRenderer.Draw(spriteBatch, item);
             log.Draw();

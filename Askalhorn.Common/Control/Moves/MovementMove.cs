@@ -22,7 +22,7 @@ namespace Askalhorn.Common.Control.Moves
         {
             character.Position.Point += offset;
             
-            Log.Verbose("Shift player with offset {offset} to {Point}", offset, character.Position.Point);
+            Log.Information("Shift player with offset {offset} to {Point}", offset, character.Position.Point);
         }
     }
 }
