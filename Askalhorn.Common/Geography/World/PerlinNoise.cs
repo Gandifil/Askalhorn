@@ -29,7 +29,6 @@ namespace Askalhorn.Common.Geography.World
             tempMap.AddPerlinNoise(10f, 0.5f);
             tempMap.AddPerlinNoise(5f, 1f);
             tempMap.AddPerlinNoise(2f, 2f);
-            levelMap.Add(1f);
             
             var hydroMap = new FloatMapBuilder(width, height);
             hydroMap.AddPerlinNoise(5f, 1f);

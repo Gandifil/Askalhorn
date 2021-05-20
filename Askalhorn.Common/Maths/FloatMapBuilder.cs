@@ -58,7 +58,7 @@ namespace Askalhorn.Common.Maths
                     for (int y = 0; y < height; y++)
                     {
                         var radVec = (new Vector2(x, y) - center).Length();
-                        data[x, y] -= radVec / len / 1.5f;
+                        data[x, y] -= radVec / len / 2.5f;
                     }
                 }
             );

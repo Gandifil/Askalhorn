@@ -28,6 +28,7 @@ namespace AmbrosiaGame.Screens
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
         private MovementTiles movements;
+        private ParticleRenderer particles;
 
         private GameLog log;
         private World world;
@@ -96,6 +97,8 @@ namespace AmbrosiaGame.Screens
         
         public override void LoadContent()
         {
+            particles = new ParticleRenderer(GraphicsDevice);
+            
             world = new World();
             mapRenderer.LoadMap(world.Location.TiledMap);
             movements = new MovementTiles(world.Characters.First());
@@ -140,15 +143,8 @@ namespace AmbrosiaGame.Screens
                 camera.Move(new Vector2(0, -10));
 
             mapRenderer.Update(gameTime);
+            particles.Update(gameTime);
         }
-        
-        private static readonly List<Point> Variants = new List<Point>
-        {
-            new Point(0, -1),
-            new Point(0, 1),
-            new Point(1, 0),
-            new Point(-1, 0),
-        };
         
         public override void Draw(GameTime gameTime)
         {
@@ -159,6 +155,7 @@ namespace AmbrosiaGame.Screens
             mapRenderer.Draw(matrix);
             movements.Draw(spriteBatch, matrix);
 
+            particles.Draw(spriteBatch);
             
             foreach (var item in world.Characters)
                 characterRenderer.Draw(spriteBatch, item);

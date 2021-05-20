@@ -1,5 +1,6 @@
 ﻿using System;
-using Askalhorn.Locations.World;
+using Askalhorn.Common.Geography.World;
+using Askalhorn.Common.Geography.World.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Font;
@@ -22,7 +23,7 @@ namespace Askalhorn.Screens
         public WorldGenerationScreen(Game game)
             : base(game)
         {
-            this.game = (AskalhornGame)game;
+            this.game = (AskalhornGame)game; 
         }
 
         public override void Initialize()
