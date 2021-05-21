@@ -22,11 +22,14 @@ namespace Askalhorn.Common
 
         public readonly BufferController playerController = new BufferController();
         
+        public static World Instance { get; private set; }
+        
         /// <summary>
         /// Create world.
         /// </summary>
         public World()
         {
+            Instance = this;
             Location = new ManagedLocation();//new TiledMapLocation("start");
             
             _characters = new List<Character>
