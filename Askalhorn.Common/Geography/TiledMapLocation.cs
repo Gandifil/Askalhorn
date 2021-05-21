@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Geography.Local;
+﻿using System.Collections.Generic;
+using Askalhorn.Common.Geography.Local;
 using MonoGame.Extended.Tiled;
 
 namespace Askalhorn.Common.Geography
@@ -8,6 +9,7 @@ namespace Askalhorn.Common.Geography
         public TiledMap TiledMap { get; private set;  }
 
         public ICell this[uint x, uint y] => throw new System.NotImplementedException();
+        public IReadOnlyCollection<IBuild> Builds { get; }
 
         public TiledMapLocation(string name)
         {

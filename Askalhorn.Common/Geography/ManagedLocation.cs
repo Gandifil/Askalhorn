@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Askalhorn.Common.Geography.Local;
+using Askalhorn.Common.Geography.Local.Builds;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Tiled;
 
 namespace Askalhorn.Common.Geography
@@ -11,6 +14,9 @@ namespace Askalhorn.Common.Geography
         public TiledMap TiledMap { get; set; }
 
         public ICell this[uint x, uint y] => throw new System.NotImplementedException();
+
+        IReadOnlyCollection<IBuild> ILocation.Builds => Builds;
+        public List<IBuild> Builds { get; private set; } = new List<IBuild>();
 
         public ManagedLocation()
         {
@@ -30,8 +36,13 @@ namespace Askalhorn.Common.Geography
             
             
             TiledMap.AddLayer(layer);
-            
-            
+
+            AddBuild<LocalTeleport>(0, 0);
+        }
+        
+        protected void AddBuild<T>(int x, int y) where T:IBuild, new()
+        {
+            Builds.Add(new T());
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Askalhorn
             Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>("images/cursor"), 0, 0));
             IsMouseVisible = true;
 
-            Storage.Initialize(Content);
+            Storage.Initialize(Content, GraphicsDevice);
             log = new GameLog(GraphicsDevice);
             LineRenderer.Initialize(GraphicsDevice);
 

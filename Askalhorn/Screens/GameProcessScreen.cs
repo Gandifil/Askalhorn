@@ -3,6 +3,7 @@ using System.Linq;
 using Askalhorn;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
+using Askalhorn.Common.Render;
 using Askalhorn.Elements;
 using Askalhorn.Logging;
 using Askalhorn.Render;
@@ -28,7 +29,6 @@ namespace AmbrosiaGame.Screens
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
         private MovementTiles movements;
-        private ParticleRenderer particles;
         private World world;
 
         public GameProcessScreen(AskalhornGame game)
@@ -94,8 +94,6 @@ namespace AmbrosiaGame.Screens
         
         public override void LoadContent()
         {
-            particles = new ParticleRenderer(GraphicsDevice);
-            
             world = new World();
             mapRenderer.LoadMap(world.Location.TiledMap);
             movements = new MovementTiles(world.Characters.First());
@@ -140,7 +138,8 @@ namespace AmbrosiaGame.Screens
                 camera.Move(new Vector2(0, -10));
 
             mapRenderer.Update(gameTime);
-            particles.Update(gameTime);
+            foreach (var build in world.Location.Builds)
+                build.Renderer.Update(gameTime);
         }
         
         public override void Draw(GameTime gameTime)
@@ -152,7 +151,8 @@ namespace AmbrosiaGame.Screens
             mapRenderer.Draw(matrix);
             movements.Draw(spriteBatch, matrix);
 
-            particles.Draw(spriteBatch);
+            foreach (var build in world.Location.Builds)
+                build.Renderer.Draw(spriteBatch, build.Position);
             
             foreach (var item in world.Characters)
                 characterRenderer.Draw(spriteBatch, item);

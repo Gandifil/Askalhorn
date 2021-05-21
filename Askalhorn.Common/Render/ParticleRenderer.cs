@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using Askalhorn.Common.Geography.Local;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Particles;
 using MonoGame.Extended.Particles.Modifiers;
-using MonoGame.Extended.Particles.Modifiers.Containers;
 using MonoGame.Extended.Particles.Modifiers.Interpolators;
 using MonoGame.Extended.Particles.Profiles;
 using MonoGame.Extended.TextureAtlases;
 
-namespace Askalhorn.Render
+namespace Askalhorn.Common.Render
 {
-    public class ParticleRenderer: IDisposable, IUpdate
+    public class ParticleRenderer: IRenderer
     {
         private ParticleEffect _particleEffect;
         private Texture2D _particleTexture;
 
-        public ParticleRenderer(GraphicsDevice GraphicsDevice)
+        public ParticleRenderer()
         {
+            var GraphicsDevice = Storage.GraphicsDevice;
             _particleTexture = new Texture2D(GraphicsDevice, 1, 1);
             _particleTexture.SetData(new[] { Color.White });
 
@@ -46,8 +47,8 @@ namespace Askalhorn.Render
                                 {
                                     new ColorInterpolator
                                     {
-                                        StartValue = Color.OrangeRed.ToHsl(),
-                                        EndValue = Color.LightBlue.ToHsl()
+                                        StartValue = ColorExtensions.ToHsl(Color.OrangeRed),
+                                        EndValue = ColorExtensions.ToHsl(Color.LightBlue)
                                     },
                                     new ScaleInterpolator { StartValue = new Vector2(3,3), EndValue = new Vector2(1,1) }
                                 }
@@ -90,6 +91,12 @@ namespace Askalhorn.Render
         public void Update(GameTime gameTime)
         {
             _particleEffect.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+        }
+
+        public void Draw(SpriteBatch batch, IPosition position)
+        {
+            _particleEffect.Position = position.RenderVector;
+            batch.Draw(_particleEffect);
         }
 
         public void Draw(SpriteBatch batch)
