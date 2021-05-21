@@ -14,6 +14,10 @@ namespace Askalhorn.Common.Geography
         public TiledMap TiledMap { get; set; }
 
         public ICell this[uint x, uint y] => Cells[x, y];
+        
+        public ICell this[Point point] => Cells[point.X, point.Y];
+        
+        public ICell this[IPosition position] => this[position.X, position.Y];
 
         public Cell[,] Cells { get; private set; } = new Cell[50, 50];
 

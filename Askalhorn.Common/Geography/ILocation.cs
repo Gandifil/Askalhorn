@@ -9,7 +9,9 @@ namespace Askalhorn.Common.Geography
     {
         TiledMap TiledMap { get; }
 
-        Local.ICell this[uint x, uint y] { get; }
+        ICell this[uint x, uint y] { get; }
+        
+        ICell this[IPosition position] { get; }
         
         IReadOnlyCollection<IBuild> Builds { get; }
     }
