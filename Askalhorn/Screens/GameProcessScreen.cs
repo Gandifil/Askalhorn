@@ -88,6 +88,12 @@ namespace AmbrosiaGame.Screens
             if (e.Key == Keys.D)
                 shift = new Point(1, 0);
 
+            if (e.Key == Keys.F)
+            {
+                var pos = world.PLayer.Position;
+                world.Location[(uint) pos.X, (uint) pos.Y].Build?.Action();
+            }
+
             if (shift.HasValue)
                 MovePlayerOn(shift.Value);
         }

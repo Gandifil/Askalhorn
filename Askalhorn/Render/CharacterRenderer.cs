@@ -11,7 +11,7 @@ namespace Askalhorn.Render
             
         public void Draw(SpriteBatch batch, ICharacter character)
         {
-            var target = character.Position.RenderVectorOrigin;
+            var target = character.Position.RenderTileVector;
             batch.Draw(character.Texture, target, Color.White);
             ProgressBar hp1 = new ProgressBar(batch);
             target.Y += 64;

@@ -25,7 +25,11 @@ namespace Askalhorn.Common.Geography.Local
         private static readonly Vector2 yi = new Vector2(-32, 16);
 
         private static readonly Vector2 Origin = new Vector2(32, 32);
-        public Vector2 RenderVectorOrigin => Point.X * xi + Point.Y * yi - Origin;
+
+        private static readonly Vector2 ToCenter = new Vector2(0, 16);
+        public Vector2 RenderTileVector => Point.X * xi + Point.Y * yi - Origin;
+        
+        public Vector2 RenderOriginVector => RenderVector + ToCenter;
 
         public Vector2 RenderVector => Point.X * xi + Point.Y * yi;
     }

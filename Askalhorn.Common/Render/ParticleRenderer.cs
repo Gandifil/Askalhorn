@@ -29,8 +29,8 @@ namespace Askalhorn.Common.Render
                 Position = new Vector2(0, -200),
                 Emitters = new List<ParticleEmitter>
                 {
-                    new ParticleEmitter(textureRegion, 2000, TimeSpan.FromSeconds(1.5),
-                        Profile.Ring(50, Profile.CircleRadiation.In))
+                    new ParticleEmitter(textureRegion, 1000, TimeSpan.FromSeconds(1.1),
+                        Profile.Ring(32, Profile.CircleRadiation.In))
                     {
                         Parameters = new ParticleReleaseParameters
                         {
@@ -55,25 +55,7 @@ namespace Askalhorn.Common.Render
                             },
                             new RotationModifier {RotationRate = -2.1f},
                             //new RectangleContainerModifier {Width = 800, Height = 480},
-                            new LinearGravityModifier {Direction = -Vector2.UnitY, Strength = 30f},
-                            new VortexModifier()
-                            {
-                                Mass = 10f,
-                                MaxSpeed = 1f,
-                                Position = new Vector2(100,0)
-                            },
-                            new VortexModifier()
-                            {
-                                Mass = 10f,
-                                MaxSpeed = 1f,
-                                Position = new Vector2(100,50)
-                            },
-                            new VortexModifier()
-                            {
-                                Mass = 10f,
-                                MaxSpeed = 1f,
-                                Position = new Vector2(90,100)
-                            }
+                            //new LinearGravityModifier {Direction = -Vector2.UnitY, Strength = 30f},
                         }
                     }
                 }
@@ -95,7 +77,7 @@ namespace Askalhorn.Common.Render
 
         public void Draw(SpriteBatch batch, IPosition position)
         {
-            _particleEffect.Position = position.RenderVector;
+            _particleEffect.Position = position.RenderOriginVector;
             batch.Draw(_particleEffect);
         }
 

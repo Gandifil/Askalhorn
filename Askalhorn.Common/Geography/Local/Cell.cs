@@ -1,6 +1,9 @@
 ﻿namespace Askalhorn.Common.Geography.Local
 {
-    struct Cell
+    class Cell: ICell
     {
+        public bool IsWall => false;
+        
+        public IBuild Build { get; set; }
     }
 }

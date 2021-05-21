@@ -50,6 +50,8 @@ namespace Askalhorn.Common
             };
         }
 
+        public ICharacter PLayer => Characters.First();
+
         public void Turn()
         {
             Log.Information("Run moves from all Controllers.");

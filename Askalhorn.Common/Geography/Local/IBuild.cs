@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Render;
+﻿using System;
+using Askalhorn.Common.Render;
 
 namespace Askalhorn.Common.Geography.Local
 {
@@ -7,5 +8,7 @@ namespace Askalhorn.Common.Geography.Local
         IPosition Position { get; }
 
         IRenderer Renderer { get; }
+        
+        Action Action { get; } 
     }
 }

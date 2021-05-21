@@ -55,9 +55,9 @@ namespace Askalhorn.Elements
             {
                 shape.Center = Vector2.Transform(movement.RenderVector + new Vector2(0, 16), matrix);
                 if (shape.Contains(Mouse.GetState().Position.ToVector2()))
-                    batch.Draw(texture, movement.RenderVectorOrigin, Color.Green);
+                    batch.Draw(texture, movement.RenderTileVector, Color.Green);
                 else
-                    batch.Draw(texture, movement.RenderVectorOrigin, Color.White);
+                    batch.Draw(texture, movement.RenderTileVector, Color.White);
             }
         }
     }

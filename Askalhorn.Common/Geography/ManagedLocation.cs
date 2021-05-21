@@ -13,7 +13,9 @@ namespace Askalhorn.Common.Geography
     {
         public TiledMap TiledMap { get; set; }
 
-        public ICell this[uint x, uint y] => throw new System.NotImplementedException();
+        public ICell this[uint x, uint y] => Cells[x, y];
+
+        public Cell[,] Cells { get; private set; } = new Cell[50, 50];
 
         IReadOnlyCollection<IBuild> ILocation.Builds => Builds;
         public List<IBuild> Builds { get; private set; } = new List<IBuild>();
@@ -33,16 +35,28 @@ namespace Askalhorn.Common.Geography
                     layer.SetTile(x, y, (uint)(TiledMap.GetTilesetFirstGlobalIdentifier(tiles) + (random.Next() % 20)));
                 }
             }
-            
+
+            for (int x = 0; x < 50; x++)
+            {
+                for (int y = 0; y < 50; y++)
+                {
+                    Cells[x, y] = new Cell();
+                }
+            }
             
             TiledMap.AddLayer(layer);
 
-            AddBuild<LocalTeleport>(0, 0);
+            AddBuild(0, 0, new LocalTeleport()
+            {
+                Shift = new Point(10, 10),
+            });
         }
         
-        protected void AddBuild<T>(int x, int y) where T:IBuild, new()
+        protected void AddBuild<T>(int x, int y, T build) where T:HasPosition, IBuild, new()
         {
-            Builds.Add(new T());
+            build.Position = new Position(x, y);
+            Builds.Add(build);
+            Cells[x, y].Build = build;
         }
     }
 }

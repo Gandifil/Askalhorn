@@ -24,14 +24,12 @@ namespace Askalhorn.Common.Maths
         {
             var r = p - Center;
 
-            //return r.Length() < 40f;
             r.X = Math.Abs(r.X);
             r.Y = Math.Abs(r.Y);
             
 
             var a = Width / 2;
             var b = Height / 2;
-            Log.Information("{r} {a} {b}", r, a, b);
 
             return r.X / a + r.Y / b <= 1f;
         }
