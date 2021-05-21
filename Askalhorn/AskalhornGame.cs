@@ -26,6 +26,8 @@ namespace Askalhorn
 
         public UiSystem UiSystem { get; private set; }
 
+        private GameLog log;
+
         public AskalhornGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -47,6 +49,7 @@ namespace Askalhorn
             IsMouseVisible = true;
 
             Storage.Initialize(Content);
+            log = new GameLog(GraphicsDevice);
             LineRenderer.Initialize(GraphicsDevice);
 
             SpriteBatch = new SpriteBatch(GraphicsDevice);
@@ -84,7 +87,7 @@ namespace Askalhorn
             // TODO: Add your drawing code here
             // Call Draw at the end to draw the Ui on top of your game
             UiSystem.Draw(gameTime, SpriteBatch);
-            //GameLog.Draw(SpriteBatch);
+            log.Draw();
             //LineRenderer.Draw(SpriteBatch, );
         }
     }

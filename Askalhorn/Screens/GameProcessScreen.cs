@@ -29,8 +29,6 @@ namespace AmbrosiaGame.Screens
         private CharacterRenderer characterRenderer;
         private MovementTiles movements;
         private ParticleRenderer particles;
-
-        private GameLog log;
         private World world;
 
         public GameProcessScreen(AskalhornGame game)
@@ -49,7 +47,6 @@ namespace AmbrosiaGame.Screens
             
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
             characterRenderer = new CharacterRenderer();
-            log = new GameLog(GraphicsDevice);
             
             var keyboardListener = new KeyboardListener();
             var mouseListener = new MouseListener();
@@ -159,7 +156,6 @@ namespace AmbrosiaGame.Screens
             
             foreach (var item in world.Characters)
                 characterRenderer.Draw(spriteBatch, item);
-            log.Draw();
             spriteBatch.End();
         }
     }
