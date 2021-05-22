@@ -4,6 +4,7 @@ using System.Reflection.Metadata.Ecma335;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
+using Askalhorn.Common.Geography.Local.Generators;
 using Askalhorn.Common.Maths;
 using Microsoft.Xna.Framework.Graphics;
 using Serilog;
@@ -30,7 +31,8 @@ namespace Askalhorn.Common
         public World()
         {
             Instance = this;
-            Location = new ManagedLocation();//new TiledMapLocation("start");
+            var locationGenerator = new SimpleGenerator();
+            Location = locationGenerator.Location;//new TiledMapLocation("start");
             
             _characters = new List<Character>
             {
