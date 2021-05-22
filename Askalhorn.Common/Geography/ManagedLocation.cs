@@ -35,17 +35,13 @@ namespace Askalhorn.Common.Geography
                 (int)width, (int)height,
             64, 32, 
                 TiledMapTileDrawOrder.RightDown, TiledMapOrientation.Isometric);
+            TiledMap.AddLayer(new TiledMapTileLayer("floors", (int)width, (int)height, 64, 32));
+            TiledMap.AddLayer(new TiledMapTileLayer("walls", 
+                (int)width, (int)height, 64, 32, new Vector2(0, -32)));
             
-            var tiles = Storage.Content.Load<TiledMapTileset>("maps/grassland_tiles");
-            TiledMap.AddTileset(tiles, 0);
+            //var tiles = Storage.Content.Load<TiledMapTileset>("maps/grassland_tiles");
+            //TiledMap.AddTileset(tiles, 0);
             
-            var layer = new TiledMapTileLayer("", (int)width, (int)height, 64, 32);
-            var random = new Random();
-            for (ushort x = 0; x < width; x++)
-                for (ushort y = 0; y < height; y++)
-                    layer.SetTile(x, y, (uint)(TiledMap.GetTilesetFirstGlobalIdentifier(tiles) + (random.Next() % 20)));
-            
-            TiledMap.AddLayer(layer);
         }
         
         public void AddBuild<T>(int x, int y, T build) where T:HasPosition, IBuild, new()
