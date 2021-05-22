@@ -12,6 +12,11 @@ namespace Askalhorn.Common.Geography.Local
         public uint X => (uint)Point.X;
 
         public uint Y => (uint)Point.Y;
+        
+        public Point Shift(Point direction)
+        {
+            return Point + direction;
+        }
 
         /// <summary>
         /// Create a position with the point (0, 0).

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Askalhorn.Common.Geography.Local;
+using Microsoft.Xna.Framework;
 using Serilog;
 
 namespace Askalhorn.Common.Control.Moves
@@ -9,7 +10,7 @@ namespace Askalhorn.Common.Control.Moves
     public class MovementMove: IMove
     {
         /// <summary>
-        /// Offset of movement
+        /// The offset of movement
         /// </summary>
         private Point offset;
         
@@ -20,9 +21,9 @@ namespace Askalhorn.Common.Control.Moves
         
         void IMove.Make(World world, Character character)
         {
-            character.Position.Point += offset;
+            character.Position.Point = character.Position.Shift(offset);
             
-            Log.Information("Shift player with offset {offset} to {Point}", offset, character.Position.Point);
+            Log.Information("Player are moving {offset}", offset);
         }
     }
 }

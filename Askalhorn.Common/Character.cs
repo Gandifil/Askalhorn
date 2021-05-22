@@ -30,11 +30,8 @@ namespace Askalhorn.Common
             new Point(-1, 0),
         };
 
-        public IEnumerable<IPosition> CanMoveTo => Variants.Select(x =>
-            new Position()
-            {
-                Point = Position.Point + x,
-            });
+        public IEnumerable<IPosition> CanMoveTo => Variants.Select(x => 
+            new Position(Position.Shift(x)));
 
         IEnumerable<IAbility> ICharacter.Abilities => Abilities;
 

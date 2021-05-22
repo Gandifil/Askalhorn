@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using Askalhorn.Common.Geography.Local;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,10 +15,21 @@ namespace Askalhorn.Common.Render
 {
     public class ParticleRenderer: IRenderer
     {
+        public class Settings
+        {
+            public int Capacity { get; set; } = 1000;
+
+            public double TimeSpanSeconds { get; set; } = 1.1;
+            public float Radius { get; set; } = 32;
+            public Color StartColor { get; set; } = Color.OrangeRed;
+            public Color EndColor { get; set; } = Color.Yellow;
+        }
+        
         private ParticleEffect _particleEffect;
         private Texture2D _particleTexture;
 
-        public ParticleRenderer()
+
+        public ParticleRenderer(Settings settings)
         {
             var GraphicsDevice = Storage.GraphicsDevice;
             _particleTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -29,15 +41,17 @@ namespace Askalhorn.Common.Render
                 Position = new Vector2(0, -200),
                 Emitters = new List<ParticleEmitter>
                 {
-                    new ParticleEmitter(textureRegion, 1000, TimeSpan.FromSeconds(1.1),
-                        Profile.Ring(32, Profile.CircleRadiation.In))
+                    new ParticleEmitter(textureRegion, 
+                        settings.Capacity, 
+                        TimeSpan.FromSeconds(settings.TimeSpanSeconds),
+                        Profile.Ring(settings.Radius, Profile.CircleRadiation.In))
                     {
                         Parameters = new ParticleReleaseParameters
                         {
-                            Speed = new Range<float>(0f, 20f),
+                            Speed = new Range<float>(10f, 30f),
                             Quantity = 15,
                             Rotation = new Range<float>(-1f, 1f),
-                            Scale = new Range<float>(1.0f, 1.0f)
+                            Scale = new Range<float>(1.0f, 1.0f),
                         },
                         Modifiers =
                         {
@@ -47,8 +61,8 @@ namespace Askalhorn.Common.Render
                                 {
                                     new ColorInterpolator
                                     {
-                                        StartValue = ColorExtensions.ToHsl(Color.OrangeRed),
-                                        EndValue = ColorExtensions.ToHsl(Color.LightBlue)
+                                        StartValue = settings.StartColor.ToHsl(),
+                                        EndValue = settings.EndColor.ToHsl()
                                     },
                                     new ScaleInterpolator { StartValue = new Vector2(3,3), EndValue = new Vector2(1,1) }
                                 }

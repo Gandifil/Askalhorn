@@ -56,7 +56,7 @@ namespace AmbrosiaGame.Screens
             mouseListener.MouseClicked += MouseClick;
         }
 
-        private void MovePlayerOn(Point shift)
+        private void MovePlayer(Point shift)
         {
             world.playerController.AddMove(new MovementMove(shift));
             world.Turn();
@@ -68,38 +68,34 @@ namespace AmbrosiaGame.Screens
             var movement = movements.CheckClick(args.Position, camera.GetViewMatrix());
             if (movement is not null)
             {
-                MovePlayerOn(movement.Point - world.Characters.First().Position.Point);
+                world.playerController.AddMove(new MovementToMove(movement.Point));
+                world.Turn();
             }
         }
 
         private void KeyRelease(object sender, KeyboardEventArgs e)
         {
-            Point? shift = null;
-
             if (e.Key == Keys.W)
-                shift = new Point(0, -1);
+                MovePlayer(new Point(0, -1));
 
             if (e.Key == Keys.S)
-                shift = new Point(0, 1);
+                MovePlayer(new Point(0, 1));
 
             if (e.Key == Keys.A)
-                shift = new Point(-1, 0);
+                MovePlayer(new Point(-1, 0));
 
             if (e.Key == Keys.D)
-                shift = new Point(1, 0);
+                MovePlayer(new Point(1, 0));
 
             if (e.Key == Keys.F)
-                world.Location[world.PLayer.Position].Build?.Action();
-
-            if (shift.HasValue)
-                MovePlayerOn(shift.Value);
+                world.Location[world.Player.Position].Build?.Action();
         }
         
         public override void LoadContent()
         {
             world = new World();
             mapRenderer.LoadMap(world.Location.TiledMap);
-            movements = new MovementTiles(world.Characters.First());
+            movements = new MovementTiles(world.Player);
             
             
             var box = new Panel(Anchor.BottomCenter, new Vector2(0.75f, 0.1f), Vector2.Zero);

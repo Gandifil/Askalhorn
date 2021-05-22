@@ -53,7 +53,7 @@ namespace Askalhorn.Common
             };
         }
 
-        public ICharacter PLayer => Characters.First();
+        public ICharacter Player => Characters.First();
 
         public void Turn()
         {

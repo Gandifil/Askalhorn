@@ -37,5 +37,12 @@ namespace Askalhorn.Common.Geography.Local
         /// The y coordinate.
         /// </summary>
         uint Y { get; }
+
+        /// <summary>
+        /// Return a new position equals current + direction.
+        /// </summary>
+        /// <param name="direction">The direction of shifting</param>
+        /// <returns>Shifted position</returns>
+        Point Shift(Point direction);
     }
 }

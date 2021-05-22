@@ -54,6 +54,11 @@ namespace Askalhorn.Common.Geography
             {
                 Shift = new Point(10, 10),
             });
+
+            AddBuild(0, 5, new GlobalTeleport()
+            {
+                Shift = new Point(20, 20),
+            });
         }
         
         protected void AddBuild<T>(int x, int y, T build) where T:HasPosition, IBuild, new()

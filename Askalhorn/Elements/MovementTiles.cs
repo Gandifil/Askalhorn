@@ -14,13 +14,11 @@ namespace Askalhorn.Elements
         private readonly ICharacter character;
         private IEnumerable<IPosition> movements;
         private readonly Texture2D texture;
-        private readonly Texture2D texture2;
         
         public MovementTiles(ICharacter character)
         {
             this.character = character;
             this.texture = Storage.Content.Load<Texture2D>("images/movement");
-            this.texture2 = Storage.Content.Load<Texture2D>("images/movement_selected");
         }
 
         public IPosition CheckClick(Point point, Matrix matrix)
