@@ -23,7 +23,7 @@ namespace Askalhorn.Common.Control.Moves
         {
             var location = World.Instance.Location;
             var pos = new Position(target);
-            return location.Contain(pos) && !World.Instance.Location[pos].IsWall;
+            return location.Contain(pos) && !World.Instance.Location[pos].IsWall && World.Instance.Find(pos) is null;
         }
 
         void IMove.Make(Character character)

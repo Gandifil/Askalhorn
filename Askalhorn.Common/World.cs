@@ -25,6 +25,15 @@ namespace Askalhorn.Common
         public readonly BufferController playerController = new BufferController();
         
         public static World Instance { get; private set; }
+
+        internal Character Find(IPosition position)
+        {
+            foreach (var character in _characters)
+                if (character.Position.Point == position.Point)
+                    return character;
+
+            return null;
+        }
         
         /// <summary>
         /// Create world.
@@ -51,7 +60,6 @@ namespace Askalhorn.Common
             };
 
             _characters[1].Controller = new RandomMovementController(_characters[1]);
-            _characters[1].Damage(50);
         }
 
         public ICharacter Player => Characters.First();
@@ -63,6 +71,7 @@ namespace Askalhorn.Common
             foreach (var character in _characters)
             foreach (var move in character.Controller.Moves)
                 move.Make(character);
+            _characters.RemoveAll(x => x.HP.Current < 1);
         }
     }
 }

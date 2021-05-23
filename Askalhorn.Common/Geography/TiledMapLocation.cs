@@ -18,6 +18,11 @@ namespace Askalhorn.Common.Geography
             throw new System.NotImplementedException();
         }
 
+        void ILocation.AddCharacter(Character character)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public TiledMapLocation(string name)
         {
             TiledMap = Storage.Content.Load<TiledMap>("maps/" + name);

@@ -30,6 +30,11 @@ namespace Askalhorn.Common.Geography
                    && position.Y < TiledMap.Height;
         }
 
+        void ILocation.AddCharacter(Character character)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<IBuild> Builds { get; private set; } = new List<IBuild>();
 
         public ManagedLocation(uint width, uint height)

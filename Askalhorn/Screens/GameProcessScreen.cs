@@ -97,6 +97,13 @@ namespace AmbrosiaGame.Screens
 
             if (e.Key == Keys.F)
                 world.Location[world.Player.Position].Build?.Action();
+
+            if (e.Key == Keys.E)
+            {
+                var move = new AttackMove(world.Characters.ElementAt(1));
+                world.playerController.AddMove(move);
+                world.Turn();
+            }
         }
         
         public override void LoadContent()

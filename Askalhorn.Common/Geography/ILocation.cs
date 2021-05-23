@@ -16,5 +16,7 @@ namespace Askalhorn.Common.Geography
         IReadOnlyCollection<IBuild> Builds { get; }
 
         bool Contain(IPosition position);
+        
+        internal void AddCharacter(Character character);
     }
 }
