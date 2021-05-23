@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;

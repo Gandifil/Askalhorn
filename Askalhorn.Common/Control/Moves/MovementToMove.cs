@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Askalhorn.Common.Geography.Local;
+using Microsoft.Xna.Framework;
 using Serilog;
 
 namespace Askalhorn.Common.Control.Moves
@@ -17,8 +18,15 @@ namespace Askalhorn.Common.Control.Moves
         {
             this.target = target;
         }
-        
-        void IMove.Make(World world, Character character)
+
+        public bool IsValid(ICharacter character)
+        {
+            var location = World.Instance.Location;
+            var pos = new Position(target);
+            return location.Contain(pos) && !World.Instance.Location[pos].IsWall;
+        }
+
+        void IMove.Make(Character character)
         {
             character.Position.Point = target;
             

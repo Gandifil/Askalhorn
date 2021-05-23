@@ -8,19 +8,24 @@ namespace Askalhorn.Common.Control
 {
     internal class RandomMovementController: IController
     {
-        private static readonly List<IMove> Variants = new List<IMove>
-        {
-            new MovementMove(new Point(0, -1)),
-            new MovementMove(new Point(0, 1)),
-            new MovementMove(new Point(1, 0)),
-            new MovementMove(new Point(-1, 0)),
-        };
-        
         private readonly Random random = new Random();
+
+        private readonly ICharacter character;
+
+        public RandomMovementController(ICharacter character)
+        {
+            this.character = character;
+        }
 
         public IEnumerable<IMove> Moves => new List<IMove>
         {
-            Variants[random.Next() % Variants.Count()],
+            getRandom(),
         };
+
+        private IMove getRandom()
+        {
+            var list = character.CanMoveTo;
+            return new MovementToMove(list.ElementAt(random.Next(0, list.Count())).Point);
+        }
     }
 }

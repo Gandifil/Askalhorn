@@ -2,7 +2,7 @@
 {
     class Cell: ICell
     {
-        public bool IsWall => false;
+        public bool IsWall { get; set; } = false;
         
         public IBuild Build { get; set; }
     }

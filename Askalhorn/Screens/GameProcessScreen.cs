@@ -58,8 +58,12 @@ namespace AmbrosiaGame.Screens
 
         private void MovePlayer(Point shift)
         {
-            world.playerController.AddMove(new MovementMove(shift));
-            world.Turn();
+            var move = new MovementMove(shift);
+            if (move.IsValid(world.Player))
+            {
+                world.playerController.AddMove(new MovementMove(shift));
+                world.Turn();
+            }
         }
 
 
@@ -68,8 +72,12 @@ namespace AmbrosiaGame.Screens
             var movement = movements.CheckClick(args.Position, camera.GetViewMatrix());
             if (movement is not null)
             {
-                world.playerController.AddMove(new MovementToMove(movement.Point));
-                world.Turn();
+                var move = new MovementToMove(movement.Point);
+                if (move.IsValid(world.Player))
+                {
+                    world.playerController.AddMove(move);
+                    world.Turn();
+                }
             }
         }
 

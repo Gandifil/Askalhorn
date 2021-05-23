@@ -39,7 +39,7 @@ namespace Askalhorn.Common
                 new Character()
                 {
                     Texture = Storage.Content.Load<Texture2D>("images/mage"),
-                    Position = new Position(0, 0),
+                    Position = new Position(2, 2),
                     Controller = playerController,
                     HP = new ObservedParameter<uint>(100),
                     MaxHP = new ObservedParameter<uint>(100),
@@ -47,12 +47,13 @@ namespace Askalhorn.Common
                 new Character()
                 {
                     Texture = Storage.Content.Load<Texture2D>("images/mage2"),
-                    Position = new Position(2, 2),
-                    Controller = new RandomMovementController(),
+                    Position = new Position(3, 3),
                     HP = new ObservedParameter<uint>(20),
                     MaxHP = new ObservedParameter<uint>(100),
                 },
             };
+
+            _characters[1].Controller = new RandomMovementController(_characters[1]);
         }
 
         public ICharacter Player => Characters.First();
@@ -63,7 +64,7 @@ namespace Askalhorn.Common
 
             foreach (var character in _characters)
             foreach (var move in character.Controller.Moves)
-                move.Make(this, character);
+                move.Make(character);
         }
     }
 }

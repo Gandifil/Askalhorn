@@ -12,18 +12,25 @@ namespace Askalhorn.Common.Control.Moves
         /// <summary>
         /// The offset of movement
         /// </summary>
-        private Point offset;
+        public Point Offset { get; set; }
         
         public MovementMove(Point offset)
         {
-            this.offset = offset;
+            this.Offset = offset;
         }
-        
-        void IMove.Make(World world, Character character)
+
+        public bool IsValid(ICharacter character)
         {
-            character.Position.Point = character.Position.Shift(offset);
+            var location = World.Instance.Location;
+            var pos = new Position(character.Position.Shift(Offset));
+            return location.Contain(pos) && !World.Instance.Location[pos].IsWall;
+        }
+
+        void IMove.Make(Character character)
+        {
+            character.Position.Point = character.Position.Shift(Offset);
             
-            Log.Information("Player are moving {offset}", offset);
+            Log.Information("Player are moving {Offset}", Offset);
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     public interface IMove
     {
-        internal void Make(World world, Character character);
+        bool IsValid(ICharacter character);
+        internal void Make(Character character);
     }
 }

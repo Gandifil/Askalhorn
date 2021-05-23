@@ -14,5 +14,7 @@ namespace Askalhorn.Common.Geography
         ICell this[IPosition position] { get; }
         
         IReadOnlyCollection<IBuild> Builds { get; }
+
+        bool Contain(IPosition position);
     }
 }

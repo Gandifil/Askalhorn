@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using Askalhorn.Common.Control;
+using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
@@ -30,8 +33,9 @@ namespace Askalhorn.Common
             new Point(-1, 0),
         };
 
-        public IEnumerable<IPosition> CanMoveTo => Variants.Select(x => 
-            new Position(Position.Shift(x)));
+        public IEnumerable<IPosition> CanMoveTo => Variants
+            .Where(x => new MovementMove(x).IsValid(this))
+            .Select(x => (IPosition)new Position(Position.Shift(x)));
 
         IEnumerable<IAbility> ICharacter.Abilities => Abilities;
 

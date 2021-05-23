@@ -28,11 +28,14 @@ namespace Askalhorn.Common.Geography.Local.Generators
                 for (ushort y = 0; y < 50; y++)
                     floors.SetTile(x, y,  0);
                 
-                for (int x = 0; x < 50; x++)
-                    for (int y = 0; y < 50; y++)
+                for (ushort x = 0; x < 50; x++)
+                    for (ushort y = 0; y < 50; y++)
                         if (cells[x, y] == LabirintGenerator.CellType.Wall)
-                            walls.SetTile((ushort)x, (ushort)y, 
-                            (ushort)(location.TiledMap.GetTilesetFirstGlobalIdentifier(tiles) + 32));
+                        {
+                            walls.SetTile(x, y, 
+                                (uint)(location.TiledMap.GetTilesetFirstGlobalIdentifier(tiles) + 32));
+                            location.SetWall(x, y); 
+                        }
                 
                 
                 location.AddBuild(0, 0, new LocalTeleport()

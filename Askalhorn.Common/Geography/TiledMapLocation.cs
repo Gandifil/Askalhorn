@@ -13,6 +13,10 @@ namespace Askalhorn.Common.Geography
         public ICell this[IPosition position] => throw new System.NotImplementedException();
 
         public IReadOnlyCollection<IBuild> Builds { get; }
+        public bool Contain(IPosition position)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public TiledMapLocation(string name)
         {
