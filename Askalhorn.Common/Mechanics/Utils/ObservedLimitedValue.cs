@@ -5,9 +5,13 @@ namespace Askalhorn.Common.Mechanics.Utils
     class ObservedLimitedValue<T> : ILimitedValue<IObservedParameter<T>> 
         where T:IComparable<T>, IConvertible
     {
-        public IObservedParameter<T> Current { get; private set; }
+        IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Current => Current;
+
+        IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Max => Max;
         
-        public IObservedParameter<T> Max { get; private set; }
+        public ObservedParameter<T> Current { get; private set; }
+        
+        public ObservedParameter<T> Max { get; private set; }
 
         public ObservedLimitedValue(T value, T max)
         {

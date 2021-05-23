@@ -18,7 +18,9 @@ namespace Askalhorn.Common
     {
         public string Name => "Test";
 
-        public ILimitedValue<IObservedParameter<int>> HP { get; set; } = new ObservedLimitedValue<int>(100, 100);
+        ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
+        
+        public ObservedLimitedValue<int> HP { get; private set; } = new ObservedLimitedValue<int>(100, 100);
         //public IObservedParameter<uint> HP { get;  set;}
         //public IObservedParameter<uint> MaxHP { get;  set; }
 
@@ -47,5 +49,10 @@ namespace Askalhorn.Common
             new FireBall()
                 { }
         };
+
+        public void Damage(int value)
+        {
+            HP.Current.Value -= value;
+        }
     }
 }

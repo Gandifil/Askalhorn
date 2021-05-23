@@ -2,9 +2,9 @@
 
 namespace Askalhorn.Common.Mechanics.Utils
 {
-    public interface IObservedParameter<T>
+    public interface IObservedParameter<out T>
     {
-        T Value { get; set; }
+        T Value { get; }
         event Action Changed;
     }
 }
