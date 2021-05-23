@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
+using Askalhorn.Common.Mechanics.Utils;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common
@@ -11,9 +12,7 @@ namespace Askalhorn.Common
     {
         string Name { get; }
         
-        IObservedParameter<uint> HP { get; }
-        
-        IObservedParameter<uint> MaxHP { get; }
+        ILimitedValue<IObservedParameter<int>> HP { get; }
         
         Texture2D Texture { get; }
         

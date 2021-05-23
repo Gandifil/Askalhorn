@@ -61,7 +61,7 @@ namespace Askalhorn.Common.Maths
                         cells[doorX, rect.Y + i] = rect.Y + i == doorY ? CellType.Door : CellType.Wall;
 
                     var rect1 = new Rectangle(rect.Location, rect.Size);
-                    rect1.Width = (int)doorX - rect.X - 1;
+                    rect1.Width = (int)doorX - rect.X ;
                     
                     Split(rect1, ref cells);
                     rect1.X = (int)doorX + 1;
@@ -75,7 +75,7 @@ namespace Askalhorn.Common.Maths
                         cells[rect.X + i, doorY] = rect.X + i == doorX ? CellType.Door : CellType.Wall;
 
                     var rect1 = new Rectangle(rect.Location, rect.Size);
-                    rect1.Height = (int)doorY - rect.Y - 1;
+                    rect1.Height = (int)doorY - rect.Y;
                     
                     Split(rect1, ref cells);
                     rect1.Y = (int)doorY + 1;

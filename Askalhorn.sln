@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Askalhorn", "Askalhorn\Askalhorn.csproj", "{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Askalhorn.Mechanics", "Askalhorn.Mechanics\Askalhorn.Mechanics.csproj", "{1472002D-BC09-414D-9ECE-A80C73ADAB89}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askalhorn.Common", "Askalhorn.Common\Askalhorn.Common.csproj", "{B91172CC-D9CE-4689-B510-DD3A52B7D89F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askalhorn.Documentation", "Askalhorn.Documentation\Askalhorn.Documentation.csproj", "{64C5850A-3143-4211-81E9-A009639DDDA0}"
@@ -21,10 +19,6 @@ Global
 		{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75ADDB58-5C4A-446F-8F44-8545D8AFDB75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1472002D-BC09-414D-9ECE-A80C73ADAB89}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B91172CC-D9CE-4689-B510-DD3A52B7D89F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B91172CC-D9CE-4689-B510-DD3A52B7D89F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B91172CC-D9CE-4689-B510-DD3A52B7D89F}.Release|Any CPU.ActiveCfg = Release|Any CPU

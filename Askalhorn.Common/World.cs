@@ -6,6 +6,7 @@ using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Geography.Local.Generators;
 using Askalhorn.Common.Maths;
+using Askalhorn.Common.Mechanics.Utils;
 using Microsoft.Xna.Framework.Graphics;
 using Serilog;
 
@@ -41,15 +42,15 @@ namespace Askalhorn.Common
                     Texture = Storage.Content.Load<Texture2D>("images/mage"),
                     Position = new Position(2, 2),
                     Controller = playerController,
-                    HP = new ObservedParameter<uint>(100),
-                    MaxHP = new ObservedParameter<uint>(100),
+                    //HP = new ObservedParameter<uint>(100),
+                    //MaxHP = new ObservedParameter<uint>(100),
                 },
                 new Character()
                 {
                     Texture = Storage.Content.Load<Texture2D>("images/mage2"),
                     Position = new Position(3, 3),
-                    HP = new ObservedParameter<uint>(20),
-                    MaxHP = new ObservedParameter<uint>(100),
+                    //HP = new ObservedParameter<uint>(20),
+                    //MaxHP = new ObservedParameter<uint>(100),
                 },
             };
 

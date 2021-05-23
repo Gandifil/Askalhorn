@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common.Mechanics
 {
@@ -9,5 +10,7 @@ namespace Askalhorn.Common.Mechanics
         string Description{ get; }
 
         Texture2D Icon { get; }
+
+        internal void Use(Character character, Character target);
     }
 }

@@ -8,5 +8,9 @@ namespace Askalhorn.Common.Mechanics.Abilities
         
         public string Description => "Обычный огненный шар, который обычно летит прямо в ебало.";
         public Texture2D Icon => Storage.Content.Load<Texture2D>("images/fireball");
+        void IAbility.Use(Character character, Character target)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

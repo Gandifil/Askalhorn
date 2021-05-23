@@ -8,6 +8,7 @@ using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Abilities;
+using Askalhorn.Common.Mechanics.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,8 +17,10 @@ namespace Askalhorn.Common
     internal class Character: ICharacter
     {
         public string Name => "Test";
-        public IObservedParameter<uint> HP { get;  set;}
-        public IObservedParameter<uint> MaxHP { get;  set; }
+
+        public ILimitedValue<IObservedParameter<int>> HP { get; set; } = new ObservedLimitedValue<int>(100, 100);
+        //public IObservedParameter<uint> HP { get;  set;}
+        //public IObservedParameter<uint> MaxHP { get;  set; }
 
         public IController Controller { get; set; }
         public Texture2D Texture { get; set; }

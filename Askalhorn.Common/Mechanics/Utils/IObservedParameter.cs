@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Askalhorn.Common.Maths
+namespace Askalhorn.Common.Mechanics.Utils
 {
     public interface IObservedParameter<T>
     {

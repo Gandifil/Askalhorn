@@ -15,7 +15,7 @@ namespace Askalhorn.Render
             batch.Draw(character.Texture, target, Color.White);
             ProgressBar hp1 = new ProgressBar(batch);
             target.Y += 64;
-            hp1.Draw(batch, target.ToPoint(), (float)character.HP.Value / character.MaxHP.Value);
+            hp1.Draw(batch, target.ToPoint(), character.HP.Percent);
         }
     }
 }

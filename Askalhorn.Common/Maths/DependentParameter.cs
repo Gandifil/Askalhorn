@@ -1,4 +1,5 @@
 ﻿using System;
+using Askalhorn.Common.Mechanics.Utils;
 using BaseParameterFunction = System.Func<int>;
 
 namespace Askalhorn.Common.Maths
