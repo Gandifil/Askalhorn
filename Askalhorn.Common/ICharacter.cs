@@ -14,6 +14,10 @@ namespace Askalhorn.Common
         
         ILimitedValue<IObservedParameter<int>> HP { get; }
         
+        IObservedParameter<uint> Level { get; }
+        
+        IObservedParameter<int> Strength { get; }
+
         Texture2D Texture { get; }
         
         IPosition Position { get; }

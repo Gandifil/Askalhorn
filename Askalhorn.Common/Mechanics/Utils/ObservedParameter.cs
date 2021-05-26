@@ -2,7 +2,7 @@
 
 namespace Askalhorn.Common.Mechanics.Utils
 {
-    public class ObservedParameter<T> : IObservedParameter<T>
+    public class ObservedParameter<T> : IObservedParameter<T> where T:IEquatable<T>
     {
         private T _value;
 
@@ -11,8 +11,11 @@ namespace Askalhorn.Common.Mechanics.Utils
             get { return _value; }
             set
             {
-                _value = value;
-                OnChanged();
+                if (!_value.Equals(value))
+                {
+                    _value = value;
+                    OnChanged();
+                }
             }
         }
 

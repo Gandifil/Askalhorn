@@ -17,6 +17,12 @@ namespace Askalhorn.Common
     internal class Character: ICharacter
     {
         public string Name => "Test";
+        IObservedParameter<int> ICharacter.Strength => Strength;
+
+        public LinearParameter<int> Strength { get; private set; } = new LinearParameter<int>(100, -5, 25);
+
+        IObservedParameter<uint> ICharacter.Level => Level;
+        public LevelParameter Level { get; private set; } = new LevelParameter();
 
         ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
         
