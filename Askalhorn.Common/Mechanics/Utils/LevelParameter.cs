@@ -2,11 +2,11 @@
 
 namespace Askalhorn.Common.Mechanics.Utils
 {
-    public class LevelParameter : ObservedParameter<uint>
+    public class LevelParameter : ObservedParameter<int>
     {
         int energy;
 
-        public LevelParameter(uint level = 0)
+        public LevelParameter(int level = 0)
             :base(level)
         {
             this.energy = 0;
@@ -16,7 +16,7 @@ namespace Askalhorn.Common.Mechanics.Utils
         {
             energy += bonus;
 
-            uint append = 0;
+            int append = 0;
             do
             {
                 var limit = (int)Math.Pow(2, Value + append + 5);

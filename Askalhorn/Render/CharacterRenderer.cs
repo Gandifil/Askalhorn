@@ -18,7 +18,7 @@ namespace Askalhorn.Render
             target.Y += 64;
             hp1.Draw(batch, target.ToPoint(), character.HP.Percent);
             var font = Storage.Content.Load<SpriteFont>("fonts/GameLogsFont");
-            batch.DrawString(font, character.Strength.ToString(),target, Color.Chocolate);
+            batch.DrawString(font, character.Level.ToString(),target, Color.Chocolate);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -17,18 +18,17 @@ namespace Askalhorn.Common
     internal class Character: ICharacter
     {
         public string Name => "Test";
-        IObservedParameter<int> ICharacter.Strength => Strength;
 
-        public LinearParameter<int> Strength { get; private set; } = new LinearParameter<int>(100, -5, 25);
+        public LinearParameter<int> Strength { get; private set; } = new LinearParameter<int>(new ObservedParameter<int>(100), -5, 25);
+        IAttributes<PrimaryTypes> ICharacter.Primary => Primary;
+        public Attributes<PrimaryTypes> Primary { get; private set; }
 
-        IObservedParameter<uint> ICharacter.Level => Level;
+        IObservedParameter<int> ICharacter.Level => Level;
         public LevelParameter Level { get; private set; } = new LevelParameter();
 
         ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
         
         public ObservedLimitedValue<int> HP { get; private set; } = new ObservedLimitedValue<int>(100, 100);
-        //public IObservedParameter<uint> HP { get;  set;}
-        //public IObservedParameter<uint> MaxHP { get;  set; }
 
         public IController Controller { get; set; }
         public Texture2D Texture { get; set; }
@@ -59,6 +59,19 @@ namespace Askalhorn.Common
         public void Damage(int value)
         {
             HP.Current.Value -= value;
+        }
+
+        public Character()
+        {
+            var attrs = new Dictionary<PrimaryTypes, LinearParameter<int>>();
+            foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
+            {
+                var parameter = new FunctionParameter<int>(() => Level.Value * 5);
+                Level.Changed += parameter.Update;
+                attrs[type] = new LinearParameter<int>(parameter);
+            }
+
+            Primary = new Attributes<PrimaryTypes>(attrs);
         }
     }
 }

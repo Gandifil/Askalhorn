@@ -42,10 +42,27 @@ namespace Askalhorn.Common.Mechanics.Utils
         // public IObservedParameter<int> Multiplication { get; }
         
         private static readonly T zero = (T) (object) 0;
-        public LinearParameter(T start, T addition, int mulltiplication = 100)
+        
+        public LinearParameter(ObservedParameter<T> start)
             :base(zero)
         {
-            Base = new ObservedParameter<T>(start);
+            Base = start;
+            
+            Addition = new ObservedParameter<T>(zero);
+            
+            Multiplication = new ObservedParameter<int>(100);
+            
+            Update();
+
+            Base.Changed += Update;
+            Addition.Changed += Update;
+            Multiplication.Changed += Update;
+        }
+        
+        public LinearParameter(ObservedParameter<T> start, T addition, int mulltiplication = 100)
+            :base(zero)
+        {
+            Base = start;
             
             Addition = new ObservedParameter<T>(addition);
             
@@ -67,14 +84,14 @@ namespace Askalhorn.Common.Mechanics.Utils
 
         IObservedParameter<T> IModifiedParameter<T>.Base => Base;
 
-        public ObservedParameter<T> Base { get; set; }
+        public ObservedParameter<T> Base { get; private set; }
 
         IObservedParameter<T> IModifiedParameter<T>.Addition => Addition;
             
-        public ObservedParameter<T> Addition { get; set; }
+        public ObservedParameter<T> Addition { get; private set; }
         
             
         IObservedParameter<int> IModifiedParameter<T>.Multiplication => Multiplication;
-        public ObservedParameter<int> Multiplication { get; set; }
+        public ObservedParameter<int> Multiplication { get; private set; }
     }
 }
