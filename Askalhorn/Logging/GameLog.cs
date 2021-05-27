@@ -7,15 +7,15 @@ namespace Askalhorn.Logging
 {
     public class GameLog
     {
-        private SpriteFont font;
-        private static SpriteBatch batch;
-        private static Color color = new Color(0, 255, 0);
+        private readonly SpriteFont font;
+
+        private readonly Color color;
         private const int SHIFT = 16;
 
-        public GameLog(GraphicsDevice device)
+        public GameLog(SpriteFont font, Color color)
         {
-            font = Storage.Content.Load<SpriteFont>("fonts/GameLogsFont");
-            batch = new SpriteBatch(device);
+            this.font = font;
+            this.color = color;
         }
         
         /// <summary>
@@ -26,7 +26,7 @@ namespace Askalhorn.Logging
         /// The default is <code>"[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"</code>.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="sinkConfiguration"/> is <code>null</code></exception>
-        public void Draw()
+        public void Draw(SpriteBatch batch)
         {
             var position = new Vector2(0, batch.GraphicsDevice.Viewport.Height / 2);
             batch.Begin();

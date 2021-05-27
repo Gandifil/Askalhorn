@@ -20,37 +20,40 @@ namespace Askalhorn.Screens
             this.game = (AskalhornGame)game;
         }
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         public override void LoadContent() { 
-            var style = new UntexturedStyle(game.SpriteBatch) {
-                Font = new GenericSpriteFont(game.Content.Load<SpriteFont>("fonts/GameLogsFont")),
-
-            };
-            game.UiSystem.Style = style;
-            
             var box = new Panel(Anchor.Center, new Vector2(0.5f, 0.5f), Vector2.Zero, setHeightBasedOnChildren: true);
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Новая карта", "Okay", 200)
+            
+            box.AddChild(new VerticalSpace(3));
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Новая карта")
             {
                 OnPressed = element => ScreenManager.LoadScreen(new WorldGenerationScreen(game)),
             });
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Играть", "Okay", 200)
+            box.AddChild(new VerticalSpace(3));
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Играть")
             {
                 OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game)),
             });
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход", "Okay", 200)
+            box.AddChild(new VerticalSpace(3));
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Загрузить")
+            {
+                OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game)),
+            });
+            box.AddChild(new VerticalSpace(3));
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Настройки")
+            {
+                OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game)),
+            });
+            box.AddChild(new VerticalSpace(3));
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход")
             {
                 OnPressed = element => game.Exit(),
             });
+            box.AddChild(new VerticalSpace(3));
             game.UiSystem.Add("MainMenuBox", box);
         }
 
         public override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
             game.UiSystem.Remove("MainMenuBox");
         }
 
@@ -60,10 +63,6 @@ namespace Askalhorn.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            //game.SpriteBatch.Begin();
-            //game.SpriteBatch.DrawString(font, "Score", new Vector2(100, 100), Color.Black);
-            //game.SpriteBatch.End();
-            //UiSystem.Draw(gameTime, spriteBatch);
         }
     }
 }

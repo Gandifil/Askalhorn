@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Extended.Font;
 using MLEM.Font;
+using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Style;
 using MonoGame.Extended.BitmapFonts;
@@ -26,6 +27,8 @@ namespace Askalhorn
 
         public UiSystem UiSystem { get; private set; }
 
+        private UntexturedStyle style;
+
         private GameLog log;
 
         public AskalhornGame()
@@ -43,29 +46,43 @@ namespace Askalhorn
             Graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
             Graphics.ApplyChanges();
 
-            Content.RootDirectory = "Content";
 
             Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>("images/cursor"), 0, 0));
             IsMouseVisible = true;
 
             Storage.Initialize(Content, GraphicsDevice);
-            log = new GameLog(GraphicsDevice);
+            log = new GameLog(Content.Load<SpriteFont>("fonts/GameLogsFont"), Color.Red);
             LineRenderer.Initialize(GraphicsDevice);
-
-            SpriteBatch = new SpriteBatch(GraphicsDevice);
-            // Initialize the Ui system
-            var style = new UntexturedStyle(SpriteBatch)
-            {
-                Font = new GenericSpriteFont(Content.Load<SpriteFont>("fonts/MenuGame")),
-            };
+            
             UiSystem = new UiSystem(Window, GraphicsDevice, style);
+            ScreenManager.LoadScreen(new MainMenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black, 0.5f));    
         }
 
         protected override void LoadContent()
         {
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
             base.LoadContent();
+            Content.RootDirectory = "Content";
 
-            ScreenManager.LoadScreen(new MainMenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black, 0.5f));    
+            var testTexture = Content.Load<Texture2D>("images/Test");
+            var testPatch = new NinePatch(new TextureRegion(testTexture, 0, 8, 24, 24), 8);
+
+            style = new UntexturedStyle(this.SpriteBatch) {
+                Font = new GenericSpriteFont(
+                    Content.Load<SpriteFont>("fonts/Text"), 
+                    Content.Load<SpriteFont>("fonts/Text"), 
+                    Content.Load<SpriteFont>("fonts/Text")),
+                TextScale = 0.5F,
+                PanelTexture = testPatch,
+                ButtonTexture = new NinePatch(new TextureRegion(testTexture, 24, 8, 16, 16), 4),
+                TextFieldTexture = new NinePatch(new TextureRegion(testTexture, 24, 8, 16, 16), 4),
+                ScrollBarBackground = new NinePatch(new TextureRegion(testTexture, 12, 0, 4, 8), 1, 1, 2, 2),
+                ScrollBarScrollerTexture = new NinePatch(new TextureRegion(testTexture, 8, 0, 4, 8), 1, 1, 2, 2),
+                CheckboxTexture = new NinePatch(new TextureRegion(testTexture, 24, 8, 16, 16), 4),
+                CheckboxCheckmark = new TextureRegion(testTexture, 24, 0, 8, 8),
+                RadioTexture = new NinePatch(new TextureRegion(testTexture, 16, 0, 8, 8), 3),
+                RadioCheckmark = new TextureRegion(testTexture, 32, 0, 8, 8),
+            };
         }
 
         protected override void Update(GameTime gameTime)
@@ -77,18 +94,14 @@ namespace Askalhorn
 
         protected override void Draw(GameTime gameTime)
         {
-            // DrawEarly needs to be called before clearing your graphics context
             UiSystem.DrawEarly(gameTime, SpriteBatch);
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             base.Draw(gameTime);
 
-            // TODO: Add your drawing code here
-            // Call Draw at the end to draw the Ui on top of your game
             UiSystem.Draw(gameTime, SpriteBatch);
-            log.Draw();
-            //LineRenderer.Draw(SpriteBatch, );
+            log.Draw(SpriteBatch);
         }
     }
 }
