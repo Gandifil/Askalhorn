@@ -98,10 +98,8 @@ namespace AmbrosiaGame.Screens
             if (e.Key == Keys.F)
                 world.Location[world.Player.Position].Build?.Action();
 
-            if (e.Key == Keys.I)
-                CharacterTab.Open(game.UiSystem, world.Player);
-            if (e.Key == Keys.O)
-                CharacterTab.Close(game.UiSystem);
+            if (e.Key == Keys.C)
+                CharacterTab.Toggle(game.UiSystem, world.Player);
 
             if (e.Key == Keys.E)
             {
