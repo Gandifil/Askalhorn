@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Inventory
 {
-    public class Bag: IBag
+    internal class Bag: IBag
     {
         public struct Element
         {

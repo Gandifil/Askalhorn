@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.ComTypes;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Geography.Local;
+using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Abilities;
@@ -35,6 +36,11 @@ namespace Askalhorn.Common
 
         IPosition ICharacter.Position => Position;
         public Position Position { get; set; }
+
+
+        IBag ICharacter.Bag => Bag;
+        
+        public readonly Bag Bag = new Bag();
         
         private static readonly List<Point> Variants = new List<Point>
         {

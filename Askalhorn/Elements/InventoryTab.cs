@@ -16,7 +16,7 @@ namespace Askalhorn.Elements
     {
         private static readonly string NAME = "inventory";
 
-        public static void Toggle(UiSystem system, Bag bag)
+        public static void Toggle(UiSystem system, IBag bag)
         {
             if (system.Get(NAME) is null)
                 system.Add(NAME, Create(bag));
@@ -24,7 +24,7 @@ namespace Askalhorn.Elements
                 system.Remove(NAME);
         }
         
-        private static Element Create(Bag bag)
+        private static Element Create(IBag bag)
         {
             var texture = new Texture2D(Storage.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Black });
@@ -48,8 +48,8 @@ namespace Askalhorn.Elements
             //         batch.Draw(texture, new Rectangle(pos + new Point(0, 32*i), hsize), Color.White);
             //     }
             // };
-            foreach (var item in bag.Elements)
-                box.AddChild(CreateItem(item.Item));
+            foreach (var item in bag.Items)
+                box.AddChild(CreateItem(item.item));
             return box;
         }
 

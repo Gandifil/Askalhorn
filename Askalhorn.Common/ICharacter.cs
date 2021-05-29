@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Askalhorn.Common.Geography.Local;
+using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Utils;
@@ -25,5 +26,7 @@ namespace Askalhorn.Common
         IEnumerable<IPosition> CanMoveTo { get; }
         
         IEnumerable<IAbility> Abilities { get; }
+        
+        IBag Bag { get; }
     }
 }
