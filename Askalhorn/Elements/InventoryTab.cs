@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Numerics;
 using Askalhorn.Common;
 using Askalhorn.Common.Inventory;
@@ -16,15 +17,15 @@ namespace Askalhorn.Elements
     {
         private static readonly string NAME = "inventory";
 
-        public static void Toggle(UiSystem system, IBag bag)
+        public static void Toggle(UiSystem system, IBag bag, Action<IItem> useAction)
         {
             if (system.Get(NAME) is null)
-                system.Add(NAME, Create(bag));
+                system.Add(NAME, Create(bag, useAction));
             else
                 system.Remove(NAME);
         }
         
-        private static Element Create(IBag bag)
+        private static Element Create(IBag bag, Action<IItem> useAction)
         {
             var texture = new Texture2D(Storage.GraphicsDevice, 1, 1);
             texture.SetData(new[] { Color.Black });
@@ -49,18 +50,18 @@ namespace Askalhorn.Elements
             //     }
             // };
             foreach (var item in bag.Items)
-                box.AddChild(CreateItem(item.item));
+                box.AddChild(CreateItem(item.item, useAction));
             return box;
         }
 
-        private static Element CreateItem(IItem item)
+        private static Element CreateItem(IItem item, Action<IItem> useAction)
         {
             var box = new Panel(Anchor.AutoCenter, new Vector2(0.9f, 0.05f), Vector2.Zero);
             box.CanBeMoused = true;
             box.CanBeSelected = true;
             box.OnMouseEnter += element => element.Size = new Vector2(0.95f, 0.07f);
             box.OnMouseExit += element => element.Size = new Vector2(0.9f, 0.05f);
-            box.OnPressed += element => element.Size = new Vector2(2f, 2f);
+            box.OnPressed += element => useAction(item);
             
             box.AddChild(new Image(Anchor.CenterLeft, new Vector2(0.2F, 1F), item.Texture.ToMlem()));
             box.AddChild(new Paragraph(Anchor.Center, 300, item.Name));

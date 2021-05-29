@@ -103,7 +103,12 @@ namespace AmbrosiaGame.Screens
                 CharacterTab.Toggle(game.UiSystem, world.Player);
 
             if (e.Key == Keys.I)
-                InventoryTab.Toggle(game.UiSystem, world.Player.Bag);
+                InventoryTab.Toggle(game.UiSystem, world.Player.Bag, item =>
+                {
+                    var move = new UseItemMove(item);
+                    world.playerController.AddMove(move);
+                    world.Turn();
+                });
 
             if (e.Key == Keys.E)
             {
