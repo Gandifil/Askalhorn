@@ -18,13 +18,14 @@ namespace Askalhorn.Common.Inventory
 
         public Bag()
         {
-            AddItem(new LifePoition(50));
-            AddItem(new EnergyPoition(50));
-            AddItem(new PoisonPoition(20));
-            AddItem(new PoisonPoition(50));
+            Put(new LifePoition(50));
+            Put(new EnergyPoition(50));
+            Put(new PoisonPoition(20));
+            Put(new PoisonPoition(50));
         }
-
-        public void AddItem(IItem item)
+        
+        IReadOnlyCollection<(IItem item, uint count)> IBag.Items => Elements.Select(x => (x.Item, x.Count)).ToList();
+        public void Put(IItem item, uint count = 1)
         {
             Elements.Add(new Element()
             {
@@ -34,7 +35,11 @@ namespace Askalhorn.Common.Inventory
             });
         }
 
-        IReadOnlyCollection<(IItem item, uint count)> IBag.Items => Elements.Select(x => (x.Item, x.Count)).ToList();
+        public IItem Pull(IItem item, uint count = 1)
+        {
+            Elements.RemoveAll(x => x.Item == item);
+            return item;
+        }
 
         public float Weight => Elements.Select(x => x.Count * x.Item.Weight).Sum();
     }

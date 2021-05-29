@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Geography.Local.Generators;
+using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics.Utils;
 using Microsoft.Xna.Framework.Graphics;
@@ -64,6 +66,12 @@ namespace Askalhorn.Common
         }
 
         public ICharacter Player => Characters.First();
+        public event Action<IBag> OnOpenBag;
+
+        internal void OpenBag(IBag bag)
+        {
+            OnOpenBag?.Invoke(bag);
+        }
 
         public void Turn()
         {

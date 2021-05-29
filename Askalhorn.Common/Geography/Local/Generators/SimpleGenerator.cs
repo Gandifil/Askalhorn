@@ -47,6 +47,8 @@ namespace Askalhorn.Common.Geography.Local.Generators
                 {
                     Shift = new Point(20, 20),
                 });
+
+                location.AddBuild(2, 2, new Chest());
                 
                 return location;
             }
