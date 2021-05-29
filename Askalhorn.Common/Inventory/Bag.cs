@@ -18,11 +18,10 @@ namespace Askalhorn.Common.Inventory
 
         public Bag()
         {
-            AddItem(new LifePoition());
-            AddItem(new LifePoition());
-            AddItem(new LifePoition());
-            AddItem(new EnergyPoition());
-            AddItem(new EnergyPoition());
+            AddItem(new LifePoition(50));
+            AddItem(new EnergyPoition(50));
+            AddItem(new PoisonPoition(20));
+            AddItem(new PoisonPoition(50));
         }
 
         public void AddItem(IItem item)

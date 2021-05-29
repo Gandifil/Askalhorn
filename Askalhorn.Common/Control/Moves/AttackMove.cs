@@ -22,7 +22,6 @@ namespace Askalhorn.Common.Control.Moves
         void IMove.Make(Character character)
         {
             var p = (Character) Target;
-            p.Damage(40);
         }
     }
 }

@@ -61,12 +61,7 @@ namespace Askalhorn.Common
             new FireBall()
                 { }
         };
-
-        public void Damage(int value)
-        {
-            HP.Current.Value -= value;
-        }
-
+        
         public Character()
         {
             var attrs = new Dictionary<PrimaryTypes, LinearParameter<int>>();

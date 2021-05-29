@@ -22,6 +22,8 @@ namespace Askalhorn.Common.Control.Moves
         {
             var itemName = Item.Name;
             Log.Information("{Name} использовал {itemName}", character.Name, itemName);
+            
+            Item.Impact?.On(character);
         }
     }
 }

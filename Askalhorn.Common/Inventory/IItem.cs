@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Render;
+﻿using Askalhorn.Common.Mechanics;
+using Askalhorn.Common.Render;
 using MonoGame.Extended;
 using MonoGame.Extended.TextureAtlases;
 
@@ -15,5 +16,7 @@ namespace Askalhorn.Common.Inventory
         float Weight { get; }
         
         Size Size { get; }
+        
+        internal IImpact Impact { get; }
     }
 }
