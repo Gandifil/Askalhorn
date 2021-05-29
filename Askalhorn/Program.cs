@@ -10,8 +10,9 @@ namespace Askalhorn
         static void Main()
         {
             Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .WriteTo.GameLog()
+                .MinimumLevel.Verbose()
+                .WriteTo.GameLog("{Message:lj}")
+                .WriteTo.DevelopConsole()
                 .CreateLogger();
             
             using (var game = new AskalhornGame())

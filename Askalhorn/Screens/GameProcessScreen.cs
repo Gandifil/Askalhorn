@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Askalhorn;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Inventory;
-using Askalhorn.Common.Render;
 using Askalhorn.Elements;
 using Askalhorn.Logging;
 using Askalhorn.Render;
@@ -55,6 +52,8 @@ namespace AmbrosiaGame.Screens
             
             keyboardListener.KeyReleased += KeyRelease;
             mouseListener.MouseClicked += MouseClick;
+
+            game.UiSystem.Add("log", GameLogSink.Create());
         }
 
         private void MovePlayer(Point shift)
@@ -125,7 +124,7 @@ namespace AmbrosiaGame.Screens
             movements = new MovementTiles(world.Player);
             
             
-            var box = new Panel(Anchor.BottomCenter, new Vector2(0.75f, 0.1f), Vector2.Zero);
+            var box = new Panel(Anchor.BottomRight, new Vector2(0.7f, 0.1f), Vector2.Zero);
 
             foreach (var item in world.Characters.First().Abilities)
             {

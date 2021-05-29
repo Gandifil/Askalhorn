@@ -29,7 +29,7 @@ namespace Askalhorn
 
         private UntexturedStyle style;
 
-        private GameLog log;
+        private DevelopConsole log;
 
         public AskalhornGame()
         {
@@ -51,7 +51,7 @@ namespace Askalhorn
             IsMouseVisible = true;
 
             Storage.Initialize(Content, GraphicsDevice);
-            log = new GameLog(Content.Load<SpriteFont>("fonts/GameLogsFont"), Color.Red);
+            log = new DevelopConsole(Content.Load<SpriteFont>("fonts/GameLogsFont"), Color.Red);
             LineRenderer.Initialize(GraphicsDevice);
             
             UiSystem = new UiSystem(Window, GraphicsDevice, style);

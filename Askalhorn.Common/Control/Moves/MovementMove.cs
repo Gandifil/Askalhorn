@@ -30,7 +30,7 @@ namespace Askalhorn.Common.Control.Moves
         {
             character.Position.Point = character.Position.Shift(Offset);
             
-            Log.Information("Player are moving {Offset}", Offset);
+            Log.Debug("Player are moving {Offset}", Offset);
         }
     }
 }

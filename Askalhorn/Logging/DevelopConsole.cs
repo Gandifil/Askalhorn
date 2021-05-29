@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.Metadata;
 using Askalhorn.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Logging
 {
-    public class GameLog
+    public class DevelopConsole
     {
         private readonly SpriteFont font;
 
         private readonly Color color;
         private const int SHIFT = 16;
+        
 
-        public GameLog(SpriteFont font, Color color)
+        public DevelopConsole(SpriteFont font, Color color)
         {
             this.font = font;
             this.color = color;
@@ -28,7 +30,8 @@ namespace Askalhorn.Logging
         /// <exception cref="ArgumentNullException">When <paramref name="sinkConfiguration"/> is <code>null</code></exception>
         public void Draw(SpriteBatch batch)
         {
-            var position = new Vector2(0, batch.GraphicsDevice.Viewport.Height / 2);
+            var position = new Vector2(0, 0);
+            
             batch.Begin();
             foreach (var line in StringLineStorage.Logs)
             {

@@ -67,7 +67,7 @@ namespace Askalhorn.Common
 
         public void Turn()
         {
-            Log.Information("Run moves from all Controllers.");
+            Log.Debug("Run moves from all Controllers.");
 
             foreach (var character in _characters)
             foreach (var move in character.Controller.Moves)

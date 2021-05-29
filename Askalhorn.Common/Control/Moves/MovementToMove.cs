@@ -30,7 +30,7 @@ namespace Askalhorn.Common.Control.Moves
         {
             character.Position.Point = target;
             
-            Log.Information("Player are moving to {target}", target);
+            Log.Debug("Player are moving to {target}", target);
         }
     }
 }
