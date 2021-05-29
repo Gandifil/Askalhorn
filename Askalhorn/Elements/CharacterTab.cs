@@ -10,7 +10,15 @@ namespace Askalhorn.Elements
 {
     public static class CharacterTab
     {
-        private static readonly string NAME = "inventory";
+        private static readonly string NAME = "character";
+
+        public static void Toggle(UiSystem system, ICharacter character)
+        {
+            if (system.Get(NAME) is null)
+                system.Add(NAME, Create(character));
+            else
+                system.Remove(NAME);
+        }
         
         public static void Open(UiSystem system, ICharacter character) 
         {
@@ -35,14 +43,6 @@ namespace Askalhorn.Elements
             }
 
             return box;
-        }
-
-        public static void Toggle(UiSystem system, ICharacter character)
-        {
-            if (system.Get(NAME) is null)
-                system.Add(NAME, Create(character));
-            else
-                system.Remove(NAME);
         }
 
         public static void Close(UiSystem system)

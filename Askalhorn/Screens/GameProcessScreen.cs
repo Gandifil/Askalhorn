@@ -3,6 +3,7 @@ using System.Linq;
 using Askalhorn;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
+using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Render;
 using Askalhorn.Elements;
 using Askalhorn.Logging;
@@ -101,6 +102,9 @@ namespace AmbrosiaGame.Screens
             if (e.Key == Keys.C)
                 CharacterTab.Toggle(game.UiSystem, world.Player);
 
+            if (e.Key == Keys.I)
+                InventoryTab.Toggle(game.UiSystem, new Bag());
+
             if (e.Key == Keys.E)
             {
                 var move = new AttackMove(world.Characters.ElementAt(1));
@@ -124,8 +128,6 @@ namespace AmbrosiaGame.Screens
                 image.CanBeMoused = true;
                 var tooltip = new Tooltip(200, item.Name + "\n" + item.Description, image);
                 tooltip.MouseOffset = new Vector2(32, -64);
-                tooltip.AddChild(new Image(Anchor.Center, new Vector2(0.6F, 0.75F), new MLEM.Textures.TextureRegion(item.Icon)));
-                tooltip.AddChild(new Button(Anchor.BottomCenter, Vector2.Zero, "test"));
                 box.AddChild(image);
             }
             game.UiSystem.Add("box", box);
