@@ -12,12 +12,19 @@ namespace Askalhorn.Common.Geography.Local.Builds
     {
         IPosition IBuild.Position => Position;
         public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
+
+        private readonly Bag Bag = new Bag();
+
+        public Chest()
+        {
+            Bag.Put(new EnergyPoition(10));
+            Bag.Put(new EnergyPoition(10));
+            Bag.Put(new EnergyPoition(10));
+        }
         
         public Action Action => () =>
         {
-            var bag = new Bag();
-            bag.Put(new EnergyPoition(10));
-            Common.World.Instance.OpenBag(bag);
+            Common.World.Instance.OpenBag(Bag);
         };
     }
 }

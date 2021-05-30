@@ -102,7 +102,7 @@ namespace AmbrosiaGame.Screens
                 CharacterTab.Toggle(game.UiSystem, world.Player);
 
             if (e.Key == Keys.I)
-                InventoryTab.Toggle(game.UiSystem, world.Player.Bag, item =>
+                InventoryTab.Toggle(game.UiSystem, world.Player.Bag, (element, item) =>
                 {
                     var move = new UseItemMove(item);
                     world.playerController.AddMove(move);
@@ -116,10 +116,15 @@ namespace AmbrosiaGame.Screens
                 world.Turn();
             }
         }
-        
+
         public override void LoadContent()
         {
             world = new World();
+            world.OnOpenBag += bag =>
+            {
+                InventoryTab.CreateExchangeTab(game.UiSystem, bag, world.Player.Bag);
+            };
+
             mapRenderer.LoadMap(world.Location.TiledMap);
             movements = new MovementTiles(world.Player);
             
