@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Askalhorn.Common.Maths;
+using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography.Local
 {
@@ -13,9 +14,9 @@ namespace Askalhorn.Common.Geography.Local
 
         public uint Y => (uint)Point.Y;
         
-        public Point Shift(Point direction)
+        public IPosition Shift(Point direction)
         {
-            return Point + direction;
+            return new Position(Point + direction);
         }
 
         /// <summary>
@@ -53,18 +54,10 @@ namespace Askalhorn.Common.Geography.Local
         {
             Point = position.Point;
         }
-
-        private static readonly Vector2 xi = new Vector2(32, 16);
-
-        private static readonly Vector2 yi = new Vector2(-32, 16);
-
-        private static readonly Vector2 Origin = new Vector2(32, 32);
-
-        private static readonly Vector2 ToCenter = new Vector2(0, 16);
-        public Vector2 RenderTileVector => Point.X * xi + Point.Y * yi - Origin;
+        public Vector2 RenderTileVector => RenderVector - Vectors.Origin;
         
-        public Vector2 RenderOriginVector => RenderVector + ToCenter;
+        public Vector2 RenderOriginVector => RenderVector + Vectors.ToCenter;
 
-        public Vector2 RenderVector => Point.X * xi + Point.Y * yi;
+        public Vector2 RenderVector => Vectors.Transform(Point);
     }
 }

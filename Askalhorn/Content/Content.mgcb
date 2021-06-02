@@ -148,6 +148,18 @@
 /processorParam:TextureFormat=Color
 /build:images/movement_selected.png
 
+#begin images/selection.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/selection.png
+
 #begin images/Test.png
 /importer:TextureImporter
 /processor:TextureProcessor

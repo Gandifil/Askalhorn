@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Maths;
@@ -24,6 +25,8 @@ namespace Askalhorn.Common
         IPosition Position { get; }
         
         IEnumerable<IPosition> CanMoveTo { get; }
+        
+        IEnumerable<MovementMove> AvailableMovements { get; }
         
         IEnumerable<IAbility> Abilities { get; }
         

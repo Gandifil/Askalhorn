@@ -12,7 +12,7 @@ namespace Askalhorn.Common.Control.Moves
         /// <summary>
         /// The offset of movement
         /// </summary>
-        public Point Offset { get; set; }
+        public readonly Point Offset;
         
         public MovementMove(Point offset)
         {
@@ -28,7 +28,7 @@ namespace Askalhorn.Common.Control.Moves
 
         void IMove.Make(Character character)
         {
-            character.Position.Point = character.Position.Shift(Offset);
+            character.Position = (Position)character.Position.Shift(Offset);
             
             Log.Debug("Player are moving {Offset}", Offset);
         }

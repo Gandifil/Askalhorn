@@ -12,7 +12,7 @@ namespace Askalhorn.Common.Control.Moves
         /// <summary>
         /// The target of movement
         /// </summary>
-        private Point target;
+        public readonly Point target;
         
         public MovementToMove(Point target)
         {

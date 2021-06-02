@@ -43,6 +43,6 @@ namespace Askalhorn.Common.Geography.Local
         /// </summary>
         /// <param name="direction">The direction of shifting</param>
         /// <returns>Shifted position</returns>
-        Point Shift(Point direction);
+        IPosition Shift(Point direction);
     }
 }

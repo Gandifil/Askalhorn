@@ -69,10 +69,9 @@ namespace AmbrosiaGame.Screens
 
         private void MouseClick(object sender, MouseEventArgs args)
         {
-            var movement = movements.CheckClick(args.Position, camera.GetViewMatrix());
-            if (movement is not null)
+            var move = movements.CheckClick(args.Position, camera.GetViewMatrix());
+            if (move is not null)
             {
-                var move = new MovementToMove(movement.Point);
                 if (move.IsValid(world.Player))
                 {
                     world.playerController.AddMove(move);
@@ -117,9 +116,15 @@ namespace AmbrosiaGame.Screens
             }
         }
 
+        private void UpdateMovements()
+        {
+            movements.AvailableMovements = world.Player.AvailableMovements;
+        }
+
         public override void LoadContent()
         {
             world = new World();
+            world.OnTurn += UpdateMovements;
             world.OnOpenBag += bag =>
             {
                 InventoryTab.CreateExchangeTab(game.UiSystem, bag, world.Player.Bag);
@@ -140,6 +145,7 @@ namespace AmbrosiaGame.Screens
                 box.AddChild(image);
             }
             game.UiSystem.Add("box", box);
+            UpdateMovements();
         }
 
         public override void UnloadContent()

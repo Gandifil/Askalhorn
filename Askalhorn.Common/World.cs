@@ -67,6 +67,7 @@ namespace Askalhorn.Common
 
         public ICharacter Player => Characters.First();
         public event Action<IBag> OnOpenBag;
+        public event Action OnTurn;
 
         internal void OpenBag(IBag bag)
         {
@@ -83,6 +84,7 @@ namespace Askalhorn.Common
             foreach (var character in _characters)
                 character.Turn();
             _characters.RemoveAll(x => x.HP.Current < 1);
+            OnTurn?.Invoke();
         }
     }
 }

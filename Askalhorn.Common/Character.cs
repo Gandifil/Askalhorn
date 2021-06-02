@@ -59,6 +59,12 @@ namespace Askalhorn.Common
             .Where(x => new MovementMove(x).IsValid(this))
             .Select(x => (IPosition)new Position(Position.Shift(x)));
 
+        public IEnumerable<MovementMove> AvailableMovements =>
+            Variants
+                .Select(x => new MovementMove(x))
+                .Where(x => x.IsValid(this));
+            
+
         IEnumerable<IAbility> ICharacter.Abilities => Abilities;
 
         public List<IAbility> Abilities { get; set; } = new List<IAbility>()
