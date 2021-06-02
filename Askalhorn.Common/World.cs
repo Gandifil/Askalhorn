@@ -79,7 +79,7 @@ namespace Askalhorn.Common
             OnOpenBag?.Invoke(bag);
         }
 
-        public void Turn()
+        internal void Turn()
         {
             Log.Debug("Run moves from all Controllers.");
 

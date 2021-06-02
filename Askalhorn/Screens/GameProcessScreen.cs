@@ -67,24 +67,15 @@ namespace AmbrosiaGame.Screens
         {
             var move = new MovementMove(shift);
             if (move.IsValid(world.Player))
-            {
                 world.playerController.AddMove(new MovementMove(shift));
-                world.Turn();
-            }
         }
 
 
         private void MouseClick(object sender, MouseEventArgs args)
         {
             var move = movements.CheckClick(args.Position, camera.GetViewMatrix());
-            if (move is not null)
-            {
-                if (move.IsValid(world.Player))
-                {
-                    world.playerController.AddMove(move);
-                    world.Turn();
-                }
-            }
+            if (move is not null && move.IsValid(world.Player))
+                world.playerController.AddMove(move);
         }
 
         private void KeyRelease(object sender, KeyboardEventArgs e)
@@ -108,19 +99,11 @@ namespace AmbrosiaGame.Screens
                 CharacterTab.Toggle(game.UiSystem, world.Player);
 
             if (e.Key == Keys.I)
-                InventoryTab.Toggle(game.UiSystem, world.Player.Bag, (element, item) =>
-                {
-                    var move = new UseItemMove(item);
-                    world.playerController.AddMove(move);
-                    world.Turn();
-                });
+                InventoryTab.Toggle(game.UiSystem, world.Player.Bag, (_, item) => 
+                    world.playerController.AddMove(new UseItemMove(item)));
 
             if (e.Key == Keys.E)
-            {
-                var move = new AttackMove(world.Characters.ElementAt(1));
-                world.playerController.AddMove(move);
-                world.Turn();
-            }
+                world.playerController.AddMove(new AttackMove(world.Characters.ElementAt(1)));
         }
 
         private void UpdateMovements()

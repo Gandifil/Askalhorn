@@ -20,6 +20,7 @@ namespace Askalhorn.Common.Control
         public void AddMove(IMove move)
         {
             buffer.Add(move);
+            World.Instance.Turn();
         }
     }
 }
