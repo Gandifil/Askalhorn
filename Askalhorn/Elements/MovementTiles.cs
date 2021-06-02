@@ -39,10 +39,7 @@ namespace Askalhorn.Elements
             
             foreach (var move in AvailableAbilities)
                 if (move.Target.Position.Point == position)
-                {
-                    AvailableAbilities = new List<UseAbilityMove>();
                     return move;
-                }
 
             return null;
         }

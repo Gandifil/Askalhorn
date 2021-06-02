@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Askalhorn;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
@@ -118,6 +119,7 @@ namespace AmbrosiaGame.Screens
 
         private void UpdateMovements()
         {
+            movements.AvailableAbilities = new List<UseAbilityMove>();
             movements.AvailableMovements = world.Player.AvailableMovements;
             
             
