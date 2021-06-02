@@ -38,7 +38,7 @@ namespace Askalhorn.Common
         }
         
         /// <summary>
-        /// Create world.
+        /// Create new world.
         /// </summary>
         public World()
         {
@@ -63,6 +63,11 @@ namespace Askalhorn.Common
 
             _characters[1].Controller = new RandomMovementController(_characters[1]);
             _characters[0].Level.AddEnergy(1000);
+        }
+
+        public World(string filepath)
+        {
+            throw new NotImplementedException();
         }
 
         public ICharacter Player => Characters.First();

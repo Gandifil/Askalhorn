@@ -28,12 +28,18 @@ namespace AmbrosiaGame.Screens
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
         private MovementTiles movements;
-        private World world;
+        private readonly World world;
 
-        public GameProcessScreen(AskalhornGame game)
+        public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
         {
             this.game = game;
+            this.world = world;
+            world.OnTurn += UpdateMovements;
+            world.OnOpenBag += bag =>
+            {
+                InventoryTab.CreateExchangeTab(game.UiSystem, bag, world.Player.Bag);
+            };
         }
 
         public override void Initialize()
@@ -146,12 +152,6 @@ namespace AmbrosiaGame.Screens
 
         public override void LoadContent()
         {
-            world = new World();
-            world.OnTurn += UpdateMovements;
-            world.OnOpenBag += bag =>
-            {
-                InventoryTab.CreateExchangeTab(game.UiSystem, bag, world.Player.Bag);
-            };
 
             mapRenderer.LoadMap(world.Location.TiledMap);
             movements = new MovementTiles(world.Player);
