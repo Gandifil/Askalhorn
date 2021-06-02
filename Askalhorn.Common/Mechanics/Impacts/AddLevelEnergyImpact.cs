@@ -1,4 +1,7 @@
-﻿using Serilog;
+﻿using System;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.TextureAtlases;
+using Serilog;
 
 namespace Askalhorn.Common.Mechanics.Impacts
 {
@@ -10,7 +13,10 @@ namespace Askalhorn.Common.Mechanics.Impacts
         {
             this.Value = value;
         }
-        
+
+        public string Description => "";
+        public TextureRegion2D TextureRegion => throw new NotImplementedException();
+
         public void On(Character character)
         {
             character.Level.AddEnergy(Value);

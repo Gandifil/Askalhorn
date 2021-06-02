@@ -80,6 +80,8 @@ namespace Askalhorn.Common
             foreach (var character in _characters)
             foreach (var move in character.Controller.Moves)
                 move.Make(character);
+            foreach (var character in _characters)
+                character.Turn();
             _characters.RemoveAll(x => x.HP.Current < 1);
         }
     }

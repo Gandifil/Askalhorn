@@ -20,6 +20,7 @@ namespace Askalhorn.Common.Geography.Local.Builds
             Bag.Put(new EnergyPoition(10));
             Bag.Put(new EnergyPoition(10));
             Bag.Put(new EnergyPoition(10));
+            Bag.Put(new PoisonPoition(10, 3));
         }
         
         public Action Action => () =>

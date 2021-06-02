@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using Askalhorn.Common;
 using Askalhorn.Common.Mechanics;
 using Microsoft.Xna.Framework;
+using MLEM.Extended.Extensions;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
@@ -41,7 +42,27 @@ namespace Askalhorn.Elements
                 box.AddChild(new VerticalSpace(3));
                 box.AddChild(new Paragraph(Anchor.AutoLeft, 1, type.ToString()+":\t" + character.Primary[type].ToString()));
             }
+            box.AddChild(new VerticalSpace(15));
+            box.AddChild(new Paragraph(Anchor.AutoLeft, 1, "Эффекты:\t"));
 
+            foreach (var effect in character.Effects)
+                box.AddChild(CreateItem(effect));
+            return box;
+        }
+        // private static Element CreateHeaders(IEffect effect)
+        // {
+        //     var box = new Panel(Anchor.AutoCenter, new Vector2(0.9f, 0.05f), Vector2.Zero);
+        //     box.AddChild(new Paragraph(Anchor.Center, 300, "effect.Description"));
+        //     box.AddChild(new Paragraph(Anchor.CenterRight, 300, effect.Description));
+        //     return box;
+        // }
+
+        private static Element CreateItem(IEffect effect)
+        {
+            var box = new Panel(Anchor.AutoCenter, new Vector2(0.9f, 0.05f), Vector2.Zero);
+            box.AddChild(new Image(Anchor.CenterLeft, new Vector2(0.2F, 1F), effect.TextureRegion.ToMlem()));
+            box.AddChild(new Paragraph(Anchor.Center, 600, effect.Description));
+            box.AddChild(new Paragraph(Anchor.CenterRight, 100, effect.TurnCount.ToString()));
             return box;
         }
 

@@ -27,6 +27,8 @@ namespace Askalhorn.Common
         
         IEnumerable<IAbility> Abilities { get; }
         
+        IReadOnlyCollection<IEffect> Effects { get; }
+
         IBag Bag { get; }
     }
 }

@@ -7,12 +7,15 @@ using Askalhorn.Common.Control;
 using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Inventory;
+using Askalhorn.Common.Inventory.Items;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Abilities;
+using Askalhorn.Common.Mechanics.Effects;
 using Askalhorn.Common.Mechanics.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Effect = Askalhorn.Common.Mechanics.Effect;
 
 namespace Askalhorn.Common
 {
@@ -37,11 +40,13 @@ namespace Askalhorn.Common
         IPosition ICharacter.Position => Position;
         public Position Position { get; set; }
 
-
+        IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         IBag ICharacter.Bag => Bag;
         
         public readonly Bag Bag = new Bag();
-        
+
+        public readonly Pool Effects;
+
         private static readonly List<Point> Variants = new List<Point>
         {
             new Point(0, -1),
@@ -73,6 +78,14 @@ namespace Askalhorn.Common
             }
 
             Primary = new Attributes<PrimaryTypes>(attrs);
+            
+            Effects = new Pool(this);
+            Bag.Put(new PoisonPoition(10, 9));
+        }
+
+        public void Turn()
+        {
+            Effects.Turn();
         }
     }
 }

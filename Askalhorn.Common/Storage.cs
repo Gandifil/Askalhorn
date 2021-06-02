@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common
 {
@@ -10,6 +11,15 @@ namespace Askalhorn.Common
         {
             Content = content ?? throw new NullReferenceException();
             GraphicsDevice = graphicsDevice ?? throw new NullReferenceException();
+        }
+
+        public static TextureRegion2D Load(string filename, uint x, uint y)
+        {
+            return new TextureRegion2D(
+                Content.Load<Texture2D>("images/" + filename),
+                (int)x * 64, (int)y * 64,
+                64, 64
+            );
         }
 
         public static GraphicsDevice GraphicsDevice { get; private set; }
