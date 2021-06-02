@@ -14,7 +14,9 @@ namespace Askalhorn.Elements
 {
     public class MovementTiles
     {
-        private readonly ICharacter character;
+        private readonly ICharacter character;        
+        public IEnumerable<UseAbilityMove> AvailableAbilities { get; set; } = new List<UseAbilityMove>();
+
         public IEnumerable<MovementMove> AvailableMovements { get; set; } = new List<MovementMove>();
         private readonly Texture2D texture;
         
@@ -31,9 +33,16 @@ namespace Askalhorn.Elements
             
             Log.Information("{position}",  position);
             
-            foreach (var movement in AvailableMovements)
-                if (character.Position.Shift(movement.Offset).Point == position )
-                    return movement;
+            foreach (var move in AvailableMovements)
+                if (character.Position.Shift(move.Offset).Point == position )
+                    return move;
+            
+            foreach (var move in AvailableAbilities)
+                if (move.Target.Position.Point == position)
+                {
+                    AvailableAbilities = new List<UseAbilityMove>();
+                    return move;
+                }
 
             return null;
         }
@@ -45,10 +54,15 @@ namespace Askalhorn.Elements
             
             batch.Draw(texture, Vectors.Transform(point) - Vectors.SmallOrigin, Color.Black); 
             
-            foreach (var movement in AvailableMovements)
+            foreach (var move in AvailableMovements)
                 batch.Draw(texture, 
-                    character.Position.Shift(movement.Offset).RenderVector - Vectors.SmallOrigin, 
+                    character.Position.Shift(move.Offset).RenderVector - Vectors.SmallOrigin, 
                     Color.LightGreen);
+            
+            foreach (var move in AvailableAbilities)
+                batch.Draw(texture, 
+                    move.Target.Position.RenderVector - Vectors.SmallOrigin, 
+                    Color.Red);
         }
     }
 }

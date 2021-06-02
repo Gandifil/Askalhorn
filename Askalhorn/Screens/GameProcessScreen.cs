@@ -119,6 +119,27 @@ namespace AmbrosiaGame.Screens
         private void UpdateMovements()
         {
             movements.AvailableMovements = world.Player.AvailableMovements;
+            
+            
+            game.UiSystem.Remove("abilities");
+            var box = new Panel(Anchor.BottomRight, new Vector2(0.7f, 0.1f), Vector2.Zero);
+            foreach (var item in world.Player.Abilities)
+            {
+                var image = new Image(Anchor.Center, new Vector2(0.6F, 0.75F), new MLEM.Textures.TextureRegion(item.Icon));
+                image.CanBeMoused = true;
+                image.OnPressed += element =>
+                {
+                    movements.AvailableAbilities = world.Characters.Select(x =>
+                        new UseAbilityMove(item)
+                        {
+                            Target = x,
+                        });
+                };
+                var tooltip = new Tooltip(200, item.Name + "\n" + item.Description, image);
+                tooltip.MouseOffset = new Vector2(32, -64);
+                box.AddChild(image);
+            }
+            game.UiSystem.Add("abilities", box);
         }
 
         public override void LoadContent()
@@ -132,19 +153,6 @@ namespace AmbrosiaGame.Screens
 
             mapRenderer.LoadMap(world.Location.TiledMap);
             movements = new MovementTiles(world.Player);
-            
-            
-            var box = new Panel(Anchor.BottomRight, new Vector2(0.7f, 0.1f), Vector2.Zero);
-
-            foreach (var item in world.Characters.First().Abilities)
-            {
-                var image = new Image(Anchor.Center, new Vector2(0.6F, 0.75F), new MLEM.Textures.TextureRegion(item.Icon));
-                image.CanBeMoused = true;
-                var tooltip = new Tooltip(200, item.Name + "\n" + item.Description, image);
-                tooltip.MouseOffset = new Vector2(32, -64);
-                box.AddChild(image);
-            }
-            game.UiSystem.Add("box", box);
             UpdateMovements();
         }
 

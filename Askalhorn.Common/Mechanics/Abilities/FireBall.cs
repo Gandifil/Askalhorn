@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Askalhorn.Common.Mechanics.Impacts;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common.Mechanics.Abilities
 {
@@ -10,7 +11,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public Texture2D Icon => Storage.Content.Load<Texture2D>("images/fireball");
         void IAbility.Use(Character character, Character target)
         {
-            throw new System.NotImplementedException();
+            new DamageImpact(10).On(target);
         }
     }
 }
