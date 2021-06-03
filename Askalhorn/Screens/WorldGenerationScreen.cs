@@ -4,6 +4,7 @@ using Askalhorn.Common.Geography.World.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Font;
+using MLEM.Misc;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
@@ -36,38 +37,40 @@ namespace Askalhorn.Screens
 
         public override void LoadContent() {
             RegenerateMap();
-            var style = new UntexturedStyle(spriteBatch) {
-                Font = new GenericSpriteFont(game.Content.Load<SpriteFont>("fonts/GameLogsFont")),
-
-            };
-            game.UiSystem.Style = style;
             
             var box = new Panel(Anchor.Center, new Vector2(0.75f, 0.9f), Vector2.Zero);
+            box.Padding = new Padding(new Padding(), -12.5f);
             
             var image = new Image(Anchor.Center, new Vector2(0.6F, 0.75F), new MLEM.Textures.TextureRegion(texture));
             var restartButton = new Button(Anchor.BottomCenter, new Vector2(0.4f, 0.1f), "Перестроить")
             {
-                OnPressed = element => RegenerateMap()
+                OnPressed = _ => RegenerateMap()
+            };
+            var exitButton = new Button(Anchor.BottomLeft, new Vector2(0.2f, 0.1f), "Назад")
+            {
+                OnPressed = _ => ScreenManager.LoadScreen(new MainMenuScreen(game)),
             };
             box.AddChild(image);
             box.AddChild(restartButton);
+            box.AddChild(exitButton);
             
             var radiobox = new Panel(Anchor.CenterLeft, new Vector2(0.1f, 0.9f), Vector2.Zero);
+            radiobox.Padding = new Padding(new Padding(), -12.5f);
             radiobox.AddChild(new RadioButton(Anchor.AutoLeft, new Vector2(0.05f, 0.05f), "Высота", true, "render")
             {
-                OnSelected = element => SetMapRenderer<LevelMapRenderer>(),
+                OnSelected = element => SetMapRenderer(new LevelMapRenderer(GraphicsDevice))
             });
-            radiobox.AddChild(new RadioButton(Anchor.AutoLeft, new Vector2(0.05f, 0.05f), "Влажность", false, "render")
+            radiobox.AddChild(new RadioButton(Anchor.AutoLeft, new Vector2(1f, 0.05f), "Влажность", false, "render")
             {
-                OnSelected = element => SetMapRenderer<HydroMapRenderer>(),
+                OnSelected = element => SetMapRenderer(new HydroMapRenderer(GraphicsDevice))
             });
             radiobox.AddChild(new RadioButton(Anchor.AutoLeft, new Vector2(0.05f, 0.05f), "Температура", false, "render")
             {
-                OnSelected = element => SetMapRenderer<TemperatureMapRenderer>(),
+                OnSelected = element => SetMapRenderer(new TemperatureMapRenderer(GraphicsDevice))
             });
             radiobox.AddChild(new RadioButton(Anchor.AutoLeft, new Vector2(0.05f, 0.05f), "Биомы", false, "render")
             {
-                OnSelected = element => SetMapRenderer<BiomeMapRenderer>(),
+                OnSelected = element => SetMapRenderer(new BiomeMapRenderer(GraphicsDevice))
             });
 
             
@@ -77,8 +80,8 @@ namespace Askalhorn.Screens
 
         public override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
             game.UiSystem.Remove("box");
+            game.UiSystem.Remove("radiobox");
         }
 
         private void RegenerateMap()
@@ -92,9 +95,9 @@ namespace Askalhorn.Screens
             mapRenderer.Draw(map, ref texture);
         }
 
-        private void SetMapRenderer<T>() where T: IMapRenderer
+        private void SetMapRenderer(IMapRenderer renderer)
         {
-            mapRenderer = (IMapRenderer)Activator.CreateInstance(typeof(T), GraphicsDevice);
+            mapRenderer = renderer;
             RerenderMap();
         }
 
@@ -104,13 +107,6 @@ namespace Askalhorn.Screens
 
         public override void Draw(GameTime gameTime)
         {
-            //GraphicsDevice.Clear(Color.Black);
-
-            //spriteBatch.Begin();
-            //if (texture != null)
-            //    spriteBatch.Draw(texture, new Rectangle(0, 0, 1024, 1024), Color.White);
-
-            //spriteBatch.End();
         }
     }
 }
