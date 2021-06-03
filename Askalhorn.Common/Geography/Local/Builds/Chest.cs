@@ -13,14 +13,11 @@ namespace Askalhorn.Common.Geography.Local.Builds
         IPosition IBuild.Position => Position;
         public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
 
-        private readonly Bag Bag = new Bag();
+        private readonly Bag Bag;
 
-        public Chest()
+        public Chest(Bag bag)
         {
-            Bag.Put(new EnergyPoition(10));
-            Bag.Put(new EnergyPoition(10));
-            Bag.Put(new EnergyPoition(10));
-            Bag.Put(new PoisonPoition(10, 3));
+            Bag = bag;
         }
         
         public Action Action => () =>

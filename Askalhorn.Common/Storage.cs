@@ -24,5 +24,7 @@ namespace Askalhorn.Common
 
         public static GraphicsDevice GraphicsDevice { get; private set; }
         public static ContentManager Content { get; private set; }
+
+        public static Random Random = new Random();
     }
 }

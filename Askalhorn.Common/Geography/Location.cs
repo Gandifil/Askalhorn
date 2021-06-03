@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Askalhorn.Common.Geography.Local;
-using Askalhorn.Common.Geography.Local.Builds;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Content;
 using MonoGame.Extended.Tiled;
 
 namespace Askalhorn.Common.Geography
 {
-    internal class ManagedLocation: ILocation
+    internal class Location: ILocation
     {
         public TiledMap TiledMap { get; set; }
-
-        public ICell this[uint x, uint y] => Cells[x, y];
         
-        public ICell this[Point point] => Cells[point.X, point.Y];
+        ICell ILocation.this[IPosition position] => Cells[position.X, position.Y];
         
-        public ICell this[IPosition position] => this[position.X, position.Y];
+        public Cell this[IPosition position] => Cells[position.X, position.Y];
 
         public Cell[,] Cells { get; private set; }
 
@@ -30,14 +25,9 @@ namespace Askalhorn.Common.Geography
                    && position.Y < TiledMap.Height;
         }
 
-        void ILocation.AddCharacter(Character character)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<IBuild> Builds { get; private set; } = new List<IBuild>();
 
-        public ManagedLocation(uint width, uint height)
+        public Location(uint width, uint height)
         {
             Cells = new Cell[width, height];
             for (int x = 0; x < width; x++)
@@ -46,15 +36,26 @@ namespace Askalhorn.Common.Geography
             
             TiledMap = new TiledMap("Global World", 
                 (int)width, (int)height,
-            64, 32, 
+                64, 32, 
                 TiledMapTileDrawOrder.RightDown, TiledMapOrientation.Isometric);
             TiledMap.AddLayer(new TiledMapTileLayer("floors", (int)width, (int)height, 64, 32));
-            TiledMap.AddLayer(new TiledMapTileLayer("walls", 
-                (int)width, (int)height, 64, 32, new Vector2(0, -32)));
+            TiledMap.AddLayer(new TiledMapTileLayer("walls",  (int)width, (int)height, 64, 32, new Vector2(0, -32)));
+        }
+
+        public Location(string name)
+        {
+            TiledMap = Storage.Content.Load<TiledMap>("maps/" + name);
             
-            //var tiles = Storage.Content.Load<TiledMapTileset>("maps/grassland_tiles");
-            //TiledMap.AddTileset(tiles, 0);
-            
+            Cells = new Cell[TiledMap.Width, TiledMap.Height];
+            for (int x = 0; x < TiledMap.Width; x++)
+            for (int y = 0; y < TiledMap.Height; y++)
+                Cells[x, y] = new Cell();
+        }
+
+        public bool FreeForBuild(Point point)
+        {
+            var position = new Position(point);
+            return Contain(position) && !this[position].IsWall && this[position].Build is null;
         }
 
         public void SetWall(uint x, uint y)
@@ -62,11 +63,11 @@ namespace Askalhorn.Common.Geography
             Cells[x, y].IsWall = true;
         }
         
-        public void AddBuild<T>(int x, int y, T build) where T:HasPosition, IBuild, new()
+        public void AddBuild(IBuild build)
         {
-            build.Position = new Position(x, y);
             Builds.Add(build);
-            Cells[x, y].Build = build;
+            this[build.Position].Build = build;
         }
+        
     }
 }

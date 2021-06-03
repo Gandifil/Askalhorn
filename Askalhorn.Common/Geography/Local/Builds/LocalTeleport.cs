@@ -14,15 +14,14 @@ namespace Askalhorn.Common.Geography.Local.Builds
 
         public IRenderer Renderer { get; set; } = new ParticleRenderer(new ParticleRenderer.Settings());
 
-        public Point Shift { get; set; }
+        public Point Target { get; set; }
 
         public Action Action => () =>
         {
-            Log.Information("Used local teleport with shift {Shift}", Shift);
+            Log.Information("Used local teleport with shift {Target}", Target);
 
-            var teleport = new MovementToMove(Shift);
+            var teleport = new MovementToMove(Target);
             Common.World.Instance.playerController.AddMove(teleport);
-            Common.World.Instance.Turn();
         };
     }
 }

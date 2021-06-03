@@ -40,6 +40,12 @@ namespace AmbrosiaGame.Screens
             {
                 InventoryTab.CreateExchangeTab(game.UiSystem, bag, world.Player.Bag);
             };
+            world.OnChangeLocation += UpdateMap;
+        }
+
+        private void UpdateMap()
+        {
+            mapRenderer.LoadMap(world.Location.TiledMap);
         }
 
         public override void Initialize()
@@ -51,6 +57,7 @@ namespace AmbrosiaGame.Screens
             camera = new OrthographicCamera(viewportAdapter);
             
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
+            UpdateMap();
             characterRenderer = new CharacterRenderer();
             
             var keyboardListener = new KeyboardListener();
@@ -135,8 +142,6 @@ namespace AmbrosiaGame.Screens
 
         public override void LoadContent()
         {
-
-            mapRenderer.LoadMap(world.Location.TiledMap);
             movements = new MovementTiles(world.Player);
             UpdateMovements();
         }

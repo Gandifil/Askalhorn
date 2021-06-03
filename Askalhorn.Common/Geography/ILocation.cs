@@ -8,15 +8,11 @@ namespace Askalhorn.Common.Geography
     public interface ILocation
     {
         TiledMap TiledMap { get; }
-
-        ICell this[uint x, uint y] { get; }
         
         ICell this[IPosition position] { get; }
         
         IReadOnlyCollection<IBuild> Builds { get; }
 
         bool Contain(IPosition position);
-        
-        internal void AddCharacter(Character character);
     }
 }

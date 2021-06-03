@@ -20,15 +20,15 @@ namespace Askalhorn.Common.Geography.Local.Builds
             Radius = 40,
         });
 
-        public Point Shift { get; set; }
+        public LocationPipeline LocationPipeline { get; set; }
+
+        public Position TargetPosition { get; set; }
 
         public Action Action => () =>
         {
-            Log.Information("Used global teleport with shift {Shift}", Shift);
+            //Log.Information("Used global teleport with shift {Shift}", Shift);
 
-            var teleport = new MovementToMove(Shift);
-            Common.World.Instance.playerController.AddMove(teleport);
-            Common.World.Instance.Turn();
+            Common.World.Instance.SetLocation(LocationPipeline, TargetPosition);
         };
     }
 }
