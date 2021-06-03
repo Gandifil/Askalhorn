@@ -50,11 +50,10 @@ namespace Askalhorn.Common
                 new()
                 {
                     Texture = Storage.Content.Load<Texture2D>("images/mage"),
-                    Position = new Position(2, 2),
                     Controller = playerController,
                 }
             };
-            SetLocation(LocationPipeline.Templates[2], new Position(1, 1));
+            SetLocation(LocationPipeline.Templates[0], new Position(1, 1));
         }
 
         public World(string filepath)

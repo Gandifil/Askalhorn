@@ -38,8 +38,6 @@ namespace Askalhorn.Common.Geography
                 (int)width, (int)height,
                 64, 32, 
                 TiledMapTileDrawOrder.RightDown, TiledMapOrientation.Isometric);
-            TiledMap.AddLayer(new TiledMapTileLayer("floors", (int)width, (int)height, 64, 32));
-            TiledMap.AddLayer(new TiledMapTileLayer("walls",  (int)width, (int)height, 64, 32, new Vector2(0, -32)));
         }
 
         public Location(string name)

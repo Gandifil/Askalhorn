@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using MonoGame.Extended.Tiled;
 
 namespace Askalhorn.Common.Geography.Local.Designers
@@ -11,14 +12,17 @@ namespace Askalhorn.Common.Geography.Local.Designers
             uint height = (uint)map.GetLength(1);
             
             var location = new Location(width, height);
+            
             var tiles = Storage.Content.Load<TiledMapTileset>("maps/dungeon_tiles");
-            var grass_tiles = Storage.Content.Load<TiledMapTileset>("maps/grassland_tiles");
-            location.TiledMap.AddTileset(grass_tiles, 0);
-            location.TiledMap.AddTileset(tiles, 300);
 
-            var floors = (TiledMapTileLayer) location.TiledMap.GetLayer("floors");
-            var walls = (TiledMapTileLayer) location.TiledMap.GetLayer("walls");
-                
+            var floors = new TiledMapTileLayer("floors", (int) width, (int) height, 64, 32, new Vector2(0, -32));
+            location.TiledMap.AddLayer(floors);
+
+            var walls = new TiledMapTileLayer("walls", (int) width, (int) height, 64, 32, new Vector2(0, -32));
+            location.TiledMap.AddLayer(walls);
+            
+            location.TiledMap.AddTileset(tiles, 0);
+
             for (ushort x = 0; x < width; x++)
             for (ushort y = 0; y < height; y++)
                 floors.SetTile(x, y,  (uint)(location.TiledMap.GetTilesetFirstGlobalIdentifier(tiles) + 74));
