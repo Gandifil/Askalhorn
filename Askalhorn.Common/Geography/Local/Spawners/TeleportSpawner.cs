@@ -6,7 +6,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners
 {
     internal class TeleportSpawner: ISpawner
     {
-        public void Initialize(Location location)
+        public void Initialize(Location location, Random random, IPosition playerPosition)
         {
             var start = RandomPoint(location);
             var end = RandomPoint(location);

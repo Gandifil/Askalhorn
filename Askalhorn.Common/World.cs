@@ -82,7 +82,7 @@ namespace Askalhorn.Common
             player.Position = position;
             _characters.Clear();
             _characters.Add(player);
-            Location = pipeline.Run();
+            Location = pipeline.Run(position);
             OnChangeLocation?.Invoke();
         }
 

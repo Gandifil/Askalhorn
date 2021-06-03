@@ -1,20 +1,21 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography.Local.Spawners
 {
     internal abstract class BuildSpawner: ISpawner
     {
-        protected Point RandomPoint(Location location)
+        protected Point RandomPoint(Location location, Random random)
         {
-            var x = Storage.Random.Next(0, location.TiledMap.Width);
-            var y = Storage.Random.Next(0, location.TiledMap.Height);
+            var x = random.Next(0, location.TiledMap.Width);
+            var y = random.Next(0, location.TiledMap.Height);
 
             var point = new Point(x, y);
             if (location.FreeForBuild(point))
                 return point;
-            return RandomPoint(location);
+            return RandomPoint(location, random);
         }
 
-        public abstract void Initialize(Location location);
+        public abstract void Initialize(Location location, Random random, IPosition playerPosition);
     }
 }

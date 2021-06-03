@@ -28,13 +28,13 @@ namespace Askalhorn.Common.Geography
             Seed = seed;
         }
         
-        public Location Run()
+        public Location Run(IPosition position)
         {
             var random = new Random(Seed);
             var cells = Generator.Create(random);
             var location = Designer.FormLocation(random, ref cells);
             foreach (var spawner in Spawners)
-                spawner.Initialize(location);
+                spawner.Initialize(location, random, position);
             return location;
         }
 

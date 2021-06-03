@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Control;
+﻿using System;
+using Askalhorn.Common.Control;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,7 +7,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners
 {
     internal class TestEnemySpawner: ISpawner
     {
-        public void Initialize(Location location)
+        public void Initialize(Location location, Random random, IPosition playerPosition)
         {
             var character = new Character()
             {
