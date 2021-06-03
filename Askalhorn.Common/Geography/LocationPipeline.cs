@@ -42,16 +42,20 @@ namespace Askalhorn.Common.Geography
         {
             new LocationPipeline(12)
             {
-                Generator = new LabirintGenerator(25, 25),
+                Generator = new OneRoomGenerator(25, 25),
                 Designer = new WhiteCastleDesigner(),
                 Spawners = new List<ISpawner>
                 {
+                    new ChestSpawner(),
+                    new ChestSpawner(),
+                    new ChestSpawner(),
+                    new TestEnemySpawner(),
                     new CustomBuildSpawner(point =>
                         new GlobalTeleport()
                         {
                             Position = new Position(point),
                             TargetPosition = new Position(1, 1),
-                            LocationPipeline = Templates[1],
+                            LocationPipeline = Templates[2],
                         })
                 },
             },
@@ -70,6 +74,11 @@ namespace Askalhorn.Common.Geography
                             LocationPipeline = Templates[0],
                         })
                 }
+            },
+            new LocationPipeline(10)
+            {
+                Generator = new RoomsAndCorridorsGenerator(50, 50),
+                Designer = new WhiteCastleDesigner(),
             },
             new LocationPipeline()
             {

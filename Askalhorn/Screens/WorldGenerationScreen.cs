@@ -60,7 +60,7 @@ namespace Askalhorn.Screens
             {
                 OnSelected = element => SetMapRenderer(new LevelMapRenderer(GraphicsDevice))
             });
-            radiobox.AddChild(new RadioButton(Anchor.AutoLeft, new Vector2(1f, 0.05f), "Влажность", false, "render")
+            radiobox.AddChild(new RadioButton(Anchor.AutoLeft, new Vector2(0.05f, 0.05f), "Влажность", false, "render")
             {
                 OnSelected = element => SetMapRenderer(new HydroMapRenderer(GraphicsDevice))
             });
