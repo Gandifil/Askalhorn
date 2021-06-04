@@ -1,6 +1,7 @@
 ﻿using System;
 using Askalhorn.Common.Geography.Local.Builds;
 using Askalhorn.Common.Inventory;
+using Askalhorn.Common.Inventory.BagFillers;
 using Askalhorn.Common.Inventory.Items;
 using Microsoft.Xna.Framework;
 
@@ -18,7 +19,13 @@ namespace Askalhorn.Common.Geography.Local.Spawners
             bag.Put(new EnergyPoition(10));
             bag.Put(new PoisonPoition(10, 3));
             
-            location.AddBuild(new Chest(bag)
+            location.AddBuild(new Chest(
+                new StaticBagFiller
+                {
+                    Item = new LifePoition(10),
+                    Minimum = 10,
+                    Maximum = 20,
+                })
             {
                 Position = new Position(start),
             });
