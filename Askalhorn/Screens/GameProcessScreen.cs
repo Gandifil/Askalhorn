@@ -6,14 +6,11 @@ using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
 using Askalhorn.Components;
 using Askalhorn.Elements;
-using Askalhorn.Logging;
 using Askalhorn.Render;
 using Askalhorn.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MLEM.Ui;
-using MLEM.Ui.Elements;
 using MonoGame.Extended;
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
@@ -28,17 +25,17 @@ namespace AmbrosiaGame.Screens
         private SpriteBatch spriteBatch;
         private OrthographicCamera camera;
         
+        public readonly World World;
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
         private MovementTiles movements;
-        private readonly World world;
         private InputListenerComponent listeners;
 
         public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
         {
             this.game = game;
-            this.world = world;
+            this.World = world;
             world.OnTurn += UpdateMovements;
             world.OnOpenBag += bag =>
             {
@@ -49,7 +46,7 @@ namespace AmbrosiaGame.Screens
 
         private void UpdateMap()
         {
-            mapRenderer.LoadMap(world.Location.TiledMap);
+            mapRenderer.LoadMap(World.Location.TiledMap);
         }
 
         public override void Initialize()
@@ -72,23 +69,24 @@ namespace AmbrosiaGame.Screens
             mouseListener.MouseClicked += MouseClick;
 
             listeners = new InputListenerComponent(Game, keyboardListener, mouseListener);
-            Game.Components.Add(listeners);
             
+            Game.Components.Add(listeners);
+            Game.Components.Add(new LogComponent(game));
         }
 
         private void MovePlayer(Point shift)
         {
             var move = new MovementMove(shift);
-            if (move.IsValid(world.Player))
-                world.playerController.AddMove(new MovementMove(shift));
+            if (move.IsValid(World.Player))
+                World.playerController.AddMove(new MovementMove(shift));
         }
 
 
         private void MouseClick(object sender, MouseEventArgs args)
         {
             var move = movements.CheckClick(args.Position, camera.GetViewMatrix());
-            if (move is not null && move.IsValid(world.Player))
-                world.playerController.AddMove(move);
+            if (move is not null && move.IsValid(World.Player))
+                World.playerController.AddMove(move);
         }
 
         private void KeyRelease(object sender, KeyboardEventArgs e)
@@ -106,63 +104,43 @@ namespace AmbrosiaGame.Screens
                 MovePlayer(new Point(1, 0));
 
             if (e.Key == Keys.F)
-                world.Location[world.Player.Position].Build?.Action();
+                World.Location[World.Player.Position].Build?.Action();
 
             if (e.Key == Keys.C)
-                CharacterTab.Toggle(game.UiSystem, world.Player);
+                CharacterTab.Toggle(game.UiSystem, World.Player);
 
             if (e.Key == Keys.I)
-                InventoryTab.Toggle(game.UiSystem, world.Player.Bag, (_, item) => 
-                    world.playerController.AddMove(new UseItemMove(item)));
+                InventoryTab.Toggle(game.UiSystem, World.Player.Bag, (_, item) => 
+                    World.playerController.AddMove(new UseItemMove(item)));
 
             if (e.Key == Keys.E)
-                world.playerController.AddMove(new AttackMove(world.Characters.ElementAt(1)));
+                World.playerController.AddMove(new AttackMove(World.Characters.ElementAt(1)));
         }
 
         private void UpdateMovements()
         {
             movements.AvailableAbilities = new List<UseAbilityMove>();
-            movements.AvailableMovements = world.Player.AvailableMovements;
-            
-            
-            game.UiSystem.Remove("abilities");
-            var box = new Panel(Anchor.BottomRight, new Vector2(0.7f, 0.1f), Vector2.Zero);
-            foreach (var item in world.Player.Abilities)
-            {
-                var image = new Image(Anchor.Center, new Vector2(0.6F, 0.75F), new MLEM.Textures.TextureRegion(item.Icon));
-                image.CanBeMoused = true;
-                image.OnPressed += element =>
-                {
-                    movements.AvailableAbilities = world.Characters.Select(x =>
-                        new UseAbilityMove(item)
-                        {
-                            Target = x,
-                        });
-                };
-                var tooltip = new Tooltip(200, item.Name + "\n" + item.Description, image);
-                tooltip.MouseOffset = new Vector2(32, -64);
-                box.AddChild(image);
-            }
-            game.UiSystem.Add("abilities", box);
+            movements.AvailableMovements = World.Player.AvailableMovements;
         }
 
         public override void LoadContent()
         {
-            movements = new MovementTiles(world.Player);
+            movements = new MovementTiles(World.Player);
             UpdateMovements();
-
-            //game.UiSystem.Add("log", GameLogSink.Create());
-            Game.Components.Add(new LogComponent(game));
+            Game.Components.Add(new AbilitiesComponent(game, World.Player));
         }
 
         public override void UnloadContent()
         {
-            Game.Components.ClearWithDispose();
-            
-            game.UiSystem.Remove("abilities");
-            // TODO: Unload any non ContentManager content here
         }
-        
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            
+            Game.Components.ClearWithDispose();
+        }
+
         public override void Update(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
@@ -182,7 +160,7 @@ namespace AmbrosiaGame.Screens
                 camera.Move(new Vector2(0, -10));
 
             mapRenderer.Update(gameTime);
-            foreach (var build in world.Location.Builds)
+            foreach (var build in World.Location.Builds)
                 build.Renderer.Update(gameTime);
         }
         
@@ -195,10 +173,10 @@ namespace AmbrosiaGame.Screens
             mapRenderer.Draw(matrix);
             movements.Draw(spriteBatch, matrix);
 
-            foreach (var build in world.Location.Builds)
+            foreach (var build in World.Location.Builds)
                 build.Renderer.Draw(spriteBatch, build.Position);
             
-            foreach (var item in world.Characters)
+            foreach (var item in World.Characters)
                 characterRenderer.Draw(spriteBatch, item);
             spriteBatch.End();
         }
