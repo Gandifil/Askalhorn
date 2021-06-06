@@ -145,7 +145,7 @@ namespace AmbrosiaGame.Screens
         {
             float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                ScreenManager.LoadScreen(new PauseScreen(game, this));
+                ScreenManager.LoadScreen(new PauseScreen(game, this, World));
         
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 camera.Move(new Vector2(-10, 0));

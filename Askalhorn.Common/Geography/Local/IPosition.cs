@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Text.Json.Serialization;
+using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography.Local
 {

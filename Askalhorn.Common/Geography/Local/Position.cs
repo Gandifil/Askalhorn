@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Maths;
+﻿using System.Text.Json.Serialization;
+using Askalhorn.Common.Maths;
 using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography.Local
@@ -8,10 +9,13 @@ namespace Askalhorn.Common.Geography.Local
     /// </summary>
     public class Position: IPosition
     {
+        [JsonIgnore]
         public Point Point { get; set; }
 
+        [JsonInclude]
         public uint X => (uint)Point.X;
 
+        [JsonInclude]
         public uint Y => (uint)Point.Y;
         
         public IPosition Shift(Point direction)
@@ -32,9 +36,10 @@ namespace Askalhorn.Common.Geography.Local
         /// </summary>
         /// <param name="x">The x coordinate in 2d-space tile map</param>
         /// <param name="y">The x coordinate in 2d-space tile map</param>
-        public Position(int x, int y)
+        [System.Text.Json.Serialization.JsonConstructor]
+        public Position(uint x, uint y)
         {
-            Point = new Point(x, y);
+            Point = new Point((int)x, (int)y);
         }
 
         /// <summary>

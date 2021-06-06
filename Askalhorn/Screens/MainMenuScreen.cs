@@ -37,7 +37,7 @@ namespace Askalhorn.Screens
             box.AddChild(new VerticalSpace(3));
             box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Загрузить")
             {
-                OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game, new World(""))),
+                OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game, new World("quicksave"))),
             });
             box.AddChild(new VerticalSpace(3));
             box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Настройки")

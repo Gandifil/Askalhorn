@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Reflection.Metadata.Ecma335;
+using System.Text.Json;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
@@ -56,9 +59,31 @@ namespace Askalhorn.Common
             SetLocation(LocationPipeline.Templates[0], new Position(1, 1));
         }
 
-        public World(string filepath)
+        public World(string filename) 
         {
-            throw new NotImplementedException();
+            Instance = this;
+        
+            _characters = new List<Character>
+            {
+                new()
+                {
+                    Texture = Storage.Content.Load<Texture2D>("images/mage"),
+                    Controller = playerController,
+                }
+            };
+            using (var file = new StreamReader(filename + ".json"))
+            {
+                var pos = JsonSerializer.Deserialize<Position>(file.ReadToEnd());
+                SetLocation(LocationPipeline.Templates[0], pos);
+            }
+        }
+
+        public void Save(string filename)
+        {
+            using (var file = new StreamWriter(filename + ".json"))
+            {
+                file.Write(JsonSerializer.Serialize(Player.Position));
+            }
         }
 
         internal void Add(Character character)

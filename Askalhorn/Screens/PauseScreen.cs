@@ -1,32 +1,31 @@
-﻿using AmbrosiaGame.Screens;
+﻿using System.IO;
+using AmbrosiaGame.Screens;
 using Askalhorn.Common;
+using Askalhorn.Common.Geography.Local;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MonoGame.Extended.Screens;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Screens
 {
-    public class PauseScreen: GameScreen
+    public class PauseScreen: BackScreenBase
     {
         public AskalhornGame game;
+        public readonly World world;
 
-        private readonly GameScreen backScreen;
-
-        public PauseScreen(Game game, GameScreen backScreen)
-            : base(game)
+        public PauseScreen(Game game, GameScreen backScreen, World world)
+            : base(game, backScreen)
         {
             this.game = (AskalhornGame)game;
-            this.backScreen = backScreen;
-        }
-        
-        private void Back()
-        {
-            ScreenManager.LoadScreen(backScreen);
+            this.world = world;
         }
 
         private void QuickSave()
         {
+            world.Save("quicksave");
+            
             Back();
         }
 
@@ -36,12 +35,17 @@ namespace Askalhorn.Screens
             
             box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Назад")
             {
-                OnPressed = element => Back(),
+                OnPressed = _ => Back(),
             });
             box.AddChild(new VerticalSpace(3));
             box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Быстрое сохранение")
             {
-                OnPressed = element => QuickSave(),
+                OnPressed = _ => QuickSave(),
+            });
+            box.AddChild(new VerticalSpace(3));
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход")
+            {
+                OnPressed = _ => Game.Exit(),
             });
             game.UiSystem.Add("menu", box);
         }
