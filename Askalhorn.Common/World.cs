@@ -24,6 +24,8 @@ namespace Askalhorn.Common
     {
         public ILocation Location { get; protected set; }
 
+        private LocationInfo locationInfo;
+
         public IEnumerable<ICharacter> Characters => _characters;
 
         private List<Character> _characters;
@@ -56,7 +58,12 @@ namespace Askalhorn.Common
                     Controller = playerController,
                 }
             };
-            SetLocation(LocationPipeline.Templates[0], new Position(1, 1));
+            SetLocation(
+                new LocationInfo
+                {
+                    PipelineName = "start",
+                    Seed = 10,
+                }, new Position(1, 1));
         }
 
         public World(string filename) 
@@ -71,10 +78,12 @@ namespace Askalhorn.Common
                     Controller = playerController,
                 }
             };
+            
             using (var file = new StreamReader(filename + ".json"))
             {
-                var pos = JsonSerializer.Deserialize<Position>(file.ReadToEnd());
-                SetLocation(LocationPipeline.Templates[0], pos);
+                //var pos = JsonSerializer.Deserialize<Position>(file.ReadToEnd());
+                var location = JsonSerializer.Deserialize<LocationInfo>(file.ReadToEnd());
+                SetLocation(location, new Position(1, 1));
             }
         }
 
@@ -82,7 +91,9 @@ namespace Askalhorn.Common
         {
             using (var file = new StreamWriter(filename + ".json"))
             {
-                file.Write(JsonSerializer.Serialize(Player.Position));
+                //file.Write(JsonSerializer.Serialize(Player.Position));
+                
+                file.Write(JsonSerializer.Serialize(locationInfo));
             }
         }
 
@@ -101,13 +112,14 @@ namespace Askalhorn.Common
             OnOpenBag?.Invoke(bag);
         }
 
-        internal void SetLocation(LocationPipeline pipeline, Position position)
+        internal void SetLocation(LocationInfo locationInfo, Position position)
         {
+            this.locationInfo = locationInfo;
             var player = _characters[0];
             player.Position = position;
             _characters.Clear();
             _characters.Add(player);
-            Location = pipeline.Run(position);
+            Location = locationInfo.Generate(position);
             OnChangeLocation?.Invoke();
         }
 

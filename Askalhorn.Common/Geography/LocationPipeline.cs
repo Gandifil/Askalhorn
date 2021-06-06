@@ -15,22 +15,10 @@ namespace Askalhorn.Common.Geography
         public ILocationDesigner Designer { get; set; }
 
         public IEnumerable<ISpawner> Spawners { get; set; } = new List<ISpawner>();
-
-        public readonly int Seed;
-
-        public LocationPipeline()
-        {
-            Seed = (int) DateTime.Now.Ticks & 0x0000FFFF;
-        }
-
-        public LocationPipeline(int seed)
-        {
-            Seed = seed;
-        }
         
-        public Location Run(IPosition position)
+        public Location Run(int seed, IPosition position)
         {
-            var random = new Random(Seed);
+            var random = new Random(seed);
             var cells = Generator.Create(random);
             var location = Designer.FormLocation(random, ref cells);
             foreach (var spawner in Spawners)
@@ -38,9 +26,32 @@ namespace Askalhorn.Common.Geography
             return location;
         }
 
-        public static List<LocationPipeline> Templates = new List<LocationPipeline>
+        public static IDictionary<string, LocationPipeline> Templates = new Dictionary<string, LocationPipeline>
         {
-            new LocationPipeline(12)
+            {"start", new LocationPipeline
+                {
+                    Generator = new OneRoomGenerator(25, 25),
+                    Designer = new WhiteCastleDesigner(),
+                    Spawners = new List<ISpawner>
+                    {
+                        new ChestSpawner(),
+                        new ChestSpawner(),
+                        new ChestSpawner(),
+                        new TestEnemySpawner(),
+                        new CustomBuildSpawner(point =>
+                            new GlobalTeleport()
+                            {
+                                Position = new Position(point),
+                                TargetPosition = new Position(1, 1),
+                                Location = new LocationInfo
+                                {
+                                    PipelineName = "file",
+                                    Seed = 10,
+                                }
+                            })
+                    },
+                }},
+            {"dungeon", new LocationPipeline
             {
                 Generator = new OneRoomGenerator(25, 25),
                 Designer = new WhiteCastleDesigner(),
@@ -55,35 +66,14 @@ namespace Askalhorn.Common.Geography
                         {
                             Position = new Position(point),
                             TargetPosition = new Position(1, 1),
-                            LocationPipeline = Templates[2],
                         })
                 },
-            },
-            new LocationPipeline(10)
-            {
-                Generator = new OneRoomGenerator(15, 15),
-                Designer = new WhiteCastleDesigner(),
-                Spawners = new List<ISpawner>
+            }},
+            {"file",
+                new LocationPipeline()
                 {
-                    new ChestSpawner(),
-                    new CustomBuildSpawner(point =>
-                        new GlobalTeleport()
-                        {
-                            Position = new Position(point),
-                            TargetPosition = new Position(1, 1),
-                            LocationPipeline = Templates[0],
-                        })
-                }
-            },
-            new LocationPipeline(10)
-            {
-                Generator = new RoomsAndCorridorsGenerator(50, 50),
-                Designer = new WhiteCastleDesigner(),
-            },
-            new LocationPipeline()
-            {
-                Designer = new FileDesigner(),
-            }
+                    Designer = new FileDesigner(),
+                }}
         };
 
     }

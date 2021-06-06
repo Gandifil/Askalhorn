@@ -20,7 +20,7 @@ namespace Askalhorn.Common.Geography.Local.Builds
             Radius = 40,
         });
 
-        public LocationPipeline LocationPipeline { get; set; }
+        public LocationInfo Location { get; set; }
 
         public Position TargetPosition { get; set; }
 
@@ -28,7 +28,7 @@ namespace Askalhorn.Common.Geography.Local.Builds
         {
             //Log.Information("Used global teleport with shift {Shift}", Shift);
 
-            Common.World.Instance.SetLocation(LocationPipeline, TargetPosition);
+            Common.World.Instance.SetLocation(Location, TargetPosition);
         };
     }
 }
