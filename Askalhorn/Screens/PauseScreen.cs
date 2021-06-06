@@ -43,6 +43,11 @@ namespace Askalhorn.Screens
                 OnPressed = _ => QuickSave(),
             });
             box.AddChild(new VerticalSpace(3));
+            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "В главное меню")
+            {
+                OnPressed = _ => ScreenManager.LoadScreen(new MainMenuScreen(game)),
+            });
+            box.AddChild(new VerticalSpace(3));
             box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход")
             {
                 OnPressed = _ => Game.Exit(),
