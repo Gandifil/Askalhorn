@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Askalhorn.Components;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -46,23 +47,9 @@ namespace Askalhorn.Logging
             {
                 var buffer = new StringWriter(new StringBuilder(DefaultWriteBufferCapacity));
                 formater.Format(logEvent, buffer);
-            
-                box.AddChild(new Paragraph(Anchor.AutoLeft, box.Area.Width - 50, buffer.ToString()));
-                box.AddChild(new VerticalSpace(10));
-                box.ScrollBar.ForceUpdateArea();
-                box.ScrollBar.CurrentValue = box.ScrollBar.MaxValue -1;
+
+                LogComponent.Write(buffer.ToString());
             }
-        }
-
-        private static Panel box;
-
-        public static Element Create()
-        {
-            box = new Panel(
-                Anchor.BottomLeft, 
-                new Vector2(0.3f, 0.1f), 
-                new Vector2(0, 30), false, true, new Point(15, 20));
-            return box;
         }
     }
 }

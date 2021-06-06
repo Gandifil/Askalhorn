@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Askalhorn;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
+using Askalhorn.Components;
 using Askalhorn.Elements;
 using Askalhorn.Logging;
 using Askalhorn.Render;
+using Askalhorn.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -29,6 +32,7 @@ namespace AmbrosiaGame.Screens
         private CharacterRenderer characterRenderer;
         private MovementTiles movements;
         private readonly World world;
+        private InputListenerComponent listeners;
 
         public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
@@ -58,16 +62,18 @@ namespace AmbrosiaGame.Screens
             
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
             UpdateMap();
+            
             characterRenderer = new CharacterRenderer();
             
             var keyboardListener = new KeyboardListener();
-            var mouseListener = new MouseListener();
-            Game.Components.Add(new InputListenerComponent(Game, keyboardListener, mouseListener));
-            
             keyboardListener.KeyReleased += KeyRelease;
+            
+            var mouseListener = new MouseListener();
             mouseListener.MouseClicked += MouseClick;
 
-            game.UiSystem.Add("log", GameLogSink.Create());
+            listeners = new InputListenerComponent(Game, keyboardListener, mouseListener);
+            Game.Components.Add(listeners);
+            
         }
 
         private void MovePlayer(Point shift)
@@ -144,10 +150,16 @@ namespace AmbrosiaGame.Screens
         {
             movements = new MovementTiles(world.Player);
             UpdateMovements();
+
+            //game.UiSystem.Add("log", GameLogSink.Create());
+            Game.Components.Add(new LogComponent(game));
         }
 
         public override void UnloadContent()
         {
+            Game.Components.ClearWithDispose();
+            
+            game.UiSystem.Remove("abilities");
             // TODO: Unload any non ContentManager content here
         }
         
@@ -155,7 +167,7 @@ namespace AmbrosiaGame.Screens
         {
             float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Game.Exit();
+                ScreenManager.LoadScreen(new PauseScreen(game, this));
         
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
                 camera.Move(new Vector2(-10, 0));
