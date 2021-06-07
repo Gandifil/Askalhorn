@@ -19,13 +19,16 @@ namespace Askalhorn.Common
     internal class Character: ICharacter
     {
         public string Name { get; set; }
-
-        public LinearParameter<int> Strength { get; private set; } = new LinearParameter<int>(new ObservedParameter<int>(100));
+        
         IAttributes<PrimaryTypes> ICharacter.Primary => Primary;
+        [JsonIgnore]
         public Attributes<PrimaryTypes> Primary { get; private set; }
 
-        IObservedParameter<int> ICharacter.Level => Level;
-        public LevelParameter Level { get; private set; } = new LevelParameter();
+        ILinearParameter<int> ICharacter.Level => Level;
+        public LevelParameter Level { get; } = new()
+        {
+            Base = new ObservedParameter<int>(1),
+        };
 
         ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
         
@@ -76,19 +79,23 @@ namespace Askalhorn.Common
         public Character()
         {
             Controller = new RandomMovementController(this);
-            
-            var attrs = new Dictionary<PrimaryTypes, LinearParameter<int>>();
+            SetupRules();
+
+            Effects = new Pool(this);
+            Bag.Put(new PoisonPoition(10, 9));
+        }
+
+        private void SetupRules()
+        {
+            var attrs = new Dictionary<PrimaryTypes, ObservedParameter<int>>();
             foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
             {
                 var parameter = new FunctionParameter<int>(() => Level.Value * 5);
                 Level.Changed += parameter.Update;
-                attrs[type] = new LinearParameter<int>(parameter);
+                attrs[type] = parameter;
             }
-
-            Primary = new Attributes<PrimaryTypes>(attrs);
             
-            Effects = new Pool(this);
-            Bag.Put(new PoisonPoition(10, 9));
+            Primary = new Attributes<PrimaryTypes>(attrs);
         }
 
         public void Turn()

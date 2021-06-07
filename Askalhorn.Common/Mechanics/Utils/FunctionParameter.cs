@@ -9,7 +9,7 @@ namespace Askalhorn.Common.Mechanics.Utils
         private readonly System.Func<T> f;
         
         public FunctionParameter(System.Func<T> f)
-            :base((T)(object)0)
+      //      :base((T)(object)0)
         {
             this.f = f;
         }

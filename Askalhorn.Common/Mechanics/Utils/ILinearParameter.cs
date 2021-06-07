@@ -1,6 +1,6 @@
 ﻿namespace Askalhorn.Common.Mechanics.Utils
 {
-    public interface IModifiedParameter<T>: IObservedParameter<T>
+    public interface ILinearParameter<T>: IObservedParameter<T>
     {
         IObservedParameter<T> Base { get; }
         

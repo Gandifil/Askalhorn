@@ -16,7 +16,7 @@ namespace Askalhorn.Common
         
         ILimitedValue<IObservedParameter<int>> HP { get; }
         
-        IObservedParameter<int> Level { get; }
+        ILinearParameter<int> Level { get; }
         
         IAttributes<PrimaryTypes> Primary { get; }
 

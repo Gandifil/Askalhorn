@@ -19,6 +19,11 @@ namespace Askalhorn.Common.Mechanics.Utils
             }
         }
 
+        public ObservedParameter()
+        {
+            
+        }
+
         public ObservedParameter(T x)
         {
             _value = x;
