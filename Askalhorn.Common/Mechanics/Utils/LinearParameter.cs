@@ -1,46 +1,10 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Common.Mechanics.Utils
 {
     public class LinearParameter<T> : DependentParameter<T>, IModifiedParameter<T> where T:IEquatable<T>,IConvertible
     {
-        // public LinearParameter(System.Func<int> F):
-        //     base(F)
-        // {
-        //     Factor.Changed += Update;
-        //     Shift.Changed += Update;
-        //     Update();
-        // }
-        //
-        // public Parameter Factor { get; set; } = new Parameter();
-        //
-        // public Parameter Shift { get; set; } = new Parameter();
-        //
-        // public int BaseValue { get; private set; } = 0;
-        //
-        // public bool IsModified => BaseValue != Value;
-        //
-        // public override void Update()
-        // {
-        //     BaseValue = F.Invoke();
-        //     Value = calculate(BaseValue);
-        // }
-        //
-        // private int calculate(int pureValue)
-        // {
-        //     return (100 + Factor) / 100 * pureValue + Shift;
-        // }
-        //
-        // public override string ToString()
-        // {
-        //     return IsModified ? $"{Value}({BaseValue})" : Value.ToString();
-        // }
-        //
-        // public IObservedParameter<T> Addition { get; }
-        //
-        //
-        // public IObservedParameter<int> Multiplication { get; }
-        
         private static readonly T zero = (T) (object) 0;
         
         public LinearParameter(ObservedParameter<T> start)
@@ -58,22 +22,22 @@ namespace Askalhorn.Common.Mechanics.Utils
             Addition.Changed += Update;
             Multiplication.Changed += Update;
         }
-        
-        public LinearParameter(ObservedParameter<T> start, T addition, int mulltiplication = 100)
-            :base(zero)
-        {
-            Base = start;
-            
-            Addition = new ObservedParameter<T>(addition);
-            
-            Multiplication = new ObservedParameter<int>(mulltiplication);
-            
-            Update();
-
-            Base.Changed += Update;
-            Addition.Changed += Update;
-            Multiplication.Changed += Update;
-        }
+        //
+        // public LinearParameter(ObservedParameter<T> start, T addition, int mulltiplication = 100)
+        //     :base(zero)
+        // {
+        //     Base = start;
+        //     
+        //     Addition = new ObservedParameter<T>(addition);
+        //     
+        //     Multiplication = new ObservedParameter<int>(mulltiplication);
+        //     
+        //     Update();
+        //
+        //     Base.Changed += Update;
+        //     Addition.Changed += Update;
+        //     Multiplication.Changed += Update;
+        // }
         
         protected override T generate()
         {
@@ -86,12 +50,17 @@ namespace Askalhorn.Common.Mechanics.Utils
 
         public ObservedParameter<T> Base { get; private set; }
 
+        [JsonIgnore]
         IObservedParameter<T> IModifiedParameter<T>.Addition => Addition;
             
+        [JsonIgnore]
         public ObservedParameter<T> Addition { get; private set; }
         
             
+        [JsonIgnore]
         IObservedParameter<int> IModifiedParameter<T>.Multiplication => Multiplication;
+        
+        [JsonIgnore]
         public ObservedParameter<int> Multiplication { get; private set; }
     }
 }

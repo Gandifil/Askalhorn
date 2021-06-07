@@ -24,8 +24,8 @@ namespace Askalhorn.Common.Control
 
         private IMove getRandom()
         {
-            var list = character.CanMoveTo;
-            return new MovementToMove(list.ElementAt(random.Next(0, list.Count())).Point);
+            var list = character.AvailableMovements;
+            return list.ElementAt(random.Next(0, list.Count()));
         }
     }
 }

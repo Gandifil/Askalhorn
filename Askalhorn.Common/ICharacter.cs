@@ -24,8 +24,6 @@ namespace Askalhorn.Common
         
         IPosition Position { get; }
         
-        IEnumerable<IPosition> CanMoveTo { get; }
-        
         IEnumerable<MovementMove> AvailableMovements { get; }
         
         IEnumerable<IAbility> Abilities { get; }

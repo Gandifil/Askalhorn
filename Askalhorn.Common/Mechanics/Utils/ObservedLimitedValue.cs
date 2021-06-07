@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Common.Mechanics.Utils
 {
@@ -33,32 +34,7 @@ namespace Askalhorn.Common.Mechanics.Utils
                 Current.Value = Max.Value;
         }
 
+        [JsonIgnore]
         public float Percent => (float)(Current.Value.ToDouble(null) / Max.Value.ToDouble(null));
     }
-    //
-    // class LimitedValue<T>: ILimitedValue<T> where T:IObservedParameter<D>
-    // {
-    //     public LimitedValue(T value, T max)
-    //     {
-    //         Value = value;
-    //         this.max = max;
-    //     }
-    //     
-    //     public T Value { get; }
-    //
-    //     private T max;
-    //
-    //     
-    //     public T Max
-    //     {
-    //         get => max;
-    //         set
-    //         {
-    //             max = value;
-    //             Value.Value = (Value.Value * value) / max;
-    //         }
-    //     }
-    //     
-    //     public float Percent => (float)(Value.Value) / Max.Value;
-    // }
 }

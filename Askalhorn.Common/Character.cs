@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Inventory.Items;
-using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Abilities;
 using Askalhorn.Common.Mechanics.Effects;
 using Askalhorn.Common.Mechanics.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Effect = Askalhorn.Common.Mechanics.Effect;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Common
 {
     internal class Character: ICharacter
     {
-        public string Name => "Test";
+        public string Name { get; set; }
 
-        public LinearParameter<int> Strength { get; private set; } = new LinearParameter<int>(new ObservedParameter<int>(100), -5, 25);
+        public LinearParameter<int> Strength { get; private set; } = new LinearParameter<int>(new ObservedParameter<int>(100));
         IAttributes<PrimaryTypes> ICharacter.Primary => Primary;
         public Attributes<PrimaryTypes> Primary { get; private set; }
 
@@ -34,7 +31,10 @@ namespace Askalhorn.Common
         
         public ObservedLimitedValue<int> HP { get; private set; } = new ObservedLimitedValue<int>(100, 100);
 
+        [JsonIgnore]
         public IController Controller { get; set; }
+        
+        [JsonIgnore]
         public Texture2D Texture { get; set; }
 
         IPosition ICharacter.Position => Position;
@@ -43,8 +43,10 @@ namespace Askalhorn.Common
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         IBag ICharacter.Bag => Bag;
         
+        [JsonIgnore]
         public readonly Bag Bag = new Bag();
 
+        [JsonIgnore]
         public readonly Pool Effects;
 
         private static readonly List<Point> Variants = new List<Point>
@@ -54,11 +56,8 @@ namespace Askalhorn.Common
             new Point(1, 0),
             new Point(-1, 0),
         };
-
-        public IEnumerable<IPosition> CanMoveTo => Variants
-            .Where(x => new MovementMove(x).IsValid(this))
-            .Select(x => (IPosition)new Position(Position.Shift(x)));
-
+        
+        [JsonIgnore]
         public IEnumerable<MovementMove> AvailableMovements =>
             Variants
                 .Select(x => new MovementMove(x))
@@ -67,6 +66,7 @@ namespace Askalhorn.Common
 
         IEnumerable<IAbility> ICharacter.Abilities => Abilities;
 
+        [JsonIgnore]
         public List<IAbility> Abilities { get; set; } = new List<IAbility>()
         {
             new FireBall()
@@ -75,6 +75,8 @@ namespace Askalhorn.Common
         
         public Character()
         {
+            Controller = new RandomMovementController(this);
+            
             var attrs = new Dictionary<PrimaryTypes, LinearParameter<int>>();
             foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
             {

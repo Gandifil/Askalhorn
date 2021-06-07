@@ -14,8 +14,6 @@ namespace Askalhorn.Common.Geography.Local.Spawners
                 Texture = Storage.Content.Load<Texture2D>("images/mage2"),
                 Position = new Position(RandomPoint(location)),
             };
-            
-            character.Controller = new RandomMovementController(character);
             Common.World.Instance.Add(character);
         }
 

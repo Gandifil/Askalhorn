@@ -2,35 +2,37 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.Json;
+using System.Runtime.CompilerServices;
+using Askalhorn.Common.Characters;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
-using Askalhorn.Common.Geography.Local.Builds;
-using Askalhorn.Common.Geography.Local.Generators;
-using Askalhorn.Common.Geography.Local.Spawners;
 using Askalhorn.Common.Inventory;
-using Askalhorn.Common.Maths;
-using Askalhorn.Common.Mechanics.Utils;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Tiled;
+using Newtonsoft.Json;
 using Serilog;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Askalhorn.Common
 {
     public class World
     {
+        private class Info
+        {
+            public LocationInfo Location { get; set; }
+
+            public List<Character> Characters { get; set; }
+        }
+        
         public ILocation Location { get; protected set; }
 
         private LocationInfo locationInfo;
 
-        public IEnumerable<ICharacter> Characters => _characters;
+        public IReadOnlyCollection<ICharacter> Characters => _characters;
 
-        private List<Character> _characters;
+        private readonly List<Character> _characters = new List<Character>();
 
-        public readonly BufferController playerController = new BufferController();
+        public BufferController playerController => (BufferController) _characters[0].Controller;
         
         public static World Instance { get; private set; }
 
@@ -46,54 +48,57 @@ namespace Askalhorn.Common
         /// <summary>
         /// Create new world.
         /// </summary>
-        public World()
+        public World()  
         {
             Instance = this;
             
-            _characters = new List<Character>
+            Add(new Player()
             {
-                new()
-                {
-                    Texture = Storage.Content.Load<Texture2D>("images/mage"),
-                    Controller = playerController,
-                }
-            };
+                Position = new Position(1, 1),
+            });
+            
             SetLocation(
                 new LocationInfo
                 {
                     PipelineName = "start",
                     Seed = 10,
-                }, new Position(1, 1));
+                }, 
+                new Position(1, 1));
         }
 
         public World(string filename) 
         {
             Instance = this;
-        
-            _characters = new List<Character>
+            
+            JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                new()
-                {
-                    Texture = Storage.Content.Load<Texture2D>("images/mage"),
-                    Controller = playerController,
-                }
+                TypeNameHandling = TypeNameHandling.All
             };
             
             using (var file = new StreamReader(filename + ".json"))
             {
-                //var pos = JsonSerializer.Deserialize<Position>(file.ReadToEnd());
-                var location = JsonSerializer.Deserialize<LocationInfo>(file.ReadToEnd());
-                SetLocation(location, new Position(1, 1));
+                var info = JsonConvert.DeserializeObject<Info>(file.ReadToEnd(), settings);
+                _characters = info.Characters.ToList();
+                SetLocation(info.Location, _characters[0].Position);
             }
         }
 
         public void Save(string filename)
         {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            var info = new Info
+            {
+                Location = locationInfo,
+                Characters = _characters,
+            };
+
             using (var file = new StreamWriter(filename + ".json"))
             {
-                //file.Write(JsonSerializer.Serialize(Player.Position));
-                
-                file.Write(JsonSerializer.Serialize(locationInfo));
+                file.Write(JsonConvert.SerializeObject(info, settings));
             }
         }
 
