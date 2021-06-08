@@ -13,18 +13,8 @@ namespace Askalhorn.Common.Geography.Local.Builds
         IPosition IBuild.Position => Position;
         public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
 
-        private readonly IBagFiller filler;
-
-        public Chest(IBagFiller filler)
-        {
-            this.filler = filler;
-        }
+        public Bag Bag { get; set; }
         
-        public Action Action => () =>
-        {
-            var bag = new Bag();
-            filler.Fill(new Random(), bag);
-            Common.World.Instance.OpenBag(bag);
-        };
+        public Action Action => () => Common.World.Instance.OpenBag(Bag);
     }
 }

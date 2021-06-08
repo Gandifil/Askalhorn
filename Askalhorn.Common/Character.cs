@@ -46,7 +46,6 @@ namespace Askalhorn.Common
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         IBag ICharacter.Bag => Bag;
         
-        [JsonIgnore]
         public readonly Bag Bag = new Bag();
 
         [JsonIgnore]
@@ -82,7 +81,6 @@ namespace Askalhorn.Common
             SetupRules();
 
             Effects = new Pool(this);
-            Bag.Put(new PoisonPoition(10, 9));
         }
 
         private void SetupRules()

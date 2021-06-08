@@ -15,7 +15,7 @@ namespace Askalhorn.Common.Inventory
         
         float Weight { get; }
         
-        Size Size { get; }
+       // Size Size { get; }
         
         internal IImpact Impact { get; }
     }

@@ -8,6 +8,7 @@ using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Common.Inventory;
+using Askalhorn.Common.Inventory.Items;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using Serilog;
@@ -17,20 +18,22 @@ namespace Askalhorn.Common
 {
     public class World
     {
-        private class Info
+        internal class Info
         {
             public LocationInfo Location { get; set; }
 
-            public List<Character> Characters { get; set; }
+            public List<Character> Characters { get; set; } = new();
+
+            public List<Bag> Bags { get; set; } = new List<Bag>();
         }
         
         public ILocation Location { get; protected set; }
 
-        private LocationInfo locationInfo;
+        internal Info info = new();
 
-        public IReadOnlyCollection<ICharacter> Characters => _characters;
+        public IReadOnlyCollection<ICharacter> Characters => info.Characters;
 
-        private readonly List<Character> _characters = new List<Character>();
+        private List<Character> _characters => info.Characters;
 
         public BufferController playerController => (BufferController) _characters[0].Controller;
         
@@ -56,6 +59,11 @@ namespace Askalhorn.Common
             {
                 Position = new Position(1, 1),
             });
+            Player.Bag.Put(new PoisonPoition
+            {
+                Value = 10,
+                TurnCount = 5,
+            });
             
             SetLocation(
                 new LocationInfo
@@ -77,28 +85,19 @@ namespace Askalhorn.Common
             
             using (var file = new StreamReader(filename + ".json"))
             {
-                var info = JsonConvert.DeserializeObject<Info>(file.ReadToEnd(), settings);
-                _characters = info.Characters.ToList();
+                info = JsonConvert.DeserializeObject<Info>(file.ReadToEnd(), settings);
                 SetLocation(info.Location, _characters[0].Position);
             }
         }
 
         public void Save(string filename)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
-
-            var info = new Info
-            {
-                Location = locationInfo,
-                Characters = _characters,
-            };
-
             using (var file = new StreamWriter(filename + ".json"))
             {
-                file.Write(JsonConvert.SerializeObject(info, settings));
+                file.Write(JsonConvert.SerializeObject(info, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                }));
             }
         }
 
@@ -119,7 +118,7 @@ namespace Askalhorn.Common
 
         internal void SetLocation(LocationInfo locationInfo, Position position)
         {
-            this.locationInfo = locationInfo;
+            this.info.Location = locationInfo;
             var player = _characters[0];
             player.Position = position;
             _characters.Clear();
