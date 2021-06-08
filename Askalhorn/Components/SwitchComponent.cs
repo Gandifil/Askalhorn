@@ -1,4 +1,5 @@
 ﻿using System;
+using AmbrosiaGame.Screens;
 using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Components
@@ -7,24 +8,33 @@ namespace Askalhorn.Components
     {
         private IGameComponent component;
         
+        private readonly GameProcessScreen screen;
+
+        public SwitchComponent(GameProcessScreen screen)
+        {
+            this.screen = screen;
+        }
+        
         public void Initialize()
         {
         }
 
         public void SwitchTo<T>() where T:IGameComponent
-        {
-            Dispose();
-            
-            if (component is not T)
+        { 
+            if (component is null || component is not T)
             {
-                    
-                
+                Dispose();
+                component = (T)Activator.CreateInstance(typeof(T), screen);
+                component.Initialize();
             }
+            else
+                Dispose();
         }
 
         public void Dispose()
         {
             (component as IDisposable)?.Dispose();
+            component = null;
         }
     }
 }

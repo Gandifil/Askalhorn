@@ -15,48 +15,12 @@ namespace Askalhorn.Elements
 {
     public class InventoryTab
     {
-        private static readonly string NAME = "inventory";
         private static readonly string EXCHANGE_NAME = "inventoryE";
-
-        public static void Toggle(UiSystem system, IBag bag, Action<Element, IItem> useAction)
-        {
-            if (system.Get(NAME) is null)
-                system.Add(NAME, Create(bag, useAction));
-            else
-                system.Remove(NAME);
-        }
         
-        private static Element Create(IBag bag, Action<Element, IItem> useAction)
+        public static void CreateExchangeTab(UiSystem system, IBag chest, IBag playerBag)
         {
-            var texture = new Texture2D(Storage.GraphicsDevice, 1, 1);
-            texture.SetData(new[] { Color.Black });
-            var box = new Panel(Anchor.CenterRight, new Vector2(0.45f, 0.9f), Vector2.Zero);
-            // box.OnDrawn += (element, time, batch, alpha) =>
-            // {
-            //
-            //     var pos = element.Area.Location.ToPoint();
-            //     
-            //     // vertical lines
-            //     var vsize = new Point(1, 320);
-            //     for (int i = 0; i < 11; i++)
-            //     {
-            //         batch.Draw(texture, new Rectangle(pos + new Point(32*i, 0), vsize), Color.White);
-            //     }
-            //     
-            //     // horizontal lines
-            //     var hsize = new Point(320, 1);
-            //     for (int i = 0; i < 11; i++)
-            //     {
-            //         batch.Draw(texture, new Rectangle(pos + new Point(0, 32*i), hsize), Color.White);
-            //     }
-            // };
-            foreach (var (item, count) in bag.Items)
-            {
-                var element = CreateItem(item);
-                element.OnPressed += element => useAction(element, item);
-                box.AddChild(element);
-            }
-            return box;
+            if (system.Get(EXCHANGE_NAME) is null)
+                system.Add(EXCHANGE_NAME, CreateExchange(chest, playerBag));
         }
 
         private static Element CreateItem(IItem item)
@@ -73,13 +37,6 @@ namespace Askalhorn.Elements
             return box;
         }
         
-
-        public static void CreateExchangeTab(UiSystem system, IBag chest, IBag playerBag)
-        {
-            if (system.Get(EXCHANGE_NAME) is null)
-                system.Add(EXCHANGE_NAME, CreateExchange(chest, playerBag));
-        }
-
         private static void CreateExchangeElement(IItem item, IBag bag1, Panel box1, IBag bag2, Panel box2)
         {
             var element = CreateItem(item);

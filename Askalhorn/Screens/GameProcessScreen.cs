@@ -30,6 +30,7 @@ namespace AmbrosiaGame.Screens
         private CharacterRenderer characterRenderer;
         private MovementTiles movements;
         private InputListenerComponent listeners;
+        private SwitchComponent switcher;
 
         public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
@@ -72,6 +73,8 @@ namespace AmbrosiaGame.Screens
             
             Game.Components.Add(listeners);
             Game.Components.Add(new LogComponent(game));
+            switcher = new SwitchComponent(this);
+            Game.Components.Add(switcher);
         }
 
         private void MovePlayer(Point shift)
@@ -107,12 +110,11 @@ namespace AmbrosiaGame.Screens
                 World.Location[World.Player.Position].Build?.Action();
 
             if (e.Key == Keys.C)
-                CharacterTab.Toggle(game.UiSystem, World.Player);
+                switcher.SwitchTo<CharacterTabComponent>();
 
             if (e.Key == Keys.I)
-                InventoryTab.Toggle(game.UiSystem, World.Player.Bag, (_, item) => 
-                    World.playerController.AddMove(new UseItemMove(item)));
-
+                switcher.SwitchTo<InventoryTabComponent>();
+            
             if (e.Key == Keys.E)
                 World.playerController.AddMove(new AttackMove(World.Characters.ElementAt(1)));
         }
