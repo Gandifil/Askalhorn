@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using Askalhorn;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
@@ -38,12 +39,18 @@ namespace AmbrosiaGame.Screens
             this.game = game;
             this.World = world;
             world.OnTurn += UpdateMovements;
+            world.OnTurn += LookAtPlayer;
             world.OnOpenBag += bag =>
             {
                 InventoryTab.CreateExchangeTab(game.UiSystem, bag, world.Player.Bag);
             };
             world.OnChangeLocation += UpdateMap;
         }
+        private void LookAtPlayer()
+        {
+            camera.LookAt(World.Player.Position.RenderVector);
+        }
+
 
         private void UpdateMap()
         {
@@ -57,6 +64,7 @@ namespace AmbrosiaGame.Screens
             spriteBatch = new SpriteBatch(GraphicsDevice);
             var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 1280, 1024);
             camera = new OrthographicCamera(viewportAdapter);
+            LookAtPlayer();
             
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
             UpdateMap();
@@ -148,18 +156,18 @@ namespace AmbrosiaGame.Screens
             float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 ScreenManager.LoadScreen(new PauseScreen(game, this, World));
-        
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                camera.Move(new Vector2(-10, 0));
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                camera.Move(new Vector2(10, 0));
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                camera.Move(new Vector2(0, 10));
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                camera.Move(new Vector2(0, -10));
+            //
+            // if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            //     camera.Move(new Vector2(-10, 0));
+            //
+            // if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            //     camera.Move(new Vector2(10, 0));
+            //
+            // if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            //     camera.Move(new Vector2(0, 10));
+            //
+            // if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            //     camera.Move(new Vector2(0, -10));
 
             mapRenderer.Update(gameTime);
             foreach (var build in World.Location.Builds)
