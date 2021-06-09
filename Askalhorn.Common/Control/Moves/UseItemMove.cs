@@ -15,15 +15,14 @@ namespace Askalhorn.Common.Control.Moves
         
         public bool IsValid(ICharacter character)
         {
-            return character.Bag.Items.Any(x => x.item == Item);
+            return character.Bag.Items.Any(x => x.Item == Item);
         }
 
         void IMove.Make(Character character)
         {
             var itemName = Item.Name;
             Log.Information("{Name} использовал {itemName}", character.Name, itemName);
-            
-            Item.Impact?.On(character);
+            character.Bag.Pull(Item).Impact?.On(character);
         }
     }
 }

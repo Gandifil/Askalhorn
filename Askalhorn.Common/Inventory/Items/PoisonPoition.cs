@@ -22,5 +22,9 @@ namespace Askalhorn.Common.Inventory.Items
         public float Weight => 0.5f;
 
         IImpact IItem.Impact => new EffectImpact(new ImpactEffect(new DamageImpact((int)Value), TurnCount));
+        public bool Equals(IItem? other)
+        {
+            return other is PoisonPoition item && item.Value == Value && item.TurnCount == TurnCount;
+        }
     }
 }

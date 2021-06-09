@@ -63,7 +63,7 @@ namespace Askalhorn.Common
             {
                 Value = 10,
                 TurnCount = 5,
-            });
+            }, 3);
             
             SetLocation(
                 new LocationInfo

@@ -1,11 +1,12 @@
-﻿using Askalhorn.Common.Mechanics;
+﻿using System;
+using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Render;
 using MonoGame.Extended;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Inventory
 {
-    public interface IItem
+    public interface IItem: IEquatable<IItem>
     {
         string Name { get; }
         

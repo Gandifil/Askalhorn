@@ -42,7 +42,7 @@ namespace AmbrosiaGame.Screens
             world.OnTurn += LookAtPlayer;
             world.OnOpenBag += bag =>
             {
-                InventoryTab.CreateExchangeTab(game.UiSystem, bag, world.Player.Bag);
+                switcher.SwitchTo(new ExchangeTabComponent(this, bag, world.Player.Bag));
             };
             world.OnChangeLocation += UpdateMap;
         }

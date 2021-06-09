@@ -21,5 +21,9 @@ namespace Askalhorn.Common.Inventory.Items
         public float Weight => 0.5f;
 
         IImpact IItem.Impact => new AddLevelEnergyImpact((int)Value);
+        public bool Equals(IItem? other)
+        {
+            return other is EnergyPoition item && item.Value == Value;
+        }
     }
 }

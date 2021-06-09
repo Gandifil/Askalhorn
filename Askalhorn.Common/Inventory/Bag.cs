@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Askalhorn.Common.Inventory.Items;
 using Microsoft.Xna.Framework;
 
@@ -7,30 +9,40 @@ namespace Askalhorn.Common.Inventory
 {
     internal class Bag: IBag
     {
-        public struct Element
-        {
-            public IItem Item;
-            public uint Count;
-        }
+        private readonly List<IBag.Pack> Elements = new();
 
-        public readonly List<Element> Elements = new List<Element>();
-        
-        IReadOnlyCollection<(IItem item, uint count)> IBag.Items => Elements.Select(x => (x.Item, x.Count)).ToList();
+        IReadOnlyCollection<IBag.Pack> IBag.Items => Elements;
+
         public void Put(IItem item, uint count = 1)
         {
-            Elements.Add(new Element()
-            {
-                Item = item,
-                Count = count,
-            });
+            var founded = Find(item);
+            if (founded is null)
+                Elements.Add(new IBag.Pack()
+                {
+                    Item = item,
+                    Count = count,
+                });
+            else
+                founded.Count += count;
+            OnChanged?.Invoke();
         }
 
         public IItem Pull(IItem item, uint count = 1)
         {
-            Elements.RemoveAll(x => x.Item == item);
+            var founded = Find(item);
+            founded.Count -= count;
+            if (founded.Count == 0)
+                Elements.Remove(founded);
+            OnChanged?.Invoke();
             return item;
         }
 
+        private IBag.Pack Find(IItem item)
+        {
+            return Elements.Find(x => item.Equals(x.Item));
+        }
+
         public float Weight => Elements.Select(x => x.Count * x.Item.Weight).Sum();
+        public event Action OnChanged;
     }
 }
