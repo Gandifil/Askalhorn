@@ -7,7 +7,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners
 {
     internal class TestEnemySpawner: ISpawner
     {
-        public void Initialize(Location location, Random random, IPosition playerPosition)
+        public void Initialize(Location location, Random random, uint placeIndex)
         {
             var character = new Character()
             {

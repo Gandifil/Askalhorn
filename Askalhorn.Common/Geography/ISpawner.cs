@@ -5,6 +5,6 @@ namespace Askalhorn.Common.Geography
 {
     internal interface ISpawner
     {
-        void Initialize(Location location, Random random, IPosition playerPosition);
+        void Initialize(Location location, Random random, uint placeIndex);
     }
 }

@@ -49,7 +49,7 @@ namespace Askalhorn.Common
         }
         
         /// <summary>
-        /// Create new world.
+        /// Create new world and start new game.
         /// </summary>
         public World()  
         {
@@ -70,10 +70,13 @@ namespace Askalhorn.Common
                 {
                     PipelineName = "start",
                     Seed = 10,
-                }, 
-                new Position(1, 1));
+                }, 0);
         }
 
+        /// <summary>
+        /// Load game from save.
+        /// </summary>
+        /// <param name="filename">File name</param>
         public World(string filename) 
         {
             Instance = this;
@@ -86,7 +89,7 @@ namespace Askalhorn.Common
             using (var file = new StreamReader(filename + ".json"))
             {
                 info = JsonConvert.DeserializeObject<Info>(file.ReadToEnd(), settings);
-                SetLocation(info.Location, _characters[0].Position);
+                Location = info.Location.Generate(0);
             }
         }
 
@@ -116,14 +119,15 @@ namespace Askalhorn.Common
             OnOpenBag?.Invoke(bag);
         }
 
-        internal void SetLocation(LocationInfo locationInfo, Position position)
+        internal void SetLocation(LocationInfo locationInfo, uint placeIndex)
         {
-            this.info.Location = locationInfo;
+            info.Location = locationInfo;
             var player = _characters[0];
-            player.Position = position;
             _characters.Clear();
+            Location = locationInfo.Generate(0);
+            Location loc = (Location)Location;
+            player.Position = loc.Places[(int)placeIndex];
             _characters.Add(player);
-            Location = locationInfo.Generate(position);
             OnChangeLocation?.Invoke();
         }
 

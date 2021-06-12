@@ -8,9 +8,9 @@ namespace Askalhorn.Common.Geography
 
         public int Seed { get; set; }
 
-        public Location Generate(IPosition position)
+        public Location Generate(uint placeIndex)
         {
-            return LocationPipeline.Templates[PipelineName].Run(Seed, position);
+            return LocationPipeline.Templates[PipelineName].Run(Seed, placeIndex);
         }
     }
 }

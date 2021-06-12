@@ -14,6 +14,8 @@ namespace Askalhorn.Common.Geography
         
         public Cell this[IPosition position] => Cells[position.X, position.Y];
 
+        public readonly List<Position> Places = new();
+
         public Cell[,] Cells { get; private set; }
 
         IReadOnlyCollection<IBuild> ILocation.Builds => Builds;
@@ -48,6 +50,16 @@ namespace Askalhorn.Common.Geography
             for (int x = 0; x < TiledMap.Width; x++)
             for (int y = 0; y < TiledMap.Height; y++)
                 Cells[x, y] = new Cell();
+
+            foreach (var layer in TiledMap.TileLayers)
+            {
+                if (layer.Name.Contains("walls"))
+                    foreach (var tile in layer.Tiles)
+                        SetWall(tile.X, tile.Y);
+                
+                if (layer.Name.StartsWith("64"))
+                    layer.Offset = new Vector2(0, -32);
+            }
         }
 
         public bool FreeForBuild(Point point)

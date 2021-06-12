@@ -163,6 +163,11 @@
 /processor:TiledMapProcessor
 /build:maps/start.tmx
 
+#begin maps/temple.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/temple.tmx
+
 #begin player.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor

@@ -22,13 +22,13 @@ namespace Askalhorn.Common.Geography.Local.Builds
 
         public LocationInfo Location { get; set; }
 
-        public Position TargetPosition { get; set; }
+        public uint Place { get; set; }
 
         public Action Action => () =>
         {
             //Log.Information("Used global teleport with shift {Shift}", Shift);
 
-            Common.World.Instance.SetLocation(Location, TargetPosition);
+            Common.World.Instance.SetLocation(Location, Place);
         };
     }
 }
