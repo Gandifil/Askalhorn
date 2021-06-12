@@ -11,7 +11,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners
     {
         private static int index = 0;
         private static Location loc;
-        public override void Initialize(Location location, Random random, uint placeIndex)
+        public override void Initialize(Location location, Random random, int[] args, uint placeIndex)
         {       
             //
             if (location != loc)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography.Local.Generators
 {
@@ -14,7 +15,7 @@ namespace Askalhorn.Common.Geography.Local.Generators
             this.Height = height;
         }
         
-        public virtual ILocationGenerator.CellType[,] Create(Random random)
+        public virtual ILocationGenerator.CellType[,] Create(Random random, out Point[] places)
         {
             var cells = new ILocationGenerator.CellType[Width, Height];
 
@@ -25,6 +26,8 @@ namespace Askalhorn.Common.Geography.Local.Generators
                 else
                     cells[x, y] = ILocationGenerator.CellType.Floor;
 
+            places = new Point[1];
+            places[0] = new Point((int)Width / 2, (int)Height / 2);
             return cells;
         }
     }

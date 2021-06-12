@@ -7,7 +7,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners
 {
     internal class TiledMapSpawner: ISpawner
     {
-        public void Initialize(Location location, Random random, uint placeIndex)
+        public void Initialize(Location location, Random random, int[] args, uint placeIndex)
         {
             foreach (var layer in location.TiledMap.ObjectLayers)
             {

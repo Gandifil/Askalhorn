@@ -5,6 +5,7 @@ using Askalhorn.Common.Geography.Local.Builds;
 using Askalhorn.Common.Geography.Local.Designers;
 using Askalhorn.Common.Geography.Local.Generators;
 using Askalhorn.Common.Geography.Local.Spawners;
+using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography
 {
@@ -16,30 +17,40 @@ namespace Askalhorn.Common.Geography
 
         public IEnumerable<ISpawner> Spawners { get; set; } = new List<ISpawner>();
         
-        public Location Run(int seed, uint placeIndex)
+        public Location Run(int seed, int[] args, uint placeIndex)
         {
             var random = new Random(seed);
-            var cells = Generator.Create(random);
+            Point[] places;
+            var cells = Generator.Create(random, out places);
+
             var location = Designer.FormLocation(random, ref cells);
+            foreach (var place in places)
+                location.Places.Add(new Position(place));
+            
             foreach (var spawner in Spawners)
-                spawner.Initialize(location, random, placeIndex);
+                spawner.Initialize(location, random, args, placeIndex);
             return location;
+        }
+
+        private static LocationPipeline FromFile(string name)
+        {
+            return new LocationPipeline()
+            {
+                Designer = new FileDesigner
+                {
+                    Name = name,
+                },
+                Spawners = new List<ISpawner>
+                {
+                    new TiledMapSpawner(),
+                }
+            };
         }
 
         public static IDictionary<string, LocationPipeline> Templates = new Dictionary<string, LocationPipeline>
         {
-            {"start", 
-                new LocationPipeline()
-                {
-                    Designer = new FileDesigner
-                    {
-                        Name = "temple"
-                    },
-                    Spawners = new List<ISpawner>
-                    {
-                        new TiledMapSpawner(),
-                    }
-                }},
+            {"start", FromFile("temple")},
+            {"castle", FromFile("castle")},
             {"dungeon", new LocationPipeline
             {
                 Generator = new OneRoomGenerator(25, 25),
@@ -58,30 +69,6 @@ namespace Askalhorn.Common.Geography
                         })
                 },
             }},
-            {"file",
-                new LocationPipeline
-                {
-                    Generator = new OneRoomGenerator(25, 25),
-                    Designer = new WhiteCastleDesigner(),
-                    Spawners = new List<ISpawner>
-                    {
-                        new ChestSpawner(),
-                        new ChestSpawner(),
-                        new ChestSpawner(),
-                        new TestEnemySpawner(),
-                        new CustomBuildSpawner(point =>
-                            new GlobalTeleport()
-                            {
-                                Position = new Position(point),
-                                Place = Convert.ToUInt32(0),
-                                Location = new LocationInfo
-                                {
-                                    PipelineName = "file",
-                                    Seed = 10,
-                                }
-                            })
-                    },
-                }}
         };
 
     }

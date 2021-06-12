@@ -16,6 +16,6 @@ namespace Askalhorn.Common.Geography.Local.Spawners
             return RandomPoint(location, random);
         }
 
-        public abstract void Initialize(Location location, Random random, uint placeIndex);
+        public abstract void Initialize(Location location, Random random, int[] args, uint placeIndex);
     }
 }

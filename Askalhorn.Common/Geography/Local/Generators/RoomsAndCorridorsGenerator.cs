@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
@@ -19,7 +20,7 @@ namespace Askalhorn.Common.Geography.Local.Generators
             this.Height = height;
         }
         
-        public ILocationGenerator.CellType[,] Create(Random random)
+        public ILocationGenerator.CellType[,] Create(Random random, out Point[] places)
         {
             var cells = new ILocationGenerator.CellType[Width, Height];
 
@@ -82,6 +83,8 @@ namespace Askalhorn.Common.Geography.Local.Generators
                 for (int y = startPoint.Y; y < endPoint.Y; y++)
                     cells[endPoint.X, y] = ILocationGenerator.CellType.Floor;
             }
+
+            places = rooms.Select(x => x.Center).ToArray();
 
             return cells;
         }

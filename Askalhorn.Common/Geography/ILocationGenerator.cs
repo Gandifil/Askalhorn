@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography
 {
@@ -11,6 +12,6 @@ namespace Askalhorn.Common.Geography
             Door,
         }
 
-        CellType[,] Create(Random random);
+        CellType[,] Create(Random random, out Point[] places);
     }
 }

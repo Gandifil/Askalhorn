@@ -136,6 +136,11 @@
 /processorParam:TextureFormat=Color
 /build:maps/64x64.png
 
+#begin maps/castle.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/castle.tmx
+
 #begin maps/dungeon_tiles.tsx
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor

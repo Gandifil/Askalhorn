@@ -45,6 +45,7 @@ namespace AmbrosiaGame.Screens
                 switcher.SwitchTo(new ExchangeTabComponent(this, bag, world.Player.Bag));
             };
             world.OnChangeLocation += UpdateMap;
+            world.OnChangeLocation += LookAtPlayer;
         }
         private void LookAtPlayer()
         {

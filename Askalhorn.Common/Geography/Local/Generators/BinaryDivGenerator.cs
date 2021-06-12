@@ -14,12 +14,15 @@ namespace Askalhorn.Common.Geography.Local.Generators
         {
         }
 
-        public override ILocationGenerator.CellType[,] Create(Random random)
+        public override ILocationGenerator.CellType[,] Create(Random random, out Point[] places)
         {
-            var cells = base.Create(random);
+            var cells = base.Create(random, out places);
             
             Split(random, new Rectangle(1, 1, (int)Width - 2, (int)Height - 2), ref cells);
 
+            places = new Point[1];
+            places[0] = new Point((int)Width / 2, (int)Height / 2);
+            
             return cells;
         }
 

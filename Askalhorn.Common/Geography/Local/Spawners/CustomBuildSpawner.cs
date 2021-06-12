@@ -12,7 +12,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners
             this.F = F;
         }
         
-        public override void Initialize(Location location, Random random, uint placeIndex)
+        public override void Initialize(Location location, Random random, int[] args, uint placeIndex)
         {
             location.AddBuild(F?.Invoke(RandomPoint(location, random)));
         }

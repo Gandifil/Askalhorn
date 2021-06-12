@@ -122,12 +122,14 @@ namespace Askalhorn.Common
         internal void SetLocation(LocationInfo locationInfo, uint placeIndex)
         {
             info.Location = locationInfo;
+            
             var player = _characters[0];
             _characters.Clear();
+            _characters.Add(player);
+            
             Location = locationInfo.Generate(0);
             Location loc = (Location)Location;
             player.Position = loc.Places[(int)placeIndex];
-            _characters.Add(player);
             OnChangeLocation?.Invoke();
         }
 
