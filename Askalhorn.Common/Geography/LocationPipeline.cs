@@ -53,19 +53,49 @@ namespace Askalhorn.Common.Geography
             {"castle", FromFile("castle")},
             {"dungeon", new LocationPipeline
             {
+                Generator = new OneRoomGenerator(15, 15),
+                Designer = new WhiteCastleDesigner(),
+                Spawners = new List<ISpawner>
+                {
+                    new CustomBuildSpawner((point, _, _, _) =>
+                        new GlobalTeleport()
+                        {
+                            Position = new Position(point),
+                            Location = new LocationInfo()
+                            {
+                                PipelineName = "dungeons",
+                                Args = new []{1},
+                            }
+                        })
+                },
+            }},
+            {"dungeons", new LocationPipeline
+            {
                 Generator = new OneRoomGenerator(25, 25),
                 Designer = new WhiteCastleDesigner(),
                 Spawners = new List<ISpawner>
                 {
                     new ChestSpawner(),
-                    new ChestSpawner(),
-                    new ChestSpawner(),
                     new TestEnemySpawner(),
-                    new CustomBuildSpawner(point =>
+                    new CustomBuildSpawner((point, _, args, _) =>
                         new GlobalTeleport()
                         {
                             Position = new Position(point),
-                            Place = Convert.ToUInt32(0),
+                            Location = new LocationInfo()
+                            {
+                                PipelineName = args[0] == 1 ? "dungeon" : "dungeons",
+                                Args = new []{args[0] - 1},
+                            }
+                        }),
+                    new CustomBuildSpawner((point, _, args, _) =>
+                        new GlobalTeleport()
+                        {
+                            Position = new Position(point),
+                            Location = new LocationInfo()
+                            {
+                                PipelineName = "dungeons",
+                                Args = new []{args[0] + 1},
+                            }
                         })
                 },
             }},

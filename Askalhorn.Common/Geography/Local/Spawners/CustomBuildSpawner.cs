@@ -5,16 +5,17 @@ namespace Askalhorn.Common.Geography.Local.Spawners
 {
     internal class CustomBuildSpawner: BuildSpawner
     {
-        private readonly Func<Point, IBuild> F;
+        private readonly Func<Point, Random, int[], uint, IBuild> F;
 
-        public CustomBuildSpawner(Func<Point, IBuild> F)
+        public CustomBuildSpawner(Func<Point, Random, int[], uint, IBuild> F)
         {
             this.F = F;
         }
         
         public override void Initialize(Location location, Random random, int[] args, uint placeIndex)
         {
-            location.AddBuild(F?.Invoke(RandomPoint(location, random)));
+            var buld = F?.Invoke(RandomPoint(location, random),random, args, placeIndex);
+            location.AddBuild(buld);
         }
     }
 }
