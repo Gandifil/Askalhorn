@@ -6,6 +6,7 @@ using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Utils;
+using Askalhorn.Common.Plot;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common
@@ -29,6 +30,8 @@ namespace Askalhorn.Common
         IEnumerable<IAbility> Abilities { get; }
         
         IReadOnlyCollection<IEffect> Effects { get; }
+        
+        Dialog Dialog { get; }
 
         IBag Bag { get; }
     }

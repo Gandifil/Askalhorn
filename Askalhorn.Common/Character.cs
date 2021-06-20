@@ -10,6 +10,7 @@ using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Abilities;
 using Askalhorn.Common.Mechanics.Effects;
 using Askalhorn.Common.Mechanics.Utils;
+using Askalhorn.Common.Plot;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
@@ -44,6 +45,7 @@ namespace Askalhorn.Common
         public Position Position { get; set; }
 
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
+        public Dialog Dialog { get; set; }
         IBag ICharacter.Bag => Bag;
         
         public readonly Bag Bag = new Bag();

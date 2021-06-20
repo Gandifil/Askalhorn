@@ -1,9 +1,11 @@
-﻿using Askalhorn.Common.Control;
+﻿using System.Collections.Generic;
+using Askalhorn.Common.Control;
+using Askalhorn.Common.Plot.Quests;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common.Characters
 {
-    internal class Player: Character
+    internal class Player: Character, IPlayer
     {
         public Player()
         {
@@ -11,5 +13,14 @@ namespace Askalhorn.Common.Characters
             Texture = Storage.Content.Load<Texture2D>("images/mage");
             Controller = new BufferController();
         }
+
+        public IJournal Journal { get; set; } = new Journal(new List<IQuest>
+        {
+            new Quest()
+            {
+                Name = "fdssdf",
+                Description = "fffffffffffffffff",
+            }
+        });
     }
 }

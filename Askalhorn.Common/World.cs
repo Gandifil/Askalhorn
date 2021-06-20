@@ -109,7 +109,7 @@ namespace Askalhorn.Common
             _characters.Add(character);
         }
 
-        public ICharacter Player => Characters.First();
+        public IPlayer Player => (IPlayer)Characters.First();
         public event Action<IBag> OnOpenBag;
         public event Action OnTurn;
         public event Action OnChangeLocation;

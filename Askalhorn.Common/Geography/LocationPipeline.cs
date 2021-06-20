@@ -43,6 +43,7 @@ namespace Askalhorn.Common.Geography
                 Spawners = new List<ISpawner>
                 {
                     new TiledMapSpawner(),
+                    new WitchSpawner(),
                 }
             };
         }
