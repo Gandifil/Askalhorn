@@ -20,6 +20,8 @@ namespace Askalhorn.Common
         ILinearParameter<int> Level { get; }
         
         IAttributes<PrimaryTypes> Primary { get; }
+        
+        IReadOnlyDictionary<PrimaryTypes, int> PrimaryBase { get; }
 
         Texture2D Texture { get; }
         

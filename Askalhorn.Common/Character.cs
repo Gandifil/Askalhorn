@@ -25,6 +25,20 @@ namespace Askalhorn.Common
         [JsonIgnore]
         public Attributes<PrimaryTypes> Primary { get; private set; }
 
+        public Dictionary<PrimaryTypes, int> PrimaryBase { get; set; } = new()
+        {
+            {PrimaryTypes.Strength, 10},
+            {PrimaryTypes.Agility, 5},
+            {PrimaryTypes.Endurance, 10},
+            {PrimaryTypes.Intelligence, 10},
+            {PrimaryTypes.Willpower, 10},
+            {PrimaryTypes.Luck, 1},
+        };
+        
+        [JsonIgnore]
+        IReadOnlyDictionary<PrimaryTypes, int> ICharacter.PrimaryBase => PrimaryBase;
+        
+
         ILinearParameter<int> ICharacter.Level => Level;
         public LevelParameter Level { get; } = new()
         {
@@ -90,8 +104,8 @@ namespace Askalhorn.Common
             var attrs = new Dictionary<PrimaryTypes, ObservedParameter<int>>();
             foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
             {
-                var parameter = new FunctionParameter<int>(() => Level.Value * 5);
-                Level.Changed += parameter.Update;
+                var parameter = new FunctionParameter<int>(() => Level.Value * 5 + PrimaryBase[type]);
+                parameter.Changed += Level.Update;
                 attrs[type] = parameter;
             }
             

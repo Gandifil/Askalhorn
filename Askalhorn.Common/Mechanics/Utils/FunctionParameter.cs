@@ -12,6 +12,7 @@ namespace Askalhorn.Common.Mechanics.Utils
       //      :base((T)(object)0)
         {
             this.f = f;
+            Update();
         }
         
         protected override T generate()
