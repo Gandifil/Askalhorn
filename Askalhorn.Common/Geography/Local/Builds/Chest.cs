@@ -11,6 +11,8 @@ namespace Askalhorn.Common.Geography.Local.Builds
     internal class Chest: HasPosition, IBuild
     {
         IPosition IBuild.Position => Position;
+
+        public IBuild.Types Type => IBuild.Types.Chest;
         public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
 
         public Bag Bag { get; set; }

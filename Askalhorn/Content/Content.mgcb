@@ -82,6 +82,18 @@
 /processorParam:TextureFormat=Color
 /build:images/grassland_tiles.png
 
+#begin images/guiactions.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/guiactions.png
+
 #begin images/items.png
 /importer:TextureImporter
 /processor:TextureProcessor

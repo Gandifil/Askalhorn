@@ -10,6 +10,8 @@ namespace Askalhorn.Common.Geography.Local.Builds
     {
         IPosition IBuild.Position => Position;
 
+        public IBuild.Types Type => IBuild.Types.Teleport;
+
         IRenderer IBuild.Renderer => Renderer;
 
         public IRenderer Renderer { get; set; } = new ParticleRenderer(new ParticleRenderer.Settings()

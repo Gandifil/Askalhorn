@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using Askalhorn;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
+using Askalhorn.Common.Geography.Local;
 using Askalhorn.Components;
 using Askalhorn.Elements;
 using Askalhorn.Render;
@@ -12,6 +13,7 @@ using Askalhorn.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MLEM.Textures;
 using MonoGame.Extended;
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
@@ -32,6 +34,7 @@ namespace AmbrosiaGame.Screens
         private MovementTiles movements;
         private InputListenerComponent listeners;
         private SwitchComponent switcher;
+        private ActionsComponent actions;
 
         public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
@@ -39,14 +42,48 @@ namespace AmbrosiaGame.Screens
             this.game = game;
             this.World = world;
             world.OnTurn += UpdateMovements;
+            world.OnTurn += UpdateActions;
             world.OnTurn += LookAtPlayer;
             world.OnOpenBag += bag =>
             {
                 switcher.SwitchTo(new ExchangeTabComponent(this, bag, world.Player.Bag));
             };
             world.OnChangeLocation += UpdateMap;
+            world.OnChangeLocation += UpdateActions;
             world.OnChangeLocation += LookAtPlayer;
         }
+
+        private void UpdateActions()
+        {
+            actions.Clear();
+
+            var build = World.Location[World.Player.Position].Build;
+            if (build is not null)
+            {
+                switch (build.Type)
+                {
+                    case IBuild.Types.Chest:
+                        actions.Add(new ActionBlock
+                        {
+                            Region = Storage.Load("guiactions", 1, 0),
+                            Key = Keys.F,
+                            Action = () => World.Location[World.Player.Position].Build.Action.Invoke()
+                        });
+                        break;
+                    case IBuild.Types.Teleport:
+                        actions.Add(new ActionBlock
+                        {
+                            Region = Storage.Load("guiactions", 2, 0),
+                            Key = Keys.F,
+                            Action = () => World.Location[World.Player.Position].Build.Action.Invoke()
+                        });
+                        break;
+                    default:
+                        break;
+                }     
+            }
+        }
+        
         private void LookAtPlayer()
         {
             camera.LookAt(World.Player.Position.RenderVector);
@@ -84,6 +121,8 @@ namespace AmbrosiaGame.Screens
             Game.Components.Add(new LogComponent(game));
             switcher = new SwitchComponent(this);
             Game.Components.Add(switcher);
+            actions = new ActionsComponent(game);
+            Game.Components.Add(actions);
         }
 
         private void MovePlayer(Point shift)
@@ -115,8 +154,8 @@ namespace AmbrosiaGame.Screens
             if (e.Key == Keys.D)
                 MovePlayer(new Point(1, 0));
 
-            if (e.Key == Keys.F)
-                World.Location[World.Player.Position].Build?.Action();
+            //if (e.Key == Keys.F)
+            //    World.Location[World.Player.Position].Build?.Action();
 
             if (e.Key == Keys.C)
                 switcher.SwitchTo<CharacterTabComponent>();
