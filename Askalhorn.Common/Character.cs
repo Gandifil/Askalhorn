@@ -25,6 +25,7 @@ namespace Askalhorn.Common
         [JsonIgnore]
         public Attributes<PrimaryTypes> Primary { get; private set; }
 
+        IReadOnlyDictionary<PrimaryTypes, int> ICharacter.PrimaryBase => PrimaryBase;
         public Dictionary<PrimaryTypes, int> PrimaryBase { get; set; } = new()
         {
             {PrimaryTypes.Strength, 10},
@@ -35,8 +36,23 @@ namespace Askalhorn.Common
             {PrimaryTypes.Luck, 1},
         };
         
+        
+        IAttributes<SecondaryTypes> ICharacter.Secondary => Secondary;
         [JsonIgnore]
-        IReadOnlyDictionary<PrimaryTypes, int> ICharacter.PrimaryBase => PrimaryBase;
+        public Attributes<SecondaryTypes> Secondary { get; private set; }
+
+        IReadOnlyDictionary<SecondaryTypes, int> ICharacter.SecondaryBase => SecondaryBase;
+        public Dictionary<SecondaryTypes, int> SecondaryBase { get; set; } = new()
+        {
+            {SecondaryTypes.MaxHP, 100},
+            {SecondaryTypes.RegenHP, 1},
+            {SecondaryTypes.MaxMagic, 50},
+            {SecondaryTypes.RegenMagic, 3},
+            {SecondaryTypes.Accuracy, 100},
+            {SecondaryTypes.Dodge, 100},
+            {SecondaryTypes.PhysicalPower, 100},
+            {SecondaryTypes.MagicPower, 100},
+        };
         
 
         ILinearParameter<int> ICharacter.Level => Level;
@@ -94,22 +110,119 @@ namespace Askalhorn.Common
         public Character()
         {
             Controller = new RandomMovementController(this);
-            SetupRules();
+            SetupPrimaryRules();
+            SetupSecondaryRules();
 
             Effects = new Pool(this);
         }
 
-        private void SetupRules()
+        private void SetupPrimaryRules()
         {
             var attrs = new Dictionary<PrimaryTypes, ObservedParameter<int>>();
             foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
             {
                 var parameter = new FunctionParameter<int>(() => Level.Value * 5 + PrimaryBase[type]);
-                parameter.Changed += Level.Update;
+                Level.Changed += parameter.Update;
                 attrs[type] = parameter;
             }
             
             Primary = new Attributes<PrimaryTypes>(attrs);
+        }
+
+        private void SetupSecondaryRules()
+        {
+            var attrs = new Dictionary<SecondaryTypes, ObservedParameter<int>>();
+            foreach (var type in (SecondaryTypes[]) Enum.GetValues(typeof(SecondaryTypes)))
+            {
+                FunctionParameter<int> parameter;
+                switch (type)
+                {
+                    case SecondaryTypes.MaxHP:
+                        parameter = new FunctionParameter<int>(() => 
+                            Primary[PrimaryTypes.Endurance] * 20 + 
+                            Primary[PrimaryTypes.Strength] * 5 +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Strength].Changed += parameter.Update;
+                        break;
+                    
+                    case SecondaryTypes.RegenHP:
+                        parameter = new FunctionParameter<int>(() => 
+                            Convert.ToInt32(Primary[PrimaryTypes.Endurance] + 
+                                            Primary[PrimaryTypes.Willpower] * 0.2) +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
+                        break;
+                    
+                    case SecondaryTypes.MaxMagic:
+                        parameter = new FunctionParameter<int>(() => 
+                            Primary[PrimaryTypes.Willpower] * 10 + 
+                            Primary[PrimaryTypes.Intelligence] * 2 +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Intelligence].Changed += parameter.Update;
+                        break;
+                    
+                    case SecondaryTypes.RegenMagic:
+                        parameter = new FunctionParameter<int>(() => 
+                            Convert.ToInt32(Primary[PrimaryTypes.Willpower] * 2 + 
+                                            Primary[PrimaryTypes.Endurance] * 0.4) +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
+                        break;
+                    
+                    case SecondaryTypes.Accuracy:
+                        parameter = new FunctionParameter<int>(() => 
+                            Primary[PrimaryTypes.Agility] * 20 + 
+                            Primary[PrimaryTypes.Strength] * 5 + 
+                            Primary[PrimaryTypes.Luck] * 5 +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Agility].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Strength].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Luck].Changed += parameter.Update;
+                        break;
+                    
+                    case SecondaryTypes.Dodge:
+                        parameter = new FunctionParameter<int>(() => 
+                            Primary[PrimaryTypes.Agility] * 20 + 
+                            Primary[PrimaryTypes.Endurance] * 5 + 
+                            Primary[PrimaryTypes.Luck] * 5 +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Agility].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Strength].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Luck].Changed += parameter.Update;
+                        break;
+                    
+                    case SecondaryTypes.PhysicalPower:
+                        parameter = new FunctionParameter<int>(() => 
+                            Primary[PrimaryTypes.Strength] * 4 + 
+                            Primary[PrimaryTypes.Endurance] * 1 +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Agility].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
+                        break;
+                    
+                    case SecondaryTypes.MagicPower:
+                        parameter = new FunctionParameter<int>(() => 
+                            Primary[PrimaryTypes.Intelligence] * 4 + 
+                            Primary[PrimaryTypes.Willpower] * 1 +
+                            SecondaryBase[type]);
+                        Primary[PrimaryTypes.Intelligence].Changed += parameter.Update;
+                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
+                        break;
+                    
+                    
+                    default:
+                        continue;
+                }
+                parameter.Changed += Level.Update;
+                attrs[type] = parameter;
+            }
+            
+            Secondary = new Attributes<SecondaryTypes>(attrs);
+            
         }
 
         public void Turn()
