@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="MLEM" Version="5.0.0" />
       <PackageReference Include="MonoGame.Extended.Particles" Version="3.8.0" />
       <PackageReference Include="MonoGame.Extended.Tiled" Version="3.8.0" />
       <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" />

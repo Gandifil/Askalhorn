@@ -54,7 +54,7 @@ namespace Askalhorn
             log = new DevelopConsole(Content.Load<SpriteFont>("fonts/GameLogsFont"), Color.Red);
             LineRenderer.Initialize(GraphicsDevice);
             
-            UiSystem = new UiSystem(Window, GraphicsDevice, style);
+            UiSystem = new UiSystem(this, style);
             ScreenManager.LoadScreen(new MainMenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black, 0.5f));    
         }
 

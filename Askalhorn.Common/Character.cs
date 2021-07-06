@@ -109,7 +109,10 @@ namespace Askalhorn.Common
         
         public Character()
         {
-            Controller = new RandomMovementController(this);
+            Controller = new AgressiveController
+            {
+                Parent = this,
+            };
             SetupPrimaryRules();
             SetupSecondaryRules();
 

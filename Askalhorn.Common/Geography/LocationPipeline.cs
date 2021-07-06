@@ -44,13 +44,17 @@ namespace Askalhorn.Common.Geography
                 {
                     new TiledMapSpawner(),
                     new WitchSpawner(),
-                    new ChestSpawner(),
-                    new ChestSpawner(),
-                    new ChestSpawner(),
-                    new ChestSpawner(),
-                    new ChestSpawner(),
-                    new ChestSpawner(),
-                    new ChestSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
+                    new WitchSpawner(),
                 }
             };
         }
