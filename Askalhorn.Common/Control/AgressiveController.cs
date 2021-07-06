@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Common.Characters;
 using Askalhorn.Common.Control.Moves;
+using Microsoft.Xna.Framework;
 using MLEM.Pathfinding;
 
 namespace Askalhorn.Common.Control
@@ -31,11 +32,22 @@ namespace Askalhorn.Common.Control
 
             if (target is not null)
             {
-                var pathfinder = new AStar2((pos, nextPos) => 1, 
-                    false);
-                var path = pathfinder.FindPath(Parent.Position.Point, target.Position.Point);
-                path.Pop();
-                return new List<IMove>{ new MovementToMove(path.Pop())};
+                if (new Rectangle(-1, -1, 3, 3).Contains(Parent.Position.Point - target.Position.Point))
+                    return new List<IMove>
+                    {
+                        new UseAbilityMove(Parent.Abilities[0])
+                        {
+                            Target = target,
+                        }
+                    };
+                else
+                {
+                    var pathfinder = new AStar2((pos, nextPos) => 1, 
+                        false);
+                    var path = pathfinder.FindPath(Parent.Position.Point, target.Position.Point);
+                    path.Pop();
+                    return new List<IMove>{ new MovementToMove(path.Pop())};
+                }
             }
 
             return new List<IMove>();

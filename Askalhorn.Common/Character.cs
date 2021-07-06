@@ -103,8 +103,8 @@ namespace Askalhorn.Common
         [JsonIgnore]
         public List<IAbility> Abilities { get; set; } = new List<IAbility>()
         {
-            new FireBall()
-                { }
+            new Strike(),
+            new FireBall(),
         };
         
         public Character()
