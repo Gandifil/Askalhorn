@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Common.Control;
+using Askalhorn.Common.Mechanics.Abilities;
 using Askalhorn.Common.Plot.Quests;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,6 +13,7 @@ namespace Askalhorn.Common.Characters
             Name = "Вася";
             Texture = Storage.Content.Load<Texture2D>("images/mage");
             Controller = new BufferController();
+            Abilities.Add(new HealMeditation());
         }
 
         public IJournal Journal { get; set; } = new Journal(new List<IQuest>

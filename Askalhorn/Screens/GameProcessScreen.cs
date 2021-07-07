@@ -181,7 +181,7 @@ namespace AmbrosiaGame.Screens
         {
             movements = new MovementTiles(World.Player);
             UpdateMovements();
-            Game.Components.Add(new AbilitiesComponent(game, World.Player));
+            Game.Components.Add(new AbilitiesComponent(this, World.Player));
         }
 
         public override void UnloadContent()

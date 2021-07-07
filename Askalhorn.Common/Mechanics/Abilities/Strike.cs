@@ -1,5 +1,6 @@
 ﻿using Askalhorn.Common.Mechanics.Impacts;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
 {
@@ -8,7 +9,9 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public string Name => "Удар";
         
         public string Description => "Удар";
-        public Texture2D Icon => Storage.Content.Load<Texture2D>("images/fireball");
+        public TextureRegion2D Icon => new TextureRegion2D(Storage.Content.Load<Texture2D>("images/fireball"));
+        public int CoolDown { get; } = 0;
+        public int CoolDownTimer { get; } = 0;
         void IAbility.Use(Character character, Character target)
         {
             new DamageImpact(10).On(target);
