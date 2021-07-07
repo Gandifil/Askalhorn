@@ -23,7 +23,15 @@ namespace Askalhorn.Common.Mechanics.Abilities
             Use(character, target);
         }
 
+        public bool IsReady => CoolDownTimer == 0;
+
         protected abstract void Use(Character character, Character target);
+
+        public void Turn()
+        {
+            if (CoolDownTimer > 0)
+                CoolDownTimer -= 1;
+        }
         
         public override string ToString()
         {

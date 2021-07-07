@@ -9,6 +9,7 @@ using MLEM.Extended.Extensions;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
+using MonoGame.Extended;
 
 namespace Askalhorn.Components
 {
@@ -49,6 +50,12 @@ namespace Askalhorn.Components
                 Image = new Image(Anchor.Center, new Vector2(1, 1), ability.Icon.ToMlem());
                 Image.CanBeMoused = true;
                 Image.OnPressed += _ => Run();
+                Image.OnDrawn += (element, time, batch, alpha) =>
+                {
+                    if (!ability.IsReady)
+                        batch.DrawCircle(element.DisplayArea.Center, 
+                            64.0f * ((float)ability.CoolDownTimer / ability.CoolDown), 50, Color.Red);
+                };
                 var tooltip = new Tooltip(500, ability.ToString(), Image);
                 tooltip.MouseOffset = new Vector2(32, -64);
                 Panel.AddChild(Image);

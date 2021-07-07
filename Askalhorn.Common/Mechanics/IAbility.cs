@@ -17,6 +17,8 @@ namespace Askalhorn.Common.Mechanics
         int CoolDownTimer { get; }
         
         int MagicCost { get; }
+        
+        bool IsReady { get; }
 
         internal void Use(Character character, Character target);
     }

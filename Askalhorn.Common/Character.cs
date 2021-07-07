@@ -110,7 +110,7 @@ namespace Askalhorn.Common
         IEnumerable<IAbility> ICharacter.Abilities => Abilities;
 
         [JsonIgnore]
-        public List<IAbility> Abilities { get; set; } = new List<IAbility>()
+        public List<Ability> Abilities { get; set; } = new List<Ability>()
         {
             new Strike(),
             new FireBall(),
@@ -242,6 +242,8 @@ namespace Askalhorn.Common
         public void Turn()
         {
             Effects.Turn();
+            foreach (var ability in Abilities)
+                ability.Turn();
         }
     }
 }

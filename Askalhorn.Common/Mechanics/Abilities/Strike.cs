@@ -4,17 +4,16 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
 {
-    internal class Strike: IAbility
+    internal class Strike: Ability
     {
-        public string Name => "Удар";
+        public override string Name => "Удар";
         
-        public string Description => "Удар";
-        public TextureRegion2D Icon => new TextureRegion2D(Storage.Content.Load<Texture2D>("images/fireball"));
-        public int CoolDown { get; } = 0;
-        public int CoolDownTimer { get; } = 0;
-        public int MagicCost => 100;
+        public override string Description => "Удар";
+        public override TextureRegion2D Icon => new TextureRegion2D(Storage.Content.Load<Texture2D>("images/fireball"));
+        public override int CoolDown { get; } = 0;
+        public override int MagicCost => 100;
 
-        void IAbility.Use(Character character, Character target)
+        protected override void Use(Character character, Character target)
         {
             new DamageImpact(10).On(target);
         }
