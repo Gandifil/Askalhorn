@@ -54,7 +54,6 @@ namespace Askalhorn.Common
             {SecondaryTypes.MagicPower, 0},
         };
         
-
         ILinearParameter<int> ICharacter.Level => Level;
         public LevelParameter Level { get; } = new()
         {
@@ -64,6 +63,13 @@ namespace Askalhorn.Common
         ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
         
         public ObservedLimitedValue<int> HP { get; } = new()
+        {
+            Current = new ObservedParameter<int>(int.MaxValue),
+        };
+
+        ILimitedValue<IObservedParameter<int>> ICharacter.MP => MP;
+        
+        public ObservedLimitedValue<int> MP { get; } = new()
         {
             Current = new ObservedParameter<int>(int.MaxValue),
         };
@@ -119,6 +125,7 @@ namespace Askalhorn.Common
             SetupPrimaryRules();
             SetupSecondaryRules();
             HP.Max = Secondary[SecondaryTypes.MaxHP];
+            MP.Max = Secondary[SecondaryTypes.MaxMagic];
 
             Effects = new Pool(this);
         }

@@ -7,18 +7,27 @@ namespace Askalhorn.Render
 {
     public class CharacterRenderer
     {
-        private readonly ProgressBar hp;
-        
-            
         public void Draw(SpriteBatch batch, ICharacter character)
         {
             var target = character.Position.RenderTileVector;
             batch.Draw(character.Texture, target, Color.White);
-            ProgressBar hp1 = new ProgressBar(batch);
             target.Y += 64;
-            hp1.Draw(batch, target.ToPoint(), character.HP.Percent);
+            
+            // hp
+            var hp = new ProgressBar(batch);
+            hp.Draw(batch, target.ToPoint(), character.HP.Percent);
+            
+            // mp
+            var mp = new ProgressBar(batch)
+            {
+                HighColor = Color.BlueViolet,
+                LowColor = Color.LightBlue,
+            };
+            mp.Draw(batch, target.ToPoint() + new Point(0, 10), character.MP.Percent);
+            
+            // level
             var font = Storage.Content.Load<SpriteFont>("fonts/GameLogsFont");
-            batch.DrawString(font, character.Level.ToString(),target, Color.Chocolate);
+            batch.DrawString(font, character.Level.ToString(),target + new Vector2(-10, 0), Color.Chocolate);
         }
     }
 }

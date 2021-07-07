@@ -60,10 +60,9 @@ namespace Askalhorn.Components
             for (int i = 1; i < 10; i++)
                 boxes[i] = new AbilityBox(box, i);
             boxes[0] = new AbilityBox(box, 0);
-
-            boxes[1].SetEffect(character.Abilities.ElementAt(1));
-            boxes[2].SetEffect(character.Abilities.ElementAt(2));
-            boxes[3].SetEffect(character.Abilities.ElementAt(3));
+            
+            for (int i = 0; i < 3; i++)
+                boxes[i+1].SetEffect(character.Abilities.ElementAt(i));
             
             screen.game.UiSystem.Add("abilities", box);
         }
