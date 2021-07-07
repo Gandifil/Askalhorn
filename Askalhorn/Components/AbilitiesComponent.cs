@@ -66,8 +66,9 @@ namespace Askalhorn.Components
             {
                 if (_ability is not null)
                 {
-                    World.Instance.playerController.AddMove(new UseAbilityMove(_ability));
-                    
+                    var move = new UseAbilityMove(_ability);
+                    if (move.IsValid(character))
+                        World.Instance.playerController.AddMove(move);
                 }
             }
         }

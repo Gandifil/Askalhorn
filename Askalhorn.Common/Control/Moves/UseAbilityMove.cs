@@ -17,7 +17,9 @@ namespace Askalhorn.Common.Control.Moves
         
         public bool IsValid(ICharacter character)
         {
-            return character.Abilities.Contains(Ability);
+            return character.Abilities.Contains(Ability)
+                && character.MP.Current.Value >= Ability.MagicCost
+                && Ability.IsReady;
         }
 
         void IMove.Make(Character character)
