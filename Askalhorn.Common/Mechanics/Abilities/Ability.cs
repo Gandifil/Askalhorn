@@ -5,17 +5,19 @@ namespace Askalhorn.Common.Mechanics.Abilities
 {
     abstract internal class Ability: IAbility
     {
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-        public TextureRegion2D Icon { get; protected set; }
+        public abstract string Name { get; }
+        public abstract string Description { get; }
+        public abstract TextureRegion2D Icon { get; }
         
-        public int CoolDown { get; protected set; }
+        public abstract int CoolDown { get; }
 
         public int CoolDownTimer { get; private set; } = 0;
-        
+        public abstract int MagicCost { get; }
+
         void IAbility.Use(Character character, Character target)
         {
             CoolDownTimer = CoolDown;
+            character.MP.Current.Value -= MagicCost;
 
             Use(character, target);
         }

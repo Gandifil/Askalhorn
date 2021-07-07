@@ -12,6 +12,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public TextureRegion2D Icon => new TextureRegion2D(Storage.Content.Load<Texture2D>("images/fireball"));
         public int CoolDown { get; } = 0;
         public int CoolDownTimer { get; } = 0;
+        public int MagicCost => 100;
 
         void IAbility.Use(Character character, Character target)
         {
