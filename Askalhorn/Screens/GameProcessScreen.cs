@@ -35,6 +35,7 @@ namespace AmbrosiaGame.Screens
         private InputListenerComponent listeners;
         private SwitchComponent switcher;
         private ActionsComponent actions;
+        private EffectsComponent effects;
 
         public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
@@ -123,6 +124,9 @@ namespace AmbrosiaGame.Screens
             Game.Components.Add(switcher);
             actions = new ActionsComponent(game);
             Game.Components.Add(actions);
+            effects = new EffectsComponent(this, World.Player);
+            World.OnTurn += effects.Update;
+            Game.Components.Add(effects);
         }
 
         private void MovePlayer(Point shift)

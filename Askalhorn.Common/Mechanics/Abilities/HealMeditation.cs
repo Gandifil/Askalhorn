@@ -15,7 +15,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
 
         protected override void Use(Character character, Character target)
         {
-            new EffectImpact(new ImpactEffect(new HealImpact(1), 5)).On(target);
+            new EffectImpact(new ImpactEffect(new HealImpact(1), 5)).On(character);
         }
     }
 }

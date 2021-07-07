@@ -16,6 +16,8 @@ namespace Askalhorn.Common.Mechanics.Abilities
         void IAbility.Use(Character character, Character target)
         {
             CoolDownTimer = CoolDown;
+
+            Use(character, target);
         }
 
         protected abstract void Use(Character character, Character target);
