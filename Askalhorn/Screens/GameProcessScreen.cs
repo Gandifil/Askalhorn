@@ -36,6 +36,7 @@ namespace AmbrosiaGame.Screens
         private SwitchComponent switcher;
         private ActionsComponent actions;
         private EffectsComponent effects;
+        private AbilitiesComponent abilities;
 
         public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
@@ -127,6 +128,8 @@ namespace AmbrosiaGame.Screens
             effects = new EffectsComponent(this, World.Player);
             World.OnTurn += effects.Update;
             Game.Components.Add(effects);
+            abilities = new AbilitiesComponent(this, World.Player);
+            Game.Components.Add(abilities);
         }
 
         private void MovePlayer(Point shift)
@@ -173,6 +176,10 @@ namespace AmbrosiaGame.Screens
             
             if (e.Key == Keys.E)
                 World.playerController.AddMove(new AttackMove(World.Characters.ElementAt(1)));
+
+            if (e.Key >= Keys.D0 && e.Key <= Keys.D9)
+                abilities.Run(e.Key - Keys.D0);
+
         }
 
         private void UpdateMovements()
@@ -185,7 +192,6 @@ namespace AmbrosiaGame.Screens
         {
             movements = new MovementTiles(World.Player);
             UpdateMovements();
-            Game.Components.Add(new AbilitiesComponent(this, World.Player));
         }
 
         public override void UnloadContent()
