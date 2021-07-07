@@ -37,7 +37,7 @@ namespace Askalhorn.Components
                 {
                     World.Instance.playerController.AddMove(new UseAbilityMove(ability));
                 };
-                var tooltip = new Tooltip(500, ability.Name + "\n" + ability.Description, image);
+                var tooltip = new Tooltip(500, ability.ToString(), image);
                 tooltip.MouseOffset = new Vector2(32, -64);
                 Panel.AddChild(image);
             }

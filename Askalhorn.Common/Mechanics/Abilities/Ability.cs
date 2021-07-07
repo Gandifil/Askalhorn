@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
@@ -23,5 +24,16 @@ namespace Askalhorn.Common.Mechanics.Abilities
         }
 
         protected abstract void Use(Character character, Character target);
+        
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine(Name);
+            builder.AppendLine($"Затраты магии: {MagicCost}");
+            builder.AppendLine($"Откат: {CoolDown}");
+            builder.AppendLine(Description);
+            
+            return builder.ToString();
+        }
     }
 }
