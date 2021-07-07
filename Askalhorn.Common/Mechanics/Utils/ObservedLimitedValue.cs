@@ -8,19 +8,38 @@ namespace Askalhorn.Common.Mechanics.Utils
     {
         IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Current => Current;
 
-        IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Max => Max;
-        
-        public ObservedParameter<T> Current { get; private set; }
-        
-        public ObservedParameter<T> Max { get; private set; }
+        private ObservedParameter<T> _current;
 
-        public ObservedLimitedValue(T value, T max)
+        public ObservedParameter<T> Current
         {
-            Current = new ObservedParameter<T>(max);
-            Current.Changed += ResetValue;
-            
-            Max = new ObservedParameter<T>(max);
-            Max.Changed += ResetValue;
+            get
+            {
+                return _current;
+            }
+            set
+            {
+                _current = value;
+                _current.Changed += ResetValue;
+            }
+        }
+
+        IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Max => Max;
+
+        private ObservedParameter<T> _max;
+        
+        [JsonIgnore]
+        public ObservedParameter<T> Max 
+        {
+            get
+            {
+                return _max;
+            }
+            set
+            {
+                _max = value;
+                _max.Changed += ResetValue;
+                ResetValue();
+            }
         }
 
         private readonly T zero = (T) (object) 0;

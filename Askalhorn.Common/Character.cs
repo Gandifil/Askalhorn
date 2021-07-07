@@ -44,14 +44,14 @@ namespace Askalhorn.Common
         IReadOnlyDictionary<SecondaryTypes, int> ICharacter.SecondaryBase => SecondaryBase;
         public Dictionary<SecondaryTypes, int> SecondaryBase { get; set; } = new()
         {
-            {SecondaryTypes.MaxHP, 100},
-            {SecondaryTypes.RegenHP, 1},
-            {SecondaryTypes.MaxMagic, 50},
-            {SecondaryTypes.RegenMagic, 3},
-            {SecondaryTypes.Accuracy, 100},
-            {SecondaryTypes.Dodge, 100},
-            {SecondaryTypes.PhysicalPower, 100},
-            {SecondaryTypes.MagicPower, 100},
+            {SecondaryTypes.MaxHP, 0},
+            {SecondaryTypes.RegenHP, 0},
+            {SecondaryTypes.MaxMagic, 0},
+            {SecondaryTypes.RegenMagic, 0},
+            {SecondaryTypes.Accuracy, 0},
+            {SecondaryTypes.Dodge, 0},
+            {SecondaryTypes.PhysicalPower, 0},
+            {SecondaryTypes.MagicPower, 0},
         };
         
 
@@ -63,7 +63,10 @@ namespace Askalhorn.Common
 
         ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
         
-        public ObservedLimitedValue<int> HP { get; private set; } = new ObservedLimitedValue<int>(100, 100);
+        public ObservedLimitedValue<int> HP { get; } = new()
+        {
+            Current = new ObservedParameter<int>(int.MaxValue),
+        };
 
         [JsonIgnore]
         public IController Controller { get; set; }
@@ -115,6 +118,7 @@ namespace Askalhorn.Common
             };
             SetupPrimaryRules();
             SetupSecondaryRules();
+            HP.Max = Secondary[SecondaryTypes.MaxHP];
 
             Effects = new Pool(this);
         }
@@ -124,7 +128,7 @@ namespace Askalhorn.Common
             var attrs = new Dictionary<PrimaryTypes, ObservedParameter<int>>();
             foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
             {
-                var parameter = new FunctionParameter<int>(() => Level.Value * 5 + PrimaryBase[type]);
+                var parameter = new FunctionParameter<int>(() => Level.Value * 2 + PrimaryBase[type]);
                 Level.Changed += parameter.Update;
                 attrs[type] = parameter;
             }
