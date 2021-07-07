@@ -39,6 +39,13 @@ namespace Askalhorn.Common.Mechanics.Abilities
             builder.AppendLine(Name);
             builder.AppendLine($"Затраты магии: {MagicCost}");
             builder.AppendLine($"Откат: {CoolDown}");
+            
+            if (IsReady)
+                builder.AppendLine($"<c Green>Умение готово к использованию</c>");
+            else
+                builder.AppendLine($"<c Red>Умение будет готово через {CoolDownTimer} ходов</c>");
+            
+            
             builder.AppendLine(Description);
             
             return builder.ToString();
