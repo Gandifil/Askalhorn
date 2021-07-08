@@ -31,7 +31,7 @@ namespace AmbrosiaGame.Screens
         public readonly World World;
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
-        private MovementTiles movements;
+        public MovementTiles movements;
         private InputListenerComponent listeners;
         private SwitchComponent switcher;
         private ActionsComponent actions;

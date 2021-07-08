@@ -9,6 +9,8 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public abstract string Name { get; }
         public abstract string Description { get; }
         public abstract TextureRegion2D Icon { get; }
+        public abstract IAbility.TargetType Type { get; }
+        public abstract int Radius { get; }
         
         public abstract int CoolDown { get; }
 
@@ -32,11 +34,14 @@ namespace Askalhorn.Common.Mechanics.Abilities
             if (CoolDownTimer > 0)
                 CoolDownTimer -= 1;
         }
+
+        private static string[] TARGET_TYPES_TEXT = {"На себя", "На одну цель"};
         
         public override string ToString()
         {
             var builder = new StringBuilder();
             builder.AppendLine(Name);
+            builder.AppendLine($"Тип: {TARGET_TYPES_TEXT[(int)Type]}");
             builder.AppendLine($"Затраты магии: {MagicCost}");
             builder.AppendLine($"Откат: {CoolDown}");
             

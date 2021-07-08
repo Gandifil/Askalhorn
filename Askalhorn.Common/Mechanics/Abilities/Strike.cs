@@ -10,6 +10,8 @@ namespace Askalhorn.Common.Mechanics.Abilities
         
         public override string Description => "Удар";
         public override TextureRegion2D Icon => new TextureRegion2D(Storage.Content.Load<Texture2D>("images/fireball"));
+        public override IAbility.TargetType Type => IAbility.TargetType.Character;
+        public override int Radius => 1;
         public override int CoolDown { get; } = 0;
         public override int MagicCost => 100;
 

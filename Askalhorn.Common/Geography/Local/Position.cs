@@ -57,6 +57,11 @@ namespace Askalhorn.Common.Geography.Local
         {
             Point = position.Point;
         }
+
+        public bool IsInside(IPosition center, float radius)
+        {
+            return (center.Point - Point).ToVector2().Length() < radius;
+        }
         
         [JsonIgnore]
         public Vector2 RenderTileVector => RenderVector - Vectors.Origin;

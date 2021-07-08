@@ -39,6 +39,8 @@ namespace Askalhorn.Common.Geography.Local
         /// </summary>
         uint Y { get; }
 
+        bool IsInside(IPosition center, float radius);
+
         /// <summary>
         /// Return a new position equals current + direction.
         /// </summary>

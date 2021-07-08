@@ -10,6 +10,8 @@ namespace Askalhorn.Common.Mechanics.Abilities
         
         public override string Description => "Обычный огненный шар, который обычно летит прямо в ебало.";
         public override TextureRegion2D Icon => new TextureRegion2D(Storage.Content.Load<Texture2D>("images/fireball"));
+        public override IAbility.TargetType Type => IAbility.TargetType.Character;
+        public override int Radius => 10;
         public override int CoolDown { get; } = 0;
         public override int MagicCost => 100;
 

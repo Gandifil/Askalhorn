@@ -9,8 +9,11 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public override string Name => "Восстанавливающая медитация";
         
         public override string Description => "Восстанавливающая медитация";
-        
+
         public override TextureRegion2D Icon => Storage.Load("effects", 0, 0);
+
+        public override IAbility.TargetType Type => IAbility.TargetType.Self;
+        public override int Radius => 10;
         
         public override int CoolDown => 10;
         public override int MagicCost => 100;

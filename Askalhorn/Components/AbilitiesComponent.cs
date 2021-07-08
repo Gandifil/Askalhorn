@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
@@ -10,6 +11,7 @@ using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
 using MonoGame.Extended;
+using MonoGame.Extended.Screens;
 
 namespace Askalhorn.Components
 {
@@ -18,15 +20,21 @@ namespace Askalhorn.Components
         private readonly GameProcessScreen screen;
         private readonly ICharacter character;
 
+        private const int ABILITIES_COUNT = 10;
+
+        private AbilityBox[] boxes = new AbilityBox[ABILITIES_COUNT]; 
+
         private class AbilityBox
         {
+            private readonly GameProcessScreen screen;
             public readonly Panel Panel;
             public Image Image;
             public IAbility _ability;
             private readonly ICharacter character;
 
-            public AbilityBox(Panel parent, int index, ICharacter character)
+            public AbilityBox(GameProcessScreen screen, Panel parent, int index, ICharacter character)
             {
+                this.screen = screen;
                 Panel = new Panel(Anchor.AutoInlineIgnoreOverflow, new Vector2(0.1f, 1), Vector2.Zero);
                 Panel.AddChild(new Paragraph(Anchor.BottomRight, 20, index.ToString())
                 {
@@ -66,16 +74,28 @@ namespace Askalhorn.Components
             {
                 if (_ability is not null)
                 {
-                    var move = new UseAbilityMove(_ability);
-                    if (move.IsValid(character))
-                        World.Instance.playerController.AddMove(move);
+                    if (_ability.Type == IAbility.TargetType.Self)
+                    {
+                        var move = new UseAbilityMove(_ability);
+                        if (move.IsValid(character))
+                            World.Instance.playerController.AddMove(move);
+                        screen.movements.AvailableAbilities = new List<UseAbilityMove>();
+                    }
+
+                    if (_ability.Type == IAbility.TargetType.Character)
+                    {
+                        screen.movements.AvailableAbilities = screen
+                            .World.Characters
+                            .Where(x => x != character && x.Position.IsInside(character.Position, _ability.Radius))
+                            .Select(x =>
+                                new UseAbilityMove(_ability)
+                                {
+                                    Target = x,
+                                });
+                    }
                 }
             }
         }
-
-        private const int ABILITIES_COUNT = 10;
-
-        private AbilityBox[] boxes = new AbilityBox[ABILITIES_COUNT]; 
         
         public AbilitiesComponent(GameProcessScreen screen, ICharacter character): base(screen.game)
         {
@@ -90,8 +110,8 @@ namespace Askalhorn.Components
             var box = new Panel(Anchor.BottomRight, new Vector2(0.7f, 0.1f), Vector2.Zero);
 
             for (int i = 1; i < ABILITIES_COUNT; i++)
-                boxes[i] = new AbilityBox(box, i, character);
-            boxes[0] = new AbilityBox(box, 0, character);
+                boxes[i] = new AbilityBox(screen, box, i, character);
+            boxes[0] = new AbilityBox(screen, box, 0, character);
             
             for (int i = 0; i < 3; i++)
                 boxes[i+1].SetEffect(character.Abilities.ElementAt(i));
