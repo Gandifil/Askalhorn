@@ -76,9 +76,7 @@ namespace Askalhorn.Components
                 {
                     if (_ability.Type == IAbility.TargetType.Self)
                     {
-                        var move = new UseAbilityMove(_ability);
-                        if (move.IsValid(character))
-                            World.Instance.playerController.AddMove(move);
+                        World.Instance.playerController.AddMove(new UseAbilityMove(_ability));
                         screen.movements.AvailableAbilities = new List<UseAbilityMove>();
                     }
 

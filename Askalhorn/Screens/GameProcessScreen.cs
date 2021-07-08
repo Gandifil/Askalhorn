@@ -130,13 +130,13 @@ namespace AmbrosiaGame.Screens
             Game.Components.Add(effects);
             abilities = new AbilitiesComponent(this, World.Player);
             Game.Components.Add(abilities);
+            movements = new MovementTiles(World.Player);
+            UpdateMovements();
         }
 
         private void MovePlayer(Point shift)
         {
-            var move = new MovementMove(shift);
-            if (move.IsValid(World.Player))
-                World.playerController.AddMove(new MovementMove(shift));
+            World.playerController.AddMove(new MovementMove(shift));
         }
 
 
@@ -190,8 +190,6 @@ namespace AmbrosiaGame.Screens
 
         public override void LoadContent()
         {
-            movements = new MovementTiles(World.Player);
-            UpdateMovements();
         }
 
         public override void UnloadContent()
@@ -207,21 +205,8 @@ namespace AmbrosiaGame.Screens
 
         public override void Update(GameTime gameTime)
         {
-            float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 ScreenManager.LoadScreen(new PauseScreen(game, this, World));
-            //
-            // if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            //     camera.Move(new Vector2(-10, 0));
-            //
-            // if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            //     camera.Move(new Vector2(10, 0));
-            //
-            // if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            //     camera.Move(new Vector2(0, 10));
-            //
-            // if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            //     camera.Move(new Vector2(0, -10));
 
             mapRenderer.Update(gameTime);
             foreach (var build in World.Location.Builds)

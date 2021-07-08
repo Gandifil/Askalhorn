@@ -19,8 +19,12 @@ namespace Askalhorn.Common.Control
 
         public void AddMove(IMove move)
         {
-            buffer.Add(move);
-            World.Instance.Turn();
+            var world = World.Instance;
+            if (move.IsValid(world.Player))
+            {
+                buffer.Add(move);
+                world.Turn();
+            }
         }
     }
 }
