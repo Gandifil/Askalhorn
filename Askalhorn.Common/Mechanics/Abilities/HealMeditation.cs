@@ -17,6 +17,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         
         public override int CoolDown => 10;
         public override int MagicCost => 100;
+        public override uint MaxSkill => 10;
 
         protected override void Use(Character character, Character target)
         {

@@ -16,12 +16,17 @@ namespace Askalhorn.Common.Mechanics.Abilities
 
         public int CoolDownTimer { get; private set; } = 0;
         public abstract int MagicCost { get; }
+        
+        public uint Skill { get; set; } = 0; 
+        public abstract uint MaxSkill { get; }
 
         void IAbility.Use(Character character, Character target)
         {
             CoolDownTimer = CoolDown;
             character.MP.Current.Value -= MagicCost;
 
+            if (Skill < MaxSkill)
+                Skill++;
             Use(character, target);
         }
 

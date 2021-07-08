@@ -29,6 +29,10 @@ namespace Askalhorn.Common.Mechanics
         int MagicCost { get; }
         
         bool IsReady { get; }
+        
+        uint MaxSkill { get; }
+        
+        uint Skill { get; }
 
         internal void Use(Character character, Character target);
     }

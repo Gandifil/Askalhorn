@@ -173,6 +173,9 @@ namespace AmbrosiaGame.Screens
             if (e.Key == Keys.J)
                 switcher.SwitchTo<JournalTabComponent>();
 
+            if (e.Key == Keys.B)
+                switcher.SwitchTo<AbilitiesTabComponent>();
+
             
             if (e.Key == Keys.E)
                 World.playerController.AddMove(new AttackMove(World.Characters.ElementAt(1)));
