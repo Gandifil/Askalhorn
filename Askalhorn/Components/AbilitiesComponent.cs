@@ -64,7 +64,7 @@ namespace Askalhorn.Components
                         batch.DrawCircle(element.DisplayArea.Center, 
                             64.0f * ((float)ability.CoolDownTimer / ability.CoolDown), 50, Color.Red);
                 };
-                var tooltip = new Tooltip(500, ability.ToString(), Image);
+                var tooltip = new Tooltip(500, _ => ability.ToString(), Image);
                 tooltip.MouseOffset = new Vector2(32, -64);
                 Panel.AddChild(Image);
                 UpdateMagic();

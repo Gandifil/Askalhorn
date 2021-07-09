@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
 
@@ -6,6 +8,13 @@ namespace Askalhorn.Common.Mechanics
 {
     public interface IAbility
     {
+        public struct Modification
+        {
+            public string Description { get; set; }
+            
+            public TextureRegion2D Icon { get; set; }
+        }
+        
         public enum TargetType
         {
             Self,
@@ -33,6 +42,10 @@ namespace Askalhorn.Common.Mechanics
         uint MaxSkill { get; }
         
         uint Skill { get; }
+        
+        List<Modification> Modifications { get;}
+        
+        int CurrentModification { get; set; }
 
         internal void Use(Character character, Character target);
     }

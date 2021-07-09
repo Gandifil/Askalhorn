@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
 
@@ -17,7 +18,11 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public int CoolDownTimer { get; private set; } = 0;
         public abstract int MagicCost { get; }
         
-        public uint Skill { get; set; } = 0; 
+        public uint Skill { get; set; } = 0;
+        
+        public abstract List<IAbility.Modification> Modifications { get; }
+        public int CurrentModification { get; set; } = -1;
+        
         public abstract uint MaxSkill { get; }
 
         void IAbility.Use(Character character, Character target)
