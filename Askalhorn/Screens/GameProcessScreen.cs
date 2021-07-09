@@ -109,8 +109,6 @@ namespace AmbrosiaGame.Screens
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
             UpdateMap();
             
-            characterRenderer = new CharacterRenderer();
-            
             var keyboardListener = new KeyboardListener();
             keyboardListener.KeyReleased += KeyRelease;
             
@@ -193,6 +191,7 @@ namespace AmbrosiaGame.Screens
 
         public override void LoadContent()
         {
+            characterRenderer = new CharacterRenderer(spriteBatch);
         }
 
         public override void UnloadContent()
