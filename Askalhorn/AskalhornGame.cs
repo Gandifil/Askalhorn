@@ -34,7 +34,7 @@ namespace Askalhorn
         public AskalhornGame()
         {
             Graphics = new GraphicsDeviceManager(this);
-            Graphics.IsFullScreen = true;
+            //Graphics.IsFullScreen = true;
             ScreenManager = new ScreenManager();
             Components.Add(ScreenManager);
         }

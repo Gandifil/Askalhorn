@@ -50,6 +50,8 @@ namespace Askalhorn.Common.Mechanics
         
         int CurrentModification { get; set; }
 
+        event Action OnChange;
+
         internal void Use(Character character, Character target);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,17 +24,34 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public uint Skill { get; set; } = 0;
         
         public abstract List<IAbility.Modification> Modifications { get; }
-        public int CurrentModification { get; set; } = -1;
-        
+
+        private int _currentModification = -1;
+
+        public int CurrentModification
+        {
+            get => _currentModification;
+            set
+            {
+                //if (_currentModification == -1)
+                {
+                    _currentModification = value;
+                    OnChange?.Invoke();
+                }
+            }
+        }
+        public event Action OnChange;
+
         public abstract uint MaxSkill { get; }
 
         void IAbility.Use(Character character, Character target)
         {
             CoolDownTimer = CoolDown;
-            character.MP.Current.Value -= MagicCost;
-
             if (Skill < MaxSkill)
                 Skill++;
+
+            OnChange?.Invoke();
+            
+            character.MP.Current.Value -= MagicCost;
             Use(character, target);
         }
 
