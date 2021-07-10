@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
 
@@ -28,6 +29,8 @@ namespace Askalhorn.Common.Mechanics
         TargetType Type { get; }
 
         TextureRegion2D Icon { get; }
+        
+        SoundEffect CastSound { get; }
         
         int CoolDown { get; }
         

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Common.Mechanics.Effects;
 using Askalhorn.Common.Mechanics.Impacts;
+using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
@@ -20,6 +21,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public override int CoolDown => 10;
         public override int MagicCost => 100;
         public override uint MaxSkill => 10;
+        public override SoundEffect CastSound => Storage.Content.Load<SoundEffect>("sounds\\heal");
 
         public override List<IAbility.Modification> Modifications { get; } =
             new()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
 
@@ -10,6 +11,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public abstract string Name { get; }
         public abstract string Description { get; }
         public abstract TextureRegion2D Icon { get; }
+        public abstract SoundEffect CastSound { get; }
         public abstract IAbility.TargetType Type { get; }
         public abstract int Radius { get; }
         

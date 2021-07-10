@@ -26,6 +26,7 @@ namespace Askalhorn.Common.Control.Moves
         {
             var itemName = Ability.Name;
             Log.Information("{Name} использовал {itemName}", character.Name, itemName);
+            Ability.CastSound.Play();
             
             Ability.Use(character, (Character) Target);
         }

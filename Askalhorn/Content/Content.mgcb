@@ -209,3 +209,9 @@
 /processorParam:ContentType=TestGame.Resources.PlayerInfo
 /build:player.json
 
+#begin sounds/heal.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Low
+/build:sounds/heal.mp3
+
