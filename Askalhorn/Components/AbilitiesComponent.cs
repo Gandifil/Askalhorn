@@ -24,13 +24,14 @@ namespace Askalhorn.Components
 
         private AbilityBox[] boxes = new AbilityBox[ABILITIES_COUNT]; 
 
-        private class AbilityBox
+        private class AbilityBox: IDisposable
         {
             private readonly GameProcessScreen screen;
             public readonly Panel Panel;
             public Image Image;
             public IAbility _ability;
             private readonly ICharacter character;
+            private Tooltip _tooltip;
 
             public AbilityBox(GameProcessScreen screen, Panel parent, int index, ICharacter character)
             {
@@ -43,7 +44,7 @@ namespace Askalhorn.Components
                 parent.AddChild(Panel);
 
                 this.character = character;
-                character.HP.Current.Changed += () => UpdateMagic();
+                character.HP.Current.Changed += UpdateMagic;
             }
 
             private void UpdateMagic()
@@ -64,10 +65,17 @@ namespace Askalhorn.Components
                         batch.DrawCircle(element.DisplayArea.Center, 
                             64.0f * ((float)ability.CoolDownTimer / ability.CoolDown), 50, Color.Red);
                 };
-                var tooltip = new Tooltip(500, _ => ability.ToString(), Image);
-                tooltip.MouseOffset = new Vector2(32, -64);
+                _tooltip = new Tooltip(500, ability.ToString(), Image);
+                _tooltip.MouseOffset = new Vector2(32, -64);
+                ability.OnChange += Update;
                 Panel.AddChild(Image);
                 UpdateMagic();
+            }
+
+            private void Update()
+            {
+                if (_ability is not null)
+                    _tooltip.Paragraph.Text = _ability.ToString();
             }
 
             public void Run()
@@ -92,6 +100,14 @@ namespace Askalhorn.Components
                                 });
                     }
                 }
+            }
+
+            public void Dispose()
+            {
+                if (_ability is not null)
+                    _ability.OnChange -= Update;
+                
+                character.HP.Current.Changed -= UpdateMagic;
             }
         }
         
@@ -131,7 +147,12 @@ namespace Askalhorn.Components
         protected override void Dispose(bool disposing)
         {
             if (disposing)
+            {
+                foreach (var box in boxes)
+                    box.Dispose();
+                
                 screen.game.UiSystem.Remove("abilities");
+            }
         }
     }
 }
