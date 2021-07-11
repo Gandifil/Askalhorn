@@ -1,4 +1,7 @@
-﻿using AmbrosiaGame.Screens;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using AmbrosiaGame.Screens;
 using AmbrosiaGame.Utils;
 using Askalhorn.Common;
 using Askalhorn.Logging;
@@ -6,6 +9,7 @@ using Askalhorn.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MLEM.Extended.Font;
 using MLEM.Font;
 using MLEM.Textures;
@@ -70,10 +74,9 @@ namespace Askalhorn
 
             style = new UntexturedStyle(this.SpriteBatch) {
                 Font = new GenericSpriteFont(
-                    Content.Load<SpriteFont>("fonts/Text"), 
+                    Content.Load<SpriteFont>("fonts/gui"), 
                     Content.Load<SpriteFont>("fonts/Text"), 
                     Content.Load<SpriteFont>("fonts/Text")),
-                TextScale = 0.5F,
                 PanelTexture = testPatch,
                 ButtonTexture = new NinePatch(new TextureRegion(testTexture, 24, 8, 16, 16), 4),
                 TextFieldTexture = new NinePatch(new TextureRegion(testTexture, 24, 8, 16, 16), 4),
@@ -84,6 +87,26 @@ namespace Askalhorn
                 RadioTexture = new NinePatch(new TextureRegion(testTexture, 16, 0, 8, 8), 3),
                 RadioCheckmark = new TextureRegion(testTexture, 32, 0, 8, 8),
             };
+
+            var music1 = Content.Load<Song>("music/Ivan Happy - Ode");
+            var music2 = Content.Load<Song>("music/ivan happy - futility");
+            var music3 = Content.Load<Song>("music/KOLARD BEATS - WAKE FROM ETERNAL SLEEP");
+            var musics = CreateInstance<SongCollection>();
+            musics.Add(music1);
+            musics.Add(music2);
+            musics.Add(music3);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(musics);
+        }
+        
+        public static T CreateInstance<T>(params object[] args)
+        {
+            var type = typeof (T);
+            var instance = type.Assembly.CreateInstance(
+                type.FullName, false,
+                BindingFlags.Instance | BindingFlags.NonPublic,
+                null, args, null, null);
+            return (T) instance;
         }
 
         protected override void Update(GameTime gameTime)

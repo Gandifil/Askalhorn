@@ -27,6 +27,13 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/GameLogsFont.spritefont
 
+#begin fonts/gui.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/gui.spritefont
+
 #begin fonts/Text.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -214,6 +221,24 @@
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
 /build:maps/temple.tmx
+
+#begin music/ivan happy - futility.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/ivan happy - futility.mp3
+
+#begin music/Ivan Happy - Ode.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/Ivan Happy - Ode.mp3
+
+#begin music/KOLARD BEATS - WAKE FROM ETERNAL SLEEP.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/KOLARD BEATS - WAKE FROM ETERNAL SLEEP.mp3
 
 #begin player.json
 /importer:JsonContentImporter
