@@ -1,5 +1,6 @@
 ﻿using System;
 using Askalhorn.Logging;
+using Askalhorn.Settings;
 using Serilog;
 
 namespace Askalhorn
@@ -14,6 +15,8 @@ namespace Askalhorn
                 .WriteTo.GameLog("{Message:lj}")
                 .WriteTo.DevelopConsole()
                 .CreateLogger();
+            
+            Configuration.Load();
             
             using (var game = new AskalhornGame())
                 game.Run();

@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
+using Askalhorn.Screens.Configuration;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Font;
@@ -42,7 +43,7 @@ namespace Askalhorn.Screens
             box.AddChild(new VerticalSpace(3));
             box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Настройки")
             {
-                OnPressed = element => ScreenManager.LoadScreen(null),
+                OnPressed = element => ScreenManager.LoadScreen(new MainSettings(game, this)),
             });
             box.AddChild(new VerticalSpace(3));
             box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход")
