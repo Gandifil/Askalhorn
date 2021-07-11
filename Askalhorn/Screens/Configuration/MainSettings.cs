@@ -19,6 +19,7 @@ namespace Askalhorn.Screens.Configuration
         { 
             _menu.AddButton("Графика", () => ScreenManager.LoadScreen(new GraphicsSettings(_game, this)));
             _menu.AddButton("Звук", () => ScreenManager.LoadScreen(new MediaSettings(_game, this)));
+            _menu.AddButton("Управление", () => ScreenManager.LoadScreen(new ControlSettings(_game, this)));
             _menu.AddButton("Назад", Back);
             _menu.Initialize();
         }
