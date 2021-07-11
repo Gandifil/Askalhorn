@@ -18,12 +18,14 @@ namespace Askalhorn.Screens.Configuration
         public override void Initialize() 
         { 
             _menu.AddButton("Графика", () => ScreenManager.LoadScreen(new GraphicsSettings(_game, this)));
+            _menu.AddButton("Звук", () => ScreenManager.LoadScreen(new MediaSettings(_game, this)));
             _menu.AddButton("Назад", Back);
             _menu.Initialize();
         }
 
         public override void Dispose()
         {
+            Settings.Configuration.Save();
             _menu.Dispose();
         }
 

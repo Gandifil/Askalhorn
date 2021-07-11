@@ -9,7 +9,11 @@ namespace Askalhorn.Settings
     {
         private const string FILENAME = "settings.json";
 
-        public static Settings Settings { get; private set; }
+        public static Options Options { get; private set; }
+
+        public delegate void OptionsChanged(Options options);
+
+        public static event OptionsChanged OnOptionsChange;
 
         public static void Load()
         {
@@ -22,13 +26,18 @@ namespace Askalhorn.Settings
                     new IsolatedStorageFileStream(FILENAME, FileMode.Open, storage))
                 using (StreamReader reader = new StreamReader(stream))
                 {
-                    Settings = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd());
+                    Options = JsonConvert.DeserializeObject<Options>(reader.ReadToEnd());
                 }
             }
             catch (Exception)
             {
-                Settings = new Settings();
+                Options = new Options();
             }
+        }
+
+        public static void Change()
+        {
+            OnOptionsChange?.Invoke(Options);
         }
 
         public static void Save()
@@ -37,7 +46,7 @@ namespace Askalhorn.Settings
             using (IsolatedStorageFileStream stream = new IsolatedStorageFileStream(FILENAME, FileMode.Create, storage))
             using (StreamWriter writer = new StreamWriter(stream))
             {
-                writer.Write(JsonConvert.SerializeObject(Settings));
+                writer.Write(JsonConvert.SerializeObject(Options));
             }
         }
     }

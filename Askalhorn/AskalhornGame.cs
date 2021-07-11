@@ -6,7 +6,9 @@ using AmbrosiaGame.Utils;
 using Askalhorn.Common;
 using Askalhorn.Logging;
 using Askalhorn.Screens;
+using Askalhorn.Settings;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -38,19 +40,31 @@ namespace Askalhorn
         public AskalhornGame()
         {
             Graphics = new GraphicsDeviceManager(this);
-            //Graphics.IsFullScreen = true;
+            Configuration.OnOptionsChange += ConfigurationOptionsChanged;
             ScreenManager = new ScreenManager();
             Components.Add(ScreenManager);
+        }
+
+        private void ConfigurationOptionsChanged(Options options)
+        {
+            Graphics.IsFullScreen = options.IsFullScreen;
+            if (options.IsFullScreen)
+            {
+                Graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
+                Graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+            }
+            else
+            {
+                Graphics.PreferredBackBufferWidth = 1920;
+                Graphics.PreferredBackBufferHeight = 1080;
+            }
+            Graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
             base.Initialize();
-
-            Graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
-            Graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
-            Graphics.ApplyChanges();
-
+            ConfigurationOptionsChanged(Configuration.Options);
 
             Mouse.SetCursor(MouseCursor.FromTexture2D(Content.Load<Texture2D>("images/cursor"), 0, 0));
             IsMouseVisible = true;
@@ -97,6 +111,8 @@ namespace Askalhorn
             musics.Add(music3);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(musics);
+            Configuration.OnOptionsChange += options => MediaPlayer.Volume = options.RealSongVolume;
+            Configuration.OnOptionsChange += options => SoundEffect.MasterVolume = options.RealSoundVolume;
         }
         
         public static T CreateInstance<T>(params object[] args)

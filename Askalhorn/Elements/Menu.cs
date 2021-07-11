@@ -2,6 +2,7 @@
 using Askalhorn.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using MLEM.Misc;
 using MLEM.Textures;
 using MLEM.Ui;
@@ -46,14 +47,24 @@ namespace Askalhorn.Elements
             });
         }
 
+        public ScrollBar AddScroll(string label, float max = 1.0f)
+        {
+            var scrollBar = new ScrollBar(Anchor.AutoCenter, new Vector2(0.8f, ELEMENT_HEIGHT), 
+                ELEMENT_HEIGHT, max, true);
+            Add(new Paragraph(Anchor.AutoCenter, 300, label));
+            Add(scrollBar, false);
+            return scrollBar;
+        }
+
         private bool isEmptyPanel = true;
 
-        public void Add(Element element)
+        public void Add(Element element, bool spacing = true)
         {
             if (isEmptyPanel)
                 isEmptyPanel = false;
             else
-                _panel.AddChild(new VerticalSpace(VERTICAL_SPACE_HEIGHT));
+                if (spacing)
+                    _panel.AddChild(new VerticalSpace(VERTICAL_SPACE_HEIGHT));
             
             _panel.AddChild(element);
         }
