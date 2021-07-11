@@ -66,7 +66,7 @@ namespace Askalhorn
             Content.RootDirectory = "Content";
 
             var testTexture = Content.Load<Texture2D>("images/Test");
-            var testPatch = new NinePatch(new TextureRegion(testTexture, 0, 8, 24, 24), 8);
+            var testPatch = new NinePatch(new TextureRegion(testTexture, 40, 0, 40, 40), 16);
 
             style = new UntexturedStyle(this.SpriteBatch) {
                 Font = new GenericSpriteFont(

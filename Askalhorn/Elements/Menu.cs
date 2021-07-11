@@ -2,6 +2,7 @@
 using Askalhorn.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MLEM.Misc;
 using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -14,8 +15,6 @@ namespace Askalhorn.Elements
         private readonly Texture2D _background;
         private readonly UiSystem _uiSystem;
 
-        //public Panel Panel => _panel;
-
         public const int ELEMENT_HEIGHT = 40;
         public const int VERTICAL_SPACE_HEIGHT = 5;
 
@@ -23,6 +22,7 @@ namespace Askalhorn.Elements
         {
             _uiSystem = uiSystem;
             _panel = new Panel(Anchor.Center, new Vector2(0.25f, 0.5f), Vector2.Zero, setHeightBasedOnChildren: true);
+            _panel.ChildPadding = (Padding) new Vector2(16);
             _background = Storage.Content.Load<Texture2D>("images/background");
         }
         
