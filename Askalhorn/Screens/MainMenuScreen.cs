@@ -1,13 +1,12 @@
-﻿using System.Reflection.Metadata;
-using AmbrosiaGame.Screens;
+﻿using AmbrosiaGame.Screens;
 using Askalhorn.Common;
+using Askalhorn.Elements;
 using Askalhorn.Screens.Configuration;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MLEM.Font;
+using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
-using MLEM.Ui.Style;
 using MonoGame.Extended.Screens;
 
 namespace Askalhorn.Screens
@@ -16,47 +15,30 @@ namespace Askalhorn.Screens
     {
         public AskalhornGame game;
 
-        public MainMenuScreen(Game game)
+        private Texture2D _texture;
+
+        private readonly Menu _menu;
+
+        public MainMenuScreen(AskalhornGame game)
             : base(game)
         {
-            this.game = (AskalhornGame)game;
+            this.game = game;
+            _menu = new Menu(game.UiSystem);
         }
 
-        public override void LoadContent() { 
-            var box = new Panel(Anchor.Center, new Vector2(0.5f, 0.5f), Vector2.Zero, setHeightBasedOnChildren: true);
-            
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Новая карта")
-            {
-                OnPressed = element => ScreenManager.LoadScreen(new WorldGenerationScreen(game)),
-            });
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Играть")
-            {
-                OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game, new World())),
-            });
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Загрузить")
-            {
-                OnPressed = element => ScreenManager.LoadScreen(new GameProcessScreen(game, new World("quicksave"))),
-            });
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Настройки")
-            {
-                OnPressed = element => ScreenManager.LoadScreen(new MainSettings(game, this)),
-            });
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход")
-            {
-                OnPressed = element => game.Exit(),
-            });
-            box.AddChild(new VerticalSpace(3));
-            game.UiSystem.Add("MainMenuBox", box);
-        }
-
-        public override void UnloadContent()
+        public override void Initialize()
         {
-            game.UiSystem.Remove("MainMenuBox");
+            _menu.AddButton("Новая карта", () => ScreenManager.LoadScreen(new WorldGenerationScreen(game)));
+            _menu.AddButton("Играть", () => ScreenManager.LoadScreen(new GameProcessScreen(game, new World())));
+            _menu.AddButton("Загрузить", () => ScreenManager.LoadScreen(new GameProcessScreen(game, new World("quicksave"))));
+            _menu.AddButton("Настройки", () => ScreenManager.LoadScreen(new MainSettings(game, this)));
+            _menu.AddButton("Выход", () => game.Exit());
+            _menu.Initialize();
+        }
+
+        public override void Dispose()
+        {
+            _menu.Dispose();
         }
 
         public override void Update(GameTime gameTime)

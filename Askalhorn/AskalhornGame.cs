@@ -97,7 +97,7 @@ namespace Askalhorn
         {
             UiSystem.DrawEarly(gameTime, SpriteBatch);
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             base.Draw(gameTime);
 
