@@ -241,6 +241,8 @@ namespace Askalhorn.Common
 
         public void Turn()
         {
+            HP.Current.Value += Secondary[SecondaryTypes.RegenHP].Value;
+            MP.Current.Value += Secondary[SecondaryTypes.RegenMagic].Value;
             Effects.Turn();
             foreach (var ability in Abilities)
                 ability.Turn();
