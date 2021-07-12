@@ -54,6 +54,19 @@ namespace Askalhorn.Common
             {SecondaryTypes.MagicPower, 0},
         };
         
+        IAttributes<DamageTypes> ICharacter.Protection => Protection;
+        [JsonIgnore]
+        public Attributes<DamageTypes> Protection { get; private set; }
+
+        IReadOnlyDictionary<DamageTypes, int> ICharacter.ProtectionBase => ProtectionBase;
+        public Dictionary<DamageTypes, int> ProtectionBase { get; set; } = new()
+        {
+            {DamageTypes.Clear, 0},
+            {DamageTypes.Phisical, 0},
+            {DamageTypes.Fire, 0},
+            {DamageTypes.Poison, 0},
+        };
+        
         ILinearParameter<int> ICharacter.Level => Level;
         public LevelParameter Level { get; } = new()
         {
@@ -124,10 +137,18 @@ namespace Askalhorn.Common
             };
             SetupPrimaryRules();
             SetupSecondaryRules();
+            SetupProtectionRules();
             HP.Max = Secondary[SecondaryTypes.MaxHP];
             MP.Max = Secondary[SecondaryTypes.MaxMagic];
 
             Effects = new Pool(this);
+        }
+
+        private void SetupProtectionRules()
+        {
+            Protection = new Attributes<DamageTypes>(ProtectionBase.ToDictionary(
+                x => x.Key, 
+                x=> new ObservedParameter<int>(x.Value)));
         }
 
         private void SetupPrimaryRules()

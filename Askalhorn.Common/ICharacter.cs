@@ -28,6 +28,10 @@ namespace Askalhorn.Common
         IAttributes<SecondaryTypes> Secondary { get; }
         
         IReadOnlyDictionary<SecondaryTypes, int> SecondaryBase { get; }
+        
+        IAttributes<DamageTypes> Protection { get; }
+        
+        IReadOnlyDictionary<DamageTypes, int> ProtectionBase { get; }
 
         Texture2D Texture { get; }
         
