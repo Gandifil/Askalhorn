@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Resources;
+using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -16,10 +17,7 @@ namespace Askalhorn.Components
         {
             this.game = game;
             
-            box = new Panel(
-                Anchor.BottomLeft, 
-                new Vector2(0.3f, 0.1f), 
-                new Vector2(0, 30), false, true, new Point(15, 20));
+            box = new FixPanel(Anchor.BottomLeft, 0.3f, 0.1f, true);
         }
 
         private static Panel box;

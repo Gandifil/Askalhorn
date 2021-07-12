@@ -22,7 +22,8 @@ namespace Askalhorn.Elements
         public Menu(UiSystem uiSystem)
         {
             _uiSystem = uiSystem;
-            _panel = new Panel(Anchor.Center, new Vector2(0.25f, 0.5f), Vector2.Zero, setHeightBasedOnChildren: true);
+            _panel = new FixPanel(Anchor.Center, 0.25f, 0.5f);
+            _panel.SetHeightBasedOnChildren = true;
             _panel.ChildPadding = (Padding) new Vector2(16);
             _background = Storage.Content.Load<Texture2D>("images/background");
         }

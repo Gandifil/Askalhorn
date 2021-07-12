@@ -4,6 +4,7 @@ using System.Linq;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
 using Askalhorn.Common.Mechanics;
+using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Misc;
@@ -11,6 +12,7 @@ using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
+using ProgressBar = MLEM.Ui.Elements.ProgressBar;
 
 namespace Askalhorn.Components
 {
@@ -27,7 +29,7 @@ namespace Askalhorn.Components
             public Item(IAbility ability)
             {
                 this.ability = ability;
-                Box = new Panel(Anchor.AutoCenter, new Vector2(0.9f, 0.1f), Vector2.Zero);
+                Box = new FixPanel(Anchor.AutoCenter, 0.9f, 0.1f);
                 var icon = new Image(Anchor.CenterLeft, new Vector2(-1, 1F), ability.Icon.ToMlem());
                 icon.CanBeMoused = true;
                 tooltip = new Tooltip(500, ability.ToString(), icon);
@@ -93,10 +95,15 @@ namespace Askalhorn.Components
         
         public void Initialize()
         {
-            var box = new Panel(Anchor.CenterLeft, new Vector2(0.45f, 0.9f), Vector2.Zero);
+            var box = new FixPanel(Anchor.CenterLeft, 0.45f, 0.9f);
+
+            box.AddChild(new Paragraph(Anchor.AutoCenter, 300, "Способности"));
             items = screen.World.Player.Abilities.Select(x => new Item(x)).ToList();
             foreach (var item in items)
+            {
+                box.AddChild(new VerticalSpace(15));
                 box.AddChild(item.Box);
+            }
             screen.game.UiSystem.Add(NAME, box);
         }
 

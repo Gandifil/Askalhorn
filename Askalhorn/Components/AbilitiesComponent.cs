@@ -5,6 +5,7 @@ using AmbrosiaGame.Screens;
 using Askalhorn.Common;
 using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Mechanics;
+using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Ui;
@@ -36,11 +37,12 @@ namespace Askalhorn.Components
             public AbilityBox(GameProcessScreen screen, Panel parent, int index, ICharacter character)
             {
                 this.screen = screen;
-                Panel = new Panel(Anchor.AutoInlineIgnoreOverflow, new Vector2(0.1f, 1), Vector2.Zero);
+                Panel = new FixPanel(Anchor.AutoInlineIgnoreOverflow, 0.1f, 1);
                 Panel.AddChild(new Paragraph(Anchor.BottomRight, 20, index.ToString())
                 {
                     TextScaleMultiplier = 0.7f,
                 });
+                //parent.AddChild(new VerticalSpace(5));
                 parent.AddChild(Panel);
 
                 this.character = character;
@@ -121,7 +123,7 @@ namespace Askalhorn.Components
         {
             base.Initialize();
 
-            var box = new Panel(Anchor.BottomRight, new Vector2(0.7f, 0.1f), Vector2.Zero);
+            var box = new InvisiblePanel(Anchor.BottomRight, 0.7f, 0.1f);
 
             for (int i = 1; i < ABILITIES_COUNT; i++)
                 boxes[i] = new AbilityBox(screen, box, i, character);
