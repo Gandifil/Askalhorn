@@ -2,6 +2,7 @@
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
 using Askalhorn.Common.Geography.Local;
+using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -12,52 +13,36 @@ namespace Askalhorn.Screens
 {
     public class PauseScreen: BackScreenBase
     {
-        public AskalhornGame game;
-        public readonly World world;
+        public AskalhornGame _game;
+        public readonly World _world;
+        private readonly Menu _menu;
 
-        public PauseScreen(Game game, GameScreen backScreen, World world)
+        public PauseScreen(AskalhornGame game, GameScreen backScreen, World world)
             : base(game, backScreen)
         {
-            this.game = (AskalhornGame)game;
-            this.world = world;
+            _game = game;
+            _world = world;
+            _menu = new Menu(game.UiSystem);
         }
 
         private void QuickSave()
         {
-            world.Save("quicksave");
-            
+            _world.Save("quicksave");
             Back();
         }
 
-        public override void LoadContent() 
+        public override void Initialize() 
         { 
-            var box = new Panel(Anchor.Center, new Vector2(0.5f, 0.5f), Vector2.Zero, setHeightBasedOnChildren: true);
-            
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Назад")
-            {
-                OnPressed = _ => Back(),
-            });
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Быстрое сохранение")
-            {
-                OnPressed = _ => QuickSave(),
-            });
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "В главное меню")
-            {
-                OnPressed = _ => ScreenManager.LoadScreen(new MainMenuScreen(game)),
-            });
-            box.AddChild(new VerticalSpace(3));
-            box.AddChild(new Button(Anchor.AutoCenter, new Vector2(0.5F, 40), "Выход")
-            {
-                OnPressed = _ => Game.Exit(),
-            });
-            game.UiSystem.Add("menu", box);
+            _menu.AddButton("Назад", Back);
+            _menu.AddButton("Быстрое сохранение", QuickSave);
+            _menu.AddButton("В главное меню", () => ScreenManager.LoadScreen(new MainMenuScreen(_game)));
+            _menu.AddButton("Выход", Game.Exit);
+            _menu.Initialize();
         }
 
-        public override void UnloadContent()
+        public override void Dispose()
         {
-            game.UiSystem.Remove("menu");
+            _menu.Dispose();
         }
 
         public override void Update(GameTime gameTime)
