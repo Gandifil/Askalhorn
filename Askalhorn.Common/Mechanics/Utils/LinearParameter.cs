@@ -6,17 +6,12 @@ namespace Askalhorn.Common.Mechanics.Utils
     public class LinearParameter<T> : DependentParameter<T>, ILinearParameter<T> where T:IEquatable<T>, IConvertible
     {
         private static readonly T zero = (T) (object) 0;
-        //
-        // public LinearParameter(ObservedParameter<T> start)
-        //     :base(zero)
-        // {
-        //     Base = start;
-        //     
-        //     Update();
-        //
-        //     Addition.Changed += Update;
-        //     Multiplication.Changed += Update;
-        // }
+        
+        public LinearParameter()
+        {
+            Addition.Changed += Update;
+            Multiplication.Changed += Update;
+        }
         
         protected override T generate()
         {

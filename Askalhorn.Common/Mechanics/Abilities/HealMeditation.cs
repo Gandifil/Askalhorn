@@ -28,7 +28,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
             {
                 new IAbility.Modification()
                 {
-                    Description = "Концентрация\n",
+                    Description = "Боевая концентрация\nДополнительно защищает от 10 единиц физического урона.",
                     Icon = Storage.Load("effects", 2, 0),
                 },
                 new IAbility.Modification()
@@ -49,12 +49,34 @@ namespace Askalhorn.Common.Mechanics.Abilities
 
         protected override void Use(Character character, Character target)
         {
-            new EffectImpact(new ImpactEffect(
+            var healEffect = new ImpactEffect(
                 new HealPercentImpact
                 { 
                     Value = HealPercent,
-                }, EffectTurn)
-            ).On(character);
+                }, EffectTurn);
+
+            if (CurrentModification == 0)
+            {
+                new EffectImpact(new CollectionEffect(EffectTurn)
+                {
+                    Effects = new List<Effect>()
+                    {
+                        healEffect,
+                        new ProtectEffect(EffectTurn)
+                        {
+                            Type = DamageTypes.Phisical,
+                            Value = 10,
+                        },
+                    }
+                }).On(character);
+            }
+            else
+            { 
+                new EffectImpact(new CollectionEffect(EffectTurn)
+                {
+                    Effects = new List<Effect>{healEffect}
+                }).On(character);
+            }
         }
     }
 }
