@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
@@ -20,6 +21,11 @@ namespace Askalhorn.Common
                 (int)x * 64, (int)y * 64,
                 64, 64
             );
+        }
+
+        public static SoundEffect LoadSound(string filename)
+        {
+            return Content.Load<SoundEffect>("sounds/"+filename);
         }
 
         public static GraphicsDevice GraphicsDevice { get; private set; }

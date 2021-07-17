@@ -77,18 +77,6 @@
 /processorParam:TextureFormat=Color
 /build:images/effects.png
 
-#begin images/fireball.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/fireball.png
-
 #begin images/grassland_tiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -251,4 +239,10 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Low
 /build:sounds/heal.mp3
+
+#begin sounds/steam.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/steam.mp3
 
