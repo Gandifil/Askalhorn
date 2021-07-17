@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Common.Mechanics.Effects;
 using Askalhorn.Common.Mechanics.Impacts;
+using Askalhorn.Common.Mechanics.Interpretators;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
@@ -11,7 +12,9 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public override string Name => "Восстанавливающая медитация";
         
         public override string Description => 
-            $"Концентрация на собственном теле восстанавливает {HealPercent}% здоровья в течении {EffectTurn} ходов";
+            $"Концентрация на собственном теле восстанавливает {_desc} здоровья в течении {EffectTurn} ходов";
+
+        private string _desc => CurrentModification == 1 ? $"<c LightBlue>{HealAbsValue}</c> единиц" : $"{HealPercent} %";
 
         public override TextureRegion2D Icon => Storage.Load("effects", 0, 0);
 
@@ -19,7 +22,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public override int Radius => 10;
         
         public override int CoolDown => 10;
-        public override int MagicCost => 100;
+        public override int MagicCost => CurrentModification == 1 ? 200 : 100;
         public override uint MaxSkill => 10;
         public override SoundEffect CastSound => Storage.Content.Load<SoundEffect>("sounds\\heal");
 
@@ -33,7 +36,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
                 },
                 new IAbility.Modification()
                 {
-                    Description = "",
+                    Description = "Обмен энергий\nМедитация восстанавливает значительно быстрее, зависит от магической силы, стоимость увеличивается.",
                     Icon = Storage.Load("effects", 3, 0),
                 },
                 new IAbility.Modification()
@@ -45,15 +48,27 @@ namespace Askalhorn.Common.Mechanics.Abilities
 
         public int HealPercent => 2 + (CurrentModification == 2 ? 3 : 0);
 
-        public uint EffectTurn => 10;
+        private IInterpretator HealAbsValue =
+            new MultiInterpretator()
+            {
+                First = new StaticInterpretator()
+                {
+                    Value = 0.1f,
+                },
+                Second = new SecondaryInterpretator()
+                {
+                    Type = SecondaryTypes.MagicPower,
+                }
+            };
+
+        public uint EffectTurn => CurrentModification == 1 ? (uint)5 : 10;
 
         protected override void Use(Character character, Character target)
         {
             var healEffect = new ImpactEffect(
-                new HealPercentImpact
-                { 
-                    Value = HealPercent,
-                }, EffectTurn);
+                CurrentModification == 1 ? 
+                    new HealImpact((int)HealAbsValue.Calculate(character)) :
+                new HealPercentImpact{ Value = HealPercent}, EffectTurn);
 
             if (CurrentModification == 0)
             {
