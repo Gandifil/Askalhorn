@@ -111,6 +111,8 @@ namespace Askalhorn
             musics.Add(music3);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(musics);
+            MediaPlayer.Volume = Configuration.Options.RealSongVolume;
+            SoundEffect.MasterVolume = Configuration.Options.RealSoundVolume;
             Configuration.OnOptionsChange += options => MediaPlayer.Volume = options.RealSongVolume;
             Configuration.OnOptionsChange += options => SoundEffect.MasterVolume = options.RealSoundVolume;
         }
