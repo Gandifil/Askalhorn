@@ -15,6 +15,13 @@ namespace Askalhorn.Settings
 
         public static event OptionsChanged OnOptionsChange;
 
+        public static void SetDefaultOptions()
+        {
+            Options = new Options();
+            Change();
+            Save();
+        }
+
         public static void Load()
         {
             try
@@ -31,7 +38,7 @@ namespace Askalhorn.Settings
             }
             catch (Exception)
             {
-                Options = new Options();
+                SetDefaultOptions();
             }
         }
 

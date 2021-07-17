@@ -10,6 +10,7 @@ using Askalhorn.Components;
 using Askalhorn.Elements;
 using Askalhorn.Render;
 using Askalhorn.Screens;
+using Askalhorn.Settings;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -37,6 +38,7 @@ namespace AmbrosiaGame.Screens
         private ActionsComponent actions;
         private EffectsComponent effects;
         private AbilitiesComponent abilities;
+        private Options _options;
 
         public GameProcessScreen(AskalhornGame game, World world)
             : base(game)
@@ -53,6 +55,8 @@ namespace AmbrosiaGame.Screens
             world.OnChangeLocation += UpdateMap;
             world.OnChangeLocation += UpdateActions;
             world.OnChangeLocation += LookAtPlayer;
+            
+            _options = Configuration.Options;
         }
 
         private void UpdateActions()
@@ -68,7 +72,7 @@ namespace AmbrosiaGame.Screens
                         actions.Add(new ActionBlock
                         {
                             Region = Storage.Load("guiactions", 1, 0),
-                            Key = Keys.F,
+                            Key = _options.Keys[Options.KeyActions.Use],
                             Action = () => World.Location[World.Player.Position].Build.Action.Invoke()
                         });
                         break;
@@ -76,7 +80,7 @@ namespace AmbrosiaGame.Screens
                         actions.Add(new ActionBlock
                         {
                             Region = Storage.Load("guiactions", 2, 0),
-                            Key = Keys.F,
+                            Key = _options.Keys[Options.KeyActions.Use],
                             Action = () => World.Location[World.Player.Position].Build.Action.Invoke()
                         });
                         break;
@@ -147,40 +151,42 @@ namespace AmbrosiaGame.Screens
 
         private void KeyRelease(object sender, KeyboardEventArgs e)
         {
-            if (e.Key == Keys.W)
+            if (e.Key == _options.Keys[Options.KeyActions.Pause])
+                ScreenManager.LoadScreen(new PauseScreen(game, this, World));
+            
+            if (e.Key == _options.Keys[Options.KeyActions.TopRight])
                 MovePlayer(new Point(0, -1));
 
-            if (e.Key == Keys.S)
+            if (e.Key == _options.Keys[Options.KeyActions.BottomLeft])
                 MovePlayer(new Point(0, 1));
 
-            if (e.Key == Keys.A)
+            if (e.Key == _options.Keys[Options.KeyActions.TopLeft])
                 MovePlayer(new Point(-1, 0));
 
-            if (e.Key == Keys.D)
+            if (e.Key == _options.Keys[Options.KeyActions.BottomRight])
                 MovePlayer(new Point(1, 0));
 
             //if (e.Key == Keys.F)
             //    World.Location[World.Player.Position].Build?.Action();
 
-            if (e.Key == Keys.C)
+            if (e.Key == _options.Keys[Options.KeyActions.Character])
                 switcher.SwitchTo<CharacterTabComponent>();
 
-            if (e.Key == Keys.I)
+            if (e.Key == _options.Keys[Options.KeyActions.Inventory])
                 switcher.SwitchTo<InventoryTabComponent>();
 
-            if (e.Key == Keys.J)
+            if (e.Key == _options.Keys[Options.KeyActions.Journal])
                 switcher.SwitchTo<JournalTabComponent>();
 
-            if (e.Key == Keys.B)
+            if (e.Key == _options.Keys[Options.KeyActions.Abilities])
                 switcher.SwitchTo<AbilitiesTabComponent>();
 
             
-            if (e.Key == Keys.E)
-                World.playerController.AddMove(new AttackMove(World.Characters.ElementAt(1)));
+           // if (e.Key == Keys.E)
+           //     World.playerController.AddMove(new AttackMove(World.Characters.ElementAt(1)));
 
             if (e.Key >= Keys.D0 && e.Key <= Keys.D9)
                 abilities.Run(e.Key - Keys.D0);
-
         }
 
         private void UpdateMovements()
@@ -207,8 +213,6 @@ namespace AmbrosiaGame.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                ScreenManager.LoadScreen(new PauseScreen(game, this, World));
 
             mapRenderer.Update(gameTime);
             foreach (var build in World.Location.Builds)

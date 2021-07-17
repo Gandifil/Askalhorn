@@ -23,6 +23,7 @@ namespace Askalhorn.Settings
             Character,
             Inventory,
             Abilities,
+            Journal,
             Use,
             Pause,
         }
@@ -37,6 +38,7 @@ namespace Askalhorn.Settings
             {KeyActions.Inventory, Microsoft.Xna.Framework.Input.Keys.I}, 
             {KeyActions.Abilities, Microsoft.Xna.Framework.Input.Keys.B}, 
             {KeyActions.Use, Microsoft.Xna.Framework.Input.Keys.E}, 
+            {KeyActions.Journal, Microsoft.Xna.Framework.Input.Keys.J}, 
             {KeyActions.Pause, Microsoft.Xna.Framework.Input.Keys.Escape}, 
         };
     }

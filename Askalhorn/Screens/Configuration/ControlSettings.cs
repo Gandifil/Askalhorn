@@ -30,6 +30,7 @@ namespace Askalhorn.Screens.Configuration
                 {Options.KeyActions.Inventory,"Инвентарь"}, 
                 {Options.KeyActions.Abilities, "Способности"},  
                 {Options.KeyActions.Use, "Использовать"}, 
+                {Options.KeyActions.Journal, "Журнал"}, 
                 {Options.KeyActions.Pause, "Назад/Пауза"}, 
             };
             

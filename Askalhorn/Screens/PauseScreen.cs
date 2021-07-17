@@ -3,6 +3,7 @@ using AmbrosiaGame.Screens;
 using Askalhorn.Common;
 using Askalhorn.Common.Geography.Local;
 using Askalhorn.Elements;
+using Askalhorn.Screens.Configuration;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -35,6 +36,7 @@ namespace Askalhorn.Screens
         { 
             _menu.AddButton("Назад", Back);
             _menu.AddButton("Быстрое сохранение", QuickSave);
+            _menu.AddButton("Настройки", () => ScreenManager.LoadScreen(new MainSettings(_game, this)));
             _menu.AddButton("В главное меню", () => ScreenManager.LoadScreen(new MainMenuScreen(_game)));
             _menu.AddButton("Выход", Game.Exit);
             _menu.Initialize();
