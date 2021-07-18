@@ -33,6 +33,7 @@ namespace Askalhorn.Components
             public IAbility _ability;
             private readonly ICharacter character;
             private Tooltip _tooltip;
+            private UseAbilityMove _move;
 
             public AbilityBox(GameProcessScreen screen, Panel parent, int index, ICharacter character)
             {
@@ -52,12 +53,18 @@ namespace Askalhorn.Components
             private void UpdateMagic()
             {
                 if (_ability is not null)
-                    Image.Color = new StyleProp<Color>(character.MP.Current.Value < _ability.MagicCost ? Color.Red : Color.Transparent);
+                    Image.Color = new StyleProp<Color>(!_move.IsEnoughMagic(character) ? Color.Red : Color.Transparent);
             }
 
             public void SetEffect(IAbility ability)
             {
                 _ability = ability;
+
+                _move = new UseAbilityMove
+                {
+                    Ability = _ability,
+                };
+                
                 Image = new Image(Anchor.Center, new Vector2(1, 1), ability.Icon.ToMlem());
                 Image.CanBeMoused = true;
                 Image.OnPressed += _ => Run();
@@ -86,7 +93,7 @@ namespace Askalhorn.Components
                 {
                     if (_ability.Type == IAbility.TargetType.Self)
                     {
-                        World.Instance.playerController.AddMove(new UseAbilityMove(_ability));
+                        World.Instance.playerController.AddMove(_move);
                         screen.movements.AvailableAbilities = new List<UseAbilityMove>();
                     }
 
@@ -96,8 +103,9 @@ namespace Askalhorn.Components
                             .World.Characters
                             .Where(x => x != character && x.Position.IsInside(character.Position, _ability.Radius))
                             .Select(x =>
-                                new UseAbilityMove(_ability)
+                                new UseAbilityMove()
                                 {
+                                    Ability = _ability,
                                     Target = x,
                                 });
                     }

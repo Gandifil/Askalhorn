@@ -35,8 +35,9 @@ namespace Askalhorn.Common.Control
                 if (new Rectangle(-1, -1, 3, 3).Contains(Parent.Position.Point - target.Position.Point))
                     return new List<IMove>
                     {
-                        new UseAbilityMove(Parent.Abilities[0])
+                        new UseAbilityMove()
                         {
+                            Ability = Parent.Abilities[0],
                             Target = target,
                         }
                     };

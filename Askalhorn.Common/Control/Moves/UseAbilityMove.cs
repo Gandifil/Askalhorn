@@ -6,19 +6,21 @@ namespace Askalhorn.Common.Control.Moves
 {
     public class UseAbilityMove: IMove
     {
-        public readonly IAbility Ability;
+        public IAbility Ability { get; set; } 
 
-        public ICharacter Target { get; set; } 
+        public ICharacter Target { get; set; }
 
-        public UseAbilityMove(IAbility ability)
+        public bool IsReady => Ability.CoolDownTimer == 0;
+
+        public bool IsEnoughMagic(ICharacter character)
         {
-            this.Ability = ability;
+            return character.MP.Current.Value >= Ability.MagicCost;
         }
         
         public bool IsValid(ICharacter character)
         {
             return character.Abilities.Contains(Ability)
-                && character.MP.Current.Value >= Ability.MagicCost
+                && IsEnoughMagic(character)
                 && Ability.IsReady;
         }
 

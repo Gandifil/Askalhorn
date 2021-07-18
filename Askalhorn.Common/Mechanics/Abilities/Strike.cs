@@ -17,7 +17,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public override int CoolDown { get; } = 0;
         public override int MagicCost => 100;
         public override uint MaxSkill => 10;
-        public override SoundEffect CastSound => Storage.Content.Load<SoundEffect>("sounds\\healmedit");
+        public override SoundEffect CastSound => Storage.Content.Load<SoundEffect>("sounds\\steam");
 
         public override List<IAbility.Modification> Modifications { get; } =
             new List<IAbility.Modification>();
