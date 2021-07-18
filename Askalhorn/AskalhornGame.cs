@@ -70,7 +70,7 @@ namespace Askalhorn
             IsMouseVisible = true;
 
             Storage.Initialize(Content, GraphicsDevice);
-            log = new DevelopConsole(Content.Load<SpriteFont>("fonts/GameLogsFont"), Color.Red);
+            log = new DevelopConsole(Content.Load<SpriteFont>("fonts/GameLogsFont"));
             LineRenderer.Initialize(GraphicsDevice);
             
             UiSystem = new UiSystem(this, style);
