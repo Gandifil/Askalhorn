@@ -46,6 +46,6 @@ namespace Askalhorn.Common.Mechanics.Utils
         IObservedParameter<int> ILinearParameter<T>.Multiplication => Multiplication;
         
         [JsonIgnore]
-        public ObservedParameter<int> Multiplication { get; } = new ObservedParameter<int>(100);
+        public ObservedParameter<int> Multiplication { get; } = new ObservedParameter<int>(0);
     }
 }
