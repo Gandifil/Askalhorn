@@ -43,11 +43,11 @@ namespace Askalhorn.Common.Geography
                 Spawners = new List<ISpawner>
                 {
                     new TiledMapSpawner(),
-                    new TestEnemySpawner(),
-                    new TestEnemySpawner(),
-                    new TestEnemySpawner(),
-                    new TestEnemySpawner(),
-                    new TestEnemySpawner(),
+                    new MultipleSpawner
+                    {
+                        Count = 100,
+                        Spawner = new TestEnemySpawner(),
+                    }
                 }
             };
         }
