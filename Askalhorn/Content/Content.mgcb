@@ -20,6 +20,24 @@
 /processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
 /build:characters/ghost.json
 
+#begin characters/skelet01.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/build:characters/skelet01.json
+
+#begin characters/skelet02.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/build:characters/skelet02.json
+
+#begin characters/skelet03.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/build:characters/skelet03.json
+
 #begin dialogs/witch.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor

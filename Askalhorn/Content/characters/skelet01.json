@@ -1,0 +1,11 @@
+{
+    "name": "Скелет",
+    "Level": 1,
+    "renderer": {
+        "fileName": "npc", 
+        "position": {
+            "x": 3,
+            "y": 0
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Воинственный скелет",
+    "Level": 3,
+    "renderer": {
+        "fileName": "npc", 
+        "position": {
+            "x": 4,
+            "y": 0
+        }
+    }
+}

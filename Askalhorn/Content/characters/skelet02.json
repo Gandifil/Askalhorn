@@ -1,0 +1,11 @@
+{
+    "name": "Крепкий скелет",
+    "Level": 2,
+    "renderer": {
+        "fileName": "npc", 
+        "position": {
+            "x": 2,
+            "y": 0
+        }
+    }
+}
