@@ -45,9 +45,33 @@ namespace Askalhorn.Common.Geography
                     new TiledMapSpawner(),
                     new MultipleSpawner
                     {
-                        Count = 100,
-                        Spawner = new TestEnemySpawner(),
-                    }
+                        Count = 20,
+                        Spawner = new ContentCharacterSpawner(),
+                    },
+                    new MultipleSpawner
+                    {
+                        Count = 20,
+                        Spawner = new ContentCharacterSpawner
+                        {
+                            Name ="skelet01"
+                        },
+                    },
+                    new MultipleSpawner
+                    {
+                        Count = 20,
+                        Spawner = new ContentCharacterSpawner
+                        {
+                            Name ="skelet02"
+                        },
+                    },
+                    new MultipleSpawner
+                    {
+                        Count = 10,
+                        Spawner = new ContentCharacterSpawner
+                        {
+                            Name ="skelet03"
+                        },
+                    },
                 }
             };
         }
@@ -81,7 +105,6 @@ namespace Askalhorn.Common.Geography
                 Spawners = new List<ISpawner>
                 {
                     new ChestSpawner(),
-                    new TestEnemySpawner(),
                     new CustomBuildSpawner((point, _, args, _) =>
                         new GlobalTeleport()
                         {
