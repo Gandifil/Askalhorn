@@ -1,31 +1,20 @@
 ﻿using System;
+using Askalhorn.Common.Characters;
 using Askalhorn.Common.Control;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common.Geography.Local.Spawners
 {
-    internal class TestEnemySpawner: ISpawner
+    internal class TestEnemySpawner: BuildSpawner
     {
-        public void Initialize(Location location, Random random, int[] args, uint placeIndex)
+        public override void Initialize(Location location, Random random, int[] args, uint placeIndex)
         {
-            var character = new Character()
+            var character = new ContentCharacter("ghost")
             {
-                Texture = Storage.Content.Load<Texture2D>("images/mage2"),
-                Position = new Position(RandomPoint(location)),
+                Position = new Position(RandomPoint(location, random)),
             };
             Common.World.Instance.Add(character);
-        }
-
-        private Point RandomPoint(Location location)
-        {
-            var x = Storage.Random.Next(0, location.TiledMap.Width);
-            var y = Storage.Random.Next(0, location.TiledMap.Height);
-
-            var point = new Point(x, y);
-            if (location.FreeForBuild(point))
-                return point;
-            return RandomPoint(location);
         }
     }
 }

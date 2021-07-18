@@ -29,12 +29,12 @@ namespace Askalhorn.Common
         IReadOnlyDictionary<PrimaryTypes, int> ICharacter.PrimaryBase => PrimaryBase;
         public Dictionary<PrimaryTypes, int> PrimaryBase { get; set; } = new()
         {
-            {PrimaryTypes.Strength, 10},
-            {PrimaryTypes.Agility, 5},
-            {PrimaryTypes.Endurance, 10},
-            {PrimaryTypes.Intelligence, 10},
-            {PrimaryTypes.Willpower, 10},
-            {PrimaryTypes.Luck, 1},
+            {PrimaryTypes.Strength, 0},
+            {PrimaryTypes.Agility, 0},
+            {PrimaryTypes.Endurance, 0},
+            {PrimaryTypes.Intelligence, 0},
+            {PrimaryTypes.Willpower, 0},
+            {PrimaryTypes.Luck, 0},
         };
         
         
@@ -132,10 +132,6 @@ namespace Askalhorn.Common
         
         public Character()
         {
-            Controller = new AgressiveController
-            {
-                Parent = this,
-            };
             SetupPrimaryRules();
             SetupSecondaryRules();
             SetupProtectionRules();
@@ -157,7 +153,7 @@ namespace Askalhorn.Common
             var attrs = new Dictionary<PrimaryTypes, ObservedParameter<int>>();
             foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
             {
-                var parameter = new FunctionParameter<int>(() => Level.Value * 2 + PrimaryBase[type]);
+                var parameter = new FunctionParameter<int>(() => 10 + Level.Value + PrimaryBase[type]);
                 Level.Changed += parameter.Update;
                 attrs[type] = parameter;
             }

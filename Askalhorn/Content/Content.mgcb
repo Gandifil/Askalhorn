@@ -14,6 +14,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin characters/ghost.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/build:characters/ghost.json
+
 #begin dialogs/witch.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
@@ -113,18 +119,6 @@
 /processorParam:TextureFormat=Color
 /build:images/items.png
 
-#begin images/mage.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/mage.png
-
 #begin images/mage2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -136,6 +130,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/mage2.png
+
+#begin images/npc.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/npc.png
 
 #begin images/selection.png
 /importer:TextureImporter
