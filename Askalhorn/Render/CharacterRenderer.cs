@@ -25,7 +25,8 @@ namespace Askalhorn.Render
         public void Draw(SpriteBatch batch, ICharacter character)
         {
             var target = character.Position.RenderTileVector;
-            batch.Draw(character.Texture, target, Color.White);
+            character.Renderer.Draw(batch, character.Position);
+            //batch.Draw(character.Re, target, Color.White);
             target.Y += 64;
             
             // hp

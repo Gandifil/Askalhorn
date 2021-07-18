@@ -7,6 +7,7 @@ using Askalhorn.Common.Maths;
 using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Mechanics.Utils;
 using Askalhorn.Common.Plot;
+using Askalhorn.Common.Render;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common
@@ -33,7 +34,7 @@ namespace Askalhorn.Common
         
         IReadOnlyDictionary<DamageTypes, int> ProtectionBase { get; }
 
-        Texture2D Texture { get; }
+        IRenderer Renderer { get; }
         
         IPosition Position { get; }
         

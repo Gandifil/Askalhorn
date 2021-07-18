@@ -11,6 +11,7 @@ using Askalhorn.Common.Mechanics.Abilities;
 using Askalhorn.Common.Mechanics.Effects;
 using Askalhorn.Common.Mechanics.Utils;
 using Askalhorn.Common.Plot;
+using Askalhorn.Common.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
@@ -91,7 +92,7 @@ namespace Askalhorn.Common
         public IController Controller { get; set; }
         
         [JsonIgnore]
-        public Texture2D Texture { get; set; }
+        public IRenderer Renderer { get; protected set; }
 
         IPosition ICharacter.Position => Position;
         public Position Position { get; set; }

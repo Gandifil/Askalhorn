@@ -37,7 +37,7 @@ namespace Askalhorn.Components
         private static Panel BaseBox(ICharacter character)
         {
             var box = new FixPanel(Anchor.TopLeft, 0.5f, 0.3f);
-            box.AddChild(new Image(Anchor.AutoCenter, new Vector2(0.9f, 0.9f), new TextureRegion(character.Texture)));
+            //box.AddChild(new Image(Anchor.AutoCenter, new Vector2(0.9f, 0.9f), character.Rend));
             box.AddChild(new Paragraph(Anchor.AutoCenter, 100, character.Name));
             return box;
         }

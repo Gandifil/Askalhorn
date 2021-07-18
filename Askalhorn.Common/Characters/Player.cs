@@ -2,6 +2,7 @@
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Mechanics.Abilities;
 using Askalhorn.Common.Plot.Quests;
+using Askalhorn.Common.Render;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common.Characters
@@ -11,7 +12,7 @@ namespace Askalhorn.Common.Characters
         public Player()
         {
             Name = "Вася";
-            Texture = Storage.Content.Load<Texture2D>("images/mage");
+            Renderer = new TextureRenderer("mage2");
             Controller = new BufferController();
             Abilities.Add(new HealMeditation());
         }
