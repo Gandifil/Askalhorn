@@ -11,13 +11,13 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public override string Name => "Удар";
         
         public override string Description => "Удар";
-        public override TextureRegion2D Icon => Storage.Load("effects", 0, 1);
+        public override TextureRegion2D Icon => Storage.Load("effects", 1, 1);
         public override IAbility.TargetType Type => IAbility.TargetType.Character;
         public override int Radius => 1;
-        public override int CoolDown { get; } = 0;
+        public override int CoolDown => 0;
         public override int MagicCost => 100;
         public override uint MaxSkill => 10;
-        public override SoundEffect CastSound => Storage.Content.Load<SoundEffect>("sounds\\steam");
+        public override SoundEffect CastSound => Storage.LoadSound("forcepush");
 
         public override List<IAbility.Modification> Modifications { get; } =
             new List<IAbility.Modification>();
