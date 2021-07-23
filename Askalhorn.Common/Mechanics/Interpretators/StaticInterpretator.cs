@@ -4,8 +4,6 @@
     {
         public float Value { get; set; }
 
-        public string Description => Value.ToString();
-
         public override string ToString()
         {
             return Value.ToString();

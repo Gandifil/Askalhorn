@@ -2,8 +2,6 @@
 {
     internal interface IInterpretator
     {
-        string Description { get; }
-
         float Calculate(Character character);
     }
 }

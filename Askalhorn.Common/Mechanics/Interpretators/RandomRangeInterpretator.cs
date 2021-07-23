@@ -1,8 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using MonoGame.Extended;
 
 namespace Askalhorn.Common.Mechanics.Interpretators
 {
-    internal class MultiInterpretator: IInterpretator
+    internal class RandomRangeInterpretator: IInterpretator
     {
         public IInterpretator First { get; set; }
         
@@ -10,12 +11,13 @@ namespace Askalhorn.Common.Mechanics.Interpretators
 
         public override string ToString()
         {
-            return $"{First}*{Second}";
+            return $"{First}..{Second}";
         }
-        
+
         public float Calculate(Character character)
         {
-            return First.Calculate(character) * Second.Calculate(character);
+            var random = new Random();
+            return random.NextSingle(First.Calculate(character), Second.Calculate(character));
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Askalhorn.Common.Mechanics.Impacts;
+using Askalhorn.Common.Mechanics.Interpretators;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
@@ -10,12 +12,14 @@ namespace Askalhorn.Common.Mechanics.Abilities
     {
         public override string Name => "Огненная стрела";
         
-        public override string Description => "Обычный огненный шар, который обычно летит прямо в ебало.";
+        public override string Description => $"Заклинатель придает огню форму стрелы и направляет ее в сторону противника, нанося {_damage} урона огнем.";
         public override TextureRegion2D Icon => Storage.Load("effects", 0, 1);
         public override IAbility.TargetType Type => IAbility.TargetType.Character;
         public override int Radius => 10;
         public override int CoolDown { get; } = 0;
-        public override int MagicCost => CurrentModification == 3 ? 50 : 100;
+
+        private int _baseMagicCost = 20;
+        public override int MagicCost => _baseMagicCost / (CurrentModification == 3 ? 2 : 1);
         public override uint MaxSkill => 10;
         public override SoundEffect CastSound => Storage.LoadSound("steam");
 
@@ -38,10 +42,36 @@ namespace Askalhorn.Common.Mechanics.Abilities
                     Icon = Storage.Load("effects", 4, 1),
                 },
             };
+
+        private readonly IInterpretator _damage;
+
+        public FireBall()
+        {
+            _damage = new MultiInterpretator
+              {
+                  First = new RandomRangeInterpretator
+                  {
+                      First = new SkillRelativeInterpretator
+                      {
+                          Ability = this,
+                          Min = 0.6f,
+                          Max = 0.89f,
+                      },
+                      Second = new StaticInterpretator
+                      {
+                          Value = 0.9f,
+                      }
+                  },
+                  Second = new SecondaryInterpretator
+                  {
+                      Type = SecondaryTypes.MagicPower,
+                  }
+              };
+        }
         
         protected override void Use(Character character, Character target)
         {
-            new DamageImpact(10).On(target);
+            new DamageImpact((int)_damage.Calculate(character)).On(target);
         }
     }
 }

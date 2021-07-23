@@ -4,8 +4,6 @@
     {
         public SecondaryTypes Type { get; set; }
 
-        public string Description => ToString();
-
         public override string ToString()
         {
             return Type.ToString();
