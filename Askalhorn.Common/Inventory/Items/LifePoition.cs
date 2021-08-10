@@ -12,7 +12,8 @@ namespace Askalhorn.Common.Inventory.Items
     {
         public uint Value { get; set; }
         public string Name => $"Лечебное зелье +{Value}";
-        public string Description => $"Восстанавливает {Value} HP";
+        public string TooltipText => $"Восстанавливает {Value} HP";
+        public IItem.PurposeType Type => IItem.PurposeType.Poition;
         
         [JsonIgnore]
         public TextureRegion2D Texture { get; } = new TextureRegion2D(Storage.Content.Load<Texture2D>("images/items"), 

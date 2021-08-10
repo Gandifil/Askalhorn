@@ -47,5 +47,7 @@ namespace Askalhorn.Common
         Dialog Dialog { get; }
 
         IBag Bag { get; }
+
+        Costume Costume { get; }
     }
 }

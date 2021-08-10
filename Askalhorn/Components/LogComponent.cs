@@ -17,7 +17,7 @@ namespace Askalhorn.Components
         {
             this.game = game;
             
-            box = new FixPanel(Anchor.BottomLeft, 0.3f, 0.1f, true);
+            box = new FixPanel(Anchor.BottomLeft, 0.3f, 0.1f,true);
         }
 
         private static Panel box;

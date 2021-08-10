@@ -19,7 +19,7 @@ namespace Askalhorn.Components
             box.AddChild(new Paragraph(Anchor.TopLeft, 100, pack.Count.ToString()));
             box.AddChild(new Image(Anchor.CenterLeft, new Vector2(0.2F, 1F), pack.Item.Texture.ToMlem()));
             box.AddChild(new Paragraph(Anchor.Center, 300, pack.Item.Name));
-            box.AddChild(new Paragraph(Anchor.CenterRight, 300, pack.Item.Description));
+            box.AddChild(new Paragraph(Anchor.CenterRight, 300, pack.Item.TooltipText));
             return box;
         }
     }

@@ -6,13 +6,39 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Inventory
 {
-    public interface IItem: IEquatable<IItem>
+    
+    public interface IItem: IIcon, IEquatable<IItem>
     {
+        public enum PurposeType
+        {
+            Head,
+            Cloak,
+            Body,
+            Hands,
+            Boots,
+            Amulet,
+            Bracelet,
+            Ring,
+            Shield,
+            Weapon,
+            Poition,
+            Resource,
+        }
+
+        public enum RarityLevel
+        {
+            Casual,
+            Rare,
+            Unique,
+        }
+        
         string Name { get; }
         
-        string Description { get; }
+        PurposeType Type { get; }
         
-        TextureRegion2D Texture { get; }
+        //string Description { get; }
+        
+        //TextureRegion2D Texture { get; }
         
         float Weight { get; }
         

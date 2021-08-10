@@ -100,7 +100,8 @@ namespace Askalhorn.Common
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         public Dialog Dialog { get; set; }
         IBag ICharacter.Bag => Bag;
-        
+        public Costume Costume { get; } = new Costume();
+
         public readonly Bag Bag = new Bag();
 
         [JsonIgnore]

@@ -14,7 +14,8 @@ namespace Askalhorn.Common.Inventory.Items
         public uint TurnCount { get; set; }
         
         public string Name => $"Ядовитое зелье -{Value}";
-        public string Description => $"Забирает {Value} HP в течении {TurnCount} ходов";
+        public IItem.PurposeType Type => IItem.PurposeType.Poition;
+        public string TooltipText => $"Забирает {Value} HP в течении {TurnCount} ходов";
         [JsonIgnore]
         public TextureRegion2D Texture { get; } = new TextureRegion2D(Storage.Content.Load<Texture2D>("images/items"), 
             2*32, 0, 32, 32);
