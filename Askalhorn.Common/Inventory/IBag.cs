@@ -6,12 +6,6 @@ namespace Askalhorn.Common.Inventory
 {
     public interface IBag
     {
-        public class Pack
-        {
-            public IItem Item;
-            public uint Count;
-        }
-        
         IReadOnlyCollection<Pack> Items { get; }
 
         void Put(IItem item, uint count = 1);

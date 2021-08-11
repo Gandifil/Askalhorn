@@ -7,6 +7,7 @@ using Askalhorn.Common.Control.Moves;
 using Askalhorn.Common.Inventory;
 using Askalhorn.Elements;
 using Askalhorn.Elements.Icons;
+using Askalhorn.Elements.Inventory;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Ui;
@@ -14,11 +15,10 @@ using MLEM.Ui.Elements;
 
 namespace Askalhorn.Components
 {
-    public class InventoryTabComponent: InventoryBase, IGameComponent, IDisposable
+    public class InventoryTabComponent: IGameComponent, IDisposable
     {
         private static readonly string NAME = "inventory";
         private readonly GameProcessScreen screen;
-        private readonly List<ItemIconElement> _icons = new List<ItemIconElement>();
 
         public InventoryTabComponent(GameProcessScreen screen)
         {
@@ -35,28 +35,12 @@ namespace Askalhorn.Components
             screen.game.UiSystem.Remove(NAME);
         }
         
-        private  Element Create(IPlayer player)
+        private Element Create(IPlayer player)
         {
-            var root = new Panel(Anchor.TopCenter, new Vector2(0.9f, 0.9f), Vector2.Zero);
-            
-            var box = new FixPanel(Anchor.CenterRight, 0.5f, 1);
-            player.Bag.OnChanged += () => FillItemPanel(box, player.Bag);
-            FillItemPanel(box, player.Bag);
-            root.AddChild(box);;
+            var root = new FixPanel(Anchor.TopCenter, 0.9f, 0.9f);
+            root.AddChild(new BagViewer(player.Bag, Anchor.CenterRight, 0.5f, 1));
             root.AddChild(new CostumeViewer(player.Costume, Anchor.CenterLeft, 0.5f, 1));
-            
             return root;
-        }
-
-        private void FillItemPanel(Panel panel, IBag bag)
-        {
-            panel.RemoveChildren();
-            _icons.Clear();
-            foreach (var pack in bag.Items)
-            {
-                _icons.Add(new ItemIconElement(pack, panel, Anchor.AutoCenter, new Vector2(0.9f, 0.05f)));
-                _icons.Last().Initialize();
-            }
         }
     }
 }
