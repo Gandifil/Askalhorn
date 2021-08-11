@@ -17,9 +17,14 @@ namespace Askalhorn.Common.Inventory
 
         public event Action<IItem> OnTakeOff;
 
+        public bool IsValid(IItem item)
+        {
+            return item is null || item.Type != Type;
+        }
+
         public IItem PutOn(IItem item)
         {
-            if (item is null || item.Type != Type)
+            if (IsValid(item))
                 throw new ArgumentException($"Item must be {Type}");
             
             var result = TakeOff();

@@ -31,6 +31,8 @@ namespace Askalhorn
 
         public SpriteBatch SpriteBatch { get; private set; }
 
+        public static AskalhornGame Instance;
+
         public UiSystem UiSystem { get; private set; }
 
         private UntexturedStyle style;
@@ -43,6 +45,8 @@ namespace Askalhorn
             Configuration.OnOptionsChange += ConfigurationOptionsChanged;
             ScreenManager = new ScreenManager();
             Components.Add(ScreenManager);
+
+            Instance = this;
         }
 
         private void ConfigurationOptionsChanged(Options options)
