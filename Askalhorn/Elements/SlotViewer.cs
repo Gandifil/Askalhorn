@@ -16,12 +16,18 @@ namespace Askalhorn.Elements
             base(anchor, width, height)
         {
             _slot = slot;
+            if (_slot.Item is not null)
+                PutOn(_slot.Item);
+            _slot.OnPutOn += PutOn;
+            _slot.OnTakeOff += TakeOff;
             
             CanBeMoused = true;
 
-            OnMouseEnter = EnableSelecting;
+            OnMouseEnter += EnableSelecting;
 
-            OnMouseExit = DisableSelecting;
+            OnMouseExit += DisableSelecting;
+            
+            OnPressed += Pressed;
 
             DragAndDrop.OnDrop += DropItem;
 
@@ -38,9 +44,34 @@ namespace Askalhorn.Elements
             DrawColor = new StyleProp<Color>();
         }
 
+        private void PutOn(IItem item)
+        {
+            var icon = new IconViewer(item, Anchor.Center, 1f, 1f);
+            icon.OnMouseEnter += EnableSelecting;
+            icon.OnMouseExit += DisableSelecting;
+            icon.OnPressed += Pressed;
+            
+            AddChild(icon);
+        }
+
+        private void TakeOff(IItem item)
+        {
+            RemoveChildren();
+        }
+
+        private void Pressed(Element e)
+        {
+            if (_slot.Item is not null)
+            {
+                var element = new DragAndDrop(_slot.Item);
+                element.OnSuccesfullyDrop += () => { _slot.TakeOff();};
+                element.Show();
+            }
+        }
+
         private void DropItem(DragAndDrop element)
         {
-            if (DisplayArea.Contains(element.PositionOffset))
+            if (DisplayArea.Contains(element.PositionOffset) && element.Icon  != _slot.Item)
             {
                 try
                 {
@@ -57,6 +88,8 @@ namespace Askalhorn.Elements
         {
             base.Dispose();
             
+            _slot.OnPutOn -= PutOn;
+            _slot.OnTakeOff -= TakeOff;
             DragAndDrop.OnDrop -= DropItem;
         }
     }

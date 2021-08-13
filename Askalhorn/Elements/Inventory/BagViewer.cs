@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Inventory;
+﻿using System;
+using Askalhorn.Common.Inventory;
 using MLEM.Ui;
 
 namespace Askalhorn.Elements.Inventory
@@ -14,7 +15,24 @@ namespace Askalhorn.Elements.Inventory
 
             _bag.OnChanged += ResetPacks;
 
+            DragAndDrop.OnDrop += DropItem;
+
             ResetPacks();
+        }
+
+        private void DropItem(DragAndDrop element)
+        {
+            if (DisplayArea.Contains(element.PositionOffset))
+            {
+                try
+                {
+                    _bag.Put(element.Icon as IItem);
+                    element.SuccesfullyDrop();
+                }
+                catch (ArgumentException e)
+                {
+                }
+            }
         }
 
         public override void Dispose()
@@ -22,6 +40,8 @@ namespace Askalhorn.Elements.Inventory
             base.Dispose();
 
             _bag.OnChanged -= ResetPacks;
+
+            DragAndDrop.OnDrop -= DropItem;
         }
 
         private void ResetPacks()
@@ -35,7 +55,7 @@ namespace Askalhorn.Elements.Inventory
 
         protected virtual PackViewer CreatePackViewer(Pack pack)
         {
-            return new PackViewer(pack, Anchor.AutoCenter, 0.9f, 0.05f);
+            return new PackViewer(pack, Anchor.AutoCenter, 0.9f, 0.07f);
         }
     }
 }

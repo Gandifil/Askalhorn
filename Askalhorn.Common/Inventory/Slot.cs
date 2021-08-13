@@ -35,7 +35,7 @@ namespace Askalhorn.Common.Inventory
             return result;
         }
 
-        IItem TakeOff()
+        public IItem TakeOff()
         {
             if (Item is null)
                 return null;

@@ -59,11 +59,6 @@ namespace Askalhorn.Common
             {
                 Position = new Position(1, 1),
             });
-            Player.Bag.Put(new PoisonPoition
-            {
-                Value = 10,
-                TurnCount = 5,
-            }, 3);
             
             SetLocation(
                 new LocationInfo

@@ -4,6 +4,7 @@ using System.Reflection;
 using AmbrosiaGame.Screens;
 using AmbrosiaGame.Utils;
 using Askalhorn.Common;
+using Askalhorn.Elements;
 using Askalhorn.Logging;
 using Askalhorn.Screens;
 using Askalhorn.Settings;
@@ -78,6 +79,7 @@ namespace Askalhorn
             LineRenderer.Initialize(GraphicsDevice);
             
             UiSystem = new UiSystem(this, style);
+            UiSystem.OnRootRemoved += root => root.Element.RecursiveDispose();
             ScreenManager.LoadScreen(new MainMenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black, 0.5f));    
         }
 
