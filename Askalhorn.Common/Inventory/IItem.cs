@@ -36,6 +36,8 @@ namespace Askalhorn.Common.Inventory
         
         PurposeType Type { get; }
         
+        RarityLevel Rarity { get; }
+        
         //string Description { get; }
         
         //TextureRegion2D Texture { get; }

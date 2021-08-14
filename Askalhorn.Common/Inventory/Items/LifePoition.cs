@@ -8,20 +8,17 @@ using Newtonsoft.Json;
 
 namespace Askalhorn.Common.Inventory.Items
 {
-    class LifePoition: IItem
+    internal class LifePoition: Poition
     {
         public uint Value { get; set; }
-        public string Name => $"Лечебное зелье +{Value}";
-        public string TooltipText => $"Восстанавливает {Value} HP";
-        public IItem.PurposeType Type => IItem.PurposeType.Poition;
+        public override string Name => $"Лечебное зелье +{Value}";
+        public override IItem.RarityLevel Rarity => IItem.RarityLevel.Rare;
+        protected internal override IImpact Impact => new HealImpact((int)Value);
+        public override string Description => $"Восстанавливает {Value} HP";
         
         [JsonIgnore]
-        public TextureRegion2D Texture { get; } = new TextureRegion2D(Storage.Content.Load<Texture2D>("images/items"), 
+        public override TextureRegion2D Texture { get; } = new TextureRegion2D(Storage.Content.Load<Texture2D>("images/items"), 
             0, 0, 32, 32);
-
-        public float Weight => 0.5f;
-
-        IImpact IItem.Impact => new HealImpact((int)Value);
         public bool Equals(IItem? other)
         {
             return other is LifePoition item && item.Value == Value;
