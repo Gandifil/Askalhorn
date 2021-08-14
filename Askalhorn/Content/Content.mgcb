@@ -276,3 +276,9 @@
 /processorParam:Quality=Best
 /build:sounds/steam.mp3
 
+#begin texts/rarity.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Localization.TextFileReader, Askalhorn.Common
+/build:texts/rarity.json
+

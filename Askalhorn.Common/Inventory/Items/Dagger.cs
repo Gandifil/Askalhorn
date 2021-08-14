@@ -1,4 +1,6 @@
-﻿using Askalhorn.Common.Mechanics;
+﻿using Askalhorn.Common.Localization;
+using Askalhorn.Common.Mechanics;
+using Microsoft.Xna.Framework;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Inventory.Items
@@ -6,7 +8,7 @@ namespace Askalhorn.Common.Inventory.Items
     public class Dagger: IItem
     {
         public TextureRegion2D Texture { get; } = Storage.Load("effects", 1, 1);
-        public string TooltipText => "Кинжал";
+        public string TooltipText => TextBank.Get("rarity", 0).WithColor("Blue");
         
         public bool Equals(IItem? other)
         {
