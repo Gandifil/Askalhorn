@@ -134,10 +134,12 @@ namespace Askalhorn.Common
 
             foreach (var character in _characters)
             foreach (var move in character.Controller.Moves)
+            {
                 move.Make(character);
+            }
+            _characters.RemoveAll(x => x.HP.Current <= 0);
             foreach (var character in _characters)
                 character.Turn();
-            _characters.RemoveAll(x => x.HP.Current < 1);
             OnTurn?.Invoke();
         }
     }
