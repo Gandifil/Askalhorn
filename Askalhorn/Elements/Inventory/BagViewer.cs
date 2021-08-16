@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Askalhorn.Common.Inventory;
+using Askalhorn.Elements.Inventory.Search;
 using MLEM.Ui;
 
 namespace Askalhorn.Elements.Inventory
@@ -7,8 +9,9 @@ namespace Askalhorn.Elements.Inventory
     public class BagViewer: InvisiblePanel
     {
         private readonly IBag _bag;
+        private readonly FiltersBar _filtersBar;
         
-        public BagViewer(IBag bag, Anchor anchor, float x, float y): 
+        public BagViewer(IBag bag, FiltersBar filtersBar, Anchor anchor, float x, float y): 
             base(anchor, x, y, true)
         {
             _bag = bag;
@@ -16,6 +19,9 @@ namespace Askalhorn.Elements.Inventory
             _bag.OnChanged += ResetPacks;
 
             DragAndDrop.OnDrop += DropItem;
+
+            _filtersBar = filtersBar;
+            _filtersBar.OnChanged += ResetPacks;
 
             ResetPacks();
         }
@@ -42,12 +48,13 @@ namespace Askalhorn.Elements.Inventory
             _bag.OnChanged -= ResetPacks;
 
             DragAndDrop.OnDrop -= DropItem;
+            _filtersBar.OnChanged -= ResetPacks;
         }
 
         private void ResetPacks()
         {
             RemoveChildren();
-            foreach (var pack in _bag.Items)
+            foreach (var pack in _bag.Items.Where(x => _filtersBar.Predicate(x.Item)))
             {
                 AddChild(CreatePackViewer(pack));
             }

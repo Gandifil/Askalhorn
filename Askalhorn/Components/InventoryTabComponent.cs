@@ -8,6 +8,7 @@ using Askalhorn.Common.Inventory;
 using Askalhorn.Elements;
 using Askalhorn.Elements.Icons;
 using Askalhorn.Elements.Inventory;
+using Askalhorn.Elements.Inventory.Search;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Ui;
@@ -38,7 +39,7 @@ namespace Askalhorn.Components
         private Element Create(IPlayer player)
         {
             var root = new FixPanel(Anchor.TopCenter, 0.9f, 0.9f);
-            root.AddChild(new BagViewer(player.Bag, Anchor.CenterRight, 0.5f, 1));
+            root.AddChild(new FilterBagViewer(player.Bag, Anchor.CenterRight, 0.5f, 1));
             root.AddChild(new CostumeViewer(player.Costume, Anchor.CenterLeft, 0.5f, 1));
             return root;
         }
