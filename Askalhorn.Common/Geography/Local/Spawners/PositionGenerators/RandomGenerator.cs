@@ -11,7 +11,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners.PositionGenerators
             var y = random.Next(0, location.TiledMap.Height);
 
             var point = new Point(x, y);
-            if (location.FreeForBuild(point))
+            if (location.FreeForBuild(point) && Common.World.Instance.Find(new Position(point)) == null)
                 return new Position(point);
             return Generate(location, random);
         }
