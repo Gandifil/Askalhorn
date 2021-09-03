@@ -8,7 +8,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
 {
-    internal class FireBall: Ability
+    public class FireBall: Ability
     {
         public override string Name => "Огненная стрела";
         
@@ -69,7 +69,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
               };
         }
         
-        protected override void Use(Character character, Character target)
+        public override void Use(Character character, Character target)
         {
             new DamageImpact((int)_damage.Calculate(character)).On(target);
         }

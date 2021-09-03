@@ -7,7 +7,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
 {
-    abstract internal class Ability: IAbility
+    public abstract class Ability: IAbility
     {
         public abstract string Name { get; }
         public abstract string Description { get; }
@@ -57,7 +57,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
 
         public bool IsReady => CoolDownTimer == 0;
 
-        protected abstract void Use(Character character, Character target);
+        public abstract void Use(Character character, Character target);
 
         public void Turn()
         {

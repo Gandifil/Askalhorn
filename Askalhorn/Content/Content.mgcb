@@ -20,6 +20,12 @@
 /processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
 /build:characters/ghost.json
 
+#begin characters/roxy_greyrat.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/build:characters/roxy_greyrat.json
+
 #begin characters/skelet01.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
@@ -88,6 +94,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/cursor.png
+
+#begin images/dialog/Roxy_LN.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/dialog/Roxy_LN.png
 
 #begin images/effects.png
 /importer:TextureImporter
@@ -172,6 +190,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/npc.png
+
+#begin images/roxy_greyrat.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/roxy_greyrat.png
 
 #begin images/selection.png
 /importer:TextureImporter

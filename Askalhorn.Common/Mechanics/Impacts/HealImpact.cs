@@ -4,7 +4,7 @@ using Serilog;
 
 namespace Askalhorn.Common.Mechanics.Impacts
 {
-    internal class HealImpact: IImpact
+    public class HealImpact: IImpact
     {
         public readonly int Value;
 

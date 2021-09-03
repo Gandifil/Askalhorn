@@ -6,7 +6,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
 {
-    internal class Strike: Ability
+    public class Strike: Ability
     {
         public override string Name => "Удар";
         
@@ -22,7 +22,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
         public override List<IAbility.Modification> Modifications { get; } =
             new List<IAbility.Modification>();
 
-        protected override void Use(Character character, Character target)
+        public override void Use(Character character, Character target)
         {
             new DamageImpact(10).On(target);
         }

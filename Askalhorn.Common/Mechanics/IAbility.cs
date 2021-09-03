@@ -52,6 +52,6 @@ namespace Askalhorn.Common.Mechanics
 
         event Action OnChange;
 
-        internal void Use(Character character, Character target);
+        void Use(Character character, Character target);
     }
 }

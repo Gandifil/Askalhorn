@@ -5,7 +5,7 @@ using Serilog;
 
 namespace Askalhorn.Common.Mechanics.Impacts
 {
-    internal class DamageImpact: IImpact
+    public class DamageImpact: IImpact
     {
         public readonly int Value;
 

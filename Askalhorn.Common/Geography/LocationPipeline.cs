@@ -46,30 +46,9 @@ namespace Askalhorn.Common.Geography
                     new MultipleSpawner
                     {
                         Count = 20,
-                        Spawner = new ContentCharacterSpawner(),
-                    },
-                    new MultipleSpawner
-                    {
-                        Count = 20,
                         Spawner = new ContentCharacterSpawner
                         {
-                            Name ="skelet01"
-                        },
-                    },
-                    new MultipleSpawner
-                    {
-                        Count = 20,
-                        Spawner = new ContentCharacterSpawner
-                        {
-                            Name ="skelet02"
-                        },
-                    },
-                    new MultipleSpawner
-                    {
-                        Count = 10,
-                        Spawner = new ContentCharacterSpawner
-                        {
-                            Name ="skelet03"
+                            Name ="roxy_greyrat"
                         },
                     },
                 }

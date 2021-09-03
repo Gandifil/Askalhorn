@@ -5,7 +5,7 @@ namespace Askalhorn.Common.Mechanics.Effects
 {
     internal class DamageEffect: Effect
     {
-        public readonly DamageImpact impact;
+        public readonly IImpact impact;
         
         public DamageEffect(uint value, uint time) : base(time)
         {

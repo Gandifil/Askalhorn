@@ -3,7 +3,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Impacts
 {
-    internal class EffectImpact: IImpact
+    public class EffectImpact: IImpact
     {
         public readonly Effect effect;
 

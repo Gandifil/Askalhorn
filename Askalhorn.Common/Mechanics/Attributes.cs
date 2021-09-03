@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Askalhorn.Common.Mechanics
 {
-    internal class Attributes<T>: IAttributes<T> where T : Enum
+    public class Attributes<T>: IAttributes<T> where T : Enum
     {
         ILinearParameter<int> IAttributes<T>.this[T index] => table[index];
 

@@ -16,6 +16,8 @@ namespace Askalhorn.Common
     {
         string Name { get; }
         
+        IFraction Fraction { get; }
+        
         ILimitedValue<IObservedParameter<int>> HP { get; }
         
         ILimitedValue<IObservedParameter<int>> MP { get; }

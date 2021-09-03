@@ -11,8 +11,8 @@ namespace Askalhorn.Common.Mechanics.Impacts
         public string Description => $"Восстанавливает {Value}% здоровья";
         
         public TextureRegion2D TextureRegion => Storage.Load("effects", 0, 0);
-        
-        public void On(Character character)
+
+        void IImpact.On(Character character)
         {
             var increment = character.HP.Current.Value * Value / 100;
             character.HP.Current.Value += increment;

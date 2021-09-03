@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Askalhorn.Common.Mechanics.Effects
 {
-    internal class Pool: List<Effect>
+    public class Pool: List<Effect>
     {
         //private readonly List<Effect> effects = new List<Effect>();
         private readonly Character character;

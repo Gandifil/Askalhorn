@@ -88,6 +88,19 @@ namespace AmbrosiaGame.Screens
                         break;
                 }     
             }
+
+            var characterNear = World.FindNear(World.Player.Position);
+            if (characterNear is not null)
+            {
+                if (characterNear.Dialog is not null)
+                    actions.Add(new ActionBlock
+                    {
+                        Region = Storage.Load("guiactions", 0, 0),
+                        Key = _options.Keys[Options.KeyActions.Use],
+                        Action = () => switcher.SwitchTo(new DialogTabComponent(characterNear.Dialog))
+                    });
+            }
+            
         }
         
         private void LookAtPlayer()

@@ -18,10 +18,11 @@ using Newtonsoft.Json;
 
 namespace Askalhorn.Common
 {
-    internal class Character: ICharacter
+    public class Character: ICharacter
     {
         public string Name { get; set; }
-        
+        public IFraction Fraction { get; protected set; }
+
         IAttributes<PrimaryTypes> ICharacter.Primary => Primary;
         [JsonIgnore]
         public Attributes<PrimaryTypes> Primary { get; private set; }

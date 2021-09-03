@@ -4,7 +4,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Effects
 {
-    internal class CollectionEffect: Effect
+    public class CollectionEffect: Effect
     {
         public List<Effect> Effects { get; set; } = new();
         

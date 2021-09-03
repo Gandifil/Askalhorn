@@ -3,7 +3,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics
 {
-    internal abstract class Effect: IEffect
+    public abstract class Effect: IEffect
     {
         public uint TurnCount { get; private set; }
 

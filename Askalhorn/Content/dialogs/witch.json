@@ -1,16 +1,36 @@
 {
     "speeches":[
         {
-            "lines": [
-                "Привет",
-                "Надеюсь, у тебя хорошо прошел день."
+            "isStart": true,
+            "paragraphs":
+            [
+                {
+                    "text": "Приветствую!"
+                },
+                {
+                    "text": "Надеюсь ты пришел по делу."
+                }
             ],
-            "answers" :[
+            "answers": 
+            [
                 {
                     "line": "Привет",
-                    "target": 0
+                    "target": 1
+                },
+                {
+                    "line": "Пока",
+                    "target": -1
                 }
             ]
+        },
+        {
+            "paragraphs":
+            [
+
+            ]
         }
-    ]
+    ],
+    "renderer": {
+        "fileName": "dialog/Roxy_LN"
+    }
 }

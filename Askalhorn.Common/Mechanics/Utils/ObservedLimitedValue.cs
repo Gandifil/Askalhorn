@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Askalhorn.Common.Mechanics.Utils
 {
-    class ObservedLimitedValue<T> : ILimitedValue<IObservedParameter<T>> 
+    public class ObservedLimitedValue<T> : ILimitedValue<IObservedParameter<T>> 
         where T:IComparable<T>, IConvertible, IEquatable<T>
     {
         IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Current => Current;

@@ -1,4 +1,5 @@
 ﻿using Askalhorn.Common.Control;
+using Askalhorn.Common.Plot;
 
 namespace Askalhorn.Common.Characters
 {
@@ -15,6 +16,12 @@ namespace Askalhorn.Common.Characters
             Name = prototype.Name;
             Level.Base.Value = prototype.Level;
             Renderer = prototype.Renderer;
+            Controller = prototype.Controller;
+
+            if (!string.IsNullOrEmpty(prototype.Dialog))
+            {
+                Dialog = Storage.Content.Load<Dialog>("dialogs/" + prototype.Dialog);
+            }
         }
         
     }

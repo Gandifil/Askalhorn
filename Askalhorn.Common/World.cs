@@ -47,6 +47,15 @@ namespace Askalhorn.Common
 
             return null;
         }
+
+        public Character FindNear(IPosition position)
+        {
+            foreach (var character in _characters)
+                if (character.Position.Point != position.Point && character.Position.IsInside(position, 1.5f))
+                    return character;
+
+            return null;
+        }
         
         /// <summary>
         /// Create new world and start new game.

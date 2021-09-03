@@ -17,7 +17,7 @@ namespace Askalhorn.Common.Mechanics.Impacts
         public string Description => "";
         public TextureRegion2D TextureRegion => throw new NotImplementedException();
 
-        public void On(Character character)
+        void IImpact.On(Character character)
         {
             character.Level.AddEnergy(Value);
             Log.Information("{Name} получил {Value} единиц энергии развития", character.Name, Value);

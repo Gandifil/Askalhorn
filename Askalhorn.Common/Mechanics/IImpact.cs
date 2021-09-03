@@ -4,7 +4,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics
 {
-    interface IImpact
+    public interface IImpact
     {
         string Description { get; }
         

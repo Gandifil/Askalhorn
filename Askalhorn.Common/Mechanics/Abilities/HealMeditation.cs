@@ -7,7 +7,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Common.Mechanics.Abilities
 {
-    internal class HealMeditation: Ability
+    public class HealMeditation: Ability
     {
         public override string Name => "Восстанавливающая медитация";
         
@@ -63,7 +63,7 @@ namespace Askalhorn.Common.Mechanics.Abilities
 
         public uint EffectTurn => CurrentModification == 1 ? (uint)5 : 10;
 
-        protected override void Use(Character character, Character target)
+        public override void Use(Character character, Character target)
         {
             var healEffect = new ImpactEffect(
                 CurrentModification == 1 ? 

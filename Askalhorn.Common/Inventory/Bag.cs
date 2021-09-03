@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Inventory
 {
-    internal class Bag: IBag
+    public class Bag: IBag
     {
         private readonly List<Pack> _packs = new();
 
