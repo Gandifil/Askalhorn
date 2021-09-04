@@ -5,6 +5,7 @@ using Askalhorn.Common.Geography.Local.Builds;
 using Askalhorn.Common.Geography.Local.Designers;
 using Askalhorn.Common.Geography.Local.Generators;
 using Askalhorn.Common.Geography.Local.Spawners;
+using Askalhorn.Common.Interpetators;
 using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Common.Geography
@@ -45,11 +46,8 @@ namespace Askalhorn.Common.Geography
                     new TiledMapSpawner(),
                     new MultipleSpawner
                     {
-                        Count = 20,
-                        Spawner = new ContentCharacterSpawner
-                        {
-                            Name ="roxy_greyrat"
-                        },
+                        Count = 1,
+                        Spawner = new ContentCharacterSpawner(new StaticPosition(34, 32), "roxy_greyrat")
                     },
                 }
             };
