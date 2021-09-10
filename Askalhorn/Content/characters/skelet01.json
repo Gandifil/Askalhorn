@@ -7,5 +7,12 @@
             "x": 3,
             "y": 0
         }
+    },
+    "loot": {
+        "$type": "Askalhorn.Common.Inventory.BagFillers.StaticLootChooser, Askalhorn.Common",
+        "item": {
+            "$type": "Askalhorn.Common.Inventory.Items.LifePoition, Askalhorn.Common",
+            "Value": 10
+        }
     }
 }

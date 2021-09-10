@@ -44,10 +44,13 @@ namespace Askalhorn.Common.Geography
                 Spawners = new List<ISpawner>
                 {
                     new TiledMapSpawner(),
+                    new ContentCharacterSpawner(new StaticPosition(34, 32), "roxy_greyrat"),
                     new MultipleSpawner
                     {
-                        Count = 1,
-                        Spawner = new ContentCharacterSpawner(new StaticPosition(34, 32), "roxy_greyrat")
+                        Count = 2,
+                        Spawner = new ContentCharacterSpawner(
+                            new InsideSquarePosition(new Rectangle(40, 40, 10, 10)), 
+                            "skelet01")
                     },
                 }
             };

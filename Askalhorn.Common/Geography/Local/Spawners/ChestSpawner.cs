@@ -25,7 +25,7 @@ namespace Askalhorn.Common.Geography.Local.Spawners
             
             var bag = new Bag();
             var filler =
-                new StaticBagFiller
+                new StaticLootChooser
                 {
                     Item = new LifePoition
                     {

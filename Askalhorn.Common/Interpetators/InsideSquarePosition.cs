@@ -2,12 +2,19 @@
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Common.Interpetators
 {
     public class InsideSquarePosition: IExpression<Position>
     {
-        public Rectangle? Rect { get; set; }
+        public Rectangle? Rect { get; }
+        
+        [JsonConstructor]
+        public InsideSquarePosition(Rectangle? rect)
+        {
+            Rect = rect;
+        }
         
         public Position Generate(ExpressionArgs args)
         {
