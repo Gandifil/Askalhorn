@@ -7,6 +7,7 @@ using Askalhorn.Common.Characters;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
+using Askalhorn.Common.Geography.Local.Builds;
 using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Inventory.Items;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,8 +27,10 @@ namespace Askalhorn.Common
 
             public List<Bag> Bags { get; set; } = new List<Bag>();
         }
-        
-        public ILocation Location { get; protected set; }
+
+        public ILocation Location => _location;
+
+        private Location _location;
 
         internal Info info = new();
 
@@ -93,7 +96,7 @@ namespace Askalhorn.Common
             using (var file = new StreamReader(filename + ".json"))
             {
                 info = JsonConvert.DeserializeObject<Info>(file.ReadToEnd(), settings);
-                Location = info.Location.Generate(0);
+                _location = info.Location.Generate(0);
             }
         }
 
@@ -131,10 +134,20 @@ namespace Askalhorn.Common
             _characters.Clear();
             _characters.Add(player);
             
-            Location = locationInfo.Generate(0);
+            _location = locationInfo.Generate(0);
             Location loc = (Location)Location;
             player.Position = loc.Places[(int)placeIndex];
             OnChangeLocation?.Invoke();
+        }
+
+        private void RemoveCharacter(Character ch)
+        {
+            if (!ch.Bag.IsEmpty)
+                _location.AddBuild(new Chest()
+                {
+                    Position = ch.Position,
+                    Bag = ch.Bag,
+                });
         }
 
         internal void Turn()
@@ -142,11 +155,17 @@ namespace Askalhorn.Common
             Log.Debug("Run moves from all Controllers.");
 
             foreach (var character in _characters)
-            foreach (var move in character.Controller.Moves)
+            foreach (var move in character.Controller.Decide(character))
             {
                 move.Make(character);
             }
-            _characters.RemoveAll(x => x.HP.Current <= 0);
+
+            var removing = _characters.Where(x => x.HP.Current < 1);
+            foreach (var character in removing)
+            {
+                RemoveCharacter(character);
+            }
+            _characters.RemoveAll(x => x.HP.Current < 1);
             foreach (var character in _characters)
                 character.Turn();
             OnTurn?.Invoke();

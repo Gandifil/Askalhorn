@@ -10,22 +10,13 @@ namespace Askalhorn.Common.Control
     {
         private readonly Random random = new Random();
 
-        private readonly ICharacter character;
-
-        public RandomMovementController(ICharacter character)
-        {
-            this.character = character;
-        }
-
-        public IEnumerable<IMove> Moves => new List<IMove>
-        {
-            getRandom(),
-        };
-
-        private IMove getRandom()
+        public IEnumerable<IMove> Decide(ICharacter character)
         {
             var list = character.AvailableMovements;
-            return list.ElementAt(random.Next(0, list.Count()));
+            return new List<IMove>
+            {
+                list.ElementAt(random.Next(0, list.Count())),
+            };
         }
     }
 }

@@ -5,16 +5,6 @@ namespace Askalhorn.Common.Control
 {
     public class BufferController: IController
     {
-        public IEnumerable<IMove> Moves
-        {
-            get
-            {
-                var results = buffer.ToList();
-                buffer.Clear();
-                return results;
-            }
-        }
-
         private List<IMove> buffer = new List<IMove>();
 
         public void AddMove(IMove move)
@@ -25,6 +15,13 @@ namespace Askalhorn.Common.Control
                 buffer.Add(move);
                 world.Turn();
             }
+        }
+
+        public IEnumerable<IMove> Decide(ICharacter character)
+        {
+            var results = buffer.ToList();
+            buffer.Clear();
+            return results;
         }
     }
 }

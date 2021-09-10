@@ -4,6 +4,6 @@ namespace Askalhorn.Common.Control
 {
     public interface IController
     {
-        IEnumerable<IMove> Moves { get; }
+        IEnumerable<IMove> Decide(ICharacter character);
     }
 }
