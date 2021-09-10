@@ -2,7 +2,7 @@
 
 namespace Askalhorn.Common.Inventory.BagFillers
 {
-    public class StaticBagFiller: IBagFiller
+    public class StaticLootChooser: ILootChooser
     {
         public IItem Item { get; set; }
 

@@ -22,6 +22,8 @@ namespace Askalhorn.Common.Inventory
                 founded.Add(count);
         }
 
+        public bool IsEmpty => !_packs.Any();
+
         private void Add(Pack pack)
         {
             pack.OnCountSetNull += Remove;

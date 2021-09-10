@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Askalhorn.Common.Inventory.BagFillers
 {
-    public class ComposeBagFiller: IBagFiller
+    public class ComposeLootChooser: ILootChooser
     {
-        public IEnumerable<IBagFiller> Fillers { get; set; }
+        public IEnumerable<ILootChooser> LootChoosers { get; set; }
         
         public void Fill(Random random, IBag bag)
         {
-            foreach (var filler in Fillers)
-                filler.Fill(random, bag);
+            foreach (var loot in LootChoosers)
+                loot.Fill(random, bag);
         }
     }
 }
