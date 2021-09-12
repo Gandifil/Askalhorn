@@ -10,18 +10,23 @@ namespace Askalhorn.Elements.Inventory
     {
         private readonly IBag _bag;
         private readonly FiltersBar _filtersBar;
+        private readonly InvisiblePanel _packsPanel;
         
-        public BagViewer(IBag bag, FiltersBar filtersBar, Anchor anchor, float x, float y): 
+        public BagViewer(IBag bag, Anchor anchor, float x, float y): 
             base(anchor, x, y, true)
         {
             _bag = bag;
+            
+            _filtersBar = new FiltersBar(Anchor.AutoCenter, 1, 0.1f);
+            _filtersBar.OnChanged += ResetPacks;
+            AddChild(_filtersBar);
+
+            _packsPanel = new InvisiblePanel(Anchor.AutoCenter, 1, 0.9f);
+            AddChild(_packsPanel);
 
             _bag.OnChanged += ResetPacks;
 
             DragAndDrop.OnDrop += DropItem;
-
-            _filtersBar = filtersBar;
-            _filtersBar.OnChanged += ResetPacks;
 
             ResetPacks();
         }
@@ -53,10 +58,10 @@ namespace Askalhorn.Elements.Inventory
 
         private void ResetPacks()
         {
-            RemoveChildren();
+            _packsPanel.RemoveChildren();
             foreach (var pack in _bag.Items.Where(x => _filtersBar.Predicate(x.Item)))
             {
-                AddChild(CreatePackViewer(pack));
+                _packsPanel.AddChild(CreatePackViewer(pack));
             }
         }
 

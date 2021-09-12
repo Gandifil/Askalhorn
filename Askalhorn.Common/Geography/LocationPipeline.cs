@@ -52,6 +52,11 @@ namespace Askalhorn.Common.Geography
                             new InsideSquarePosition(new Rectangle(40, 40, 10, 10)), 
                             "skelet01")
                     },
+                    new MultipleSpawner
+                    {
+                        Count = 12,
+                        Spawner = new ChestSpawner(),
+                    },
                 }
             };
         }

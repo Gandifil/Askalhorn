@@ -39,7 +39,7 @@ namespace Askalhorn.Components
         private Element Create(IPlayer player)
         {
             var root = new FixPanel(Anchor.TopCenter, 0.9f, 0.9f);
-            root.AddChild(new FilterBagViewer(player.Bag, Anchor.CenterRight, 0.5f, 1));
+            root.AddChild(new BagViewer(player.Bag, Anchor.CenterRight, 0.5f, 1));
             root.AddChild(new CostumeViewer(player.Costume, Anchor.CenterLeft, 0.5f, 1));
             return root;
         }
