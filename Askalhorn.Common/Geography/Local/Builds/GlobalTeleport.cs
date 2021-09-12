@@ -1,5 +1,7 @@
 ﻿using System;
 using Askalhorn.Common.Control.Moves;
+using Askalhorn.Common.Mechanics;
+using Askalhorn.Common.Mechanics.Impacts;
 using Askalhorn.Common.Render;
 using Microsoft.Xna.Framework;
 using Serilog;
@@ -26,11 +28,6 @@ namespace Askalhorn.Common.Geography.Local.Builds
 
         public uint Place { get; set; }
 
-        public Action Action => () =>
-        {
-            //Log.Information("Used global teleport with shift {Shift}", Shift);
-
-            Common.World.Instance.SetLocation(Location, Place);
-        };
+        public IImpact Impact => new EnterLocationImpact(Location, Place);
     }
 }

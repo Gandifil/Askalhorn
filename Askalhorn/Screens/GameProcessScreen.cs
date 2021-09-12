@@ -73,7 +73,7 @@ namespace AmbrosiaGame.Screens
                         {
                             Region = Storage.Load("guiactions", 1, 0),
                             Key = _options.Keys[Options.KeyActions.Use],
-                            Action = () => World.Location[World.Player.Position].Build.Action.Invoke()
+                            Action = () => World.Location[World.Player.Position].Build.Impact.On((Character)World.Player)
                         });
                         break;
                     case IBuild.Types.Teleport:
@@ -81,7 +81,7 @@ namespace AmbrosiaGame.Screens
                         {
                             Region = Storage.Load("guiactions", 2, 0),
                             Key = _options.Keys[Options.KeyActions.Use],
-                            Action = () => World.Location[World.Player.Position].Build.Action.Invoke()
+                            Action = () => World.Location[World.Player.Position].Build.Impact.On((Character)World.Player)
                         });
                         break;
                     default:

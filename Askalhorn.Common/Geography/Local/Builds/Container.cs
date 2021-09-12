@@ -1,5 +1,7 @@
 ﻿using System;
 using Askalhorn.Common.Inventory;
+using Askalhorn.Common.Mechanics;
+using Askalhorn.Common.Mechanics.Impacts;
 using Askalhorn.Common.Render;
 
 namespace Askalhorn.Common.Geography.Local.Builds
@@ -17,6 +19,6 @@ namespace Askalhorn.Common.Geography.Local.Builds
 
         public string Name { get; set; }
         
-        public Action Action => () => Common.World.Instance.OpenBag(Bag);
+        public IImpact Impact => new OpenBagImpact(Bag);
     }
 }

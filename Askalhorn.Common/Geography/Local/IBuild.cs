@@ -1,4 +1,5 @@
 ﻿using System;
+using Askalhorn.Common.Mechanics;
 using Askalhorn.Common.Render;
 
 namespace Askalhorn.Common.Geography.Local
@@ -13,6 +14,6 @@ namespace Askalhorn.Common.Geography.Local
 
         IRenderer Renderer { get; }
         
-        Action Action { get; } 
+        IImpact Impact { get; }
     }
 }

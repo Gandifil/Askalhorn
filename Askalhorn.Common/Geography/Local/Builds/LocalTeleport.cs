@@ -1,5 +1,7 @@
 ﻿using System;
 using Askalhorn.Common.Control.Moves;
+using Askalhorn.Common.Mechanics;
+using Askalhorn.Common.Mechanics.Impacts;
 using Askalhorn.Common.Render;
 using Microsoft.Xna.Framework;
 using Serilog;
@@ -18,12 +20,6 @@ namespace Askalhorn.Common.Geography.Local.Builds
 
         public Point Target { get; set; }
 
-        public Action Action => () =>
-        {
-            Log.Information("Used local teleport with shift {Target}", Target);
-
-            var teleport = new MovementToMove(Target);
-            Common.World.Instance.playerController.AddMove(teleport);
-        };
+        public IImpact Impact => new TeleportImpact(Target);
     }
 }
