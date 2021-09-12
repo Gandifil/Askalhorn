@@ -1,0 +1,12 @@
+{
+    "name": "Рокси",
+    "Level": 15,
+    "dialog": "witch",
+    "controller":
+    {
+        "$type": "Askalhorn.Common.Control.EmptyController, Askalhorn.Common"
+    },
+    "renderer": {
+        "fileName": "roxy_greyrat"
+    }
+}
