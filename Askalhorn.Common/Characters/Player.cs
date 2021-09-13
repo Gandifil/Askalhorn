@@ -28,11 +28,12 @@ namespace Askalhorn.Common.Characters
 
         public IJournal Journal { get; set; } = new Journal(new List<IQuest>
         {
-            new Quest()
-            {
-                Name = "fdssdf",
-                Description = "fffffffffffffffff",
-            }
+            new Quest("FindProvision")
+            // new Quest()
+            // {
+            //     Name = "fdssdf",
+            //     Description = "fffffffffffffffff",
+            // }
         });
     }
 }

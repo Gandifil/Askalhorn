@@ -300,6 +300,12 @@
 /processorParam:ContentType=TestGame.Resources.PlayerInfo
 /build:player.json
 
+#begin quests/FindProvision.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Plot.Quests.QuestFileReader, Askalhorn.Common
+/build:quests/FindProvision.json
+
 #begin sounds/forcepush.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -317,6 +323,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/steam.mp3
+
+#begin texts/FindProvisionQuest.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Localization.TextFileReader, Askalhorn.Common
+/build:texts/FindProvisionQuest.json
 
 #begin texts/rarity.json
 /importer:JsonContentImporter

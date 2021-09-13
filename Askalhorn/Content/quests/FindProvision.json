@@ -1,0 +1,20 @@
+{
+    "Name": "FindProvisionQuest:0",
+    "Description": "FindProvisionQuest:1",
+    "Steps": [
+        {
+            "Name": "findBones",
+            "Description": "FindProvisionQuest:2"
+        },
+        {
+            "Name": "pushBones",
+            "NameOfLastStep": "findBones",
+            "Description": "FindProvisionQuest:3"
+        },
+        {
+            "Name": "end",
+            "NameOfLastStep": "pushBones",
+            "Description": "FindProvisionQuest:4"
+        }
+    ]
+}
