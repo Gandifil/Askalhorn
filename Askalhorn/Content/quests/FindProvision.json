@@ -3,18 +3,13 @@
     "Description": "FindProvisionQuest:1",
     "Steps": [
         {
-            "Name": "findBones",
-            "Description": "FindProvisionQuest:2"
-        },
-        {
             "Name": "pushBones",
-            "NameOfLastStep": "findBones",
-            "Description": "FindProvisionQuest:3"
+            "Description": "FindProvisionQuest:2"
         },
         {
             "Name": "end",
             "NameOfLastStep": "pushBones",
-            "Description": "FindProvisionQuest:4"
+            "Description": "FindProvisionQuest:3"
         }
     ]
 }

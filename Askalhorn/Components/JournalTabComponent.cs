@@ -38,7 +38,8 @@ namespace Askalhorn.Components
                 list.AddChild(line);
             }
 
-            OpenQuest(info, screen.World.Player.Journal.First());
+            if (screen.World.Player.Journal.Any())
+                OpenQuest(info, screen.World.Player.Journal.First());
 
             box.AddChild(list);
             box.AddChild(info);

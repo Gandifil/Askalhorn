@@ -26,14 +26,8 @@ namespace Askalhorn.Common.Characters
             Bag.Put(new Dagger());
         }
 
-        public IJournal Journal { get; set; } = new Journal(new List<IQuest>
-        {
-            new Quest("FindProvision")
-            // new Quest()
-            // {
-            //     Name = "fdssdf",
-            //     Description = "fffffffffffffffff",
-            // }
-        });
+        IJournal IPlayer.Journal => Journal;
+        
+        public Journal Journal { get;  } = new (new List<IQuest>());
     }
 }

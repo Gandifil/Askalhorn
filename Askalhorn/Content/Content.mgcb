@@ -330,6 +330,12 @@
 /processorParam:ContentType=Askalhorn.Common.Localization.TextFileReader, Askalhorn.Common
 /build:texts/FindProvisionQuest.json
 
+#begin texts/journal.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Common.Localization.TextFileReader, Askalhorn.Common
+/build:texts/journal.json
+
 #begin texts/rarity.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
