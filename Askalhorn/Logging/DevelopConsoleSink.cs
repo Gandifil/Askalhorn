@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Askalhorn.Common.Localization;
 using Askalhorn.Elements;
 using Serilog.Core;
 using Serilog.Events;
@@ -42,7 +43,22 @@ namespace Askalhorn.Logging
         {
             var buffer = new StringWriter(new StringBuilder(DefaultWriteBufferCapacity));
             formater.Format(logEvent, buffer);
-            DebugConsole.LineStorage.Write(buffer.ToString());
+            var line = buffer.ToString();
+            switch (logEvent.Level)
+            {
+                case LogEventLevel.Debug:
+                case LogEventLevel.Verbose:
+                    line = line.WithColor("LightGreen");
+                    break;
+                case LogEventLevel.Warning:
+                    line = line.WithColor("Orange");
+                    break;
+                case LogEventLevel.Error:
+                case LogEventLevel.Fatal:
+                    line = line.WithColor("DarkRed");
+                    break;
+            }
+            DebugConsole.LineStorage.Write(line);
         }
     }
 }
