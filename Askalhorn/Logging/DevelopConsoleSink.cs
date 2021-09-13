@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Askalhorn.Elements;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting;
@@ -14,7 +15,7 @@ namespace Askalhorn.Logging
         readonly ITextFormatter formater;
 
         /// <summary>
-        /// Writes log events to <see cref="Askalhorn.Logging.StringLineStorage"/>.
+        /// Writes log events to <see cref="LineStorage"/>.
         /// </summary>
         /// <param name="sinkConfiguration">Logger sink configuration.</param>
         /// <param name="outputTemplate">A message template describing the format used to write to the sink.
@@ -30,7 +31,7 @@ namespace Askalhorn.Logging
         }
         
         /// <summary>
-        /// Writes log events to <see cref="Askalhorn.Logging.StringLineStorage"/>.
+        /// Writes log events to <see cref="LineStorage"/>.
         /// </summary>
         /// <param name="sinkConfiguration">Logger sink configuration.</param>
         /// <param name="outputTemplate">A message template describing the format used to write to the sink.
@@ -41,7 +42,7 @@ namespace Askalhorn.Logging
         {
             var buffer = new StringWriter(new StringBuilder(DefaultWriteBufferCapacity));
             formater.Format(logEvent, buffer);
-            StringLineStorage.WriteLine(buffer.ToString());
+            DebugConsole.LineStorage.Write(buffer.ToString());
         }
     }
 }

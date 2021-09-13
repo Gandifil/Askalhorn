@@ -15,6 +15,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Textures;
+using MLEM.Ui;
 using MonoGame.Extended;
 using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
@@ -166,7 +167,14 @@ namespace AmbrosiaGame.Screens
         {
             if (e.Key == _options.Keys[Options.KeyActions.Pause])
                 ScreenManager.LoadScreen(new PauseScreen(game, this, World));
+#if DEBUG
+            if (e.Key == Keys.OemTilde)
+                DebugConsole.Toggle();
             
+            if (DebugConsole.IsExist)
+                return;
+#endif
+
             if (e.Key == _options.Keys[Options.KeyActions.TopRight])
                 MovePlayer(new Point(0, -1));
 
@@ -179,9 +187,6 @@ namespace AmbrosiaGame.Screens
             if (e.Key == _options.Keys[Options.KeyActions.BottomRight])
                 MovePlayer(new Point(1, 0));
 
-            //if (e.Key == Keys.F)
-            //    World.Location[World.Player.Position].Build?.Action();
-
             if (e.Key == _options.Keys[Options.KeyActions.Character])
                 switcher.SwitchTo<CharacterTabComponent>();
 
@@ -193,10 +198,6 @@ namespace AmbrosiaGame.Screens
 
             if (e.Key == _options.Keys[Options.KeyActions.Abilities])
                 switcher.SwitchTo<AbilitiesTabComponent>();
-
-            
-           // if (e.Key == Keys.E)
-           //     World.playerController.AddMove(new AttackMove(World.Characters.ElementAt(1)));
 
             if (e.Key >= Keys.D0 && e.Key <= Keys.D9)
                 abilities.Run(e.Key - Keys.D0);

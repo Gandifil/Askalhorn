@@ -5,31 +5,37 @@ using System.ComponentModel;
 
 namespace Askalhorn.Logging
 {
-    public static class StringLineStorage
+    public class LineStorage
     {
         /// <summary>
-        /// Saved string lines.
+        /// Maximum count of saved strings
         /// </summary>
-        public static IEnumerable<string> Logs => lines;
-
-        private static ConcurrentQueue<string> lines = new ConcurrentQueue<string>();
-        private const int LINE_LIMIT = 10;
+        private const int MAX_COUNT = 50;
 
         /// <summary>
-        /// Write line to multithread storage.
+        /// Saved strings
+        /// </summary>
+        public IEnumerable<string> Logs => lines;
+
+        private ConcurrentQueue<string> lines = new ();
+
+        /// <summary>
+        /// Write line to storage.
         /// </summary>
         /// <param name="line">A message</param>
-        /// <param name="outputTemplate">A message template describing the format used to write to the sink.
-        /// The default is <code>"[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"</code>.</param>
         /// <exception cref="ArgumentNullException">When <paramref name="line"/> is empty or <code>null</code></exception>
-        public static void WriteLine(string line)
+        public void Write(string line)
         {
             if (string.IsNullOrEmpty(line))
                 throw new ArgumentNullException(nameof(line));
                 
             lines.Enqueue(line);
-            if (lines.Count > LINE_LIMIT)
+            if (lines.Count > MAX_COUNT)
                 lines.TryDequeue(out string _);
+            
+            OnWrited?.Invoke(line);
         }
+
+        public event Action<string> OnWrited;
     }
 }

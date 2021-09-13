@@ -38,8 +38,6 @@ namespace Askalhorn
 
         private UntexturedStyle style;
 
-        private DevelopConsole log;
-
         public AskalhornGame()
         {
             Graphics = new GraphicsDeviceManager(this);
@@ -75,7 +73,6 @@ namespace Askalhorn
             IsMouseVisible = true;
 
             Storage.Initialize(Content, GraphicsDevice);
-            log = new DevelopConsole(Content.Load<SpriteFont>("fonts/GameLogsFont"));
             LineRenderer.Initialize(GraphicsDevice);
             
             UiSystem = new UiSystem(this, style);
@@ -149,7 +146,6 @@ namespace Askalhorn
             base.Draw(gameTime);
 
             UiSystem.Draw(gameTime, SpriteBatch);
-            log.Draw(SpriteBatch);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Askalhorn.Elements
 {
     public class FixPanel: Panel
     {
-        private const int CHILD_PADDING = 10;
+        private const int CHILD_PADDING = 18;
         
         public FixPanel(Anchor anchor, float width, float height, bool scrollOverflow = false) : 
             base(anchor, new Vector2(width, height), new Vector2(width, height), false, 
