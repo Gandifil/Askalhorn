@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 
 namespace Askalhorn.Common
 {
-    public class Character: ICharacter
+    public class Character: GameObject, ICharacter
     {
         public string Name { get; set; }
         public IFraction Fraction { get; protected set; }
@@ -91,12 +91,6 @@ namespace Askalhorn.Common
 
         [JsonIgnore]
         public IController Controller { get; set; }
-        
-        [JsonIgnore]
-        public IRenderer Renderer { get; protected set; }
-
-        IPosition ICharacter.Position => Position;
-        public Position Position { get; set; }
 
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         public Dialog Dialog { get; set; }

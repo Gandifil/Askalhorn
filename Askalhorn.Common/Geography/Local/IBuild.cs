@@ -4,15 +4,11 @@ using Askalhorn.Common.Render;
 
 namespace Askalhorn.Common.Geography.Local
 {
-    public interface IBuild
+    public interface IBuild: IGameObject
     {
         public enum Types { None, Chest, Teleport}
         
-        IPosition Position { get; }
-        
         Types Type { get; }
-
-        IRenderer Renderer { get; }
         
         IImpact Impact { get; }
     }

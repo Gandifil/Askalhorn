@@ -1,23 +1,14 @@
-﻿using System;
-using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Inventory;
-using Askalhorn.Common.Inventory.Items;
-using Askalhorn.Common.Mechanics;
-using Askalhorn.Common.Mechanics.Impacts;
+﻿using Askalhorn.Common.Inventory;
 using Askalhorn.Common.Render;
-using Microsoft.Xna.Framework;
-using Serilog;
 
 namespace Askalhorn.Common.Geography.Local.Builds
 {
-    internal class Chest: HasPosition, IBuild
+    internal class Chest: Container, IBuild
     {
-        IPosition IBuild.Position => Position;
-
-        public IBuild.Types Type => IBuild.Types.Chest;
-        public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
-
-        public Bag Bag { get; set; }
-        public IImpact Impact => new OpenBagImpact(Bag);
+        public Chest(Bag bag)
+            :base("сундук", false, bag)
+        {
+            Renderer = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
+        }
     }
 }

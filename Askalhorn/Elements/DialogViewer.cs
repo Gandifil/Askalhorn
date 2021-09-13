@@ -26,7 +26,6 @@ namespace Askalhorn.Elements
             _image = new Image(Anchor.CenterRight, new Vector2(200, 200), _enumerator.Renderer.Region.ToMlem(), true);
             AddChild(_image);
 
-
             _answers = new MenuIB(Anchor.BottomLeft, .5f, .5f);
             AddChild(_answers);
 

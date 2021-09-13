@@ -143,11 +143,7 @@ namespace Askalhorn.Common
         private void RemoveCharacter(Character ch)
         {
             if (!ch.Bag.IsEmpty)
-                _location.AddBuild(new Chest()
-                {
-                    Position = ch.Position,
-                    Bag = ch.Bag,
-                });
+                _location.AddBuild(new LootContainer(ch));
         }
 
         internal void Turn()

@@ -6,18 +6,26 @@ using Askalhorn.Common.Render;
 
 namespace Askalhorn.Common.Geography.Local.Builds
 {
-    internal class Container: HasPosition, IBuild
+    internal class Container: GameObject, IBuild
     {
-        IPosition IBuild.Position => Position;
 
         public IBuild.Types Type => IBuild.Types.Chest;
-        public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
+        //public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
 
-        public Bag Bag { get; set; }
+        public readonly Bag Bag;
 
-        public bool IsOneTime { get; set; }
+        public readonly bool IsOneTime;
 
-        public string Name { get; set; }
+        public readonly string Name;
+
+        public Container(string name, bool isOneTime, Bag bag)
+        {
+            Name = name;
+
+            IsOneTime = isOneTime;
+
+            Bag = bag;
+        }
         
         public IImpact Impact => new OpenBagImpact(Bag);
     }

@@ -41,10 +41,9 @@ namespace Askalhorn.Common.Geography.Local.Spawners
             else
                 Askalhorn.Common.World.Instance.info.Bags.Add(bag);
             
-            location.AddBuild(new Chest()
+            location.AddBuild(new Chest(bag)
             {
                 Position = new Position(start),
-                Bag = bag,
             });
 
             index++;

@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Askalhorn.Common
 {
-    public interface ICharacter
+    public interface ICharacter: IGameObject
     {
         string Name { get; }
         
@@ -35,10 +35,6 @@ namespace Askalhorn.Common
         IAttributes<DamageTypes> Protection { get; }
         
         IReadOnlyDictionary<DamageTypes, int> ProtectionBase { get; }
-
-        IRenderer Renderer { get; }
-        
-        IPosition Position { get; }
         
         IEnumerable<MovementMove> AvailableMovements { get; }
         
