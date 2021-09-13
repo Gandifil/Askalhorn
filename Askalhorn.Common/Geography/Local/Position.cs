@@ -71,5 +71,12 @@ namespace Askalhorn.Common.Geography.Local
 
         [JsonIgnore]
         public Vector2 RenderVector => Vectors.Transform(Point);
+        
+        /// <summary>
+        /// Returns a <see cref="T:System.String" /> representation of this <see cref="T:Askalhorn.Common.Geography.Local.Position" /> in the format:
+        /// (X: <see cref="P:Askalhorn.Common.Geography.Local.Position.X" />, Y:<see cref="P:Askalhorn.Common.Geography.Local.Position.Y" />)
+        /// </summary>
+        /// <returns><see cref="T:System.String" /> representation of this <see cref="T:Askalhorn.Common.Geography.Local.Position" />.</returns>
+        public override string ToString() => $"({X}, {Y})";
     }
 }
