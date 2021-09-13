@@ -52,6 +52,7 @@ namespace Askalhorn.Elements
             _input.RemoveText(0, command.Length);
             
             LineStorage.Write((">>>  " + command).WithColor(COMMAND_COLOR));
+            World.Instance.RunConsoleCommand(command);
         }
 
         public override void Dispose()

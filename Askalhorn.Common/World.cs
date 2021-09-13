@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Askalhorn.Common.Characters;
+using Askalhorn.Common.Commands;
 using Askalhorn.Common.Control;
 using Askalhorn.Common.Geography;
 using Askalhorn.Common.Geography.Local;
@@ -165,6 +166,33 @@ namespace Askalhorn.Common
             foreach (var character in _characters)
                 character.Turn();
             OnTurn?.Invoke();
+        }
+
+        public void RunConsoleCommand(string line)
+        {
+#if DEBUG
+            try
+            {
+                if (string.IsNullOrEmpty(line))
+                    throw new ArgumentNullException(nameof(line));
+
+                var words = line.Split(' ');
+                var commandName = words.First();
+                var args = words.TakeLast(words.Length - 1);
+            
+                var type = Type.GetType($"Askalhorn.Common.Commands.{commandName}Command");
+                if (type is null)
+                    throw new ArgumentOutOfRangeException(nameof(line), 
+                        "Failed to find a command with name " + commandName);
+                
+                var command = (ICommand)Activator.CreateInstance(type);
+                command.Run(args.ToArray());
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, "Failed to run console command '{line}'", line);
+            }
+#endif
         }
     }
 }
