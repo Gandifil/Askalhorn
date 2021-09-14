@@ -34,7 +34,7 @@ namespace Askalhorn.Common.Mechanics.Impacts
 
             IQuest quest = new Quest(QuestName, QuestStep);
             
-            Log.Information(new TextPointer("journal", 3).ToString(), quest.Name);
+            Log.Information(new TextPointer("journal", "getQuestLog").ToString(), quest.Name);
 
             player.Journal.Quests.Add(quest);
         }

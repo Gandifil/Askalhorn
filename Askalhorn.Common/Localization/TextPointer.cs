@@ -20,7 +20,7 @@ namespace Askalhorn.Common.Localization
             var name = line.Substring(0, line.IndexOf(SEPARATOR));
             var index = line.Substring(line.IndexOf(SEPARATOR)+ 1);
 
-            return new TextPointer(name, Convert.ToUInt32(index));
+            return new TextPointer(name, index);
         }
     }
     
@@ -29,10 +29,10 @@ namespace Askalhorn.Common.Localization
     {
         public readonly string Name;
 
-        public readonly uint Index;
+        public readonly string Index;
 
         [JsonConstructor]
-        public TextPointer(string name, uint index)
+        public TextPointer(string name, string index)
         {
             Name = name;
             Index = index;
@@ -41,8 +41,8 @@ namespace Askalhorn.Common.Localization
         public override string ToString()
         {
             var filePath = $"texts/{Name}";
-            var lines = Storage.Content.Load<TextFile>(filePath);
-            return lines.Lines[Index];
+            var texts = Storage.Content.Load<TextFile>(filePath);
+            return texts[Index];
         }
     }
 }

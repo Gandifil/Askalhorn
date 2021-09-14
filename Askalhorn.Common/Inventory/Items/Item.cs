@@ -13,7 +13,7 @@ namespace Askalhorn.Common.Inventory.Items
         public string TooltipText =>
             @$"{Name}
 Тип: {Type}
-Редкость: {TextBank.Get("rarity", (int) Rarity).WithColor(RarityColors[(int) Rarity])}
+Редкость: {new TextPointer("rarity", Rarity.ToString()).ToString().WithColor(RarityColors[(int) Rarity])}
 Вес: {Weight} кг
 {Description}
 ";
