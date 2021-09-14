@@ -1,4 +1,7 @@
-﻿using Askalhorn.Common;
+﻿using System;
+using System.IO;
+using System.Linq;
+using Askalhorn.Common;
 using Askalhorn.Common.Localization;
 using Askalhorn.Logging;
 using Microsoft.Xna.Framework;
@@ -26,6 +29,8 @@ namespace Askalhorn.Elements
         
         private readonly FixPanel _output;
         private readonly TextField _input;
+
+        public Element InputField => _input;
         
         public DebugConsole(Anchor anchor, float width, float height) : base(anchor, width, height)
         {
@@ -38,6 +43,23 @@ namespace Askalhorn.Elements
             {
                 if (key == Keys.Enter)
                     EnterCommand();
+
+                if (key == Keys.Tab)
+                {
+                    try
+                    {
+                        var commandsHistory = File.ReadAllLines("console.txt");
+                        if (_historyIndex >= commandsHistory.Length)
+                            _historyIndex = 0;
+                        _input.SetText(commandsHistory[commandsHistory.Length - 1 - _historyIndex]);
+                        _historyIndex++;
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
+                else
+                    _historyIndex = 0;
             };
             AddChild(_input);
 
@@ -46,11 +68,21 @@ namespace Askalhorn.Elements
             LineStorage.OnWrited += Write;
         }
 
+        private int _historyIndex = 0;
+
         private void EnterCommand()
         {
             var command = _input.Text;
+
+            if (string.IsNullOrEmpty(command))
+                return;
+            
             _input.RemoveText(0, command.Length);
             
+            using (var sw = File.AppendText("console.txt"))
+            {
+                sw.WriteLine(command);
+            }	
             LineStorage.Write((">>>  " + command).WithColor(COMMAND_COLOR));
             World.Instance.RunConsoleCommand(command);
         }
@@ -80,7 +112,11 @@ namespace Askalhorn.Elements
             if (IsExist)
                 AskalhornGame.Instance.UiSystem.Remove(UI_NAME);
             else
-                AskalhornGame.Instance.UiSystem.Add(UI_NAME, new DebugConsole(Anchor.TopCenter, ELEMENT_WIDTH, 0.5f));
+            {
+                var console = new DebugConsole(Anchor.TopCenter, ELEMENT_WIDTH, 0.5f);
+                AskalhornGame.Instance.UiSystem.Add(UI_NAME, console)
+                    .SelectElement(console._input, true);
+            }
         }
     }
 }
