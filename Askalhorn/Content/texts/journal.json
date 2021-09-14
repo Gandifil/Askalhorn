@@ -1,6 +1,6 @@
 {
     "title": "Журнал",
     "questList": "Список заданий",
-    "description": "Описание",
+    "description": "Описание задания '{name}'",
     "getQuestLog": "Получено задание '{name}'"
 }
