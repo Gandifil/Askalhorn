@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Askalhorn.Common;
+using Askalhorn.Math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -90,7 +91,7 @@ namespace Askalhorn.Render
 
         public void Draw(SpriteBatch batch, Vector2 center)
         {
-            _particleEffect.Position = center;
+            _particleEffect.Position = center + Vectors.ToCenter;
             batch.Draw(_particleEffect);
         }
 

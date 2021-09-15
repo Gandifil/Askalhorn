@@ -25,7 +25,7 @@ namespace Askalhorn.Characters.Control.Moves
         {
             var location = Location.Current.Location;
             var pos = new Position(character.Position.Shift(Offset));
-            return location.Contain(pos) && !location[pos].IsWall && location.Find(pos) is null;
+            return location.Contain(pos) && !location[pos].IsWall && location[pos].DynamicObject is null;
         }
 
         void IMove.Make(Character character)

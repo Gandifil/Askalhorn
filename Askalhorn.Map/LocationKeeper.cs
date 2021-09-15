@@ -12,7 +12,7 @@ namespace Askalhorn.Map
         {
              Location = info.Generate(placeIndex);
              target.Position = Location.Places[(int)placeIndex];
-             Location.GameObjects.Add(target);
+             Location.Add(target);
              OnChange?.Invoke();
         }
     }

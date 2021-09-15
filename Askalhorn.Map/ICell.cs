@@ -1,5 +1,7 @@
 ﻿
-namespace Askalhorn.Map.Local
+using Askalhorn.Map.Builds;
+
+namespace Askalhorn.Map
 {
     public interface ICell
     {
@@ -7,6 +9,6 @@ namespace Askalhorn.Map.Local
         
         IBuild Build { get; }
 
-        //ICharacter Character { get; }
+        IGameObject DynamicObject { get; }
     }
 }

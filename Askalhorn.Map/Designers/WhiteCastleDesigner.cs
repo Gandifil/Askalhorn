@@ -1,9 +1,10 @@
 ﻿using System;
 using Askalhorn.Common;
+using Askalhorn.Map.Generators;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Tiled;
 
-namespace Askalhorn.Map.Local.Designers
+namespace Askalhorn.Map.Designers
 {
     class WhiteCastleDesigner: ILocationDesigner
     {

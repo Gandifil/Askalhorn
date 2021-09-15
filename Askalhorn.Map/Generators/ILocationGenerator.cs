@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Askalhorn.Map
+namespace Askalhorn.Map.Generators
 {
     internal interface ILocationGenerator
     {

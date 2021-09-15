@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Askalhorn.Common\Askalhorn.Common.csproj" />
+      <ProjectReference Include="..\Askalhorn.Math\Askalhorn.Math.csproj" />
     </ItemGroup>
 
 </Project>

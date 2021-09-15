@@ -1,4 +1,5 @@
 ﻿using Askalhorn.Common;
+using Askalhorn.Math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.TextureAtlases;
@@ -40,7 +41,7 @@ namespace Askalhorn.Render
 
         public void Draw(SpriteBatch batch, Vector2 center)
         {
-            batch.Draw(Region.Texture, center, Region.Bounds, Color.White);
+            batch.Draw(Region.Texture, center - Vectors.Origin, Region.Bounds, Color.White); //  - Vectors.Origin - Vectors.ToCenter
         }
     }
 }

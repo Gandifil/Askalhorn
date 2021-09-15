@@ -2,6 +2,7 @@
 using Askalhorn.Common;
 using Askalhorn.Inventory;
 using Askalhorn.Map;
+using Askalhorn.Map.Builds;
 using Askalhorn.Map.Local;
 
 namespace Askalhorn.Characters.Builds

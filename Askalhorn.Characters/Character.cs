@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Askalhorn.Characters.Abilities;
+using Askalhorn.Characters.Builds;
 using Askalhorn.Characters.Control;
 using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Characters.Effects;
@@ -247,16 +248,29 @@ namespace Askalhorn.Characters
             }
             
             Secondary = new Attributes<SecondaryTypes>(attrs);
-            
+
+            OnDisposed += o =>
+            {
+                Location.Current.Location.Add(new LootContainer(o as Character));
+            };
         }
 
-        public void Turn()
+        public override void Turn()
         {
-            HP.Current.Value += Secondary[SecondaryTypes.RegenHP].Value;
-            MP.Current.Value += Secondary[SecondaryTypes.RegenMagic].Value;
-            Effects.Turn();
-            foreach (var ability in Abilities)
-                ability.Turn();
+            if (HP.Current.Value <= 0)
+                Dispose(); // Die!
+            else
+            {
+                HP.Current.Value += Secondary[SecondaryTypes.RegenHP].Value;
+                MP.Current.Value += Secondary[SecondaryTypes.RegenMagic].Value;
+                
+                Effects.Turn();
+                foreach (var ability in Abilities)
+                    ability.Turn();
+
+                foreach (var move in Controller.Decide(this))
+                    move.Make(this);
+            }
         }
     }
 }

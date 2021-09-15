@@ -17,37 +17,37 @@
 #begin characters/ghost.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Characters.CharacterTypeInformationReader, Askalhorn.Characters
 /build:characters/ghost.json
 
 #begin characters/roxy_greyrat.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Characters.CharacterTypeInformationReader, Askalhorn.Characters
 /build:characters/roxy_greyrat.json
 
 #begin characters/skelet01.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Characters.CharacterTypeInformationReader, Askalhorn.Characters
 /build:characters/skelet01.json
 
 #begin characters/skelet02.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Characters.CharacterTypeInformationReader, Askalhorn.Characters
 /build:characters/skelet02.json
 
 #begin characters/skelet03.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Characters.CharacterTypeInformationReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Characters.CharacterTypeInformationReader, Askalhorn.Characters
 /build:characters/skelet03.json
 
 #begin dialogs/witch.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Plot.DialogReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Dialogs.DialogReader, Askalhorn.Dialogs
 /build:dialogs/witch.json
 
 #begin fonts/GameLogsFont.spritefont
@@ -226,6 +226,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/Test.png
+
+#begin locations/start.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Map.LocationPipelineReader, Askalhorn.Map
+/build:locations/start.json
 
 #begin maps/64x64.png
 /importer:TextureImporter

@@ -4,7 +4,7 @@
     "dialog": "witch",
     "controller":
     {
-        "$type": "Askalhorn.Common.Control.EmptyController, Askalhorn.Common"
+        "$type": "Askalhorn.Characters.Control.EmptyController, Askalhorn.Characters"
     },
     "renderer": {
         "fileName": "roxy_greyrat"

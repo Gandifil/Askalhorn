@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Askalhorn.Common;
+using Askalhorn.Map.Builds;
 using Askalhorn.Map.Local;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Tiled;
@@ -8,17 +10,19 @@ namespace Askalhorn.Map
 {
     public class Location: ILocation
     {
-        public TiledMap TiledMap { get; set; }
+        public TiledMap TiledMap { get; }
         
         ICell ILocation.this[IPosition position] => Cells[position.X, position.Y];
         
         public Cell this[IPosition position] => Cells[position.X, position.Y];
+        public Cell this[Point position] => Cells[position.X, position.Y];
 
         public readonly List<Position> Places = new();
 
+        public IReadOnlyCollection<IBuild> Builds => GameObjects.Where(x => x is IBuild).Select(x => x as IBuild).ToList();
+
         public Cell[,] Cells { get; private set; }
 
-        IReadOnlyCollection<IBuild> ILocation.Builds => Builds;
         public bool Contain(IPosition position)
         {
             return position.X > 0
@@ -26,8 +30,6 @@ namespace Askalhorn.Map
                    && position.X < TiledMap.Width
                    && position.Y < TiledMap.Height;
         }
-
-        public List<IBuild> Builds { get; private set; } = new List<IBuild>();
 
         public Location(uint width, uint height)
         {
@@ -73,34 +75,39 @@ namespace Askalhorn.Map
             Cells[x, y].IsWall = true;
         }
         
-        public void AddBuild(IBuild build)
+        public void Add(IGameObject obj)
         {
-            Builds.Add(build);
-            this[build.Position].Build = build;
+            GameObjects.Insert(0, obj);
+            this[obj.Position].Set(obj);
+            obj.OnMoved += GameObjectMoved;
+            obj.OnDisposed += Remove;
+        }
+
+        private void GameObjectMoved(IGameObject obj, IPosition from, IPosition to)
+        {
+            this[from].Remove(obj);
+            this[to].Set(obj);
+        }
+
+        private void Remove(IGameObject obj)
+        {
+            GameObjects.Remove(obj);
+            this[obj.Position].Remove(obj);
         }
 
         IReadOnlyCollection<IGameObject> ILocation.GameObjects => GameObjects;
 
         public List<IGameObject> GameObjects { get; } = new();
 
-         public IGameObject Find(IPosition position)
-         {
-             foreach (var character in GameObjects)
-                 if (character.Position.Point == position.Point)
-                     return character;
-
-             return null;
-         }
-
-         public IGameObject FindNear(IPosition position)
-         {
+        public IGameObject FindNear(IPosition position)
+        {
              foreach (var character in GameObjects)
                  if (character.Position.Point != position.Point && character.Position.IsInside(position, 1.5f))
                      return character;
 
              return null;
-         }
+        }
 
-         public static LocationKeeper Current = new LocationKeeper();
+        public static LocationKeeper Current = new LocationKeeper();
     }
 }

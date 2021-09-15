@@ -9,9 +9,9 @@
         }
     },
     "loot": {
-        "$type": "Askalhorn.Common.Inventory.BagFillers.StaticLootChooser, Askalhorn.Common",
+        "$type": "Askalhorn.Inventory.BagFillers.StaticLootChooser, Askalhorn.Inventory",
         "item": {
-            "$type": "Askalhorn.Common.Inventory.Items.LifePoition, Askalhorn.Common",
+            "$type": "Askalhorn.Characters.Items.LifePoition, Askalhorn.Characters",
             "Value": 10
         }
     }

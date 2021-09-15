@@ -1,6 +1,7 @@
 ﻿using System;
+using Askalhorn.Map.Generators;
 
-namespace Askalhorn.Map
+namespace Askalhorn.Map.Designers
 {
     internal interface ILocationDesigner
     {

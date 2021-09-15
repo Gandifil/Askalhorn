@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Askalhorn.Map.Local.Generators
+namespace Askalhorn.Map.Generators
 {
     class LabirintGenerator: OneRoomGenerator
     {

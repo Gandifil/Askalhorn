@@ -14,7 +14,8 @@ namespace Askalhorn.Core
 {
     public class GameProcess: TurnRunner
     {
-        public override IReadOnlyCollection<Character> Characters { get; }
+        public override IReadOnlyCollection<Character> Characters =>
+            Location.Current.Location.GameObjects.Select(x => x as Character).Where(x => x is not null).ToList();
 
         public static GameProcess Instance => TurnRunner.Instance as GameProcess;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Askalhorn.Map.Local.Spawners
+namespace Askalhorn.Map.Spawners
 {
     internal class MultipleSpawner: ISpawner
     {

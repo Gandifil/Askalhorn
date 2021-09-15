@@ -25,12 +25,12 @@ namespace Askalhorn.Characters.Control.Moves
         {
             var location = Location.Current.Location;
             var pos = new Position(target);
-            return location.Contain(pos) && !location[pos].IsWall && location.Find(pos) is null;
+            return location.Contain(pos) && !location[pos].IsWall && location[pos].DynamicObject is null;
         }
 
         void IMove.Make(Character character)
         {
-            character.Position.Point = target;
+            character.Position = new Position(target);
             
             Log.Debug("Player are moving to {target}", target);
         }

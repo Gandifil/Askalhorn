@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Askalhorn.Common;
+using Askalhorn.Map;
 
 namespace Askalhorn.Characters
 {
@@ -19,9 +20,8 @@ namespace Askalhorn.Characters
 
         public virtual void Turn()
         {
-            foreach (var character in Characters)
-                foreach (var move in character.Controller.Decide(character))
-                    move.Make(character);
+            foreach (var obj in Location.Current.Location.GameObjects)
+                obj.Turn();
         }
     }
 }

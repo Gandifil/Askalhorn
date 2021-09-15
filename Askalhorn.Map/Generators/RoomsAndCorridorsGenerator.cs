@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
-namespace Askalhorn.Map.Local.Generators
+namespace Askalhorn.Map.Generators
 {
     internal class RoomsAndCorridorsGenerator: ILocationGenerator
     {

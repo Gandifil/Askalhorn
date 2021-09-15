@@ -1,6 +1,6 @@
 ﻿using Askalhorn.Common;
 
-namespace Askalhorn.Map.Local
+namespace Askalhorn.Map.Builds
 {
     public interface IBuild: IGameObject
     {

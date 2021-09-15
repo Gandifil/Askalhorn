@@ -1,12 +1,35 @@
-﻿using Askalhorn.Map.Local;
+﻿using System;
+using Askalhorn.Map.Local;
 using Askalhorn.Render;
 
 namespace Askalhorn.Map
 {
-    public class GameObject : IGameObject
+    public abstract class GameObject : IGameObject
     {
-        public Position Position { get; set; }
+        private Position _position;
+        public Position Position
+        {
+            get => _position;
+            set
+            {
+                OnMoved?.Invoke(this, _position, value);
+                _position = value;
+            }
+        }
         
-        public IRenderer Renderer { get; set; } 
+        public IRenderer Renderer { get; set; }
+        public event Action<IGameObject> OnDisposed;
+        public event Action<IGameObject, IPosition, IPosition> OnMoved;
+
+        public virtual void Dispose()
+        {
+            OnDisposed?.Invoke(this);
+        }
+
+
+        public virtual void Turn()
+        {
+            
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Askalhorn.Map
+namespace Askalhorn.Map.Spawners
 {
     internal interface ISpawner
     {

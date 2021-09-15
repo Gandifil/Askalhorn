@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Askalhorn.Common;
 using Askalhorn.Common.Interpetators;
+using Askalhorn.Map.Designers;
+using Askalhorn.Map.Generators;
 using Askalhorn.Map.Local;
-using Askalhorn.Map.Local.Designers;
-using Askalhorn.Map.Local.Generators;
-using Askalhorn.Map.Local.Spawners;
+using Askalhorn.Map.Spawners;
 using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Map
@@ -113,5 +114,9 @@ namespace Askalhorn.Map
         //     }},
         // };
 
+    }
+    internal class LocationPipelineReader : PolymorphJsonReader<LocationPipeline>
+    {
+        
     }
 }

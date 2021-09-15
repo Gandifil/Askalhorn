@@ -247,8 +247,8 @@ namespace AmbrosiaGame.Screens
             mapRenderer.Draw(matrix);
             movements.Draw(spriteBatch, matrix);
 
-            foreach (var build in Location.Current.Location.GameObjects.Select(x => x as IBuild).Where(x => x is not null))
-                build.Renderer.Draw(spriteBatch, build.Position.RenderOriginVector);
+            foreach (var build in Location.Current.Location.Builds)
+                build.Renderer.Draw(spriteBatch, build.Position.RenderVector);
             
             foreach (var item in GameProcess.Characters)
                 characterRenderer.Draw(spriteBatch, item);

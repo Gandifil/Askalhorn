@@ -10,8 +10,6 @@ namespace Askalhorn.Map
         
         ICell this[IPosition position] { get; }
         
-        IReadOnlyCollection<IBuild> Builds { get; }
-        
         IReadOnlyCollection<IGameObject> GameObjects { get; }
 
         bool Contain(IPosition position);

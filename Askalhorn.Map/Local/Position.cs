@@ -1,4 +1,5 @@
-﻿using Askalhorn.Math;
+﻿using System;
+using Askalhorn.Math;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 
@@ -9,8 +10,7 @@ namespace Askalhorn.Map.Local
     /// </summary>
     public class Position: IPosition
     {
-        [JsonIgnore]
-        public Point Point { get; set; }
+        [JsonIgnore] public Point Point { get; }
 
         public uint X => (uint)Point.X;
 
@@ -62,7 +62,7 @@ namespace Askalhorn.Map.Local
         {
             return (center.Point - Point).ToVector2().Length() < radius;
         }
-        
+
         [JsonIgnore]
         public Vector2 RenderTileVector => RenderVector - Vectors.Origin;
         

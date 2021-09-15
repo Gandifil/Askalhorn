@@ -1,8 +1,9 @@
 ﻿using System;
 using Askalhorn.Common.Interpetators;
+using Askalhorn.Map.Local;
 using Newtonsoft.Json;
 
-namespace Askalhorn.Map.Local.Spawners
+namespace Askalhorn.Map.Spawners
 {
     internal class Spawner: ISpawner
     {
@@ -19,7 +20,7 @@ namespace Askalhorn.Map.Local.Spawners
         
         public void Initialize(Location location, Random random, int[] args, uint placeIndex)
         {
-            Location.Current.Location.GameObjects.Add(
+            location.Add(
                 Builder.Build(PositionExpression.Generate(new LocationExpressionArgs
             {
                 Location = location,
