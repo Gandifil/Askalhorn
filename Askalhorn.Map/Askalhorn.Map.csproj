@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Askalhorn.Common\Askalhorn.Common.csproj" />
+      <ProjectReference Include="..\Askalhorn.Math\Askalhorn.Math.csproj" />
+      <ProjectReference Include="..\Askalhorn.Render\Askalhorn.Render.csproj" />
+    </ItemGroup>
+
+</Project>

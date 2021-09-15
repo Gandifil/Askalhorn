@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Askalhorn.Common.Inventory;
 using Askalhorn.Elements.Inventory.Search;
+using Askalhorn.Inventory;
 using MLEM.Ui;
 
 namespace Askalhorn.Elements.Inventory

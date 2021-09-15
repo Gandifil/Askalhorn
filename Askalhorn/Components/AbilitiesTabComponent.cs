@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AmbrosiaGame.Screens;
+using Askalhorn.Characters;
 using Askalhorn.Common;
-using Askalhorn.Common.Mechanics;
 using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
@@ -98,7 +98,7 @@ namespace Askalhorn.Components
             var box = new FixPanel(Anchor.CenterLeft, 0.45f, 0.9f);
 
             box.AddChild(new Paragraph(Anchor.AutoCenter, 300, "Способности"));
-            items = screen.World.Player.Abilities.Select(x => new Item(x)).ToList();
+            items = screen.GameProcess.Player.Abilities.Select(x => new Item(x)).ToList();
             foreach (var item in items)
             {
                 box.AddChild(new VerticalSpace(15));

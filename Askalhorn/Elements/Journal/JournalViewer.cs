@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Askalhorn.Common.Localization;
-using Askalhorn.Common.Plot.Quests;
+using Askalhorn.Plot;
+using Askalhorn.Text;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 

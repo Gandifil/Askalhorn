@@ -1,3 +1,0 @@
-﻿namespace Askalhorn.Common.Mechanics
-{
-}

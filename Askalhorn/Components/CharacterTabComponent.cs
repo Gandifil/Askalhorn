@@ -1,7 +1,7 @@
 ﻿using System;
 using AmbrosiaGame.Screens;
+using Askalhorn.Characters;
 using Askalhorn.Common;
-using Askalhorn.Common.Mechanics;
 using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
@@ -23,7 +23,7 @@ namespace Askalhorn.Components
         
         public void Initialize()
         {
-            screen.game.UiSystem.Add(NAME, Create(screen.World.Player));
+            screen.game.UiSystem.Add(NAME, Create(screen.GameProcess.Player));
         }
         
         private static Element Create(ICharacter character)

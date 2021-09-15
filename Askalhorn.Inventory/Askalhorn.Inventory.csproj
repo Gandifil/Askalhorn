@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Askalhorn.Common\Askalhorn.Common.csproj" />
+      <ProjectReference Include="..\Askalhorn.Render\Askalhorn.Render.csproj" />
+      <ProjectReference Include="..\Askalhorn.Text\Askalhorn.Text.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+</Project>

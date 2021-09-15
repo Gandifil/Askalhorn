@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using AmbrosiaGame.Screens;
+using Askalhorn.Characters;
+using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Common;
-using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Mechanics;
+using Askalhorn.Core;
 using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
@@ -93,14 +94,14 @@ namespace Askalhorn.Components
                 {
                     if (_ability.Type == IAbility.TargetType.Self)
                     {
-                        World.Instance.playerController.AddMove(_move);
+                        GameProcess.Instance.Player.Make(_move);
                         screen.movements.AvailableAbilities = new List<UseAbilityMove>();
                     }
 
                     if (_ability.Type == IAbility.TargetType.Character)
                     {
                         screen.movements.AvailableAbilities = screen
-                            .World.Characters
+                            .GameProcess.Characters
                             .Where(x => x != character && x.Position.IsInside(character.Position, _ability.Radius))
                             .Select(x =>
                                 new UseAbilityMove()

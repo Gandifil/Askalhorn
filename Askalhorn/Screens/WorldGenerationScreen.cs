@@ -1,6 +1,6 @@
 ﻿using System;
-using Askalhorn.Common.Geography.World;
-using Askalhorn.Common.Geography.World.Render;
+using Askalhorn.World;
+using Askalhorn.World.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Font;
@@ -19,7 +19,7 @@ namespace Askalhorn.Screens
         private SpriteBatch spriteBatch;
         private IMapProvider mapProvider = new PerlinNoise(8, 1024, 1024);
         private IMapRenderer mapRenderer;
-        private Map map;
+        private World.Map map;
 
         public WorldGenerationScreen(Game game)
             : base(game)

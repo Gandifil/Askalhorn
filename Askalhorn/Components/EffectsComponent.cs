@@ -1,7 +1,6 @@
 ﻿using AmbrosiaGame.Screens;
+using Askalhorn.Characters;
 using Askalhorn.Common;
-using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Mechanics;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Ui;

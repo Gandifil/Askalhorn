@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Askalhorn.Dialogs\Askalhorn.Dialogs.csproj" />
+      <ProjectReference Include="..\Askalhorn.Inventory\Askalhorn.Inventory.csproj" />
+      <ProjectReference Include="..\Askalhorn.Map\Askalhorn.Map.csproj" />
+      <ProjectReference Include="..\Askalhorn.Plot\Askalhorn.Plot.csproj" />
+      <ProjectReference Include="..\Askalhorn.Utils\Askalhorn.Utils.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Serilog" Version="2.10.0" />
+    </ItemGroup>
+
+</Project>

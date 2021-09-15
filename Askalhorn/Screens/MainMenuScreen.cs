@@ -1,5 +1,6 @@
 ﻿using AmbrosiaGame.Screens;
 using Askalhorn.Common;
+using Askalhorn.Core;
 using Askalhorn.Elements;
 using Askalhorn.Screens.Configuration;
 using Microsoft.Xna.Framework;
@@ -29,8 +30,8 @@ namespace Askalhorn.Screens
         public override void Initialize()
         {
             _menu.AddButton("Новая карта", () => ScreenManager.LoadScreen(new WorldGenerationScreen(game)));
-            _menu.AddButton("Играть", () => ScreenManager.LoadScreen(new GameProcessScreen(game, new World())));
-            _menu.AddButton("Загрузить", () => ScreenManager.LoadScreen(new GameProcessScreen(game, new World("quicksave"))));
+            _menu.AddButton("Играть", () => ScreenManager.LoadScreen(new GameProcessScreen(game, new GameProcess())));
+            _menu.AddButton("Загрузить", () => ScreenManager.LoadScreen(new GameProcessScreen(game, new GameProcess("quicksave"))));
             _menu.AddButton("Настройки", () => ScreenManager.LoadScreen(new MainSettings(game, this)));
             _menu.AddButton("Выход", () => game.Exit());
             _menu.Initialize();

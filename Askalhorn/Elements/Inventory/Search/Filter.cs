@@ -1,6 +1,7 @@
 ﻿using System;
 using Askalhorn.Common;
-using Askalhorn.Common.Inventory;
+using Askalhorn.Inventory;
+using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Elements.Inventory.Search

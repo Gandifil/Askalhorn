@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Askalhorn.Common.Localization;
 using Askalhorn.Elements;
+using Askalhorn.Text;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Formatting;

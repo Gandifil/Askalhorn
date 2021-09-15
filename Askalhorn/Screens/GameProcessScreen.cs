@@ -3,11 +3,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using Askalhorn;
+using Askalhorn.Characters;
+using Askalhorn.Characters.Control.Moves;
+using Askalhorn.Characters.Impacts;
 using Askalhorn.Common;
-using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Geography.Local;
 using Askalhorn.Components;
+using Askalhorn.Core;
 using Askalhorn.Elements;
+using Askalhorn.Map;
+using Askalhorn.Map.Local;
 using Askalhorn.Render;
 using Askalhorn.Screens;
 using Askalhorn.Settings;
@@ -30,7 +34,7 @@ namespace AmbrosiaGame.Screens
         private SpriteBatch spriteBatch;
         private OrthographicCamera camera;
         
-        public readonly World World;
+        public readonly GameProcess GameProcess;
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
         public MovementTiles movements;
@@ -41,21 +45,23 @@ namespace AmbrosiaGame.Screens
         private AbilitiesComponent abilities;
         private Options _options;
 
-        public GameProcessScreen(AskalhornGame game, World world)
+        public GameProcessScreen(AskalhornGame game, GameProcess gameProcess)
             : base(game)
         {
             this.game = game;
-            this.World = world;
-            world.OnTurn += UpdateMovements;
-            world.OnTurn += UpdateActions;
-            world.OnTurn += LookAtPlayer;
-            world.OnOpenBag += bag =>
+            
+            this.GameProcess = gameProcess;
+            gameProcess.OnTurned += UpdateMovements;
+            gameProcess.OnTurned += UpdateActions;
+            gameProcess.OnTurned += LookAtPlayer;
+            
+            OpenBagImpact.OnBagOpened += bag =>
             {
-                switcher.SwitchTo(new ExchangeTabComponent(this, bag, world.Player.Bag));
+                switcher.SwitchTo(new ExchangeTabComponent(this, bag, gameProcess.Player.Bag));
             };
-            world.OnChangeLocation += UpdateMap;
-            world.OnChangeLocation += UpdateActions;
-            world.OnChangeLocation += LookAtPlayer;
+            Location.Current.OnChange += UpdateMap;
+            Location.Current.OnChange += UpdateActions;
+            Location.Current.OnChange += LookAtPlayer;
             
             _options = Configuration.Options;
         }
@@ -64,55 +70,55 @@ namespace AmbrosiaGame.Screens
         {
             actions.Clear();
 
-            var build = World.Location[World.Player.Position].Build;
-            if (build is not null)
-            {
-                switch (build.Type)
-                {
-                    case IBuild.Types.Chest:
-                        actions.Add(new ActionBlock
-                        {
-                            Region = Storage.Load("guiactions", 1, 0),
-                            Key = _options.Keys[Options.KeyActions.Use],
-                            Action = () => World.Location[World.Player.Position].Build.Impact.On((Character)World.Player)
-                        });
-                        break;
-                    case IBuild.Types.Teleport:
-                        actions.Add(new ActionBlock
-                        {
-                            Region = Storage.Load("guiactions", 2, 0),
-                            Key = _options.Keys[Options.KeyActions.Use],
-                            Action = () => World.Location[World.Player.Position].Build.Impact.On((Character)World.Player)
-                        });
-                        break;
-                    default:
-                        break;
-                }     
-            }
-
-            var characterNear = World.FindNear(World.Player.Position);
-            if (characterNear is not null)
-            {
-                if (characterNear.Dialog is not null)
-                    actions.Add(new ActionBlock
-                    {
-                        Region = Storage.Load("guiactions", 0, 0),
-                        Key = _options.Keys[Options.KeyActions.Use],
-                        Action = () => switcher.SwitchTo(new DialogTabComponent(characterNear.Dialog))
-                    });
-            }
-            
+            // var build = GameProcess.Location[GameProcess.Player.Position].Build;
+            // if (build is not null)
+            // {
+            //     switch (build.Type)
+            //     {
+            //         case IBuild.Types.Chest:
+            //             actions.Add(new ActionBlock
+            //             {
+            //                 Region = Storage.Load("guiactions", 1, 0),
+            //                 Key = _options.Keys[Options.KeyActions.Use],
+            //                 Action = () => GameProcess.Location[GameProcess.Player.Position].Build.Impact.On((Character)GameProcess.Player)
+            //             });
+            //             break;
+            //         case IBuild.Types.Teleport:
+            //             actions.Add(new ActionBlock
+            //             {
+            //                 Region = Storage.Load("guiactions", 2, 0),
+            //                 Key = _options.Keys[Options.KeyActions.Use],
+            //                 Action = () => GameProcess.Location[GameProcess.Player.Position].Build.Impact.On((Character)GameProcess.Player)
+            //             });
+            //             break;
+            //         default:
+            //             break;
+            //     }     
+            // }
+            //
+            // var characterNear = GameProcess.FindNear(GameProcess.Player.Position);
+            // if (characterNear is not null)
+            // {
+            //     if (characterNear.Dialog is not null)
+            //         actions.Add(new ActionBlock
+            //         {
+            //             Region = Storage.Load("guiactions", 0, 0),
+            //             Key = _options.Keys[Options.KeyActions.Use],
+            //             Action = () => switcher.SwitchTo(new DialogTabComponent(characterNear.Dialog))
+            //         });
+            // }
+            //
         }
         
         private void LookAtPlayer()
         {
-            camera.LookAt(World.Player.Position.RenderVector);
+            camera.LookAt(GameProcess.Player.Position.RenderVector);
         }
 
 
         private void UpdateMap()
         {
-            mapRenderer.LoadMap(World.Location.TiledMap);
+            mapRenderer.LoadMap(Location.Current.Location.TiledMap);
         }
 
         public override void Initialize()
@@ -141,32 +147,31 @@ namespace AmbrosiaGame.Screens
             Game.Components.Add(switcher);
             actions = new ActionsComponent(game);
             Game.Components.Add(actions);
-            effects = new EffectsComponent(this, World.Player);
-            World.OnTurn += effects.Update;
+            effects = new EffectsComponent(this, GameProcess.Player);
+            GameProcess.OnTurned += effects.Update;
             Game.Components.Add(effects);
-            abilities = new AbilitiesComponent(this, World.Player);
+            abilities = new AbilitiesComponent(this, GameProcess.Player);
             Game.Components.Add(abilities);
-            movements = new MovementTiles(World.Player);
+            movements = new MovementTiles(GameProcess.Player);
             UpdateMovements();
         }
 
         private void MovePlayer(Point shift)
         {
-            World.playerController.AddMove(new MovementMove(shift));
+            GameProcess.Instance.Player.Make(new MovementMove(shift));
         }
 
 
         private void MouseClick(object sender, MouseEventArgs args)
         {
             var move = movements.CheckClick(args.Position, camera.GetViewMatrix());
-            if (move is not null && move.IsValid(World.Player))
-                World.playerController.AddMove(move);
+            GameProcess.Instance.Player.Make(move);
         }
 
         private void KeyRelease(object sender, KeyboardEventArgs e)
         {
             if (e.Key == _options.Keys[Options.KeyActions.Pause])
-                ScreenManager.LoadScreen(new PauseScreen(game, this, World));
+                ScreenManager.LoadScreen(new PauseScreen(game, this));
 #if DEBUG
             if (e.Key == Keys.OemTilde)
                 DebugConsole.Toggle();
@@ -206,7 +211,7 @@ namespace AmbrosiaGame.Screens
         private void UpdateMovements()
         {
             movements.AvailableAbilities = new List<UseAbilityMove>();
-            movements.AvailableMovements = World.Player.AvailableMovements;
+            movements.AvailableMovements = GameProcess.Player.AvailableMovements;
         }
 
         public override void LoadContent()
@@ -229,8 +234,8 @@ namespace AmbrosiaGame.Screens
         {
 
             mapRenderer.Update(gameTime);
-            foreach (var build in World.Location.Builds)
-                build.Renderer.Update(gameTime);
+            foreach (var gameObject in Location.Current.Location.GameObjects)
+                gameObject.Renderer.Update(gameTime);
         }
         
         public override void Draw(GameTime gameTime)
@@ -242,10 +247,10 @@ namespace AmbrosiaGame.Screens
             mapRenderer.Draw(matrix);
             movements.Draw(spriteBatch, matrix);
 
-            foreach (var build in World.Location.Builds)
-                build.Renderer.Draw(spriteBatch, build.Position);
+            foreach (var build in Location.Current.Location.GameObjects.Select(x => x as IBuild).Where(x => x is not null))
+                build.Renderer.Draw(spriteBatch, build.Position.RenderOriginVector);
             
-            foreach (var item in World.Characters)
+            foreach (var item in GameProcess.Characters)
                 characterRenderer.Draw(spriteBatch, item);
             spriteBatch.End();
         }

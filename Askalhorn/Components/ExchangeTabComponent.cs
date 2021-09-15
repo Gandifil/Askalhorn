@@ -1,8 +1,8 @@
 ﻿using System;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
-using Askalhorn.Common.Inventory;
 using Askalhorn.Elements.Inventory;
+using Askalhorn.Inventory;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Extended.Extensions;

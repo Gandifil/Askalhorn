@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
-using Askalhorn.Common.Geography.Local;
+using Askalhorn.Core;
 using Askalhorn.Elements;
 using Askalhorn.Screens.Configuration;
 using Microsoft.Xna.Framework;
@@ -15,20 +15,18 @@ namespace Askalhorn.Screens
     public class PauseScreen: BackScreenBase
     {
         public AskalhornGame _game;
-        public readonly World _world;
         private readonly Menu _menu;
 
-        public PauseScreen(AskalhornGame game, GameScreen backScreen, World world)
+        public PauseScreen(AskalhornGame game, GameScreen backScreen)
             : base(game, backScreen)
         {
             _game = game;
-            _world = world;
             _menu = new Menu(game.UiSystem);
         }
 
         private void QuickSave()
         {
-            _world.Save("quicksave");
+            GameProcess.Instance.Save("quicksave");
             Back();
         }
 

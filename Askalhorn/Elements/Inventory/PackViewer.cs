@@ -1,6 +1,7 @@
-﻿using Askalhorn.Common;
-using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Inventory;
+﻿using Askalhorn.Characters.Control.Moves;
+using Askalhorn.Common;
+using Askalhorn.Core;
+using Askalhorn.Inventory;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -40,7 +41,7 @@ namespace Askalhorn.Elements.Inventory
 
         protected virtual void DoubleClick(Element element)
         {
-            World.Instance.playerController.AddMove(new UseItemMove(_pack.Item));
+            GameProcess.Instance.Player.Make(new UseItemMove(_pack.Item));
         }
 
         private void SetSelecting(Element element)

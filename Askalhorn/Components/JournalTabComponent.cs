@@ -2,8 +2,6 @@
 using System.Linq;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
-using Askalhorn.Common.Mechanics;
-using Askalhorn.Common.Plot.Quests;
 using Askalhorn.Elements.Journal;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
@@ -24,7 +22,7 @@ namespace Askalhorn.Components
 
         public void Initialize()
         {
-            screen.game.UiSystem.Add(NAME, new JournalViewer(screen.World.Player.Journal, Anchor.Center, 0.9f, 0.9f));
+            screen.game.UiSystem.Add(NAME, new JournalViewer(screen.GameProcess.Player.Journal, Anchor.Center, 0.9f, 0.9f));
         }
 
         public void Dispose()

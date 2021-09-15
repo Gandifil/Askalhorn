@@ -1,5 +1,5 @@
 ﻿using System;
-using Askalhorn.Common.Plot.Quests;
+using Askalhorn.Plot;
 using MLEM.Ui;
 
 namespace Askalhorn.Elements.Journal

@@ -2,8 +2,9 @@
 using System.IO;
 using System.Linq;
 using Askalhorn.Common;
-using Askalhorn.Common.Localization;
+using Askalhorn.Core;
 using Askalhorn.Logging;
+using Askalhorn.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -84,7 +85,7 @@ namespace Askalhorn.Elements
                 sw.WriteLine(command);
             }	
             LineStorage.Write((">>>  " + command).WithColor(COMMAND_COLOR));
-            World.Instance.RunConsoleCommand(command);
+            GameProcess.Instance.RunConsoleCommand(command);
         }
 
         public override void Dispose()

@@ -1,7 +1,7 @@
 ﻿using System;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
-using Askalhorn.Common.Plot;
+using Askalhorn.Dialogs;
 using Askalhorn.Elements;
 using Askalhorn.Elements.Inventory.Search;
 using Microsoft.Xna.Framework;

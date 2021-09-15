@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AmbrosiaGame.Screens;
+using Askalhorn.Characters;
 using Askalhorn.Common;
-using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Inventory;
 using Askalhorn.Elements;
 using Askalhorn.Elements.Icons;
 using Askalhorn.Elements.Inventory;
@@ -28,7 +27,7 @@ namespace Askalhorn.Components
         
         public void Initialize()
         {
-            screen.game.UiSystem.Add(NAME, Create(screen.World.Player));
+            screen.game.UiSystem.Add(NAME, Create(screen.GameProcess.Player));
         }
 
         public void Dispose()

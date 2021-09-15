@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using Askalhorn.Characters;
+using Askalhorn.Characters.Control;
+using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Common;
-using Askalhorn.Common.Control;
-using Askalhorn.Common.Control.Moves;
-using Askalhorn.Common.Geography.Local;
-using Askalhorn.Common.Maths;
+using Askalhorn.Math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

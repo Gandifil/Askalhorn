@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
-using Askalhorn.Common.Inventory;
+using Askalhorn.Inventory;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;

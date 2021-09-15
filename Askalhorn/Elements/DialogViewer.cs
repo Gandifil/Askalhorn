@@ -1,4 +1,4 @@
-﻿using Askalhorn.Common.Plot;
+﻿using Askalhorn.Dialogs;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Ui;

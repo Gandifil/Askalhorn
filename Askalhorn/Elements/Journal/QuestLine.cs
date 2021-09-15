@@ -1,4 +1,4 @@
-﻿using Askalhorn.Common.Plot.Quests;
+﻿using Askalhorn.Plot;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 

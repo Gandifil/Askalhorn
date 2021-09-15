@@ -1,4 +1,4 @@
-﻿using Askalhorn.Common.Inventory;
+﻿using Askalhorn.Inventory;
 using MLEM.Ui;
 
 namespace Askalhorn.Elements.Inventory

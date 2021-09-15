@@ -1,6 +1,6 @@
 ﻿using System;
 using Askalhorn.Common;
-using Askalhorn.Common.Inventory;
+using Askalhorn.Inventory;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MonoGame.Extended.Content;

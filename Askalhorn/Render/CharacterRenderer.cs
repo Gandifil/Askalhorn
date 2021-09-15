@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common;
+﻿using Askalhorn.Characters;
+using Askalhorn.Common;
 using Askalhorn.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,8 +26,7 @@ namespace Askalhorn.Render
         public void Draw(SpriteBatch batch, ICharacter character)
         {
             var target = character.Position.RenderTileVector;
-            character.Renderer.Draw(batch, character.Position);
-            //batch.Draw(character.Re, target, Color.White);
+            character.Renderer.Draw(batch, character.Position.RenderOriginVector);
             target.Y += 64;
             
             // hp

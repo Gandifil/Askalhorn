@@ -1,5 +1,6 @@
 ﻿using System;
 using Askalhorn.Common;
+using Askalhorn.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Extended.Extensions;
