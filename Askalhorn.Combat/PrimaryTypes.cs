@@ -1,4 +1,4 @@
-﻿namespace Askalhorn.Characters
+﻿namespace Askalhorn.Combat
 {
     public enum PrimaryTypes
     {

@@ -11,6 +11,7 @@ using Askalhorn.Components;
 using Askalhorn.Core;
 using Askalhorn.Elements;
 using Askalhorn.Map;
+using Askalhorn.Map.Builds;
 using Askalhorn.Map.Local;
 using Askalhorn.Render;
 using Askalhorn.Screens;
@@ -70,44 +71,30 @@ namespace AmbrosiaGame.Screens
         {
             actions.Clear();
 
-            // var build = GameProcess.Location[GameProcess.Player.Position].Build;
-            // if (build is not null)
-            // {
-            //     switch (build.Type)
-            //     {
-            //         case IBuild.Types.Chest:
-            //             actions.Add(new ActionBlock
-            //             {
-            //                 Region = Storage.Load("guiactions", 1, 0),
-            //                 Key = _options.Keys[Options.KeyActions.Use],
-            //                 Action = () => GameProcess.Location[GameProcess.Player.Position].Build.Impact.On((Character)GameProcess.Player)
-            //             });
-            //             break;
-            //         case IBuild.Types.Teleport:
-            //             actions.Add(new ActionBlock
-            //             {
-            //                 Region = Storage.Load("guiactions", 2, 0),
-            //                 Key = _options.Keys[Options.KeyActions.Use],
-            //                 Action = () => GameProcess.Location[GameProcess.Player.Position].Build.Impact.On((Character)GameProcess.Player)
-            //             });
-            //             break;
-            //         default:
-            //             break;
-            //     }     
-            // }
-            //
-            // var characterNear = GameProcess.FindNear(GameProcess.Player.Position);
-            // if (characterNear is not null)
-            // {
-            //     if (characterNear.Dialog is not null)
-            //         actions.Add(new ActionBlock
-            //         {
-            //             Region = Storage.Load("guiactions", 0, 0),
-            //             Key = _options.Keys[Options.KeyActions.Use],
-            //             Action = () => switcher.SwitchTo(new DialogTabComponent(characterNear.Dialog))
-            //         });
-            // }
-            //
+            var build = Location.Current.Location[GameProcess.Player.Position].Build;
+            if (build is not null)
+            {
+                actions.Add(new ActionBlock
+                {
+                    Region = Storage.Load("guiactions", (uint)(build.Type == IBuild.Types.Chest ? 1 : 2), 0),
+                    Key = _options.Keys[Options.KeyActions.Use],
+                    Action = () => Location.Current.Location[GameProcess.Player.Position].Build.Impact.On((Character)GameProcess.Player)
+                });
+            }
+            
+            var characterNear = Location.Current.Location
+                .FindNear(GameProcess.Player.Position, x => x is ICharacter) as ICharacter;
+            if (characterNear is not null)
+            {
+                if (characterNear.Dialog is not null)
+                    actions.Add(new ActionBlock
+                    {
+                        Region = Storage.Load("guiactions", 0, 0),
+                        Key = _options.Keys[Options.KeyActions.Use],
+                        Action = () => switcher.SwitchTo(new DialogTabComponent(characterNear.Dialog))
+                    });
+            }
+            
         }
         
         private void LookAtPlayer()

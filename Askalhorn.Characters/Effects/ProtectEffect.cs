@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common;
+﻿using Askalhorn.Combat;
+using Askalhorn.Common;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects

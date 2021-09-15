@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Askalhorn.Utils;
-using Newtonsoft.Json;
 
-namespace Askalhorn.Characters
+namespace Askalhorn.Combat
 {
     public class Attributes<T>: IAttributes<T> where T : Enum
     {

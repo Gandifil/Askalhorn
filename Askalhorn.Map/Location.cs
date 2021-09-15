@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Askalhorn.Common;
 using Askalhorn.Map.Builds;
@@ -99,13 +100,23 @@ namespace Askalhorn.Map
 
         public List<IGameObject> GameObjects { get; } = new();
 
-        public IGameObject FindNear(IPosition position)
+        public IGameObject FindNear(IPosition position, Func<IGameObject, bool> p)
         {
-             foreach (var character in GameObjects)
-                 if (character.Position.Point != position.Point && character.Position.IsInside(position, 1.5f))
-                     return character;
+            for (uint x = position.X - 1; x <= position.X + 1; x++)
+            for (uint y = position.Y - 1; y <= position.Y + 1; y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+                
+                var cell = Cells[(int) x, (int) y];
+                if (cell.Build is not null && p(cell.Build))
+                    return cell.Build;
 
-             return null;
+                if (cell.DynamicObject is not null && p(cell.DynamicObject))
+                    return cell.DynamicObject;
+            }
+
+            return null;
         }
 
         public static LocationKeeper Current = new LocationKeeper();

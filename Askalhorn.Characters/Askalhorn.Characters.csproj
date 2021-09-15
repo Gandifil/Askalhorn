@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Askalhorn.Combat\Askalhorn.Combat.csproj" />
       <ProjectReference Include="..\Askalhorn.Dialogs\Askalhorn.Dialogs.csproj" />
       <ProjectReference Include="..\Askalhorn.Inventory\Askalhorn.Inventory.csproj" />
       <ProjectReference Include="..\Askalhorn.Map\Askalhorn.Map.csproj" />

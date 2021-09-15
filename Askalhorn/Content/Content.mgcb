@@ -333,18 +333,18 @@
 #begin texts/FindProvisionQuest.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Localization.TextFileReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/FindProvisionQuest.json
 
 #begin texts/journal.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Localization.TextFileReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/journal.json
 
 #begin texts/rarity.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Localization.TextFileReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/rarity.json
 

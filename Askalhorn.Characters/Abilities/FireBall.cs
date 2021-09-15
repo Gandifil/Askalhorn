@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Characters.Impacts;
 using Askalhorn.Characters.Interpretators;
+using Askalhorn.Combat;
 using Askalhorn.Common;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;

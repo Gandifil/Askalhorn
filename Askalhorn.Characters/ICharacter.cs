@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Characters.Control.Moves;
+using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Dialogs;
 using Askalhorn.Inventory;

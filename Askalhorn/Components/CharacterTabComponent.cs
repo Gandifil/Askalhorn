@@ -1,6 +1,7 @@
 ﻿using System;
 using AmbrosiaGame.Screens;
 using Askalhorn.Characters;
+using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Elements;
 using Microsoft.Xna.Framework;

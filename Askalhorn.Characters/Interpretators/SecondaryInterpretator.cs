@@ -1,4 +1,6 @@
-﻿namespace Askalhorn.Characters.Interpretators
+﻿using Askalhorn.Combat;
+
+namespace Askalhorn.Characters.Interpretators
 {
     internal class SecondaryInterpretator: IInterpretator
     {
