@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Askalhorn.Characters.Effects;
 using Askalhorn.Characters.Impacts;
 using Askalhorn.Characters.Interpretators;
@@ -67,6 +68,7 @@ namespace Askalhorn.Characters.Abilities
         {
             var args = new CharacterExpressionArgs()
             {
+                Random = new Random(),
                 Character = character,
             };
             var healEffect = new ImpactEffect(

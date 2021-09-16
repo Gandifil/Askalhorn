@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Askalhorn.Characters.Impacts;
 using Askalhorn.Characters.Interpretators;
 using Askalhorn.Combat;
@@ -20,7 +21,7 @@ namespace Askalhorn.Characters.Abilities
         public override int CoolDown { get; } = 0;
 
         private int _baseMagicCost = 20;
-        public override int MagicCost => _baseMagicCost / (CurrentModification == 3 ? 2 : 1);
+        public override int MagicCost => _baseMagicCost / (CurrentModification == 2 ? 2 : 1);
         public override uint MaxSkill => 10;
         public override SoundEffect CastSound => Storage.LoadSound("steam");
 
@@ -55,10 +56,10 @@ namespace Askalhorn.Characters.Abilities
                       First = new SkillRelativeExpression
                       {
                           Ability = this,
-                          Min = 0.6f,
-                          Max = 0.89f,
+                          Min = 1.3f,
+                          Max = 1.9f,
                       },
-                      Second = new StaticExpression<float>(.9f)
+                      Second = new StaticExpression<float>(2.9f)
                   },
                   Second = new SecondaryExpression
                   {
@@ -71,6 +72,7 @@ namespace Askalhorn.Characters.Abilities
         {
             var args = new CharacterExpressionArgs()
             {
+                Random = new Random(),
                 Character = character,
             };
             new DamageImpact((int)_damage.Generate(args)).On(target);
