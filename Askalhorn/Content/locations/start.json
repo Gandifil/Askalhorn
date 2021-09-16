@@ -1,0 +1,32 @@
+{
+    "designer": {
+        "$type": "Askalhorn.Map.Designers.TiledMapDesigner, Askalhorn.Map",
+        "name": "temple"
+    },
+    "spawners": [
+        {
+            "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.StaticPosition, Askalhorn.Map",
+                "x": 34,
+                "y": 34
+            },
+            "builder": {
+                "$type": "Askalhorn.Characters.Builders.CharacterBuilder, Askalhorn.Characters",
+                "name": "roxy_greyrat"
+            }
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.StaticPosition, Askalhorn.Map",
+                "x": 34,
+                "y": 32
+            },
+            "builder": {
+                "$type": "Askalhorn.Characters.Builders.CharacterBuilder, Askalhorn.Characters",
+                "name": "skelet01"
+            }
+        }
+    ]
+}

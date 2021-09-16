@@ -4,6 +4,7 @@ using Askalhorn.Characters.Impacts;
 using Askalhorn.Characters.Interpretators;
 using Askalhorn.Combat;
 using Askalhorn.Common;
+using Askalhorn.Common.Interpetators;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
@@ -50,14 +51,11 @@ namespace Askalhorn.Characters.Abilities
 
         public int HealPercent => 2 + (CurrentModification == 2 ? 3 : 0);
 
-        private IInterpretator HealAbsValue =
-            new MultiInterpretator()
+        private IExpression<float> HealAbsValue =
+            new MultiExpression<float>
             {
-                First = new StaticInterpretator()
-                {
-                    Value = 0.1f,
-                },
-                Second = new SecondaryInterpretator()
+                First = new StaticExpression<float>(0.1f),
+                Second = new SecondaryExpression()
                 {
                     Type = SecondaryTypes.MagicPower,
                 }
@@ -67,9 +65,13 @@ namespace Askalhorn.Characters.Abilities
 
         public override void Use(Character character, Character target)
         {
+            var args = new CharacterExpressionArgs()
+            {
+                Character = character,
+            };
             var healEffect = new ImpactEffect(
                 CurrentModification == 1 ? 
-                    new HealImpact((int)HealAbsValue.Calculate(character)) :
+                    new HealImpact((int)HealAbsValue.Generate(args)) :
                 new HealPercentImpact{ Value = HealPercent}, EffectTurn);
 
             if (CurrentModification == 0)

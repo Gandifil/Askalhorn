@@ -12,6 +12,11 @@ namespace Askalhorn.Common.Interpetators
             Value = value;
         }
         
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+        
         public T Generate(ExpressionArgs args)
         {
             return Value;

@@ -3,6 +3,7 @@ using Askalhorn.Characters.Impacts;
 using Askalhorn.Characters.Interpretators;
 using Askalhorn.Combat;
 using Askalhorn.Common;
+using Askalhorn.Common.Interpetators;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
@@ -43,26 +44,23 @@ namespace Askalhorn.Characters.Abilities
                 },
             };
 
-        private readonly IInterpretator _damage;
+        private readonly IExpression<float> _damage;
 
         public FireBall()
         {
-            _damage = new MultiInterpretator
+            _damage = new MultiExpression<float>
               {
-                  First = new RandomRangeInterpretator
+                  First = new RandomRangeInterpretator<float>
                   {
-                      First = new SkillRelativeInterpretator
+                      First = new SkillRelativeExpression
                       {
                           Ability = this,
                           Min = 0.6f,
                           Max = 0.89f,
                       },
-                      Second = new StaticInterpretator
-                      {
-                          Value = 0.9f,
-                      }
+                      Second = new StaticExpression<float>(.9f)
                   },
-                  Second = new SecondaryInterpretator
+                  Second = new SecondaryExpression
                   {
                       Type = SecondaryTypes.MagicPower,
                   }
@@ -71,7 +69,11 @@ namespace Askalhorn.Characters.Abilities
         
         public override void Use(Character character, Character target)
         {
-            new DamageImpact((int)_damage.Calculate(character)).On(target);
+            var args = new CharacterExpressionArgs()
+            {
+                Character = character,
+            };
+            new DamageImpact((int)_damage.Generate(args)).On(target);
         }
     }
 }

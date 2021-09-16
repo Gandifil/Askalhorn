@@ -1,6 +1,8 @@
-﻿namespace Askalhorn.Characters.Interpretators
+﻿using Askalhorn.Common.Interpetators;
+
+namespace Askalhorn.Characters.Interpretators
 {
-    internal class SkillRelativeInterpretator: IInterpretator
+    internal class SkillRelativeExpression: IExpression<float>
     {
         public IAbility Ability { get; set; }
 
@@ -12,14 +14,13 @@
         private float _difference => Max - Min;
 
         private float _value => Min + _difference * Ability.Skill / Ability.MaxSkill;
-
-
+        
         public override string ToString()
         {
             return _value.ToString();
         }
-
-        public float Calculate(Character character)
+        
+        public float Generate(ExpressionArgs args)
         {
             return _value;
         }
