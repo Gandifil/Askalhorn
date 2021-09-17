@@ -1,9 +1,8 @@
 ﻿using Askalhorn.Inventory;
-using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI.Inventory
 {
     public class CostumeViewer: InvisiblePanel
     {

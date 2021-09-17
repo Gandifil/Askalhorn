@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Askalhorn.Elements.Inventory.Search;
 using Askalhorn.Inventory;
+using Askalhorn.UI.Inventory.Search;
 using MLEM.Ui;
 
-namespace Askalhorn.Elements.Inventory
+namespace Askalhorn.UI.Inventory
 {
     public class BagViewer: InvisiblePanel
     {

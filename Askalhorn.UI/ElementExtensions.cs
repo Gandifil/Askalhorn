@@ -2,7 +2,7 @@
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI
 {
     public static class ElementExtensions
     {

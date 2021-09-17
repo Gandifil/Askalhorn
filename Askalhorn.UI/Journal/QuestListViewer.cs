@@ -2,7 +2,7 @@
 using Askalhorn.Plot;
 using MLEM.Ui;
 
-namespace Askalhorn.Elements.Journal
+namespace Askalhorn.UI.Journal
 {
     public class QuestListViewer: FixPanel
     {

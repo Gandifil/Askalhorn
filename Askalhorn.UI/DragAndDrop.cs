@@ -1,12 +1,12 @@
 ﻿using System;
-using Askalhorn.Common;
 using Askalhorn.Render;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Extended.Extensions;
+using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI
 {
     
     public class DragAndDrop: Image
@@ -20,30 +20,34 @@ namespace Askalhorn.Elements
         public DragAndDrop(IIcon icon) : base(0, Vector2.Zero, icon.Texture.ToMlem(), true)
         {
             Icon = icon;
-            OnUpdated += Update;
         }
 
         public void SuccesfullyDrop()
         {
             OnSuccesfullyDrop?.Invoke();
         }
+
+        private void Drop()
+        {
+            OnDrop?.Invoke(this);
+            Dispose();
+        }
         
         public event Action OnSuccesfullyDrop;
 
-        public void Show()
+        public void Show(UiSystem system)
         {
-            AskalhornGame.Instance.UiSystem.Add(ELEMENT_NAME, this);
+            system.Add(ELEMENT_NAME, this);
         }
 
-        private static void Update(Element element, GameTime time)
+        public override void Update(GameTime time)
         {
+            base.Update(time);
+            
             var state = Mouse.GetState();
-            element.PositionOffset = state.Position.ToVector2();
+            PositionOffset = state.Position.ToVector2();
             if (state.LeftButton == ButtonState.Released)
-            {
-                OnDrop?.Invoke(element as DragAndDrop);
-                AskalhornGame.Instance.UiSystem.Remove(ELEMENT_NAME);
-            }
+                Drop();
         }
     }
 }

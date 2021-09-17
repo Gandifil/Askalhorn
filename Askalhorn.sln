@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askalhorn.Core", "Askalhorn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askalhorn.Combat", "Askalhorn.Combat\Askalhorn.Combat.csproj", "{25DCA54D-AF2E-4660-82D8-F38EA0FDA1EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Askalhorn.UI", "Askalhorn.UI\Askalhorn.UI.csproj", "{3F654F18-BA80-4BDB-86EF-679E4915520A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{25DCA54D-AF2E-4660-82D8-F38EA0FDA1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25DCA54D-AF2E-4660-82D8-F38EA0FDA1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25DCA54D-AF2E-4660-82D8-F38EA0FDA1EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F654F18-BA80-4BDB-86EF-679E4915520A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F654F18-BA80-4BDB-86EF-679E4915520A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F654F18-BA80-4BDB-86EF-679E4915520A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F654F18-BA80-4BDB-86EF-679E4915520A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

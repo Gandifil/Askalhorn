@@ -2,7 +2,7 @@
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements.Inventory
+namespace Askalhorn.UI.Inventory
 {
     public class ExchangePackViewer: PackViewer
     {

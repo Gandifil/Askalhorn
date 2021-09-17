@@ -41,6 +41,7 @@
     <ProjectReference Include="..\Askalhorn.Common\Askalhorn.Common.csproj" />
     <ProjectReference Include="..\Askalhorn.Core\Askalhorn.Core.csproj" />
     <ProjectReference Include="..\Askalhorn.Locations\Askalhorn.Locations.csproj" />
+    <ProjectReference Include="..\Askalhorn.UI\Askalhorn.UI.csproj" />
     <ProjectReference Include="..\Askalhorn.World\Askalhorn.World.csproj" />
   </ItemGroup>
 </Project>

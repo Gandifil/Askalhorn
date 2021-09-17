@@ -2,7 +2,7 @@
 using System.Linq;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
-using Askalhorn.Elements.Journal;
+using Askalhorn.UI.Journal;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Ui;

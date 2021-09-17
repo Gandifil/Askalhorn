@@ -1,8 +1,8 @@
 ﻿using System;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
-using Askalhorn.Elements.Inventory;
 using Askalhorn.Inventory;
+using Askalhorn.UI.Inventory;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Extended.Extensions;
@@ -38,17 +38,6 @@ namespace Askalhorn.Components
                 OnPressed = _ => Dispose(),
             });
             return box;
-        }
-
-        private void FillBagPanel(Panel panel, IBag source, IBag dist)
-        {
-            // panel.RemoveChildren();
-            // foreach (var pack in source.Items)
-            // {
-            //     var element = CreateItem(pack);
-            //     element.OnPressed += _ => dist.Put(source.Pull(pack.Item));
-            //     panel.AddChild(element);
-            // }
         }
 
         public void Initialize()

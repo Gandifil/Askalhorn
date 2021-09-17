@@ -4,7 +4,7 @@ using MLEM.Extended.Extensions;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI.Dialogs
 {
     public class DialogViewer: FixPanel
     {

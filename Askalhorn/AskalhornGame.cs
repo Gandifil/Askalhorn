@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Reflection;
 using AmbrosiaGame.Screens;
-using AmbrosiaGame.Utils;
 using Askalhorn.Common;
 using Askalhorn.Elements;
 using Askalhorn.Logging;
 using Askalhorn.Screens;
 using Askalhorn.Settings;
+using Askalhorn.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -73,7 +73,6 @@ namespace Askalhorn
             IsMouseVisible = true;
 
             Storage.Initialize(Content, GraphicsDevice);
-            LineRenderer.Initialize(GraphicsDevice);
             
             UiSystem = new UiSystem(this, style);
             UiSystem.OnRootRemoved += root => root.Element.RecursiveDispose();

@@ -4,7 +4,7 @@ using Askalhorn.Text;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements.Journal
+namespace Askalhorn.UI.Journal
 {
     public class JournalViewer: FixPanel
     {

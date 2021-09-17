@@ -1,5 +1,4 @@
 ﻿using Askalhorn.Characters.Control.Moves;
-using Askalhorn.Common;
 using Askalhorn.Core;
 using Askalhorn.Inventory;
 using Microsoft.Xna.Framework;
@@ -7,7 +6,7 @@ using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
 
-namespace Askalhorn.Elements.Inventory
+namespace Askalhorn.UI.Inventory
 {
     public class PackViewer: FixPanel
     {
@@ -58,7 +57,7 @@ namespace Askalhorn.Elements.Inventory
         {
             var element = new DragAndDrop(_pack.Item);
             element.OnSuccesfullyDrop += () => { _pack.Remove();}; // TODO: add removing item from player's bag;
-            element.Show();
+            element.Show(Root.System);
         }
 
         private void ResetCount()

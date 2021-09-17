@@ -1,16 +1,12 @@
 ﻿using System;
-using Askalhorn.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using MLEM.Misc;
-using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI
 {
-    public class Menu: IDisposable
+    public class MenuIB: InvisiblePanel, IDisposable
     {
         private readonly Panel _panel;
         private readonly Texture2D _background;
@@ -19,19 +15,9 @@ namespace Askalhorn.Elements
         public const int ELEMENT_HEIGHT = 40;
         public const int VERTICAL_SPACE_HEIGHT = 5;
 
-        public Menu(UiSystem uiSystem)
+        public MenuIB(Anchor anchor, float x, float y) : base(anchor, x, y, true)
         {
-            _uiSystem = uiSystem;
-            _panel = new FixPanel(Anchor.Center, 0.25f, 0.5f);
-            _panel.SetHeightBasedOnChildren = true;
-            _panel.ChildPadding = (Padding) new Vector2(16);
-            _background = Storage.Content.Load<Texture2D>("images/background");
-        }
-        
-        public void Initialize()
-        {
-            _uiSystem.Add("background", new Image(Anchor.Center, Vector2.One, new TextureRegion(_background)));
-            _uiSystem.Add("menu", _panel);
+            //SetHeightBasedOnChildren = true;
         }
 
         public void AddButton(string label, Action pressAction)
@@ -46,6 +32,12 @@ namespace Askalhorn.Elements
             {
                 OnPressed = _ => pressAction(),
             });
+        }
+
+        public void Clear()
+        {
+            isEmptyPanel = true;
+            RemoveChildren();
         }
 
         public ScrollBar AddScroll(string label, float max = 1.0f)
@@ -65,17 +57,9 @@ namespace Askalhorn.Elements
                 isEmptyPanel = false;
             else
                 if (spacing)
-                    _panel.AddChild(new VerticalSpace(VERTICAL_SPACE_HEIGHT));
+                    AddChild(new VerticalSpace(VERTICAL_SPACE_HEIGHT));
             
-            _panel.AddChild(element);
-        }
-        
-        
-        public void Dispose()
-        {
-            _panel.RemoveChildren();
-            _uiSystem.Remove("menu");
-            _uiSystem.Remove("background");
+            AddChild(element);
         }
     }
 }

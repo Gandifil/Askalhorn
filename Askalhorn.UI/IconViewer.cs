@@ -1,11 +1,10 @@
-﻿using Askalhorn.Common;
-using Askalhorn.Render;
+﻿using Askalhorn.Render;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI
 {
     public class IconViewer: Image
     {

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Xml.Linq;
 using Askalhorn.Inventory;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI.Inventory
 {
     public class SlotViewer: FixPanel
     {
@@ -65,7 +64,7 @@ namespace Askalhorn.Elements
             {
                 var element = new DragAndDrop(_slot.Item);
                 element.OnSuccesfullyDrop += () => { _slot.TakeOff();};
-                element.Show();
+                element.Show(Root.System);
             }
         }
 

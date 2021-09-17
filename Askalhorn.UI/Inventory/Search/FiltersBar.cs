@@ -2,10 +2,8 @@
 using Askalhorn.Common;
 using Askalhorn.Inventory;
 using MLEM.Ui;
-using MLEM.Ui.Elements;
-using MonoGame.Extended.Content;
 
-namespace Askalhorn.Elements.Inventory.Search
+namespace Askalhorn.UI.Inventory.Search
 {
     public sealed class FiltersBar: FixPanel
     {

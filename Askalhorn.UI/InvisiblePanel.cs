@@ -3,7 +3,7 @@ using MLEM.Misc;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI
 {
     public class InvisiblePanel: Panel
     {

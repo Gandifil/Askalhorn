@@ -1,7 +1,7 @@
 ﻿using Askalhorn.Inventory;
 using MLEM.Ui;
 
-namespace Askalhorn.Elements.Inventory
+namespace Askalhorn.UI.Inventory
 {
     public class ExchangeBagViewer: BagViewer
     {

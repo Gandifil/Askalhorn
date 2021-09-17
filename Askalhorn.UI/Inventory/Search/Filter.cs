@@ -1,10 +1,9 @@
 ﻿using System;
-using Askalhorn.Common;
 using Askalhorn.Inventory;
 using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
-namespace Askalhorn.Elements.Inventory.Search
+namespace Askalhorn.UI.Inventory.Search
 {
     public class Filter: IIcon
     {

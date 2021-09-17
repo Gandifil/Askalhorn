@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MLEM.Extended" Version="5.0.0" />
+      <PackageReference Include="MLEM.Ui" Version="5.0.0" />
+      <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Askalhorn.Core\Askalhorn.Core.csproj" />
+      <ProjectReference Include="..\Askalhorn.Inventory\Askalhorn.Inventory.csproj" />
+      <ProjectReference Include="..\Askalhorn.Render\Askalhorn.Render.csproj" />
+    </ItemGroup>
+
+</Project>

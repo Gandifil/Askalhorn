@@ -5,6 +5,7 @@ using Askalhorn.Common;
 using Askalhorn.Core;
 using Askalhorn.Logging;
 using Askalhorn.Text;
+using Askalhorn.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
