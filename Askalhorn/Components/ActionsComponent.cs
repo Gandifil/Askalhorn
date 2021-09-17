@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Askalhorn.Characters.Control.Moves;
+using Askalhorn.Core;
+using Askalhorn.Map.Actions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MLEM.Extended.Extensions;
@@ -11,7 +14,7 @@ namespace Askalhorn.Components
     {
         private static readonly string PANEL_NAME = "actions";
         private readonly AskalhornGame game;
-        private readonly List<IActionBlock> Actions = new List<IActionBlock>();
+        private readonly Dictionary<Keys, IAction> _actions= new ();
         private KeyboardState previousState;
         private Panel panel;
         
@@ -26,30 +29,31 @@ namespace Askalhorn.Components
                 game.UiSystem.Remove(PANEL_NAME);
             
             panel = null;
-            Actions.Clear();
+            _actions.Clear();
         }
 
-        public void Add(IActionBlock action)
+        public void Add(Keys key, IAction action)
         {
             if (panel is null)
             {
                 panel = new Panel(Anchor.Center, new Vector2(0.1f, 0.05f), new Vector2(0, 100));
                 game.UiSystem.Add(PANEL_NAME, panel);
             }
+
+            _actions[key] = action;
             
-            Actions.Add(action);
             panel.AddChild(createElement(action));
         }
 
-        private Element createElement(IActionBlock action)
+        private Element createElement(IAction action)
         {
-            var image = new Image(Anchor.AutoCenter, new Vector2(0.5f, 0.9f), action.Region.ToMlem())
+            var image = new Image(Anchor.AutoCenter, new Vector2(0.5f, 0.9f), action.Texture.ToMlem())
             {
-                OnPressed = _ => action.Action.Invoke(),
+                OnPressed = _ => GameProcess.Instance.Player.Make(new UseActionMove(action)),
                 CanBePressed = true,
                 CanBeMoused = true,
             };
-            var tooltip = new Tooltip(100, action.Key.ToString(), image);
+            var tooltip = new Tooltip(100, action.Name.ToString(), image);
             return image;
         }
 
@@ -59,9 +63,13 @@ namespace Askalhorn.Components
 
             var state = Keyboard.GetState();
 
-            foreach (var action in Actions)
+            foreach (var action in _actions)
                 if (state[action.Key] == KeyState.Down && previousState[action.Key] == KeyState.Up)
-                    action.Action?.Invoke();
+                {
+                    GameProcess.Instance.Player.Make(new UseActionMove(action.Value));
+                    previousState = state;
+                    return;
+                }
 
             previousState = state;
         }

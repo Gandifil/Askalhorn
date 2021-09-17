@@ -5,11 +5,12 @@ using Askalhorn.Common;
 using Askalhorn.Dialogs;
 using Askalhorn.Inventory;
 using Askalhorn.Map;
+using Askalhorn.Map.Actions;
 using Askalhorn.Utils;
 
 namespace Askalhorn.Characters
 {
-    public interface ICharacter: IGameObject
+    public interface ICharacter: IGameObject, IActionable
     {
         string Name { get; }
         

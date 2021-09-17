@@ -13,9 +13,9 @@ namespace Askalhorn.Components
     public class DialogTabComponent: IGameComponent, IDisposable
     {
         private static readonly string NAME = "dialog";
-        private readonly Dialog _dialog;
+        private readonly DialogEnumerator _dialog;
 
-        public DialogTabComponent(Dialog dialog)
+        public DialogTabComponent(DialogEnumerator dialog)
         {
             _dialog = dialog;
         }

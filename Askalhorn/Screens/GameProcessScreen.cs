@@ -9,8 +9,10 @@ using Askalhorn.Characters.Impacts;
 using Askalhorn.Common;
 using Askalhorn.Components;
 using Askalhorn.Core;
+using Askalhorn.Dialogs;
 using Askalhorn.Elements;
 using Askalhorn.Map;
+using Askalhorn.Map.Actions;
 using Askalhorn.Map.Builds;
 using Askalhorn.Map.Local;
 using Askalhorn.Render;
@@ -60,6 +62,11 @@ namespace AmbrosiaGame.Screens
             {
                 switcher.SwitchTo(new ExchangeTabComponent(this, bag, gameProcess.Player.Bag));
             };
+            
+            DialogImpact.OnDialogOpened += d =>
+            {
+                switcher.SwitchTo(new DialogTabComponent(d));
+            };
             Location.Current.OnChange += UpdateMap;
             Location.Current.OnChange += UpdateActions;
             Location.Current.OnChange += LookAtPlayer;
@@ -71,30 +78,16 @@ namespace AmbrosiaGame.Screens
         {
             actions.Clear();
 
-            var build = Location.Current.Location[GameProcess.Player.Position].Build;
+            var build = Location.Current.Location[GameProcess.Player.Position].Build as IActionable;
             if (build is not null)
-            {
-                actions.Add(new ActionBlock
-                {
-                    Region = Storage.Load("guiactions", (uint)(build.Type == IBuild.Types.Chest ? 1 : 2), 0),
-                    Key = _options.Keys[Options.KeyActions.Use],
-                    Action = () => Location.Current.Location[GameProcess.Player.Position].Build.Impact.On((Character)GameProcess.Player)
-                });
-            }
+                if (build.Action is not null)
+                    actions.Add(_options.Keys[Options.KeyActions.Use], build.Action);
             
             var characterNear = Location.Current.Location
-                .FindNear(GameProcess.Player.Position, x => x is ICharacter) as ICharacter;
+                .FindNear(GameProcess.Player.Position, x => x is ICharacter) as IActionable;
             if (characterNear is not null)
-            {
-                if (characterNear.Dialog is not null)
-                    actions.Add(new ActionBlock
-                    {
-                        Region = Storage.Load("guiactions", 0, 0),
-                        Key = _options.Keys[Options.KeyActions.Use],
-                        Action = () => switcher.SwitchTo(new DialogTabComponent(characterNear.Dialog))
-                    });
-            }
-            
+                if (characterNear.Action is not null)
+                    actions.Add(_options.Keys[Options.KeyActions.Use], characterNear.Action);
         }
         
         private void LookAtPlayer()

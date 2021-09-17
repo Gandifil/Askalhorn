@@ -7,7 +7,5 @@ namespace Askalhorn.Map.Builds
         public enum Types { None, Chest, Teleport}
         
         Types Type { get; }
-        
-        IImpact Impact { get; }
     }
 }

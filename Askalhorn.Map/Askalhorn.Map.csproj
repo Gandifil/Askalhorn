@@ -12,6 +12,7 @@
       <ProjectReference Include="..\Askalhorn.Common\Askalhorn.Common.csproj" />
       <ProjectReference Include="..\Askalhorn.Math\Askalhorn.Math.csproj" />
       <ProjectReference Include="..\Askalhorn.Render\Askalhorn.Render.csproj" />
+      <ProjectReference Include="..\Askalhorn.Text\Askalhorn.Text.csproj" />
     </ItemGroup>
 
 </Project>

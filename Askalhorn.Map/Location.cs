@@ -105,7 +105,7 @@ namespace Askalhorn.Map
             for (uint x = position.X - 1; x <= position.X + 1; x++)
             for (uint y = position.Y - 1; y <= position.Y + 1; y++)
             {
-                if (x == 0 && y == 0)
+                if (x == position.X && y == position.Y)
                     continue;
                 
                 var cell = Cells[(int) x, (int) y];

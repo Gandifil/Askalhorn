@@ -1,4 +1,5 @@
 ﻿using Askalhorn.Common;
+using Askalhorn.Map.Actions;
 using Askalhorn.Map.Impacts;
 using Askalhorn.Map.Local;
 using Askalhorn.Render;
@@ -6,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Map.Builds
 {
-    class LocalTeleport: GameObject, IBuild
+    class LocalTeleport: GameObject, IBuild, IActionable
     {
         public IBuild.Types Type => IBuild.Types.Teleport;
 
@@ -14,6 +15,6 @@ namespace Askalhorn.Map.Builds
 
         public Point Target { get; set; }
 
-        public IImpact Impact => new TeleportImpact(Target);
+        public IAction Action => new TransferAction(new TeleportImpact(Target));
     }
 }

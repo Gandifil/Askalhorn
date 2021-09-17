@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Askalhorn.Characters.Abilities;
+using Askalhorn.Characters.Actions;
 using Askalhorn.Characters.Builds;
 using Askalhorn.Characters.Control;
 using Askalhorn.Characters.Control.Moves;
@@ -10,6 +11,7 @@ using Askalhorn.Combat;
 using Askalhorn.Dialogs;
 using Askalhorn.Inventory;
 using Askalhorn.Map;
+using Askalhorn.Map.Actions;
 using Askalhorn.Utils;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Collections;
@@ -273,5 +275,9 @@ namespace Askalhorn.Characters
                     move.Make(this);
             }
         }
+
+        private IAction _action => new SayAction(Dialog);
+
+        public IAction Action => Dialog is null ? null : _action;
     }
 }

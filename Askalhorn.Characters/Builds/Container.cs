@@ -1,17 +1,18 @@
-﻿using Askalhorn.Characters.Impacts;
+﻿using Askalhorn.Characters.Actions;
+using Askalhorn.Characters.Impacts;
 using Askalhorn.Common;
 using Askalhorn.Inventory;
 using Askalhorn.Map;
+using Askalhorn.Map.Actions;
 using Askalhorn.Map.Builds;
 using Askalhorn.Map.Local;
 
 namespace Askalhorn.Characters.Builds
 {
-    internal class Container: GameObject, IBuild
+    internal class Container: GameObject, IBuild, IActionable
     {
 
         public IBuild.Types Type => IBuild.Types.Chest;
-        //public IRenderer Renderer { get; set; } = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
 
         public readonly Bag Bag;
 
@@ -27,7 +28,7 @@ namespace Askalhorn.Characters.Builds
 
             Bag = bag;
         }
-        
-        public IImpact Impact => new OpenBagImpact(Bag);
+
+        public IAction Action => new OpenAction(Bag);
     }
 }

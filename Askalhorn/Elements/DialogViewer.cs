@@ -16,9 +16,9 @@ namespace Askalhorn.Elements
 
         private readonly MLEM.Ui.Elements.Paragraph _text;
         
-        public DialogViewer(Dialog dialog, Anchor anchor, float width, float height) : base(anchor, width, height)
+        public DialogViewer(DialogEnumerator dialog, Anchor anchor, float width, float height) : base(anchor, width, height)
         {
-            _enumerator = new DialogEnumerator(dialog);
+            _enumerator = dialog;
 
             _text = new MLEM.Ui.Elements.Paragraph(Anchor.TopLeft, 100, "", true);
             AddChild(_text);
