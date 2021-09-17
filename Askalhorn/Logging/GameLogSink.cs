@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using Askalhorn.Components;
+using Askalhorn.UI;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
@@ -48,7 +49,7 @@ namespace Askalhorn.Logging
                 var buffer = new StringWriter(new StringBuilder(DefaultWriteBufferCapacity));
                 formater.Format(logEvent, buffer);
 
-                LogComponent.Write(buffer.ToString());
+                GameLogViewer.Storage.Write(buffer.ToString());
             }
         }
     }

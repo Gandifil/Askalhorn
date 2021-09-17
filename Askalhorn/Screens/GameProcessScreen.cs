@@ -18,6 +18,7 @@ using Askalhorn.Map.Local;
 using Askalhorn.Render;
 using Askalhorn.Screens;
 using Askalhorn.Settings;
+using Askalhorn.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -119,7 +120,7 @@ namespace AmbrosiaGame.Screens
             listeners = new InputListenerComponent(Game, keyboardListener, mouseListener);
             
             Game.Components.Add(listeners);
-            Game.Components.Add(new LogComponent(Game));
+            Game.UiSystem.Add("GameLog", new GameLogViewer());
             switcher = new SwitchComponent(this);
             Game.Components.Add(switcher);
             actions = new ActionsComponent(Game);
