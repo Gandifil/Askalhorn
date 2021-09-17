@@ -123,7 +123,7 @@ namespace Askalhorn.Components
             }
         }
         
-        public AbilitiesComponent(GameProcessScreen screen, ICharacter character): base(screen.game)
+        public AbilitiesComponent(GameProcessScreen screen, ICharacter character): base(screen.Game)
         {
             this.screen = screen;
             this.character = character;
@@ -142,7 +142,7 @@ namespace Askalhorn.Components
             for (int i = 0; i < 3; i++)
                 boxes[i+1].SetEffect(character.Abilities.ElementAt(i));
             
-            screen.game.UiSystem.Add("abilities", box);
+            screen.Game.UiSystem.Add("abilities", box);
         }
 
         public void Run(int index)
@@ -163,7 +163,7 @@ namespace Askalhorn.Components
                 foreach (var box in boxes)
                     box.Dispose();
                 
-                screen.game.UiSystem.Remove("abilities");
+                screen.Game.UiSystem.Remove("abilities");
             }
         }
     }

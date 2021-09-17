@@ -17,7 +17,7 @@ namespace Askalhorn.Screens.Configuration
         public GraphicsSettings(AskalhornGame game, GameScreen backScreen) : base(game, backScreen)
         {
             _game = game;
-            _menu = new Menu(game.UiSystem);
+            _menu = new Menu();
             _options = Settings.Configuration.Options;
         }
 
@@ -31,7 +31,7 @@ namespace Askalhorn.Screens.Configuration
                 OnCheckStateChange = (box, checced) => SetFullScreen(checced), 
             });
             _menu.AddButton("Назад", Back);
-            _menu.Initialize();
+            _game.UiSystem.Add("menu", _menu);
         }
 
         private void SetFullScreen(bool checced)

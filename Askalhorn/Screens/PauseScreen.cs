@@ -15,14 +15,12 @@ namespace Askalhorn.Screens
 {
     public class PauseScreen: BackScreenBase
     {
-        public AskalhornGame _game;
         private readonly Menu _menu;
 
         public PauseScreen(AskalhornGame game, GameScreen backScreen)
             : base(game, backScreen)
         {
-            _game = game;
-            _menu = new Menu(game.UiSystem);
+            _menu = new Menu();
         }
 
         private void QuickSave()
@@ -35,24 +33,10 @@ namespace Askalhorn.Screens
         { 
             _menu.AddButton("Назад", Back);
             _menu.AddButton("Быстрое сохранение", QuickSave);
-            _menu.AddButton("Настройки", () => ScreenManager.LoadScreen(new MainSettings(_game, this)));
-            _menu.AddButton("В главное меню", () => ScreenManager.LoadScreen(new MainMenuScreen(_game)));
+            _menu.AddButton("Настройки", () => ScreenManager.LoadScreen(new MainSettings(Game, this)));
+            _menu.AddButton("В главное меню", () => ScreenManager.LoadScreen(new MainMenuScreen(Game)));
             _menu.AddButton("Выход", Game.Exit);
-            _menu.Initialize();
+            Game.UiSystem.Add("menu", _menu);
         }
-
-        public override void Dispose()
-        {
-            _menu.Dispose();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-        }
-        
     }
 }

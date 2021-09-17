@@ -25,7 +25,7 @@ namespace Askalhorn.Components
         
         public void Initialize()
         {
-            screen.game.UiSystem.Add(NAME, Create(screen.GameProcess.Player));
+            screen.Game.UiSystem.Add(NAME, Create(screen.GameProcess.Player));
         }
         
         private static Element Create(ICharacter character)
@@ -73,7 +73,7 @@ namespace Askalhorn.Components
         
         public void Dispose()
         {
-            screen.game.UiSystem.Remove(NAME);
+            screen.Game.UiSystem.Remove(NAME);
         }
     }
 }

@@ -31,9 +31,8 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace AmbrosiaGame.Screens
 {
-    public class GameProcessScreen: GameScreen
+    public class GameProcessScreen: ClearUIScreen
     {
-        public AskalhornGame game;
         private SpriteBatch spriteBatch;
         private OrthographicCamera camera;
         
@@ -51,12 +50,10 @@ namespace AmbrosiaGame.Screens
         public GameProcessScreen(AskalhornGame game, GameProcess gameProcess)
             : base(game)
         {
-            this.game = game;
-            
             this.GameProcess = gameProcess;
-            gameProcess.OnTurned += UpdateMovements;
-            gameProcess.OnTurned += UpdateActions;
-            gameProcess.OnTurned += LookAtPlayer;
+            GameProcess.OnTurned += UpdateMovements;
+            GameProcess.OnTurned += UpdateActions;
+            GameProcess.OnTurned += LookAtPlayer;
             
             OpenBagImpact.OnBagOpened += bag =>
             {
@@ -122,10 +119,10 @@ namespace AmbrosiaGame.Screens
             listeners = new InputListenerComponent(Game, keyboardListener, mouseListener);
             
             Game.Components.Add(listeners);
-            Game.Components.Add(new LogComponent(game));
+            Game.Components.Add(new LogComponent(Game));
             switcher = new SwitchComponent(this);
             Game.Components.Add(switcher);
-            actions = new ActionsComponent(game);
+            actions = new ActionsComponent(Game);
             Game.Components.Add(actions);
             effects = new EffectsComponent(this, GameProcess.Player);
             GameProcess.OnTurned += effects.Update;
@@ -151,7 +148,7 @@ namespace AmbrosiaGame.Screens
         private void KeyRelease(object sender, KeyboardEventArgs e)
         {
             if (e.Key == _options.Keys[Options.KeyActions.Pause])
-                ScreenManager.LoadScreen(new PauseScreen(game, this));
+                ScreenManager.LoadScreen(new PauseScreen(Game, this));
 #if DEBUG
             if (e.Key == Keys.OemTilde)
                 DebugConsole.Toggle();
@@ -212,7 +209,6 @@ namespace AmbrosiaGame.Screens
 
         public override void Update(GameTime gameTime)
         {
-
             mapRenderer.Update(gameTime);
             foreach (var gameObject in Location.Current.Location.GameObjects)
                 gameObject.Renderer.Update(gameTime);

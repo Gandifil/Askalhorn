@@ -60,7 +60,7 @@ namespace Askalhorn.Screens.Configuration
         public ControlSettings(AskalhornGame game, GameScreen backScreen) : base(game, backScreen)
         {
             _game = game;
-            _menu = new Menu(game.UiSystem);
+            _menu = new Menu();
             _options = Settings.Configuration.Options;
         }
 
@@ -85,7 +85,7 @@ namespace Askalhorn.Screens.Configuration
                 _menu.Add(item.Panel);
             }
             _menu.AddButton("Назад", Back);
-            _menu.Initialize();
+            _game.UiSystem.Add("menu", _menu);
         }
         
         private void KeyRelease(object sender, KeyboardEventArgs e)
@@ -102,7 +102,7 @@ namespace Askalhorn.Screens.Configuration
         public override void Dispose()
         {
             _menu.Dispose();
-            _game.Components.ClearWithDispose();
+            //_game.Components.ClearWithDispose();
         }
 
         public override void Update(GameTime gameTime)

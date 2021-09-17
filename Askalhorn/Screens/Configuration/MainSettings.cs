@@ -13,7 +13,7 @@ namespace Askalhorn.Screens.Configuration
         public MainSettings(AskalhornGame game, GameScreen backScreen) : base(game, backScreen)
         {
             _game = game;
-            _menu = new Menu(game.UiSystem);
+            _menu = new Menu();
         }
 
         public override void Initialize() 
@@ -23,7 +23,7 @@ namespace Askalhorn.Screens.Configuration
             _menu.AddButton("Управление", () => ScreenManager.LoadScreen(new ControlSettings(_game, this)));
             _menu.AddButton("По умолчанию", Askalhorn.Settings.Configuration.SetDefaultOptions);
             _menu.AddButton("Назад", Back);
-            _menu.Initialize();
+            _game.UiSystem.Add("menu", _menu);
         }
 
         public override void Dispose()

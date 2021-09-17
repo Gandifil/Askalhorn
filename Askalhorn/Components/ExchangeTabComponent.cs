@@ -42,12 +42,12 @@ namespace Askalhorn.Components
 
         public void Initialize()
         {
-            screen.game.UiSystem.Add(EXCHANGE_NAME, CreateExchange());
+            screen.Game.UiSystem.Add(EXCHANGE_NAME, CreateExchange());
         }
 
         public void Dispose()
         {
-            screen.game.UiSystem.Remove(EXCHANGE_NAME);
+            screen.Game.UiSystem.Remove(EXCHANGE_NAME);
         }
     }
 }

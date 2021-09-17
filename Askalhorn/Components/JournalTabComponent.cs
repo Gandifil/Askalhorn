@@ -22,12 +22,12 @@ namespace Askalhorn.Components
 
         public void Initialize()
         {
-            screen.game.UiSystem.Add(NAME, new JournalViewer(screen.GameProcess.Player.Journal, Anchor.Center, 0.9f, 0.9f));
+            screen.Game.UiSystem.Add(NAME, new JournalViewer(screen.GameProcess.Player.Journal, Anchor.Center, 0.9f, 0.9f));
         }
 
         public void Dispose()
         {
-            screen.game.UiSystem.Remove(NAME);
+            screen.Game.UiSystem.Remove(NAME);
         }
     }
 }

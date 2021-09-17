@@ -26,12 +26,12 @@ namespace Askalhorn.Components
         
         public void Initialize()
         {
-            screen.game.UiSystem.Add(NAME, Create(screen.GameProcess.Player));
+            screen.Game.UiSystem.Add(NAME, Create(screen.GameProcess.Player));
         }
 
         public void Dispose()
         {
-            screen.game.UiSystem.Remove(NAME);
+            screen.Game.UiSystem.Remove(NAME);
         }
         
         private Element Create(IPlayer player)

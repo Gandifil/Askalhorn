@@ -14,7 +14,7 @@ namespace Askalhorn.Components
         private readonly ICharacter character;
         private Panel effectsBox;
         
-        public EffectsComponent(GameProcessScreen screen, ICharacter character): base(screen.game)
+        public EffectsComponent(GameProcessScreen screen, ICharacter character): base(screen.Game)
         {
             this.screen = screen;
             this.character = character;
@@ -25,7 +25,7 @@ namespace Askalhorn.Components
             base.Initialize();
             effectsBox = new Panel(Anchor.TopLeft, new Vector2(1, 0.07f), Vector2.Zero);
             effectsBox.Texture = null;
-            screen.game.UiSystem.Add("effects", effectsBox);
+            screen.Game.UiSystem.Add("effects", effectsBox);
         }
 
         public void Update()
@@ -58,7 +58,7 @@ namespace Askalhorn.Components
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                screen.game.UiSystem.Remove("effects");
+                screen.Game.UiSystem.Remove("effects");
         }
     }
 }

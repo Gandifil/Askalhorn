@@ -3,11 +3,11 @@ using MonoGame.Extended.Screens;
 
 namespace Askalhorn.Screens
 {
-    public abstract class BackScreenBase : GameScreen
+    public abstract class BackScreenBase : ClearUIScreen
     {
         private readonly GameScreen backScreen;
 
-        protected BackScreenBase(Game game, GameScreen backScreen) : base(game)
+        protected BackScreenBase(AskalhornGame game, GameScreen backScreen) : base(game)
         {
             this.backScreen = backScreen;
         }

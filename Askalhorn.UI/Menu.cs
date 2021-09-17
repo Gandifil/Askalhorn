@@ -9,28 +9,23 @@ using MLEM.Ui.Elements;
 
 namespace Askalhorn.UI
 {
-    public class Menu: IDisposable
+    public class Menu: InvisiblePanel
     {
         private readonly Panel _panel;
-        private readonly Texture2D _background;
-        private readonly UiSystem _uiSystem;
 
         public const int ELEMENT_HEIGHT = 40;
         public const int VERTICAL_SPACE_HEIGHT = 5;
 
-        public Menu(UiSystem uiSystem)
+        public Menu() : base(Anchor.Center, 1f, 1f)
         {
-            _uiSystem = uiSystem;
-            _panel = new FixPanel(Anchor.Center, 0.25f, 0.5f);
-            _panel.SetHeightBasedOnChildren = true;
-            _panel.ChildPadding = (Padding) new Vector2(16);
-            _background = Storage.Content.Load<Texture2D>("images/background");
-        }
-        
-        public void Initialize()
-        {
-            _uiSystem.Add("background", new Image(Anchor.Center, Vector2.One, new TextureRegion(_background)));
-            _uiSystem.Add("menu", _panel);
+            var _background = Storage.Content.Load<Texture2D>("images/background");
+            AddChild(new Image(Anchor.Center, Vector2.One, new TextureRegion(_background)));
+            
+            _panel = new FixPanel(Anchor.Center, 0.25f, 0.5f)
+            {
+                SetHeightBasedOnChildren = true,
+            };
+            AddChild(_panel);
         }
 
         public void AddButton(string label, Action pressAction)
@@ -67,14 +62,6 @@ namespace Askalhorn.UI
                     _panel.AddChild(new VerticalSpace(VERTICAL_SPACE_HEIGHT));
             
             _panel.AddChild(element);
-        }
-        
-        
-        public void Dispose()
-        {
-            _panel.RemoveChildren();
-            _uiSystem.Remove("menu");
-            _uiSystem.Remove("background");
         }
     }
 }

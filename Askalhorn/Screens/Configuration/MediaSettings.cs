@@ -17,7 +17,7 @@ namespace Askalhorn.Screens.Configuration
         public MediaSettings(AskalhornGame game, GameScreen backScreen) : base(game, backScreen)
         {
             _game = game;
-            _menu = new Menu(game.UiSystem);
+            _menu = new Menu();
             _options = Settings.Configuration.Options;
         }
 
@@ -49,7 +49,7 @@ namespace Askalhorn.Screens.Configuration
             
             
             _menu.AddButton("Назад", Back);
-            _menu.Initialize();
+            _game.UiSystem.Add("menu", _menu);
         }
 
         public override void Dispose()

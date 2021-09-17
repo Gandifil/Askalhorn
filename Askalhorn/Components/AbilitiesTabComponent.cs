@@ -105,14 +105,14 @@ namespace Askalhorn.Components
                 box.AddChild(new VerticalSpace(15));
                 box.AddChild(item.Box);
             }
-            screen.game.UiSystem.Add(NAME, box);
+            screen.Game.UiSystem.Add(NAME, box);
         }
 
         public void Dispose()
         {
             foreach (var item in items)
                 item.Dispose();
-            screen.game.UiSystem.Remove(NAME);
+            screen.Game.UiSystem.Remove(NAME);
         }
         
     }
