@@ -1,4 +1,5 @@
 ﻿using Askalhorn.Common;
+using Askalhorn.Render;
 using Askalhorn.Text;
 using MonoGame.Extended.TextureAtlases;
 
@@ -10,7 +11,7 @@ namespace Askalhorn.Map.Actions
 
         public TextPointer Name { get; set; }
 
-        string IAction.Name => Name.ToString();
+        string IIcon.TooltipText => Name.ToString();
         
         public IImpact Impact { get; set; }
         

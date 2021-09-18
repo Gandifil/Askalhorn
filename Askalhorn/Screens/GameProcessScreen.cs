@@ -19,6 +19,7 @@ using Askalhorn.Render;
 using Askalhorn.Screens;
 using Askalhorn.Settings;
 using Askalhorn.UI;
+using Askalhorn.UI.Actions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -43,7 +44,7 @@ namespace AmbrosiaGame.Screens
         public MovementTiles movements;
         private InputListenerComponent listeners;
         private SwitchComponent switcher;
-        private ActionsComponent actions;
+        private ActionsViewer actions;
         private EffectsComponent effects;
         private AbilitiesComponent abilities;
         private Options _options;
@@ -123,8 +124,6 @@ namespace AmbrosiaGame.Screens
             Game.UiSystem.Add("GameLog", new GameLogViewer());
             switcher = new SwitchComponent(this);
             Game.Components.Add(switcher);
-            actions = new ActionsComponent(Game);
-            Game.Components.Add(actions);
             effects = new EffectsComponent(this, GameProcess.Player);
             GameProcess.OnTurned += effects.Update;
             Game.Components.Add(effects);
@@ -132,6 +131,10 @@ namespace AmbrosiaGame.Screens
             Game.Components.Add(abilities);
             movements = new MovementTiles(GameProcess.Player);
             UpdateMovements();
+                
+            actions = new ActionsViewer();
+            Game.UiSystem.Add("Actions", actions);
+            UpdateActions();
         }
 
         private void MovePlayer(Point shift)

@@ -15,6 +15,7 @@ namespace Askalhorn.UI
             base(anchor, new Vector2(width, height), icon.Texture.ToMlem(), false)
         {
             CanBeMoused = true;
+            CanBePressed= true;
             _icon = icon;
             _tooltip = new Tooltip(500, _icon.TooltipText, this);
             _tooltip.MouseOffset = new Vector2(32, -64);
