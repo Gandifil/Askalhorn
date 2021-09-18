@@ -2,52 +2,33 @@
 using System.Linq;
 using AmbrosiaGame.Screens;
 using Microsoft.Xna.Framework;
+using MLEM.Ui;
+using MLEM.Ui.Elements;
 
 namespace Askalhorn.Components
 {
-    public class SwitchComponent: IGameComponent, IDisposable
+    public class SwitchComponent: IGameComponent
     {
-        private IGameComponent component;
-        
-        private readonly GameProcessScreen screen;
+        private const string SWITCH_ELEMENT_NAME = "SWITCH_ELEMENT";
+        private readonly UiSystem _uiSystem;
 
-        public SwitchComponent(GameProcessScreen screen)
+        public SwitchComponent(UiSystem uiSystem)
         {
-            this.screen = screen;
+            _uiSystem = uiSystem;
         }
-        
+
+        public void SwitchTo<T>(Func<T> genNewElement) where T : Element
+        {
+            var oldElement = _uiSystem.Get(SWITCH_ELEMENT_NAME)?.Element;
+            if (oldElement is not null)
+                _uiSystem.Remove(SWITCH_ELEMENT_NAME);
+            
+            if (oldElement is null || oldElement is not T)
+                _uiSystem.Add(SWITCH_ELEMENT_NAME, genNewElement());
+        }
+
         public void Initialize()
         {
-        }
-
-        public void SwitchTo<T>() where T:IGameComponent
-        { 
-            if (component is null || component is not T)
-            {
-                Dispose();
-                component = (T)Activator.CreateInstance(typeof(T), screen);
-                component.Initialize();
-            }
-            else
-                Dispose();
-        }
-
-        public void SwitchTo<T>(T newComponent) where T : IGameComponent
-        {
-            if (component is null || component is not T)
-            {
-                Dispose();
-                component = newComponent;
-                component.Initialize();
-            }
-            else
-                Dispose();
-        }
-
-        public void Dispose()
-        {
-            (component as IDisposable)?.Dispose();
-            component = null;
         }
     }
 }

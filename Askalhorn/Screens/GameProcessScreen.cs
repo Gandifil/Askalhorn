@@ -21,7 +21,10 @@ using Askalhorn.Settings;
 using Askalhorn.UI;
 using Askalhorn.UI.Abilities;
 using Askalhorn.UI.Actions;
+using Askalhorn.UI.Dialogs;
 using Askalhorn.UI.Effects;
+using Askalhorn.UI.Inventory;
+using Askalhorn.UI.Journal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -61,12 +64,12 @@ namespace AmbrosiaGame.Screens
             
             OpenBagImpact.OnBagOpened += bag =>
             {
-                switcher.SwitchTo(new ExchangeTabComponent(this, bag, gameProcess.Player.Bag));
+                Game.UiSystem.Add("sda1", new ExchangeWindow(bag, GameProcess.Player.Bag));
             };
             
             DialogImpact.OnDialogOpened += d =>
             {
-                switcher.SwitchTo(new DialogTabComponent(d));
+                Game.UiSystem.Add("sda2", new DialogViewer(d, Anchor.Center, .9f, .5f));
             };
             Location.Current.OnChange += UpdateMap;
             Location.Current.OnChange += UpdateActions;
@@ -125,8 +128,6 @@ namespace AmbrosiaGame.Screens
             Game.Components.Add(listeners);
             Game.UiSystem.Add("GameLog", new GameLogViewer());
             
-            switcher = new SwitchComponent(this);
-            Game.Components.Add(switcher);
             UpdateMovements();
             
             abilities = new AbilitiesHotPanel(Anchor.BottomRight);
@@ -178,16 +179,16 @@ namespace AmbrosiaGame.Screens
                 MovePlayer(new Point(1, 0));
 
             if (e.Key == _options.Keys[Options.KeyActions.Character])
-                switcher.SwitchTo<CharacterTabComponent>();
+                Game.ElementSlot.SwitchTo(() => new CharacterWindow(GameProcess.Player));
 
             if (e.Key == _options.Keys[Options.KeyActions.Inventory])
-                switcher.SwitchTo<InventoryTabComponent>();
+                Game.ElementSlot.SwitchTo(() => new CharacterInventoryViewer(GameProcess.Player));
 
             if (e.Key == _options.Keys[Options.KeyActions.Journal])
-                switcher.SwitchTo<JournalTabComponent>();
+                Game.ElementSlot.SwitchTo(() => new JournalViewer(GameProcess.Player.Journal, Anchor.Center, 0.9f, 0.9f));
 
             if (e.Key == _options.Keys[Options.KeyActions.Abilities])
-                switcher.SwitchTo<AbilitiesTabComponent>();
+                Game.ElementSlot.SwitchTo(() => new AbilitiesWindow(Anchor.CenterLeft, 0.45f, 0.9f));
 
             if (e.Key >= Keys.D0 && e.Key <= Keys.D9)
                 abilities.Run(e.Key - Keys.D0);
@@ -206,13 +207,6 @@ namespace AmbrosiaGame.Screens
 
         public override void UnloadContent()
         {
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-            
-            Game.Components.ClearWithDispose();
         }
 
         public override void Update(GameTime gameTime)

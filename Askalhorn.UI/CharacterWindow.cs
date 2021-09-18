@@ -1,45 +1,24 @@
 ﻿using System;
-using AmbrosiaGame.Screens;
 using Askalhorn.Characters;
 using Askalhorn.Combat;
-using Askalhorn.Common;
-using Askalhorn.Elements;
-using Askalhorn.UI;
-using Microsoft.Xna.Framework;
-using MLEM.Extended.Extensions;
-using MLEM.Textures;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
-namespace Askalhorn.Components
+namespace Askalhorn.UI
 {
-    public class CharacterTabComponent: IGameComponent, IDisposable
+    public class CharacterWindow: FixPanel
     {
-        private static readonly string NAME = "character";
-        private readonly GameProcessScreen screen;
-
-        public CharacterTabComponent(GameProcessScreen screen)
+        public CharacterWindow(ICharacter character, Anchor anchor = Anchor.CenterRight, float width = .45f, float height = .9f): 
+            base(anchor, width, height)
         {
-            this.screen = screen;
+            AddChild(BaseBox(character));
+            AddChild(PrimaryBox(character));
+            AddChild(SecondaryBox(character));
         }
         
-        public void Initialize()
-        {
-            screen.Game.UiSystem.Add(NAME, Create(screen.GameProcess.Player));
-        }
-        
-        private static Element Create(ICharacter character)
-        {
-            var box = new FixPanel(Anchor.CenterRight, 0.45f, 0.9f);
-            box.AddChild(BaseBox(character));
-            box.AddChild(PrimaryBox(character));
-            box.AddChild(SecondaryBox(character));
-            return box;
-        }
         private static Panel BaseBox(ICharacter character)
         {
             var box = new FixPanel(Anchor.TopLeft, 0.5f, 0.3f);
-            //box.AddChild(new Image(Anchor.AutoCenter, new Vector2(0.9f, 0.9f), character.Rend));
             box.AddChild(new Paragraph(Anchor.AutoCenter, 100, character.Name));
             return box;
         }
@@ -69,11 +48,6 @@ namespace Askalhorn.Components
                 box.AddChild(new Paragraph(Anchor.AutoLeft, 1, type+":\t" + character.Protection[type]));
             }
             return box;
-        }
-        
-        public void Dispose()
-        {
-            screen.Game.UiSystem.Remove(NAME);
         }
     }
 }

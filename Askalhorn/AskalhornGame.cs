@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using AmbrosiaGame.Screens;
 using Askalhorn.Common;
+using Askalhorn.Components;
 using Askalhorn.Elements;
 using Askalhorn.Logging;
 using Askalhorn.Screens;
@@ -31,6 +32,8 @@ namespace Askalhorn
         public GraphicsDeviceManager Graphics { get; private set; }
 
         public SpriteBatch SpriteBatch { get; private set; }
+        
+        public SwitchComponent ElementSlot { get; private set; }
 
         public static AskalhornGame Instance;
 
@@ -76,6 +79,9 @@ namespace Askalhorn
             
             UiSystem = new UiSystem(this, style);
             UiSystem.OnRootRemoved += root => root.Element.RecursiveDispose();
+
+            ElementSlot = new SwitchComponent(UiSystem);
+            Components.Add(ElementSlot);
             ScreenManager.LoadScreen(new MainMenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black, 0.5f));    
         }
 
