@@ -76,9 +76,6 @@ namespace Askalhorn.Core
 
         public override void Turn()
         {
-            foreach (var character in Characters)
-                character.Turn();
-            
             base.Turn();
             
             var removing = Characters.Where(x => x.HP.Current < 1);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Askalhorn.Characters.Effects;
 using Askalhorn.Common;
 using MonoGame.Extended.TextureAtlases;
 

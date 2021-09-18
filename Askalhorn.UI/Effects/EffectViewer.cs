@@ -1,4 +1,5 @@
 ﻿using Askalhorn.Characters;
+using Askalhorn.Characters.Effects;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 

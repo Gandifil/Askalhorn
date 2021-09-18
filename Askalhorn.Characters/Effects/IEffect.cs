@@ -1,7 +1,6 @@
 ﻿using Askalhorn.Render;
-using MonoGame.Extended.TextureAtlases;
 
-namespace Askalhorn.Characters
+namespace Askalhorn.Characters.Effects
 {
     public interface IEffect: IIcon
     {
