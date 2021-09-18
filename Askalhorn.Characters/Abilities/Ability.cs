@@ -10,7 +10,7 @@ namespace Askalhorn.Characters.Abilities
     {
         public abstract string Name { get; }
         public abstract string Description { get; }
-        public abstract TextureRegion2D Icon { get; }
+        public abstract TextureRegion2D Texture { get; }
         public abstract SoundEffect CastSound { get; }
         public abstract IAbility.TargetType Type { get; }
         public abstract int Radius { get; }
@@ -34,11 +34,11 @@ namespace Askalhorn.Characters.Abilities
                 //if (_currentModification == -1)
                 {
                     _currentModification = value;
-                    OnChange?.Invoke();
+                    OnChanged?.Invoke();
                 }
             }
         }
-        public event Action OnChange;
+        public event Action OnChanged;
 
         public abstract uint MaxSkill { get; }
 
@@ -48,7 +48,7 @@ namespace Askalhorn.Characters.Abilities
             if (Skill < MaxSkill)
                 Skill++;
 
-            OnChange?.Invoke();
+            OnChanged?.Invoke();
             
             character.MP.Current.Value -= MagicCost;
             Use(character, target);
@@ -65,24 +65,27 @@ namespace Askalhorn.Characters.Abilities
         }
 
         private static string[] TARGET_TYPES_TEXT = {"На себя", "На одну цель"};
-        
-        public override string ToString()
+
+        public string TooltipText
         {
-            var builder = new StringBuilder();
-            builder.AppendLine(Name);
-            builder.AppendLine($"Тип: {TARGET_TYPES_TEXT[(int)Type]}");
-            builder.AppendLine($"Затраты магии: {MagicCost}");
-            builder.AppendLine($"Откат: {CoolDown}");
+            get
+            {
+                var builder = new StringBuilder();
+                builder.AppendLine(Name);
+                builder.AppendLine($"Тип: {TARGET_TYPES_TEXT[(int)Type]}");
+                builder.AppendLine($"Затраты магии: {MagicCost}");
+                builder.AppendLine($"Откат: {CoolDown}");
             
-            if (IsReady)
-                builder.AppendLine($"<c Green>Умение готово к использованию</c>");
-            else
-                builder.AppendLine($"<c Red>Умение будет готово через {CoolDownTimer} ходов</c>");
+                if (IsReady)
+                    builder.AppendLine($"<c Green>Умение готово к использованию</c>");
+                else
+                    builder.AppendLine($"<c Red>Умение будет готово через {CoolDownTimer} ходов</c>");
             
             
-            builder.AppendLine(Description);
+                builder.AppendLine(Description);
             
-            return builder.ToString();
+                return builder.ToString();
+            }
         }
     }
 }

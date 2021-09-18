@@ -11,7 +11,7 @@ namespace Askalhorn.Characters.Abilities
         public override string Name => "Удар";
         
         public override string Description => "Удар";
-        public override TextureRegion2D Icon => Storage.Load("effects", 1, 1);
+        public override TextureRegion2D Texture => Storage.Load("effects", 1, 1);
         public override IAbility.TargetType Type => IAbility.TargetType.Character;
         public override int Radius => 1;
         public override int CoolDown => 0;

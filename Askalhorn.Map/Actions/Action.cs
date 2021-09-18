@@ -13,6 +13,8 @@ namespace Askalhorn.Map.Actions
 
         string IIcon.TooltipText => Name.ToString();
         
+        public event System.Action OnChanged;
+
         public IImpact Impact { get; set; }
         
         public abstract bool IsOnlyOneCell { get; }

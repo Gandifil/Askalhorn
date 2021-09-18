@@ -15,7 +15,7 @@ namespace Askalhorn.Characters.Abilities
         public override string Name => "Огненная стрела";
         
         public override string Description => $"Заклинатель придает огню форму стрелы и направляет ее в сторону противника, нанося {_damage} урона огнем.";
-        public override TextureRegion2D Icon => Storage.Load("effects", 0, 1);
+        public override TextureRegion2D Texture => Storage.Load("effects", 0, 1);
         public override IAbility.TargetType Type => IAbility.TargetType.Character;
         public override int Radius => 10;
         public override int CoolDown { get; } = 0;

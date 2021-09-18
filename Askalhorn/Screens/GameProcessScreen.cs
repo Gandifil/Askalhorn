@@ -19,6 +19,7 @@ using Askalhorn.Render;
 using Askalhorn.Screens;
 using Askalhorn.Settings;
 using Askalhorn.UI;
+using Askalhorn.UI.Abilities;
 using Askalhorn.UI.Actions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -41,12 +42,12 @@ namespace AmbrosiaGame.Screens
         public readonly GameProcess GameProcess;
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
-        public MovementTiles movements;
+        public MovementTiles movements => MovementTiles.Instance;
         private InputListenerComponent listeners;
         private SwitchComponent switcher;
         private ActionsViewer actions;
         private EffectsComponent effects;
-        private AbilitiesComponent abilities;
+        private AbilitiesHotPanel abilities;
         private Options _options;
 
         public GameProcessScreen(AskalhornGame game, GameProcess gameProcess)
@@ -122,16 +123,18 @@ namespace AmbrosiaGame.Screens
             
             Game.Components.Add(listeners);
             Game.UiSystem.Add("GameLog", new GameLogViewer());
+            
             switcher = new SwitchComponent(this);
             Game.Components.Add(switcher);
+            UpdateMovements();
+            
+            abilities = new AbilitiesHotPanel(Anchor.BottomRight);
+            Game.UiSystem.Add("Abilities", abilities);
+                
             effects = new EffectsComponent(this, GameProcess.Player);
             GameProcess.OnTurned += effects.Update;
             Game.Components.Add(effects);
-            abilities = new AbilitiesComponent(this, GameProcess.Player);
-            Game.Components.Add(abilities);
-            movements = new MovementTiles(GameProcess.Player);
-            UpdateMovements();
-                
+            
             actions = new ActionsViewer();
             Game.UiSystem.Add("Actions", actions);
             UpdateActions();

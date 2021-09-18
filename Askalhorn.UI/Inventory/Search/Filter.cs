@@ -9,7 +9,8 @@ namespace Askalhorn.UI.Inventory.Search
     {
         public TextureRegion2D Texture { get; set; }
         public string TooltipText { get; set; }
-        
+        public event Action OnChanged;
+
         public Func<IItem, bool> Predicate { get; set; }
     }
 }

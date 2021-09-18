@@ -3,31 +3,32 @@ using Askalhorn.Characters;
 using Askalhorn.Characters.Control;
 using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Common;
+using Askalhorn.Core;
 using Askalhorn.Math;
+using Autofac.Core.Activators;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MLEM.Extensions;
 using Serilog;
 
-namespace Askalhorn.Elements
+namespace Askalhorn.UI
 {
     public class MovementTiles
     {
-        private readonly ICharacter character;        
+        public static MovementTiles Instance = new MovementTiles();
         public IEnumerable<UseAbilityMove> AvailableAbilities { get; set; } = new List<UseAbilityMove>();
 
         public IEnumerable<MovementMove> AvailableMovements { get; set; } = new List<MovementMove>();
         private readonly Texture2D texture;
         
-        public MovementTiles(ICharacter character)
+        public MovementTiles()
         {
-            this.character = character;
             this.texture = Storage.Content.Load<Texture2D>("images/selection");
         }
 
         public IMove CheckClick(Point point, Matrix matrix)
         {
+            var character = GameProcess.Instance.Player;
             var f = Vector2.Transform(point.ToVector2(), Matrix.Invert(matrix));
             var position = Vectors.Detransform(f);
             
@@ -46,6 +47,7 @@ namespace Askalhorn.Elements
 
         public void Draw(SpriteBatch batch, Matrix matrix)
         {
+            var character = GameProcess.Instance.Player;
             var f = Vector2.Transform(Mouse.GetState().Position.ToVector2(), Matrix.Invert(matrix));
             var point = Vectors.Detransform(f);
             

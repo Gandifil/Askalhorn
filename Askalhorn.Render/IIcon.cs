@@ -1,4 +1,5 @@
-﻿using MonoGame.Extended.TextureAtlases;
+﻿using System;
+using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Render
 {
@@ -7,5 +8,7 @@ namespace Askalhorn.Render
         TextureRegion2D Texture { get; }
         
         string TooltipText { get; }
+
+        event Action OnChanged;
     }
 }

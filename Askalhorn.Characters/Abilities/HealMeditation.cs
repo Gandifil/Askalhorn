@@ -20,7 +20,7 @@ namespace Askalhorn.Characters.Abilities
 
         private string _desc => CurrentModification == 1 ? $"<c LightBlue>{HealAbsValue}</c> единиц" : $"{HealPercent} %";
 
-        public override TextureRegion2D Icon => Storage.Load("effects", 0, 0);
+        public override TextureRegion2D Texture => Storage.Load("effects", 0, 0);
 
         public override IAbility.TargetType Type => IAbility.TargetType.Self;
         public override int Radius => 10;

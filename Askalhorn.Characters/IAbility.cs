@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Askalhorn.Render;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters
 {
-    public interface IAbility
+    public interface IAbility: IIcon
     {
         public struct Modification
         {
@@ -21,12 +22,8 @@ namespace Askalhorn.Characters
         }
         
         string Name { get; }
-
-        string Description{ get; }
         
         TargetType Type { get; }
-
-        TextureRegion2D Icon { get; }
         
         SoundEffect CastSound { get; }
         
@@ -47,8 +44,6 @@ namespace Askalhorn.Characters
         List<Modification> Modifications { get;}
         
         int CurrentModification { get; set; }
-
-        event Action OnChange;
 
         void Use(Character character, Character target);
     }

@@ -31,7 +31,7 @@ namespace Askalhorn.Components
             {
                 this.ability = ability;
                 Box = new FixPanel(Anchor.AutoCenter, 0.9f, 0.1f);
-                var icon = new Image(Anchor.CenterLeft, new Vector2(-1, 1F), ability.Icon.ToMlem());
+                var icon = new Image(Anchor.CenterLeft, new Vector2(-1, 1F), ability.Texture.ToMlem());
                 icon.CanBeMoused = true;
                 tooltip = new Tooltip(500, ability.ToString(), icon);
                 tooltip.MouseOffset = new Vector2(32, -64);
@@ -64,7 +64,7 @@ namespace Askalhorn.Components
                     modBox.AddChild(image);
                 }
                 Box.AddChild(modBox);
-                ability.OnChange += Update;
+                ability.OnChanged += Update;
             }
 
             public void Update()
@@ -81,7 +81,7 @@ namespace Askalhorn.Components
 
             public void Dispose()
             {
-                ability.OnChange -= Update;
+                ability.OnChanged -= Update;
             }
         }
         

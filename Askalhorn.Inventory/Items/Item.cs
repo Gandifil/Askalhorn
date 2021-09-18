@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common;
+﻿using System;
+using Askalhorn.Common;
 using Askalhorn.Text;
 using MonoGame.Extended.TextureAtlases;
 
@@ -17,6 +18,8 @@ namespace Askalhorn.Inventory.Items
 Вес: {Weight} кг
 {Description}
 ";
+
+        public event Action OnChanged;
 
 
         public virtual bool Equals(IItem? other)
