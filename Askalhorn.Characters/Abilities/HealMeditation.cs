@@ -35,18 +35,18 @@ namespace Askalhorn.Characters.Abilities
             {
                 new IAbility.Modification()
                 {
-                    Description = "Боевая концентрация\nДополнительно защищает от 10 единиц физического урона.",
-                    Icon = Storage.Load("effects", 2, 0),
+                    TooltipText = "Боевая концентрация\nДополнительно защищает от 10 единиц физического урона.",
+                    Texture = Storage.Load("effects", 2, 0),
                 },
                 new IAbility.Modification()
                 {
-                    Description = "Обмен энергий\nМедитация восстанавливает значительно быстрее, зависит от магической силы, стоимость увеличивается.",
-                    Icon = Storage.Load("effects", 3, 0),
+                    TooltipText = "Обмен энергий\nМедитация восстанавливает значительно быстрее, зависит от магической силы, стоимость увеличивается.",
+                    Texture = Storage.Load("effects", 3, 0),
                 },
                 new IAbility.Modification()
                 {
-                    Description = "Истинный покой\nВосстанавливает дополнительно 3% здоровья в секунду.",
-                    Icon = Storage.Load("effects", 4, 0),
+                    TooltipText = "Истинный покой\nВосстанавливает дополнительно 3% здоровья в секунду.",
+                    Texture = Storage.Load("effects", 4, 0),
                 },
             };
 

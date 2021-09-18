@@ -30,18 +30,18 @@ namespace Askalhorn.Characters.Abilities
             {
                 new IAbility.Modification()
                 {
-                    Description = "Истинное разрушение\nСтрела наносит значительно больше урона.",
-                    Icon = Storage.Load("effects", 2, 1),
+                    TooltipText = "Истинное разрушение\nСтрела наносит значительно больше урона.",
+                    Texture = Storage.Load("effects", 2, 1),
                 },
                 new IAbility.Modification()
                 {
-                    Description = "Поджог\nСтрела дополнительно поджигает противника, нанося 10 единиц урона в течении 2 секунд",
-                    Icon = Storage.Load("effects", 3, 1),
+                    TooltipText = "Поджог\nСтрела дополнительно поджигает противника, нанося 10 единиц урона в течении 2 секунд",
+                    Texture = Storage.Load("effects", 3, 1),
                 },
                 new IAbility.Modification()
                 {
-                    Description = "Родство с огнем\nПридавать огню форму стрелы становится значительно легче, благодаря чему затраты магии снижаются в 2 раза.",
-                    Icon = Storage.Load("effects", 4, 1),
+                    TooltipText = "Родство с огнем\nПридавать огню форму стрелы становится значительно легче, благодаря чему затраты магии снижаются в 2 раза.",
+                    Texture = Storage.Load("effects", 4, 1),
                 },
             };
 

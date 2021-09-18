@@ -8,11 +8,12 @@ namespace Askalhorn.Characters
 {
     public interface IAbility: IIcon
     {
-        public struct Modification
+        public class Modification: IIcon
         {
-            public string Description { get; set; }
-            
-            public TextureRegion2D Icon { get; set; }
+            public string TooltipText { get; set; }
+            public event Action OnChanged;
+
+            public TextureRegion2D Texture { get; set; }
         }
         
         public enum TargetType

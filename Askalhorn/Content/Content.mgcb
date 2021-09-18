@@ -330,6 +330,12 @@
 /processorParam:Quality=Best
 /build:sounds/steam.mp3
 
+#begin texts/abilityWindow.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/abilityWindow.json
+
 #begin texts/actions.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
