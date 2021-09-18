@@ -21,6 +21,7 @@ using Askalhorn.Settings;
 using Askalhorn.UI;
 using Askalhorn.UI.Abilities;
 using Askalhorn.UI.Actions;
+using Askalhorn.UI.Effects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -46,7 +47,7 @@ namespace AmbrosiaGame.Screens
         private InputListenerComponent listeners;
         private SwitchComponent switcher;
         private ActionsViewer actions;
-        private EffectsComponent effects;
+        private EffectsViewer effects;
         private AbilitiesHotPanel abilities;
         private Options _options;
 
@@ -131,9 +132,9 @@ namespace AmbrosiaGame.Screens
             abilities = new AbilitiesHotPanel(Anchor.BottomRight);
             Game.UiSystem.Add("Abilities", abilities);
                 
-            effects = new EffectsComponent(this, GameProcess.Player);
+            effects = new EffectsViewer(GameProcess.Player, Anchor.TopLeft, 1f, .1f);
             GameProcess.OnTurned += effects.Update;
-            Game.Components.Add(effects);
+            Game.UiSystem.Add("Effects", effects);
             
             actions = new ActionsViewer();
             Game.UiSystem.Add("Actions", actions);

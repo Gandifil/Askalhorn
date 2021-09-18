@@ -14,9 +14,9 @@ namespace Askalhorn.Characters.Effects
         {
         }
 
-        public override string Description => $"Защищает от {Value} единиц урона {Type} в течении {TurnCount} ходов.";
+        public override string TooltipText => $"Защищает от {Value} единиц урона {Type} в течении {TurnCount} ходов.";
         
-        public override TextureRegion2D TextureRegion => Storage.Load("effects", 0, 0);
+        public override TextureRegion2D Texture => Storage.Load("effects", 0, 0);
 
         public override void Subscribe(Character character)
         {

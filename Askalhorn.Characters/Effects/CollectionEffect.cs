@@ -12,8 +12,8 @@ namespace Askalhorn.Characters.Effects
         {
         }
 
-        public override string Description => string.Join(" ", Effects.Select(x => x.Description));
-        public override TextureRegion2D TextureRegion => Effects[0].TextureRegion;
+        public override string TooltipText => string.Join(" ", Effects.Select(x => x.TooltipText));
+        public override TextureRegion2D Texture => Effects[0].Texture;
 
         public override void Subscribe(Character character)
         {

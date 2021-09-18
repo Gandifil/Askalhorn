@@ -1,4 +1,5 @@
-﻿using MonoGame.Extended.TextureAtlases;
+﻿using System;
+using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters
 {
@@ -24,7 +25,8 @@ namespace Askalhorn.Characters
         public virtual void Unsubscribe(Character character){}
         
         public virtual void Tick(Character character){}
-        public abstract string Description { get; }
-        public abstract TextureRegion2D TextureRegion { get; }
+        public abstract string TooltipText { get; }
+        public event Action OnChanged;
+        public abstract TextureRegion2D Texture { get; }
     }
 }

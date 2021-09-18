@@ -18,7 +18,7 @@ namespace Askalhorn.Characters.Effects
             impact.On(character);
         }
 
-        public override string Description => "''";
-        public override TextureRegion2D TextureRegion => null;
+        public override string TooltipText => "''";
+        public override TextureRegion2D Texture => null;
     }
 }

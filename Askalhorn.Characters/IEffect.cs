@@ -1,13 +1,10 @@
-﻿using MonoGame.Extended.TextureAtlases;
+﻿using Askalhorn.Render;
+using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters
 {
-    public interface IEffect
+    public interface IEffect: IIcon
     {
-        string Description { get; }
-        
         uint TurnCount { get; }
-        
-        TextureRegion2D  TextureRegion { get; }
     }
 }
