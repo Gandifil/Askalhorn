@@ -18,6 +18,7 @@ namespace Askalhorn.Map
         }
         
         public IRenderer Renderer { get; set; }
+        public abstract bool IsStatic { get; }
         public event Action<IGameObject> OnDisposed;
         public event Action<IGameObject, IPosition, IPosition> OnMoved;
 

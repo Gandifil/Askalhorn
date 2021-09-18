@@ -9,6 +9,7 @@ namespace Askalhorn.Map
     {
         Position Position { get; set; }
         IRenderer Renderer { get; }
+        bool IsStatic { get; }
 
         event Action<IGameObject> OnDisposed;
         event Action<IGameObject, IPosition, IPosition> OnMoved;

@@ -8,10 +8,10 @@ namespace Askalhorn.Map.Spawners
 
         public ISpawner Spawner { get; set; }
         
-        public void Initialize(Location location, Random random, int[] args, uint placeIndex)
+        public void Initialize(Location location, Random random, int[] args, bool isLoading)
         {
             for (int i = 0; i < Count; i++)
-                Spawner?.Initialize(location, random, args, placeIndex);
+                Spawner?.Initialize(location, random, args, isLoading);
         }
     }
 }

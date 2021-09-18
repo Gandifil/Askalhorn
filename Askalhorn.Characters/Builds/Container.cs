@@ -9,7 +9,7 @@ using Askalhorn.Map.Local;
 
 namespace Askalhorn.Characters.Builds
 {
-    internal class Container: GameObject, IBuild, IActionable
+    internal abstract class Container: GameObject, IBuild, IActionable
     {
 
         public IBuild.Types Type => IBuild.Types.Chest;

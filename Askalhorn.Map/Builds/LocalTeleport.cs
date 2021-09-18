@@ -16,5 +16,7 @@ namespace Askalhorn.Map.Builds
         public Point Target { get; set; }
 
         public IAction Action => new TransferAction(new TeleportImpact(Target));
+
+        public override bool IsStatic => true;
     }
 }

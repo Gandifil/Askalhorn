@@ -19,6 +19,8 @@ namespace Askalhorn.Map.Builds
             Radius = 40,
         });
 
+        public override bool IsStatic => true;
+
         public LocationInfo Location { get; set; }
 
         public uint Place { get; set; }

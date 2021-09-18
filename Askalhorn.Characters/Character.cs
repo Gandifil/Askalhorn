@@ -89,8 +89,7 @@ namespace Askalhorn.Characters
         {
             Current = new ObservedParameter<int>(int.MaxValue),
         };
-
-        [JsonIgnore]
+        
         public IController Controller { get; set; }
 
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
@@ -257,6 +256,8 @@ namespace Askalhorn.Characters
                 Location.Current.Location.Add(new LootContainer(o as Character));
             };
         }
+
+        public override bool IsStatic => false;
 
         public override void Turn()
         {

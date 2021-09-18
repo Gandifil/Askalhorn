@@ -10,10 +10,10 @@ namespace Askalhorn.Map
 
         public int[] Args { get; set; } = new int[0];
 
-        public Location Generate(uint placeIndex)
+        public Location Generate(bool IsLoading)
         {
             var pipeline = Storage.Content.Load<LocationPipeline>("locations/" + PipelineName);
-            return pipeline.Run(Seed, Args, placeIndex);
+            return pipeline.Run(Seed, Args, IsLoading);
         }
     }
 }

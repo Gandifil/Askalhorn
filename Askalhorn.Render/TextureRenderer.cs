@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common;
+﻿using System.IO;
+using Askalhorn.Common;
 using Askalhorn.Math;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,25 +10,32 @@ namespace Askalhorn.Render
 {
     public class TextureRenderer: IRenderer
     {
+        [JsonIgnore]
         public readonly TextureRegion2D Region;
-        
-        public TextureRenderer(string fileName, int x, int y, int width, int height)
-        {
-            Region = new TextureRegion2D(Storage.Content.Load<Texture2D>(fileName), x, y, width, height);
-        }
-        
-        public TextureRenderer(string fileName, uint x, uint y)
-        {
-            Region = Storage.Load(fileName, x, y);
-        }
+
+        public string FileName { get; set; }
+
+        public Point? Position { get; set; }
+
+        //public Point? Size { get; set; }
         
         [JsonConstructor]
-        public TextureRenderer(string fileName, Point? position = null)
+        public TextureRenderer(string fileName, Point? position = null, Point? size = null)
         {
+            FileName = fileName;
+            Position = position;
+            
+            Texture2D texture = Storage.Content.Load<Texture2D>("images/" + fileName);
+            
             if (position.HasValue)
-                Region = Storage.Load(fileName, (uint)position.Value.X, (uint)position.Value.Y);
+            {
+                var csize = size ?? new Point(64, 64);
+                var location = position * csize;
+                Region = new TextureRegion2D(texture, new Rectangle(location.Value, csize));
+            }
             else
-                Region = new TextureRegion2D(Storage.Content.Load<Texture2D>("images/" + fileName));
+                Region = new TextureRegion2D(texture);
+
         }
         
         public void Dispose()

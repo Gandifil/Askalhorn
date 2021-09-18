@@ -58,8 +58,9 @@ namespace Askalhorn.Core
             
             using (var file = new StreamReader(filename + ".json"))
             {
-                //info = JsonConvert.DeserializeObject<Info>(file.ReadToEnd(), settings);
-                //_location = info.Location.Generate(0);
+                var state = JsonConvert.DeserializeObject<StateFile>(file.ReadToEnd(), settings);
+                
+                Location.Current.Change(state);
             }
         }
 
@@ -67,23 +68,16 @@ namespace Askalhorn.Core
         {
             using (var file = new StreamWriter(filename + ".json"))
             {
-                // file.Write(JsonConvert.SerializeObject(info, new JsonSerializerSettings
-                // {
-                //     TypeNameHandling = TypeNameHandling.All
-                // }));
+                file.Write(JsonConvert.SerializeObject(Location.Current.StateFile, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                }));
             }
         }
 
         public override void Turn()
         {
             base.Turn();
-            
-            var removing = Characters.Where(x => x.HP.Current < 1);
-            foreach (var character in removing)
-            {
-                //RemoveCharacter(character);
-            }
-            //_characters.RemoveAll(x => x.HP.Current < 1);
             
             InvokeOnTurned();
         }

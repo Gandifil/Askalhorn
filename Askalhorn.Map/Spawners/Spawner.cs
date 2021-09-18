@@ -18,14 +18,16 @@ namespace Askalhorn.Map.Spawners
             Builder = builder;
         }
         
-        public void Initialize(Location location, Random random, int[] args, uint placeIndex)
+        public void Initialize(Location location, Random random, int[] args, bool isLoading)
         {
-            location.Add(
-                Builder.Build(PositionExpression.Generate(new LocationExpressionArgs
+            var obj = Builder.Build(PositionExpression.Generate(new LocationExpressionArgs
             {
                 Location = location,
                 Random = random,
-            })));
+            }));
+            
+            if (!isLoading || obj.IsStatic)
+                location.Add(obj);
         }
     }
 }

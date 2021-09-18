@@ -2,6 +2,7 @@
 using Askalhorn.Map.Builds;
 using Askalhorn.Map.Local;
 using Askalhorn.Render;
+using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Characters.Builds
 {
@@ -10,7 +11,9 @@ namespace Askalhorn.Characters.Builds
         public Chest(Bag bag)
             :base("сундук", false, bag)
         {
-            Renderer = new TextureRenderer("images/grassland_tiles", 0, 256, 64, 64);
+            Renderer = new TextureRenderer("images/grassland_tiles", new Point(0, 4));
         }
+
+        public override bool IsStatic => false;
     }
 }
