@@ -94,7 +94,7 @@ namespace Askalhorn.Core
                 var commandName = words.First();
                 var args = words.TakeLast(words.Length - 1);
             
-                var type = Type.GetType($"Askalhorn.Common.Commands.{commandName}Command");
+                var type = Type.GetType($"Askalhorn.Core.Commands.{commandName}Command");
                 if (type is null)
                     throw new ArgumentOutOfRangeException(nameof(line), 
                         "Failed to find a command with name " + commandName);

@@ -98,13 +98,12 @@ namespace Askalhorn.Elements
 
         private void Write(string line)
         {
-            _output.AddChild(new Paragraph(Anchor.AutoLeft, _output.Area.Width - 50, line)
+            _output.AddChild(new Paragraph(Anchor.AutoLeft, 1, line, true)
             {
                 RegularFont = new StyleProp<GenericFont>(new GenericSpriteFont(Storage.Content.Load<SpriteFont>("fonts/GameLogsFont"))),
             });
-            _output.AddChild(new VerticalSpace(VERTICAL_SPACE));
             _output.ScrollBar.ForceUpdateArea();
-            _output.ScrollBar.CurrentValue = _output.ScrollBar.MaxValue - 1;
+            _output.ScrollBar.CurrentValue = _output.ScrollBar.MaxValue;
         }
 
         public static bool IsExist => AskalhornGame.Instance.UiSystem.Get(DebugConsole.UI_NAME) is not null;
