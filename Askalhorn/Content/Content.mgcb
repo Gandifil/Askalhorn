@@ -309,7 +309,7 @@
 #begin quests/FindProvision.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Common.Plot.Quests.QuestFileReader, Askalhorn.Common
+/processorParam:ContentType=Askalhorn.Plot.QuestFileReader, Askalhorn.Plot
 /build:quests/FindProvision.json
 
 #begin sounds/forcepush.mp3
