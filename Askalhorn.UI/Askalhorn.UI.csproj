@@ -7,6 +7,7 @@
     <ItemGroup>
       <PackageReference Include="MLEM.Extended" Version="5.0.0" />
       <PackageReference Include="MLEM.Ui" Version="5.0.0" />
+      <PackageReference Include="MonoGame.Extended.Input" Version="3.8.0" />
       <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" />
     </ItemGroup>
 

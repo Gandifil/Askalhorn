@@ -9,6 +9,7 @@ using Askalhorn.Logging;
 using Askalhorn.Screens;
 using Askalhorn.Settings;
 using Askalhorn.UI;
+using Askalhorn.UI.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -76,6 +77,9 @@ namespace Askalhorn
             IsMouseVisible = true;
 
             Storage.Initialize(Content, GraphicsDevice);
+
+            InputListeners.Input = new InputListeners(this);
+            Components.Add(InputListeners.Input);
             
             UiSystem = new UiSystem(this, style);
             UiSystem.OnRootRemoved += root => root.Element.RecursiveDispose();
