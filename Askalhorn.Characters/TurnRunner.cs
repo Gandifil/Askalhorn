@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Askalhorn.Common;
 using Askalhorn.Map;
 
@@ -20,8 +21,11 @@ namespace Askalhorn.Characters
 
         public virtual void Turn()
         {
-            foreach (var obj in Location.Current.Location.GameObjects)
-                obj.Turn();
+            var list = Location.Current.Location.GameObjects.ToList();
+            
+            // on Turn() objects can dispose themself;
+            for (int i = list.Count - 1; i >= 0; i--)
+                list[i].Turn();
         }
     }
 }

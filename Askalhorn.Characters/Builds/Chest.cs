@@ -11,7 +11,7 @@ namespace Askalhorn.Characters.Builds
         public Chest(Bag bag)
             :base("сундук", false, bag)
         {
-            Renderer = new TextureRenderer("images/grassland_tiles", new Point(0, 4));
+            Renderer = new TextureRenderer("grassland_tiles", new Point(0, 4));
         }
 
         public override bool IsStatic => false;

@@ -9,7 +9,7 @@ namespace Askalhorn.Characters.Builds
             : base(character.Name, true, character.Bag)
         {
             Position = character.Position;
-            Renderer = new TextureRenderer("images/grassland_tiles", new Point(0, 4));
+            Renderer = new TextureRenderer("grassland_tiles", new Point(0, 4));
         }
 
         public override bool IsStatic => false;
