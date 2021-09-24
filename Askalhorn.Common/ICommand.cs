@@ -2,6 +2,6 @@
 {
     public interface ICommand
     {
-        void Run(string[] args);
+        void Run(object target, string[] args);
     }
 }

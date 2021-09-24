@@ -50,6 +50,9 @@ namespace Askalhorn.Plot
                 if (step is null)
                     throw new ArgumentOutOfRangeException(nameof(value), "Failed to find step");
                 
+                if (step.NameOfLastStep != _currentStep)
+                    throw new InvalidOperationException( "Next.NameOfLastStep must be equals a current.");
+                
                 _currentStep = value;
                 _questStep = step;
             }
@@ -86,11 +89,11 @@ namespace Askalhorn.Plot
                 CurrentStep = step;
         }
 
-        public void Complete(string stepName)
+        public void Complete(string stepName = null)
         {
             State = QuestState.Completed;
 
-            if (stepName is null)
+            if (string.IsNullOrEmpty(stepName))
             {
                 var noFinishStep = _quest.Steps.Select(x => x.NameOfLastStep).ToList();
                 var step = _quest.Steps.Find(x => noFinishStep.Find(y => y == x.Name) is null);
@@ -105,6 +108,30 @@ namespace Askalhorn.Plot
         public void Fail()
         {
             State = QuestState.Failed;
+        }
+
+        private bool Equals(Quest other)
+        {
+            return ContentName == other.ContentName;
+        }
+
+        public bool Equals(IQuest? other)
+        {
+            var anotherQuest = other as Quest;
+            if (anotherQuest is null)
+                return false;
+            else
+                return Equals(anotherQuest);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return ReferenceEquals(this, obj) || obj is Quest other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return (ContentName != null ? ContentName.GetHashCode() : 0);
         }
     }
 }

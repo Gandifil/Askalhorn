@@ -354,6 +354,12 @@
 /processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/journal.json
 
+#begin texts/questState.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/questState.json
+
 #begin texts/rarity.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor

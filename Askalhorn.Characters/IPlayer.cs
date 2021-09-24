@@ -3,10 +3,8 @@ using Askalhorn.Plot;
 
 namespace Askalhorn.Characters
 {
-    public interface IPlayer: ICharacter
+    public interface IPlayer: ICharacter, IHasReadOnlyJournal
     {
-        IJournal Journal { get; }
-
         public void Make(IMove move);
     }
 }

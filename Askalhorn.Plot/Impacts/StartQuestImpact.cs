@@ -1,12 +1,11 @@
 ﻿using System;
 using Askalhorn.Common;
-using Askalhorn.Plot;
 using Askalhorn.Text;
 using MonoGame.Extended.TextureAtlases;
 using Newtonsoft.Json;
 using Serilog;
 
-namespace Askalhorn.Characters.Impacts
+namespace Askalhorn.Plot.Impacts
 {
     public class StartQuestImpact: IImpact
     {
@@ -15,6 +14,7 @@ namespace Askalhorn.Characters.Impacts
         public readonly string QuestStep;
 
         [JsonConstructor]
+        [CommandConstructor]
         public StartQuestImpact(string questName, string questStep = null)
         {
             QuestName = questName;
@@ -23,21 +23,17 @@ namespace Askalhorn.Characters.Impacts
         
         public string Description { get; }
         public TextureRegion2D TextureRegion { get; }
+        
         public void On(object target)
         {
-            var character = target as Character;
-            if (character is null)
-                throw new ArgumentNullException(nameof(target));
-
-            var player = character as Player;
-            if (player is null)
-                throw new ArgumentException(nameof(character), "Character must be a player!");
-
+            var objWithJournal = target as IHasJournal;
+            if (objWithJournal is null)
+                throw new ArgumentNullException(nameof(target), "Target must be a " + nameof(IHasJournal));
+            
             IQuest quest = new Quest(QuestName, QuestStep);
+            objWithJournal.Journal.Add(quest);
             
             Log.Information(new TextPointer("journal", "getQuestLog").ToString(), quest.Name);
-
-            player.Journal.Quests.Add(quest);
         }
     }
 }

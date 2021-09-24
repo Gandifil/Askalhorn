@@ -1,6 +1,8 @@
-﻿namespace Askalhorn.Plot
+﻿using System;
+
+namespace Askalhorn.Plot
 {
-    public interface IQuest
+    public interface IQuest: IEquatable<IQuest>
     {
         QuestState State { get; }
         string Name { get; }

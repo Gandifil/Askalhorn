@@ -91,22 +91,30 @@ namespace Askalhorn.Core
                     throw new ArgumentNullException(nameof(line));
 
                 var words = line.Split(' ');
-                var commandName = words.First();
-                var args = words.TakeLast(words.Length - 1);
-            
-                var type = Type.GetType($"Askalhorn.Core.Commands.{commandName}Command");
-                if (type is null)
-                    throw new ArgumentOutOfRangeException(nameof(line), 
-                        "Failed to find a command with name " + commandName);
-                
-                var command = (ICommand)Activator.CreateInstance(type);
-                command.Run(args.ToArray());
+                new UniversalCommand().Run(null, words);
             }
             catch (Exception e)
             {
                 Log.Error(e, "Failed to run console command '{line}'", line);
             }
 #endif
+        }
+        private object FindTarget(string name)
+        {
+            if (name == "me" || name == "this")
+                return Player;
+
+            return null;
+        }
+
+        private Type FindCommand(string name)
+        {
+            var type = typeof(ICommand);
+            return AppDomain.CurrentDomain
+                .GetAssemblies()//.Where(x => x.FullName?.StartsWith("Askalhorn.") ?? false)
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p))
+                .First(p => p.Name.StartsWith(name));
         }
     }
 }

@@ -12,8 +12,8 @@ namespace Askalhorn.UI.Journal
         {
             AddChild(new Paragraph(Anchor.TopCenter, 1, new TextPointer("journal", "title").ToString(), true));
             
-            var list = new QuestListViewer(journal, Anchor.BottomLeft, .49f, .95f);
-            list.OnOpened += OpenQuest;
+            var list = new QuestsViewer(journal, Anchor.BottomLeft, .49f, .95f);
+            list.List.OnOpened += OpenQuest;
             AddChild(list);
             
             if (journal.Any())
