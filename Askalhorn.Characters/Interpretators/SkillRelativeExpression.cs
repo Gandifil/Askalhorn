@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Interpetators;
+﻿using System;
+using Askalhorn.Common.Interpetators;
 
 namespace Askalhorn.Characters.Interpretators
 {
@@ -20,7 +21,7 @@ namespace Askalhorn.Characters.Interpretators
             return _value.ToString();
         }
         
-        public float Generate(ExpressionArgs args)
+        public float Generate(object target, Random random)
         {
             return _value;
         }

@@ -42,6 +42,12 @@ namespace Askalhorn.Inventory
             return item;
         }
 
+        public bool Contains(IItem item, uint count = 1)
+        {
+            var founded = Find(item);
+            return founded is null ? false : founded.Count >= count;
+        }
+
         private Pack Find(IItem item)
         {
             return _packs.Find(x => item.Equals(x.Item));

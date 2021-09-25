@@ -36,7 +36,7 @@ namespace Askalhorn.Inventory
             if (wBag is null)
                 throw new ArgumentNullException(nameof(target), "Target must be a " + nameof(IHasBag));
             
-            wBag.Bag.Put(Item, Count.Generate(new ExpressionArgs()));
+            wBag.Bag.Put(Item, Count.Generate(null, new Random()));
         }
     }
 }

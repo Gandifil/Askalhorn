@@ -48,7 +48,15 @@ namespace Askalhorn.Inventory.Items
 
         public bool Equals(IItem? other)
         {
-            return _item.Equals(other);
+            if (other is null)
+                return false;
+
+            var otherContentItem = other as ContentItem;
+
+            if (otherContentItem is null)
+                return _item.Equals(other);
+            else
+                return ContentName == otherContentItem.ContentName;
         }
     }
 }

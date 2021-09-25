@@ -18,7 +18,7 @@ namespace Askalhorn.Dialogs
         
         public void On(object target)
         {
-            OnDialogOpened?.Invoke(new DialogEnumerator(Dialog));
+            OnDialogOpened?.Invoke(new DialogEnumerator(target, Dialog));
         }
 
         public static event Action<DialogEnumerator> OnDialogOpened;

@@ -13,13 +13,13 @@ namespace Askalhorn.Characters.Interpretators
             return Type.ToString();
         }
         
-        public float Generate(ExpressionArgs args)
+        public float Generate(object target, Random random)
         {
-            var characterArgs = args as CharacterExpressionArgs;
-            if (characterArgs is null)
-                throw new ArgumentNullException(nameof(args), "Args must be CharacterExpressionArgs!");
+            var character= target as ICharacter;
+            if (character is null)
+                throw new ArgumentNullException(nameof(target), "Target must be " + nameof(ICharacter));
                     
-            return characterArgs.Character.Secondary[Type].Value;
+            return character.Secondary[Type].Value;
         }
 
     }

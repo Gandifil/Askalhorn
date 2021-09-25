@@ -15,7 +15,12 @@
             [
                 {
                     "line": "Привет. Где бы мне разжиться барахлом?",
-                    "target": 1
+                    "target": 1,
+                    "requirement": {
+                        "$type": "Askalhorn.Inventory.Expressions.HasItemExpression, Askalhorn.Inventory",
+                        "item": "goldCoin",
+                        "count": 5
+                    }
                 },
                 {
                     "line": "Пока",

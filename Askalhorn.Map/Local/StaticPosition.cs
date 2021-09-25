@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Interpetators;
+﻿using System;
+using Askalhorn.Common.Interpetators;
 using Newtonsoft.Json;
 
 namespace Askalhorn.Map.Local
@@ -16,7 +17,7 @@ namespace Askalhorn.Map.Local
             Y = y;
         }
         
-        public Position Generate(ExpressionArgs args)
+        public Position Generate(object target, Random random)
         {
             return new (X, Y);
         }

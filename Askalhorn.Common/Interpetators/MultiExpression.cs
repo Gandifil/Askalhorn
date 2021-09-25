@@ -13,10 +13,10 @@ namespace Askalhorn.Common.Interpetators
             return $"{First}*{Second}";
         }
         
-        public T Generate(ExpressionArgs args)
+        public T Generate(object target, Random random)
         {
-            var a = First.Generate(args);
-            var b = Second.Generate(args);
+            var a = First.Generate(target, random);
+            var b = Second.Generate(target, random);
             
             var tuple = new Tuple<T, T>(a, b);
             switch (tuple)

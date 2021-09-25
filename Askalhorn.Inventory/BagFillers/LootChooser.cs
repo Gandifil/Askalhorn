@@ -20,10 +20,7 @@ namespace Askalhorn.Inventory.BagFillers
         
         public void Fill(Random random, Bag bag)
         {
-            var count = Count.Generate(new ExpressionArgs
-            {
-                Random = random,
-            });
+            var count = Count.Generate(null, random);
             
             bag.Put(Item, count);
         }

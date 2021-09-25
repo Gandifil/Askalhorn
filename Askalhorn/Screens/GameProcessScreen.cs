@@ -35,6 +35,7 @@ using MonoGame.Extended.Input.InputListeners;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.ViewportAdapters;
+using Serilog;
 
 namespace AmbrosiaGame.Screens
 {

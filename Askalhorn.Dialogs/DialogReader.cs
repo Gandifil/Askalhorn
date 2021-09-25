@@ -1,8 +1,9 @@
-﻿using MonoGame.Extended.Serialization;
+﻿using Askalhorn.Common;
+using MonoGame.Extended.Serialization;
 
 namespace Askalhorn.Dialogs
 {
-    public class DialogReader : JsonContentTypeReader<Dialog>
+    public class DialogReader : PolymorphJsonReader<Dialog>
     {
     }
 }

@@ -16,20 +16,13 @@ namespace Askalhorn.Map.Local
             Rect = rect;
         }
         
-        public Position Generate(ExpressionArgs args)
+        public Position Generate(object target, Random random)
         {
-            if (args is null)
-                throw new ArgumentNullException("Args can't be null");
-            
-            if (args.Random is null)
-                throw new ArgumentNullException("Args.Random can't be null");
-
-            var _args = args as LocationExpressionArgs;
-            var location = _args?.Location;
+            var location = target as Location;
             if (location is null)
-                throw new ArgumentNullException("Args.Location can't be null both");
+                throw new ArgumentNullException("Target must be " + nameof(Location));
             
-            return Calculate(args.Random, location, Rect ?? DefaultRect(_args));
+            return Calculate(random, location, Rect ?? DefaultRect(location));
         }
 
         private Position Calculate(Random random, Location location, Rectangle place)
@@ -44,9 +37,9 @@ namespace Askalhorn.Map.Local
                 return Calculate(random, location, place); 
         }
 
-        private Rectangle DefaultRect(LocationExpressionArgs args)
+        private Rectangle DefaultRect(Location location)
         {
-            return new Rectangle(0, 0, args.Location.TiledMap.Width, args.Location.TiledMap.Height);
+            return new Rectangle(0, 0, location.TiledMap.Width, location.TiledMap.Height);
         }
     }
 }

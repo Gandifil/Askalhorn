@@ -71,12 +71,7 @@ namespace Askalhorn.Characters.Abilities
         
         public override void Use(Character character, Character target)
         {
-            var args = new CharacterExpressionArgs()
-            {
-                Random = new Random(),
-                Character = character,
-            };
-            new DamageImpact((int)_damage.Generate(args)).On(target);
+            new DamageImpact((int)_damage.Generate(character, new Random())).On(target);
         }
     }
 }

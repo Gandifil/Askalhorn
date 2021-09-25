@@ -67,14 +67,9 @@ namespace Askalhorn.Characters.Abilities
 
         public override void Use(Character character, Character target)
         {
-            var args = new CharacterExpressionArgs()
-            {
-                Random = new Random(),
-                Character = character,
-            };
             var healEffect = new ImpactEffect(
                 CurrentModification == 1 ? 
-                    new HealImpact((int)HealAbsValue.Generate(args)) :
+                    new HealImpact((int)HealAbsValue.Generate(character, new Random())) :
                 new HealPercentImpact{ Value = HealPercent}, EffectTurn);
 
             if (CurrentModification == 0)

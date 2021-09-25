@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Common.Interpetators
 {
@@ -17,7 +18,7 @@ namespace Askalhorn.Common.Interpetators
             return Value.ToString();
         }
         
-        public T Generate(ExpressionArgs args)
+        public T Generate(object target, Random random)
         {
             return Value;
         }

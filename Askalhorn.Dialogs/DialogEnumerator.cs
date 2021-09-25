@@ -8,11 +8,13 @@ namespace Askalhorn.Dialogs
     public sealed class DialogEnumerator
     {
         private readonly Dialog _dialog;
+        private readonly object _character;
         private int _millisecondsCounter = 0;
 
-        public DialogEnumerator(Dialog dialog)
+        public DialogEnumerator(object character, Dialog dialog)
         {
             _dialog = dialog;
+            _character = character;
             CurrentSpeech = GetStartSpeech();
         }
 
@@ -67,7 +69,9 @@ namespace Askalhorn.Dialogs
             }
         }
 
-        public IList<Answer> Answers => CurrentParagraphIsLast ? CurrentSpeech.Answers : new List<Answer>();
+        public IEnumerable<Answer> Answers => CurrentParagraphIsLast 
+            ? CurrentSpeech.Answers.Where(x => x.Requirement?.Generate(_character, new Random()) ?? true) 
+            : new List<Answer>();
 
         private uint _paragraphIndex = 0;
         public Paragraph CurrentParagraph => CurrentSpeech.Paragraphs[_paragraphIndex];

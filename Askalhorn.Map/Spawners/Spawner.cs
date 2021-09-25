@@ -20,11 +20,7 @@ namespace Askalhorn.Map.Spawners
         
         public void Initialize(Location location, Random random, int[] args, bool isLoading)
         {
-            var obj = Builder.Build(PositionExpression.Generate(new LocationExpressionArgs
-            {
-                Location = location,
-                Random = random,
-            }));
+            var obj = Builder.Build(PositionExpression.Generate(location, random));
             
             if (!isLoading || obj.IsStatic)
                 location.Add(obj);
