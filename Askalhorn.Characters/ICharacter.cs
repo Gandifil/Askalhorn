@@ -11,7 +11,7 @@ using Askalhorn.Utils;
 
 namespace Askalhorn.Characters
 {
-    public interface ICharacter: IGameObject, IActionable
+    public interface ICharacter: IGameObject, IActionable, IHasBag
     {
         string Name { get; }
         
@@ -42,8 +42,6 @@ namespace Askalhorn.Characters
         IReadOnlyCollection<IEffect> Effects { get; }
         
         Dialog Dialog { get; }
-
-        Bag Bag { get; }
 
         Costume Costume { get; }
     }

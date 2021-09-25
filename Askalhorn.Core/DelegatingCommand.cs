@@ -29,16 +29,23 @@ namespace Askalhorn.Core
             var results = new List<object>();
             foreach (var parameter in _constructor.GetParameters())
             {
-                if (queue.Any() )
-                    switch (parameter.ParameterType.Name)
+                if (queue.Any())
+                {
+                    var typeName = parameter.ParameterType.Name;
+                    switch (typeName)
                     {
-                       case "String":
-                           results.Add(queue.Dequeue());
-                           break;
+                        case "String":
+                            results.Add(queue.Dequeue());
+                            break;
+                        case "UInt32":
+                            results.Add(Convert.ToUInt32(queue.Dequeue()));
+                            break;
                         default:
-                            throw new ArgumentException("Unknown type " + parameter.ParameterType.Name);
+                            throw new ArgumentException("Unknown type " + typeName);
                             break;
                     }
+                }
+                
                 else
                 {
                     if (parameter.IsOptional)

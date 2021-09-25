@@ -94,10 +94,7 @@ namespace Askalhorn.Characters
 
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         public Dialog Dialog { get; set; }
-        Bag ICharacter.Bag => Bag;
         public Costume Costume { get; } = new Costume();
-
-        public readonly Bag Bag = new Bag();
 
         [JsonIgnore]
         public readonly Pool Effects;
@@ -280,5 +277,6 @@ namespace Askalhorn.Characters
         private IAction _action => new SayAction(Dialog);
 
         public IAction Action => Dialog is null ? null : _action;
+        public Bag Bag { get; } = new Bag();
     }
 }
