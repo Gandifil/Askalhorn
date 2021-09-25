@@ -2,11 +2,13 @@
 using Askalhorn.Characters;
 using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Core;
+using Askalhorn.UI.Input;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
 using MonoGame.Extended;
+using MonoGame.Extended.Input.InputListeners;
 
 namespace Askalhorn.UI.Abilities
 {
@@ -37,14 +39,25 @@ namespace Askalhorn.UI.Abilities
                         64.0f * ((float)ability.CoolDownTimer / ability.CoolDown), 50, Microsoft.Xna.Framework.Color.Red);
             };
 
-            OnPressed += TryUse;
+            OnSecondaryPressed += TryUse;
+            InputListeners.Mouse.MouseDragStart += OnMouseDragStart;
         }
 
         public override void Dispose()
         {
-            base.Dispose();
-            
+            InputListeners.Mouse.MouseDragStart -= OnMouseDragStart;
             _owner.MP.Current.Changed -= UpdateMagicRequirement;
+            
+            base.Dispose();
+        }
+
+        private void OnMouseDragStart(object? sender, MouseEventArgs e)
+        {
+            if (DisplayArea.Contains(e.Position.ToVector2()))
+            {
+                var element = new DragAndDrop(_ability);
+                element.Show(Root.System);
+            }
         }
 
         private void UpdateMagicRequirement()
@@ -57,10 +70,7 @@ namespace Askalhorn.UI.Abilities
         public void TryUse(Element element = null)
         {
             if (_ability.Type == IAbility.TargetType.Self)
-            {
                 GameProcess.Instance.Player.Make(_move);
-                //screen.movements.AvailableAbilities = new List<UseAbilityMove>();
-            }
 
             if (_ability.Type == IAbility.TargetType.Character)
             {

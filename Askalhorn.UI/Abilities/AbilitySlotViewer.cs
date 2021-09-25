@@ -1,4 +1,5 @@
-﻿using Askalhorn.Characters;
+﻿using System;
+using Askalhorn.Characters;
 using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Core;
 using Microsoft.Xna.Framework;
@@ -38,6 +39,30 @@ namespace Askalhorn.UI.Abilities
             {
                 TextScaleMultiplier = 0.7f,
             });
+            
+            DragAndDrop.OnDrop += OnDrop;
+        }
+
+        public override void Dispose()
+        {
+            DragAndDrop.OnDrop -= OnDrop;
+
+            base.Dispose();
+        }
+
+        private void OnDrop(DragAndDrop obj)
+        {
+            if (DisplayArea.Contains(obj.PositionOffset) && obj.Icon is IAbility)
+            {
+                try 
+                {
+                    Ability = obj.Icon as IAbility;
+                    obj.SuccesfullyDrop();
+                }
+                catch (ArgumentException e)
+                {
+                }
+            }
         }
 
         public void TryUse()

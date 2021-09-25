@@ -24,13 +24,11 @@ namespace Askalhorn.UI.Inventory
             CanBeMoused = true;
             OnMouseEnter += SetSelecting;
             OnMouseExit += SetUnselecting;
-            //OnPressed += CreateDragAndDrop;
             OnSecondaryPressed += DoubleClick;
 
             var icon = new IconViewer(_pack.Item, Anchor.CenterLeft, 0.1f, 1f);
             icon.OnMouseEnter += SetSelecting;
             icon.OnMouseExit += SetUnselecting;
-            //icon.OnPressed += CreateDragAndDrop;
             icon.OnSecondaryPressed += DoubleClick;
             
             AddChild(icon);
@@ -51,7 +49,11 @@ namespace Askalhorn.UI.Inventory
         private void OnMouseDragStart(object? sender, MouseEventArgs e)
         {
             if (DisplayArea.Contains(e.Position.ToVector2()))
-                CreateDragAndDrop(null);
+            {
+                var element = new DragAndDrop(_pack.Item);
+                element.OnSuccesfullyDrop += () => { _pack.Remove();};
+                element.Show(Root.System);
+            }
         }
 
         protected virtual void DoubleClick(Element element)
@@ -67,13 +69,6 @@ namespace Askalhorn.UI.Inventory
         private void SetUnselecting(Element element)
         {
             DrawColor = new StyleProp<Color>(Color.LightGray);
-        }
-
-        private void CreateDragAndDrop(Element target)
-        {
-            var element = new DragAndDrop(_pack.Item);
-            element.OnSuccesfullyDrop += () => { _pack.Remove();}; // TODO: add removing item from player's bag;
-            element.Show(Root.System);
         }
 
         private void ResetCount()

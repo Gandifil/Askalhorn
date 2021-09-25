@@ -1,7 +1,9 @@
 ﻿using Askalhorn.Core;
 using Askalhorn.Text;
+using Askalhorn.UI.Input;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
+using MonoGame.Extended.Input.InputListeners;
 
 namespace Askalhorn.UI.Abilities
 {
@@ -11,11 +13,19 @@ namespace Askalhorn.UI.Abilities
             
         public AbilitiesWindow(Anchor anchor, float width, float height) : base(anchor, width, height, true)
         {
+            InputListeners.Input.MouseListener.Push(new MouseListener());
             AddChild(new Paragraph(Anchor.AutoCenter, 1, TITLE.ToString(), true));
             
             var owner = GameProcess.Instance.Player;
             foreach (var ability in owner.Abilities)
                 AddChild(new AbilityControlViewer(owner, ability, Anchor.AutoCenter, 1f, .1f));
+        }
+
+        public override void Dispose()
+        {
+            InputListeners.Input.MouseListener.Pop();
+            
+            base.Dispose();
         }
     }
 }
