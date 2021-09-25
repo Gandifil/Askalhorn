@@ -227,6 +227,12 @@
 /processorParam:TextureFormat=Color
 /build:images/Test.png
 
+#begin items/healPoition10.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
+/build:items/healPoition10.json
+
 #begin locations/start.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
@@ -347,6 +353,12 @@
 /processor:JsonContentProcessor
 /processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/FindProvisionQuest.json
+
+#begin texts/items.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/items.json
 
 #begin texts/journal.json
 /importer:JsonContentImporter

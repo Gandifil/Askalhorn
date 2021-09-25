@@ -9,10 +9,14 @@
         }
     },
     "loot": {
-        "$type": "Askalhorn.Inventory.BagFillers.StaticLootChooser, Askalhorn.Inventory",
+        "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
         "item": {
-            "$type": "Askalhorn.Characters.Items.LifePoition, Askalhorn.Characters",
-            "Value": 10
+            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+            "contentName": "healPoition10"
+        },
+        "count": {
+            "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+            "value": 25
         }
     }
 }
