@@ -2,6 +2,7 @@
 using Askalhorn.Common;
 using Askalhorn.Inventory;
 using Askalhorn.Map.Actions;
+using Askalhorn.Render;
 using Askalhorn.Text;
 
 namespace Askalhorn.Characters.Actions
@@ -10,7 +11,7 @@ namespace Askalhorn.Characters.Actions
     {
         public OpenAction(Bag bag)
         {
-            Texture = Storage.Load("guiactions", 1, 0);
+            Renderer = new TextureRenderer("guiactions", new (1, 0));
             Name = new TextPointer("actions", "Open");
             Impact = new OpenBagImpact(bag);
         }

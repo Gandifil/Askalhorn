@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Askalhorn.Inventory.Items;
 
 namespace Askalhorn.Inventory
 {

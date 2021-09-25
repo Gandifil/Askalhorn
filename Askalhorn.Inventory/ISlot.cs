@@ -1,4 +1,6 @@
-﻿namespace Askalhorn.Inventory
+﻿using Askalhorn.Inventory.Items;
+
+namespace Askalhorn.Inventory
 {
     public interface ISlot
     {

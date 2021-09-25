@@ -1,4 +1,5 @@
 ﻿using Askalhorn.Common;
+using Askalhorn.Render;
 using Askalhorn.Text;
 
 namespace Askalhorn.Map.Actions
@@ -7,7 +8,7 @@ namespace Askalhorn.Map.Actions
     {
         public TransferAction(IImpact impact)
         {
-            Texture = Storage.Load("guiactions", 2, 0);
+            Renderer = new TextureRenderer("guiactions", new (2, 0));
             Name = new TextPointer("actions", "Transfer");
             Impact = impact;
         }

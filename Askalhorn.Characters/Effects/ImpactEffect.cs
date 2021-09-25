@@ -1,4 +1,5 @@
 ﻿using Askalhorn.Common;
+using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects
@@ -18,6 +19,6 @@ namespace Askalhorn.Characters.Effects
         }
 
         public override string TooltipText => Impact.Description + " каждый ход";
-        public override TextureRegion2D Texture => Impact.TextureRegion;
+        public override TextureRenderer Renderer => new(Impact.TextureRegion);
     }
 }

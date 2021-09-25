@@ -1,34 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Askalhorn.Inventory.Items;
 
 namespace Askalhorn.Inventory
 {
     public class Costume
     {
-        public readonly Slot Head = new Slot(IItem.PurposeType.Head);
-        public readonly Slot Body = new Slot(IItem.PurposeType.Body);
-        public readonly Slot Hands = new Slot(IItem.PurposeType.Hands);
-        public readonly Slot Boots = new Slot(IItem.PurposeType.Boots);
-        public readonly Slot Weapon = new Slot(IItem.PurposeType.Weapon);
-        public readonly Slot Shield = new Slot(IItem.PurposeType.Shield);
+        public readonly Slot Head = new Slot(ItemPurpose.Head);
+        public readonly Slot Body = new Slot(ItemPurpose.Body);
+        public readonly Slot Hands = new Slot(ItemPurpose.Hands);
+        public readonly Slot Boots = new Slot(ItemPurpose.Boots);
+        public readonly Slot Weapon = new Slot(ItemPurpose.Weapon);
+        public readonly Slot Shield = new Slot(ItemPurpose.Shield);
 
-        public readonly Slot Cloak = new Slot(IItem.PurposeType.Cloak);
-        public readonly Slot Amulet = new Slot(IItem.PurposeType.Amulet);
+        public readonly Slot Cloak = new Slot(ItemPurpose.Cloak);
+        public readonly Slot Amulet = new Slot(ItemPurpose.Amulet);
 
-        public readonly Dictionary<IItem.PurposeType, Slot> Clothes =
-            ((IItem.PurposeType[]) Enum.GetValues(typeof(IItem.PurposeType)))
+        public readonly Dictionary<ItemPurpose, Slot> Clothes =
+            ((ItemPurpose[]) Enum.GetValues(typeof(ItemPurpose)))
             .Select(x => new Slot(x))
             .ToDictionary(x => x.Type, x => x);
 
-        public readonly Slot SecondRing =new Slot(IItem.PurposeType.Ring);
+        public readonly Slot SecondRing =new Slot(ItemPurpose.Ring);
 
         public readonly Slot[] Rings =
         {
-            new Slot(IItem.PurposeType.Ring),
-            new Slot(IItem.PurposeType.Ring)
+            new Slot(ItemPurpose.Ring),
+            new Slot(ItemPurpose.Ring)
         };
 
-        public readonly Slot Bracelet = new Slot(IItem.PurposeType.Bracelet);
+        public readonly Slot Bracelet = new Slot(ItemPurpose.Bracelet);
     }
 } 

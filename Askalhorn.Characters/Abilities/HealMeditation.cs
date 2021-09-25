@@ -6,6 +6,7 @@ using Askalhorn.Characters.Interpretators;
 using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Common.Interpetators;
+using Askalhorn.Render;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
@@ -20,7 +21,7 @@ namespace Askalhorn.Characters.Abilities
 
         private string _desc => CurrentModification == 1 ? $"<c LightBlue>{HealAbsValue}</c> единиц" : $"{HealPercent} %";
 
-        public override TextureRegion2D Texture => Storage.Load("effects", 0, 0);
+        public override TextureRenderer Renderer => new TextureRenderer("effects", new(0, 0));
 
         public override IAbility.TargetType Type => IAbility.TargetType.Self;
         public override int Radius => 10;
@@ -36,17 +37,17 @@ namespace Askalhorn.Characters.Abilities
                 new IAbility.Modification()
                 {
                     TooltipText = "Боевая концентрация\nДополнительно защищает от 10 единиц физического урона.",
-                    Texture = Storage.Load("effects", 2, 0),
+                    Renderer = new TextureRenderer("effects", new(2, 0)),
                 },
                 new IAbility.Modification()
                 {
                     TooltipText = "Обмен энергий\nМедитация восстанавливает значительно быстрее, зависит от магической силы, стоимость увеличивается.",
-                    Texture = Storage.Load("effects", 3, 0),
+                    Renderer = new TextureRenderer("effects", new(3, 0)),
                 },
                 new IAbility.Modification()
                 {
                     TooltipText = "Истинный покой\nВосстанавливает дополнительно 3% здоровья в секунду.",
-                    Texture = Storage.Load("effects", 4, 0),
+                    Renderer = new TextureRenderer("effects", new(4, 0)),
                 },
             };
 

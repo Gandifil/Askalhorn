@@ -1,16 +1,17 @@
 ﻿using System;
+using Askalhorn.Inventory.Items;
 
 namespace Askalhorn.Inventory
 {
     public sealed class Slot
     {
-        public readonly IItem.PurposeType Type;
+        public readonly ItemPurpose Type;
         
         public IItem Item { get; private set; }
 
-        public Slot(IItem.PurposeType aType)
+        public Slot(ItemPurpose a)
         {
-            Type = aType;
+            Type = a;
         }
 
         public event Action<IItem> OnPutOn;

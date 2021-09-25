@@ -5,7 +5,7 @@ namespace Askalhorn.Render
 {
     public interface IIcon
     {
-        TextureRegion2D Texture { get; }
+        TextureRenderer Renderer { get; }
         
         string TooltipText { get; }
 

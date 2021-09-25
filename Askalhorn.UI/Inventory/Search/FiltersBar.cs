@@ -1,6 +1,8 @@
 ﻿using System;
 using Askalhorn.Common;
 using Askalhorn.Inventory;
+using Askalhorn.Inventory.Items;
+using Askalhorn.Render;
 using MLEM.Ui;
 
 namespace Askalhorn.UI.Inventory.Search
@@ -11,36 +13,36 @@ namespace Askalhorn.UI.Inventory.Search
         {   
             new Filter
             {
-                Texture = Storage.Load("filters", 0, 1),
+                Renderer = new TextureRenderer("filters", new(0, 1)),
                 TooltipText = "Без фильтра",
                 Predicate = _ => true,
             },
             new Filter
             {
-                Texture = Storage.Load("filters", 0, 0),
+                Renderer = new TextureRenderer("filters", new(0, 0)),
                 TooltipText = "Оружие",
-                Predicate = x=> x.Type == IItem.PurposeType.Weapon,
+                Predicate = x=> x.Type == ItemPurpose.Weapon,
             },
             new Filter
             {
-                Texture = Storage.Load("filters", 1, 0),
+                Renderer = new TextureRenderer("filters", new(1, 0)),
                 TooltipText = "Броня",
                 Predicate = x => 
-                    x.Type != IItem.PurposeType.Weapon &&
-                    x.Type != IItem.PurposeType.Poition &&
-                    x.Type != IItem.PurposeType.Resource,
+                    x.Type != ItemPurpose.Weapon &&
+                    x.Type != ItemPurpose.Poition &&
+                    x.Type != ItemPurpose.Resource,
             },
             new Filter
             {
-                Texture = Storage.Load("filters", 2, 0),
+                Renderer = new TextureRenderer("filters", new(2, 0)),
                 TooltipText = "Зелья",
-                Predicate = x=> x.Type == IItem.PurposeType.Poition,
+                Predicate = x=> x.Type == ItemPurpose.Poition,
             },
             new Filter
             {
-                Texture = Storage.Load("filters", 1, 1),
+                Renderer = new TextureRenderer("filters", new(1, 1)),
                 TooltipText = "Ресурсы",
-                Predicate = x=> x.Type == IItem.PurposeType.Resource,
+                Predicate = x=> x.Type == ItemPurpose.Resource,
             },
         };
 

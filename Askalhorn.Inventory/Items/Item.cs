@@ -1,5 +1,6 @@
 ﻿using System;
 using Askalhorn.Common;
+using Askalhorn.Render;
 using Askalhorn.Text;
 using MonoGame.Extended.TextureAtlases;
 
@@ -7,32 +8,33 @@ namespace Askalhorn.Inventory.Items
 {
     public abstract class Item : IItem
     {
-        public abstract TextureRegion2D Texture { get; }
-
         private static string[] RarityColors = {"White", "Green", "Orange"};
 
         public string TooltipText =>
             @$"{Name}
 Тип: {Type}
-Редкость: {new TextPointer("rarity", Rarity.ToString()).ToString().WithColor(RarityColors[(int) Rarity])}
+Редкость: {new TextPointer("rarity", ItemRarity.ToString()).ToString().WithColor(RarityColors[(int) ItemRarity])}
 Вес: {Weight} кг
 {Description}
 ";
 
         public event Action OnChanged;
 
-
         public virtual bool Equals(IItem? other)
-
         {
             return other?.GetType() == GetType();
         }
 
-        public abstract string Name { get; }
-        public abstract string Description { get; }
-        public abstract IItem.PurposeType Type { get; }
-        public abstract IItem.RarityLevel Rarity { get; }
-        public float Weight => 0;
+        public TextureRenderer Renderer { get; set; }
+
+        string IItem.Name => Name.ToString();
+        public TextPointer Name { get; set; }
+        
+        public TextPointer Description { get; set; }
+        
+        public abstract ItemPurpose Type { get; }
+        public abstract ItemRarity ItemRarity { get; }
+        public abstract float Weight { get; }
 
         protected abstract IImpact Impact { get; }
 

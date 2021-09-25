@@ -1,4 +1,5 @@
 ﻿using System;
+using Askalhorn.Inventory.Items;
 using Newtonsoft.Json;
 
 namespace Askalhorn.Inventory

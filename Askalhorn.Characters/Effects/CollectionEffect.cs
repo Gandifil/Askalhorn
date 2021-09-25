@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects
@@ -13,7 +14,7 @@ namespace Askalhorn.Characters.Effects
         }
 
         public override string TooltipText => string.Join(" ", Effects.Select(x => x.TooltipText));
-        public override TextureRegion2D Texture => Effects[0].Texture;
+        public override TextureRenderer Renderer => Effects[0].Renderer;
 
         public override void Subscribe(Character character)
         {

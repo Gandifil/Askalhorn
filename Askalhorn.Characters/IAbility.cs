@@ -13,7 +13,7 @@ namespace Askalhorn.Characters
             public string TooltipText { get; set; }
             public event Action OnChanged;
 
-            public TextureRegion2D Texture { get; set; }
+            public TextureRenderer Renderer { get; set; }
         }
         
         public enum TargetType

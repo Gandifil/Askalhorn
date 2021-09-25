@@ -5,6 +5,7 @@ using Askalhorn.Characters.Interpretators;
 using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Common.Interpetators;
+using Askalhorn.Render;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
@@ -15,7 +16,7 @@ namespace Askalhorn.Characters.Abilities
         public override string Name => "Огненная стрела";
         
         public override string Description => $"Заклинатель придает огню форму стрелы и направляет ее в сторону противника, нанося {_damage} урона огнем.";
-        public override TextureRegion2D Texture => Storage.Load("effects", 0, 1);
+        public override TextureRenderer Renderer => new TextureRenderer("effects", new(0, 1));
         public override IAbility.TargetType Type => IAbility.TargetType.Character;
         public override int Radius => 10;
         public override int CoolDown { get; } = 0;
@@ -31,17 +32,17 @@ namespace Askalhorn.Characters.Abilities
                 new IAbility.Modification()
                 {
                     TooltipText = "Истинное разрушение\nСтрела наносит значительно больше урона.",
-                    Texture = Storage.Load("effects", 2, 1),
+                    Renderer = new TextureRenderer("effects", new(2, 1)),
                 },
                 new IAbility.Modification()
                 {
                     TooltipText = "Поджог\nСтрела дополнительно поджигает противника, нанося 10 единиц урона в течении 2 секунд",
-                    Texture = Storage.Load("effects", 3, 1),
+                    Renderer = new TextureRenderer("effects", new(3, 1)),
                 },
                 new IAbility.Modification()
                 {
                     TooltipText = "Родство с огнем\nПридавать огню форму стрелы становится значительно легче, благодаря чему затраты магии снижаются в 2 раза.",
-                    Texture = Storage.Load("effects", 4, 1),
+                    Renderer = new TextureRenderer("effects", new(4, 1)),
                 },
             };
 

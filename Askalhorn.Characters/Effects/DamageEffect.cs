@@ -1,5 +1,6 @@
 ﻿using Askalhorn.Characters.Impacts;
 using Askalhorn.Common;
+using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects
@@ -19,6 +20,6 @@ namespace Askalhorn.Characters.Effects
         }
 
         public override string TooltipText => "''";
-        public override TextureRegion2D Texture => null;
+        public override TextureRenderer Renderer => null;
     }
 }

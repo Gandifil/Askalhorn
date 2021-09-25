@@ -1,4 +1,5 @@
 ﻿using System;
+using Askalhorn.Inventory.Items;
 
 namespace Askalhorn.Inventory.BagFillers
 {

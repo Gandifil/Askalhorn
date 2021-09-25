@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Characters.Impacts;
 using Askalhorn.Common;
+using Askalhorn.Render;
 using Microsoft.Xna.Framework.Audio;
 using MonoGame.Extended.TextureAtlases;
 
@@ -11,7 +12,7 @@ namespace Askalhorn.Characters.Abilities
         public override string Name => "Удар";
         
         public override string Description => "Удар";
-        public override TextureRegion2D Texture => Storage.Load("effects", 1, 1);
+        public override TextureRenderer Renderer => new TextureRenderer("effects", new(1, 1));
         public override IAbility.TargetType Type => IAbility.TargetType.Character;
         public override int Radius => 1;
         public override int CoolDown => 0;

@@ -7,7 +7,7 @@ namespace Askalhorn.Map.Actions
 {
     public abstract class Action: IAction
     {
-        public TextureRegion2D Texture { get; set; }
+        public TextureRenderer Renderer { get; set; }
 
         public TextPointer Name { get; set; }
 

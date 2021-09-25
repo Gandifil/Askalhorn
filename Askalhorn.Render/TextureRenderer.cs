@@ -18,6 +18,10 @@ namespace Askalhorn.Render
         public Point? Position { get; set; }
 
         //public Point? Size { get; set; }
+        public TextureRenderer(TextureRegion2D region)
+        {
+            Region = region;
+        }
         
         [JsonConstructor]
         public TextureRenderer(string fileName, Point? position = null, Point? size = null)

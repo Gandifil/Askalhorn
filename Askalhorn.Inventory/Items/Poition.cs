@@ -2,6 +2,8 @@
 {
     public abstract class Poition: Item
     {
-        public override IItem.PurposeType Type { get; } = IItem.PurposeType.Poition;
+        public override ItemPurpose Type { get; } = ItemPurpose.Poition;
+
+        public override float Weight => .5f;
     }
 }

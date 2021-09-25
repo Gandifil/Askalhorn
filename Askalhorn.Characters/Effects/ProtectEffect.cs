@@ -1,5 +1,6 @@
 ﻿using Askalhorn.Combat;
 using Askalhorn.Common;
+using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects
@@ -16,7 +17,7 @@ namespace Askalhorn.Characters.Effects
 
         public override string TooltipText => $"Защищает от {Value} единиц урона {Type} в течении {TurnCount} ходов.";
         
-        public override TextureRegion2D Texture => Storage.Load("effects", 0, 0);
+        public override TextureRenderer Renderer => new TextureRenderer("effects", new());
 
         public override void Subscribe(Character character)
         {

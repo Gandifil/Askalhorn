@@ -13,7 +13,7 @@ namespace Askalhorn.UI
         private readonly Tooltip _tooltip;
         
         public IconViewer(IIcon icon, Anchor anchor, float width, float height): 
-            base(anchor, new Vector2(width, height), icon.Texture.ToMlem(), false)
+            base(anchor, new Vector2(width, height), icon.Renderer.Region.ToMlem(), false)
         {
             if (icon is null)
                 throw new ArgumentNullException(nameof(icon));

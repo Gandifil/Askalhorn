@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Askalhorn.Inventory;
+using Askalhorn.Inventory.Items;
 using Serilog;
 
 namespace Askalhorn.Characters.Control.Moves

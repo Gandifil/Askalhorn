@@ -2,6 +2,7 @@
 using Askalhorn.Common;
 using Askalhorn.Dialogs;
 using Askalhorn.Map.Actions;
+using Askalhorn.Render;
 using Askalhorn.Text;
 
 namespace Askalhorn.Characters.Actions
@@ -10,7 +11,7 @@ namespace Askalhorn.Characters.Actions
     {
         public SayAction(Dialog dialog)
         {
-            Texture = Storage.Load("guiactions", 0, 0);
+            Renderer = new TextureRenderer("guiactions", new (0, 0));
             Name = new TextPointer("actions", "Say");
             Impact = new DialogImpact(dialog);
         }

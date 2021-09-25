@@ -17,7 +17,7 @@ namespace Askalhorn.UI
 
         public readonly IIcon Icon;
         
-        public DragAndDrop(IIcon icon) : base(0, Vector2.Zero, icon.Texture.ToMlem(), true)
+        public DragAndDrop(IIcon icon) : base(0, Vector2.Zero, icon.Renderer.Region.ToMlem(), true)
         {
             Icon = icon;
         }
