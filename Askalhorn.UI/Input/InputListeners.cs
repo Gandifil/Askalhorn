@@ -19,5 +19,9 @@ namespace Askalhorn.UI.Input
         }
 
         public static InputListeners Input;
+
+        public static NumericKeyboardListener Keyboard => Input.KeyboardListener.Current;
+
+        public static MouseListener Mouse => Input.MouseListener.Current;
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Core;
 using Askalhorn.Inventory;
+using Askalhorn.UI.Input;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
+using MonoGame.Extended.Input.InputListeners;
 
 namespace Askalhorn.UI.Inventory
 {
@@ -20,22 +22,36 @@ namespace Askalhorn.UI.Inventory
 
             SetUnselecting(this);
             CanBeMoused = true;
-            //CanBeSelected = true;
             OnMouseEnter += SetSelecting;
             OnMouseExit += SetUnselecting;
-            OnPressed += CreateDragAndDrop;
+            //OnPressed += CreateDragAndDrop;
             OnSecondaryPressed += DoubleClick;
 
             var icon = new IconViewer(_pack.Item, Anchor.CenterLeft, 0.1f, 1f);
             icon.OnMouseEnter += SetSelecting;
             icon.OnMouseExit += SetUnselecting;
-            icon.OnPressed += CreateDragAndDrop;
+            //icon.OnPressed += CreateDragAndDrop;
             icon.OnSecondaryPressed += DoubleClick;
             
             AddChild(icon);
             AddChild(new Paragraph(Anchor.Center, 300, _pack.Item.Name));
             _count = new Paragraph(Anchor.CenterRight, 150, "x" + _pack.Count);
             AddChild(_count);
+            InputListeners.Mouse.MouseDragStart += OnMouseDragStart;
+        }
+
+        public override void Dispose()
+        {
+            InputListeners.Mouse.MouseDragStart -= OnMouseDragStart;
+            _pack.OnCountChange -= ResetCount;
+            
+            base.Dispose();
+        }
+
+        private void OnMouseDragStart(object? sender, MouseEventArgs e)
+        {
+            if (DisplayArea.Contains(e.Position.ToVector2()))
+                CreateDragAndDrop(null);
         }
 
         protected virtual void DoubleClick(Element element)
@@ -63,13 +79,6 @@ namespace Askalhorn.UI.Inventory
         private void ResetCount()
         {
             _count.Text = "x" + _pack.Count;
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-            
-            _pack.OnCountChange -= ResetCount;
         }
     }
 }

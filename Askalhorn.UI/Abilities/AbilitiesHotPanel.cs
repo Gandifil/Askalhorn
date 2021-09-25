@@ -2,6 +2,7 @@
 using System.Linq;
 using Askalhorn.Characters;
 using Askalhorn.Core;
+using Askalhorn.UI.Input;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
@@ -20,24 +21,27 @@ namespace Askalhorn.UI.Abilities
             
             for (uint i = 0; i < ABILITIES_COUNT; i++)
                 slots[i] = new AbilitySlotViewer(character, i, Anchor.AutoInlineIgnoreOverflow, .1f, -1f);
-            //slots[0] = new AbilitySlotViewer(character, 0, Anchor.AutoInlineIgnoreOverflow, .1f, -1f);
             
             for (int i = 0; i < 3; i++)
                 slots[i+1].Ability = character.Abilities.ElementAt(i);
 
             foreach (var slot in slots)
                 AddChild(slot);
+            
+            InputListeners.Keyboard.NumericKeyReleased += OnNumericKeyReleased;
         }
-        
-        public void Run(int index)
+
+        public override void Dispose()
         {
-            if (index < 0)
-                throw new ArgumentException("Index must be greater than or equal zero");
+            InputListeners.Keyboard.NumericKeyReleased -= OnNumericKeyReleased;
             
-            if (index >= ABILITIES_COUNT)
-                throw new ArgumentException($"Index must be lower than count of ability's block ({ABILITIES_COUNT})");
-            
-            slots[index].TryUse();
+            base.Dispose();
+        }
+
+        private void OnNumericKeyReleased(object? sender, int e)
+        {
+            if (0 <= e && e < ABILITIES_COUNT)
+                slots[e].TryUse();
         }
     }
 }

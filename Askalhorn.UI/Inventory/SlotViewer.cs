@@ -1,10 +1,12 @@
 ﻿using System;
 using Askalhorn.Inventory;
 using Askalhorn.Inventory.Items;
+using Askalhorn.UI.Input;
 using Microsoft.Xna.Framework;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
+using MonoGame.Extended.Input.InputListeners;
 
 namespace Askalhorn.UI.Inventory
 {
@@ -26,12 +28,31 @@ namespace Askalhorn.UI.Inventory
             OnMouseEnter += EnableSelecting;
 
             OnMouseExit += DisableSelecting;
-            
-            OnPressed += Pressed;
-
-            DragAndDrop.OnDrop += DropItem;
 
             new Tooltip(100, slot.Type.ToString(), this);
+
+            DragAndDrop.OnDrop += DropItem;
+            InputListeners.Mouse.MouseDragStart += OnMouseDragStart;
+        }
+
+        private void OnMouseDragStart(object? sender, MouseEventArgs e)
+        {
+            if (_slot.Item is not null)
+            {
+                var element = new DragAndDrop(_slot.Item);
+                element.OnSuccesfullyDrop += () => { _slot.TakeOff();};
+                element.Show(Root.System);
+            }
+        }
+
+        public override void Dispose()
+        {
+            InputListeners.Mouse.MouseDragStart -= OnMouseDragStart;
+            _slot.OnPutOn -= PutOn;
+            _slot.OnTakeOff -= TakeOff;
+            DragAndDrop.OnDrop -= DropItem;
+            
+            base.Dispose();
         }
 
         private void EnableSelecting(Element element)
@@ -49,7 +70,6 @@ namespace Askalhorn.UI.Inventory
             var icon = new IconViewer(item, Anchor.Center, 1f, 1f);
             icon.OnMouseEnter += EnableSelecting;
             icon.OnMouseExit += DisableSelecting;
-            icon.OnPressed += Pressed;
             
             AddChild(icon);
         }
@@ -57,16 +77,6 @@ namespace Askalhorn.UI.Inventory
         private void TakeOff(IItem item)
         {
             RemoveChildren();
-        }
-
-        private void Pressed(Element e)
-        {
-            if (_slot.Item is not null)
-            {
-                var element = new DragAndDrop(_slot.Item);
-                element.OnSuccesfullyDrop += () => { _slot.TakeOff();};
-                element.Show(Root.System);
-            }
         }
 
         private void DropItem(DragAndDrop element)
@@ -82,15 +92,6 @@ namespace Askalhorn.UI.Inventory
                 {
                 }
             }
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
-            
-            _slot.OnPutOn -= PutOn;
-            _slot.OnTakeOff -= TakeOff;
-            DragAndDrop.OnDrop -= DropItem;
         }
     }
 }

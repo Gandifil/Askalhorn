@@ -83,9 +83,10 @@ namespace Askalhorn
             Components.Add(InputListeners.Input);
             
             UiSystem = new UiSystem(this, style);
+            UiSystem.OnRootAdded += root => root.OnElementRemoved += element => element.Dispose(); 
             UiSystem.OnRootAdded += root => Log.Debug("Root '{Name}' added in UiSystem (class {FullName})", root.Name, root.Element.GetType().FullName);
             UiSystem.OnRootRemoved += root => Log.Debug("Root '{Name}' removed in UiSystem (class {FullName})", root.Name, root.Element.GetType().FullName);
-            UiSystem.OnRootRemoved += root => root.Element.RecursiveDispose();
+            //UiSystem.OnRootRemoved += root => root.Element.RecursiveDispose();
 
             ElementSlot = new SwitchComponent(UiSystem);
             Components.Add(ElementSlot);

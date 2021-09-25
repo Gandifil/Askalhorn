@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Input.InputListeners;
 
@@ -20,10 +21,13 @@ namespace Askalhorn.UI.Input
 
         public void Pop()
         {
-            _stack.Pop();
+            var listener = _stack.Pop();
+            ListenerRemoved?.Invoke(listener);
         }
 
         public T Current => _stack.Peek();
+
+        public event Action<T> ListenerRemoved;
         
         public override void Update(GameTime gameTime)
         {

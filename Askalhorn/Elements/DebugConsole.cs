@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using Askalhorn.Common;
 using Askalhorn.Core;
 using Askalhorn.Logging;
 using Askalhorn.Text;
 using Askalhorn.UI;
+using Askalhorn.UI.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +15,7 @@ using MLEM.Font;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MLEM.Ui.Style;
+using MonoGame.Extended.Input.InputListeners;
 
 namespace Askalhorn.Elements
 {
@@ -41,33 +44,50 @@ namespace Askalhorn.Elements
 
             AddChild(new Paragraph(Anchor.BottomLeft, 1, "Print command:", true));
             _input = new TextField(Anchor.BottomRight, new Vector2(.9f, 0.1f));
-            _input.OnTextInput += (element, key, character) =>
-            {
-                if (key == Keys.Enter)
-                    EnterCommand();
-
-                if (key == Keys.Tab)
-                {
-                    try
-                    {
-                        var commandsHistory = File.ReadAllLines("console.txt");
-                        if (_historyIndex >= commandsHistory.Length)
-                            _historyIndex = 0;
-                        _input.SetText(commandsHistory[commandsHistory.Length - 1 - _historyIndex]);
-                        _historyIndex++;
-                    }
-                    catch (Exception e)
-                    {
-                    }
-                }
-                else
-                    _historyIndex = 0;
-            };
             AddChild(_input);
 
             foreach (var line in LineStorage.Logs)
                 Write(line);
             LineStorage.OnWrited += Write;
+            InputListeners.Input.KeyboardListener.Push(new NumericKeyboardListener());
+            InputListeners.Input.MouseListener.Push(new MouseListener());
+            InputListeners.Keyboard.KeyReleased += OnKeyReleased;
+        }
+
+        private void OnKeyReleased(object? sender, KeyboardEventArgs args)
+        {
+            if (args.Key == Keys.OemTilde)
+                this.Close();
+            
+            if (args.Key == Keys.Enter)
+                EnterCommand();
+
+            if (args.Key == Keys.Up)
+            {
+                try
+                {
+                    var commandsHistory = File.ReadAllLines("console.txt");
+                    if (_historyIndex >= commandsHistory.Length)
+                        _historyIndex = 0;
+                    _input.SetText(commandsHistory[commandsHistory.Length - 1 - _historyIndex]);
+                    _historyIndex++;
+                }
+                catch (Exception e)
+                {
+                }
+            }
+            else
+                _historyIndex = 0;
+        }
+
+        public override void Dispose()
+        {
+            InputListeners.Keyboard.KeyReleased -= OnKeyReleased;
+            InputListeners.Input.KeyboardListener.Pop();
+            InputListeners.Input.MouseListener.Pop();
+            LineStorage.OnWrited -= Write;
+            
+            base.Dispose();
         }
 
         private int _historyIndex = 0;
@@ -89,13 +109,6 @@ namespace Askalhorn.Elements
             GameProcess.Instance.RunConsoleCommand(command);
         }
 
-        public override void Dispose()
-        {
-            base.Dispose();
-            
-            LineStorage.OnWrited -= Write;
-        }
-
         private void Write(string line)
         {
             _output.AddChild(new Paragraph(Anchor.AutoLeft, 1, line, true)
@@ -113,11 +126,14 @@ namespace Askalhorn.Elements
             if (IsExist)
                 AskalhornGame.Instance.UiSystem.Remove(UI_NAME);
             else
-            {
-                var console = new DebugConsole(Anchor.TopCenter, ELEMENT_WIDTH, 0.5f);
-                AskalhornGame.Instance.UiSystem.Add(UI_NAME, console)
-                    .SelectElement(console._input, true);
-            }
+                Open();
+        }
+
+        public static void Open()
+        {
+            var console = new DebugConsole(Anchor.TopCenter, ELEMENT_WIDTH, 0.5f);
+            AskalhornGame.Instance.UiSystem.Add(UI_NAME, console)
+                .SelectElement(console._input, true);
         }
     }
 }

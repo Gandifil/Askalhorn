@@ -23,6 +23,7 @@ using Askalhorn.UI.Abilities;
 using Askalhorn.UI.Actions;
 using Askalhorn.UI.Dialogs;
 using Askalhorn.UI.Effects;
+using Askalhorn.UI.Input;
 using Askalhorn.UI.Inventory;
 using Askalhorn.UI.Journal;
 using Microsoft.Xna.Framework;
@@ -47,8 +48,7 @@ namespace AmbrosiaGame.Screens
         public readonly GameProcess GameProcess;
         private TiledMapRenderer mapRenderer;
         private CharacterRenderer characterRenderer;
-        public MovementTiles movements => MovementTiles.Instance;
-        private InputListenerComponent listeners;
+        public MovementTiles movements;
         private SwitchComponent switcher;
         private ActionsViewer actions;
         private EffectsViewer effects;
@@ -59,7 +59,6 @@ namespace AmbrosiaGame.Screens
             : base(game)
         {
             this.GameProcess = gameProcess;
-            GameProcess.OnTurned += UpdateMovements;
             GameProcess.OnTurned += UpdateActions;
             GameProcess.OnTurned += LookAtPlayer;
             
@@ -77,6 +76,18 @@ namespace AmbrosiaGame.Screens
             Location.Current.OnChange += LookAtPlayer;
             
             _options = Configuration.Options;
+        }
+
+        public override void Dispose()
+        {
+            movements.Dispose();
+            GameProcess.OnTurned -= UpdateActions;
+            GameProcess.OnTurned -= LookAtPlayer;
+            Location.Current.OnChange -= UpdateMap;
+            Location.Current.OnChange -= UpdateActions;
+            Location.Current.OnChange -= LookAtPlayer;
+            
+            base.Dispose();
         }
 
         private void UpdateActions()
@@ -118,18 +129,11 @@ namespace AmbrosiaGame.Screens
             mapRenderer = new TiledMapRenderer(GraphicsDevice);
             UpdateMap();
             
-            var keyboardListener = new KeyboardListener();
-            keyboardListener.KeyReleased += KeyRelease;
+            InputListeners.Keyboard.KeyReleased += KeyRelease;
             
-            var mouseListener = new MouseListener();
-            mouseListener.MouseClicked += MouseClick;
-
-            listeners = new InputListenerComponent(Game, keyboardListener, mouseListener);
-            
-            Game.Components.Add(listeners);
             Game.UiSystem.Add("GameLog", new GameLogViewer());
-            
-            UpdateMovements();
+
+            movements = new MovementTiles(camera);
             
             abilities = new AbilitiesHotPanel(Anchor.BottomRight);
             Game.UiSystem.Add("Abilities", abilities);
@@ -148,23 +152,13 @@ namespace AmbrosiaGame.Screens
             GameProcess.Instance.Player.Make(new MovementMove(shift));
         }
 
-
-        private void MouseClick(object sender, MouseEventArgs args)
-        {
-            var move = movements.CheckClick(args.Position, camera.GetViewMatrix());
-            GameProcess.Instance.Player.Make(move);
-        }
-
         private void KeyRelease(object sender, KeyboardEventArgs e)
         {
             if (e.Key == _options.Keys[Options.KeyActions.Pause])
                 ScreenManager.LoadScreen(new PauseScreen(Game, this));
 #if DEBUG
             if (e.Key == Keys.OemTilde)
-                DebugConsole.Toggle();
-            
-            if (DebugConsole.IsExist)
-                return;
+                DebugConsole.Open();
 #endif
 
             if (e.Key == _options.Keys[Options.KeyActions.TopRight])
@@ -190,16 +184,8 @@ namespace AmbrosiaGame.Screens
 
             if (e.Key == _options.Keys[Options.KeyActions.Abilities])
                 Game.ElementSlot.SwitchTo(() => new AbilitiesWindow(Anchor.CenterLeft, 0.45f, 0.9f));
-
-            if (e.Key >= Keys.D0 && e.Key <= Keys.D9)
-                abilities.Run(e.Key - Keys.D0);
         }
 
-        private void UpdateMovements()
-        {
-            movements.AvailableAbilities = new List<UseAbilityMove>();
-            movements.AvailableMovements = GameProcess.Player.AvailableMovements;
-        }
 
         public override void LoadContent()
         {
