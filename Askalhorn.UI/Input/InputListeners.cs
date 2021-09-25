@@ -5,13 +5,13 @@ namespace Askalhorn.UI.Input
 {
     public class InputListeners: InputListenerComponent
     {
-        public StackInputListener<KeyboardListener> KeyboardListener { get; }
+        public StackInputListener<NumericKeyboardListener> KeyboardListener { get; }
         
         public StackInputListener<MouseListener> MouseListener { get; }
         
         public InputListeners(Game game) : base(game)
         {
-            KeyboardListener = new StackInputListener<KeyboardListener>(new KeyboardListener());
+            KeyboardListener = new StackInputListener<NumericKeyboardListener>(new NumericKeyboardListener());
             Listeners.Add(KeyboardListener);
                 
             MouseListener = new StackInputListener<MouseListener>(new MouseListener());

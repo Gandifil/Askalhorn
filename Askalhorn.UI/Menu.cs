@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Askalhorn.Common;
+using Askalhorn.UI.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MLEM.Misc;
@@ -12,6 +14,7 @@ namespace Askalhorn.UI
     public class Menu: InvisiblePanel
     {
         private readonly Panel _panel;
+        private readonly List<Action> _actions = new List<Action>();
 
         public const int ELEMENT_HEIGHT = 40;
         public const int VERTICAL_SPACE_HEIGHT = 5;
@@ -26,6 +29,21 @@ namespace Askalhorn.UI
                 SetHeightBasedOnChildren = true,
             };
             AddChild(_panel);
+            
+            InputListeners.Input.KeyboardListener.Current.NumericKeyReleased += OnNumericKeyReleased;
+        }
+
+        public override void Dispose()
+        {
+            InputListeners.Input.KeyboardListener.Current.NumericKeyReleased -= OnNumericKeyReleased;
+            
+            base.Dispose();
+        }
+
+        private void OnNumericKeyReleased(object? sender, int e)
+        {
+            if (0 < e && e < _actions.Count)
+                _actions[e - 1].Invoke();
         }
 
         public void AddButton(string label, Action pressAction)
@@ -40,6 +58,7 @@ namespace Askalhorn.UI
             {
                 OnPressed = _ => pressAction(),
             });
+            _actions.Add(pressAction);
         }
 
         public ScrollBar AddScroll(string label, float max = 1.0f)
