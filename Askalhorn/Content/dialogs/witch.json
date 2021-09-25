@@ -14,12 +14,12 @@
             "answers": 
             [
                 {
-                    "line": "Привет. Где бы мне разжиться барахлом?",
+                    "line": "Что произошло? Откуда вся эта нежить?",
                     "target": 1,
                     "requirement": {
-                        "$type": "Askalhorn.Inventory.Expressions.HasItemExpression, Askalhorn.Inventory",
-                        "item": "goldCoin",
-                        "count": 5
+                        "$type": "Askalhorn.Plot.QuestRequirement, Askalhorn.Plot",
+                        "quest": "FindProvision",
+                        "isInversed": true
                     }
                 },
                 {
@@ -32,7 +32,11 @@
             "paragraphs":
             [
                 {
-                    "text": "Вот возьми немного мусора"
+                    "text": "Вылезла из подземелий под храмом. Давай воспользуемся ситуацией, мне нужны реагенты для зелий, а кости скелетов подойдут для этого идеально. Собери мне полсотни костей и мы в расчете.",
+                    "impact": {
+                        "$type": "Askalhorn.Plot.Impacts.StartQuestImpact, Askalhorn.Plot",
+                        "quest": "FindProvision"
+                    }
                 },
                 {
                     "text": "Ага, вот так."

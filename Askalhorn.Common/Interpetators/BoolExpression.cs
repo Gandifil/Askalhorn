@@ -4,7 +4,7 @@ namespace Askalhorn.Common.Interpetators
 {
     public abstract class BoolExpression: IExpression<bool>
     {
-        public bool IsInversed { get; set; }
+        public bool IsInversed { get; set; } = false;
         
         public bool Generate(object target, Random random)
         {

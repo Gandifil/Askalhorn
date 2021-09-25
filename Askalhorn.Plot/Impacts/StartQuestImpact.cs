@@ -9,16 +9,16 @@ namespace Askalhorn.Plot.Impacts
 {
     public class StartQuestImpact: IImpact
     {
-        public readonly string QuestName;
+        public readonly string Quest;
 
-        public readonly string QuestStep;
+        public readonly string Step;
 
         [JsonConstructor]
         [CommandConstructor]
-        public StartQuestImpact(string questName, string questStep = null)
+        public StartQuestImpact(string quest, string step = null)
         {
-            QuestName = questName;
-            QuestStep = questStep;
+            Quest = quest;
+            Step = step;
         }
         
         public string Description { get; }
@@ -30,7 +30,7 @@ namespace Askalhorn.Plot.Impacts
             if (objWithJournal is null)
                 throw new ArgumentNullException(nameof(target), "Target must be a " + nameof(IHasJournal));
             
-            IQuest quest = new Quest(QuestName, QuestStep);
+            IQuest quest = new Quest(Quest, Step);
             objWithJournal.Journal.Add(quest);
             
             Log.Information(new TextPointer("journal", "getQuestLog").ToString(), quest.Name);

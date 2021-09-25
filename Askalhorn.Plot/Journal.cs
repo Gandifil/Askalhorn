@@ -38,7 +38,7 @@ namespace Askalhorn.Plot
 
         public Quest Find(string name)
         {
-            return _quests.Select(x => x as Quest).First(x => x.ContentName == name);
+            return _quests.Find(x => (x as Quest).ContentName == name) as Quest;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

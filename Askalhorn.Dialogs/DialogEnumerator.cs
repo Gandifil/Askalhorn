@@ -46,6 +46,7 @@ namespace Askalhorn.Dialogs
                 else
                 {
                     _paragraphIndex++;
+                    CurrentParagraph.Impact?.On(_character);
                     OnChanded?.Invoke();
                 }
             }
@@ -65,6 +66,7 @@ namespace Askalhorn.Dialogs
                 _currentSpeech = value;
                 _millisecondsCounter = 0;
                 _paragraphIndex = 0;
+                CurrentParagraph.Impact?.On(_character);
                 OnChanded?.Invoke();
             }
         }
