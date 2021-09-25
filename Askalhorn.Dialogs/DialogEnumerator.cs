@@ -33,11 +33,19 @@ namespace Askalhorn.Dialogs
         {
             _millisecondsCounter += milliseconds;
 
-            if (CurrentParagraph.ShowMilliseconds < _millisecondsCounter && !CurrentParagraphIsLast)
+            if (CurrentParagraph.ShowMilliseconds < _millisecondsCounter)
             {
                 _millisecondsCounter = 0;
-                _paragraphIndex++;
-                OnChanded?.Invoke();
+                if (CurrentParagraphIsLast)
+                {
+                    if (!Answers.Any())
+                        OnEnd?.Invoke();
+                }
+                else
+                {
+                    _paragraphIndex++;
+                    OnChanded?.Invoke();
+                }
             }
         }
 
@@ -59,7 +67,7 @@ namespace Askalhorn.Dialogs
             }
         }
 
-        public IList<Answer> Answers => CurrentSpeech.Answers;
+        public IList<Answer> Answers => CurrentParagraphIsLast ? CurrentSpeech.Answers : new List<Answer>();
 
         private uint _paragraphIndex = 0;
         public Paragraph CurrentParagraph => CurrentSpeech.Paragraphs[_paragraphIndex];

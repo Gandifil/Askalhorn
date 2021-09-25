@@ -1,8 +1,11 @@
-﻿using Askalhorn.Dialogs;
+﻿using Askalhorn.Common;
+using Askalhorn.Dialogs;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
+using MonoGame.Extended.Content;
+using Serilog;
 
 namespace Askalhorn.UI.Dialogs
 {
@@ -20,7 +23,7 @@ namespace Askalhorn.UI.Dialogs
         {
             _enumerator = dialog;
 
-            _text = new MLEM.Ui.Elements.Paragraph(Anchor.TopLeft, 100, "", true);
+            _text = new MLEM.Ui.Elements.Paragraph(Anchor.TopLeft, Storage.Content.GetGraphicsDevice().Viewport.Width / 2, "", true);
             AddChild(_text);
 
             _image = new Image(Anchor.CenterRight, new Vector2(200, 200), _enumerator.Renderer.Region.ToMlem(), true);
@@ -31,12 +34,24 @@ namespace Askalhorn.UI.Dialogs
 
             UpdateState();
             _enumerator.OnChanded += UpdateState;
-            _enumerator.OnEnd += EndDialog;
+            _enumerator.OnEnd += Close;
+            Log.Debug("DialogViewer init");
         }
 
-        public void EndDialog()
+        private void Close()
         {
-            Dispose();
+            if (Root.Element == this)
+                System.Remove(Root.Name);
+        }
+
+        public override void Dispose()
+        {
+            _enumerator.OnChanded -= UpdateState;
+            _enumerator.OnEnd -= Close;
+            
+            Log.Debug("DialogViewer disposed");
+            
+            base.Dispose();
         }
 
         public override void Update(GameTime time)

@@ -20,7 +20,7 @@
             "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
             "positionExpression": {
                 "$type": "Askalhorn.Map.Local.StaticPosition, Askalhorn.Map",
-                "x": 34,
+                "x": 54,
                 "y": 32
             },
             "builder": {

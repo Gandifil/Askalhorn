@@ -8,7 +8,7 @@ namespace Askalhorn.Dialogs
     {
         public string Text { get; set; }
 
-        public uint ShowMilliseconds { get; set; } = 1000;
+        public uint ShowMilliseconds { get; set; } = 5000;
 
         public TextureRegion2D Texture { get; set; }
 

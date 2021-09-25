@@ -22,6 +22,8 @@ namespace Askalhorn.UI.Actions
             _key = key;
 
             OnPressed += _ => Use();
+            
+            _previousState = Keyboard.GetState();
         }
 
         private void Use()
