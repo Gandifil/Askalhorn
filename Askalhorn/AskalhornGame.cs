@@ -23,6 +23,7 @@ using MLEM.Ui.Style;
 using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using Serilog;
 
 namespace Askalhorn
 {
@@ -82,6 +83,8 @@ namespace Askalhorn
             Components.Add(InputListeners.Input);
             
             UiSystem = new UiSystem(this, style);
+            UiSystem.OnRootAdded += root => Log.Debug("Root '{Name}' added in UiSystem (class {FullName})", root.Name, root.Element.GetType().FullName);
+            UiSystem.OnRootRemoved += root => Log.Debug("Root '{Name}' removed in UiSystem (class {FullName})", root.Name, root.Element.GetType().FullName);
             UiSystem.OnRootRemoved += root => root.Element.RecursiveDispose();
 
             ElementSlot = new SwitchComponent(UiSystem);
