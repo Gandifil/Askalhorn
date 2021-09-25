@@ -9,11 +9,11 @@ namespace Askalhorn.UI.Inventory
 {
     public class BagViewer: InvisiblePanel
     {
-        private readonly IBag _bag;
+        private readonly Bag _bag;
         private readonly FiltersBar _filtersBar;
         private readonly InvisiblePanel _packsPanel;
         
-        public BagViewer(IBag bag, Anchor anchor, float x, float y): 
+        public BagViewer(Bag bag, Anchor anchor, float x, float y): 
             base(anchor, x, y, true)
         {
             _bag = bag;

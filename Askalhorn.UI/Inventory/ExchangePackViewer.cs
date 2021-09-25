@@ -6,9 +6,9 @@ namespace Askalhorn.UI.Inventory
 {
     public class ExchangePackViewer: PackViewer
     {
-        private readonly IBag _target;
+        private readonly Bag _target;
         
-        public ExchangePackViewer(IBag target, Pack pack, Anchor anchor, float x, float y) : base(pack, anchor, x, y)
+        public ExchangePackViewer(Bag target, Pack pack, Anchor anchor, float x, float y) : base(pack, anchor, x, y)
         {
             _target = target;
         }

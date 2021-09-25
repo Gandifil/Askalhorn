@@ -18,7 +18,7 @@ namespace Askalhorn.Inventory.BagFillers
             Count = count;
         }
         
-        public void Fill(Random random, IBag bag)
+        public void Fill(Random random, Bag bag)
         {
             var count = Count.Generate(new ExpressionArgs
             {

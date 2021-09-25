@@ -7,7 +7,7 @@ namespace Askalhorn.Inventory.BagFillers
     {
         public IEnumerable<ILootChooser> LootChoosers { get; set; }
         
-        public void Fill(Random random, IBag bag)
+        public void Fill(Random random, Bag bag)
         {
             foreach (var loot in LootChoosers)
                 loot.Fill(random, bag);

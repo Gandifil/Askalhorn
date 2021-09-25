@@ -11,7 +11,7 @@ namespace Askalhorn.Inventory.BagFillers
 
         public int Maximum { get; set; } = 1;
         
-        public void Fill(Random random, IBag bag)
+        public void Fill(Random random, Bag bag)
         {
             var count = random.Next(Minimum, Maximum + 1);
             for (int i = 0; i < count; i++)

@@ -43,7 +43,7 @@ namespace Askalhorn.Characters
         
         Dialog Dialog { get; }
 
-        IBag Bag { get; }
+        Bag Bag { get; }
 
         Costume Costume { get; }
     }

@@ -4,6 +4,6 @@ namespace Askalhorn.Inventory
 {
     public interface ILootChooser
     {
-        void Fill(Random random, IBag bag);
+        void Fill(Random random, Bag bag);
     }
 }

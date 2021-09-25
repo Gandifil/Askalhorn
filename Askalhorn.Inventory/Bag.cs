@@ -5,11 +5,11 @@ using Askalhorn.Inventory.Items;
 
 namespace Askalhorn.Inventory
 {
-    public class Bag: IBag
+    public class Bag
     {
         private readonly List<Pack> _packs = new();
 
-        IReadOnlyCollection<Pack> IBag.Items => _packs;
+        public IReadOnlyCollection<Pack> Items => _packs;
 
         public void Put(IItem item, uint count = 1)
         {

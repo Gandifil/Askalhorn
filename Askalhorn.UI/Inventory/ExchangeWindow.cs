@@ -7,7 +7,7 @@ namespace Askalhorn.UI.Inventory
 {
     public class ExchangeWindow:FixPanel
     {
-        public ExchangeWindow(IBag left, IBag right, Anchor anchor = Anchor.Center, float width =.9f, float height =.9f): 
+        public ExchangeWindow(Bag left, Bag right, Anchor anchor = Anchor.Center, float width =.9f, float height =.9f): 
             base(anchor, width, height)
         {
             AddChild(new ExchangeBagViewer(right, left, Anchor.CenterLeft, 0.45f, 0.9f));

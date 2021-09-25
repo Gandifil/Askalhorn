@@ -94,7 +94,7 @@ namespace Askalhorn.Characters
 
         IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         public Dialog Dialog { get; set; }
-        IBag ICharacter.Bag => Bag;
+        Bag ICharacter.Bag => Bag;
         public Costume Costume { get; } = new Costume();
 
         public readonly Bag Bag = new Bag();
