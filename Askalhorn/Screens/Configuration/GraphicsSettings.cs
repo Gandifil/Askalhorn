@@ -39,18 +39,5 @@ namespace Askalhorn.Screens.Configuration
             _options.IsFullScreen = checced;
             Settings.Configuration.Change();
         }
-
-        public override void Dispose()
-        {
-            _menu.Dispose();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-        }
     }
 }

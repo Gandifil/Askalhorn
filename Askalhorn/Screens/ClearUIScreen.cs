@@ -15,9 +15,9 @@ namespace Askalhorn.Screens
 
         public override void Dispose()
         {
-            base.Dispose();
-            
             Game.UiSystem.Clear();
+            
+            base.Dispose();
         }
 
         public override void Update(GameTime gameTime)

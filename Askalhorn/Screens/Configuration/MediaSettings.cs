@@ -51,18 +51,5 @@ namespace Askalhorn.Screens.Configuration
             _menu.AddButton("Назад", Back);
             _game.UiSystem.Add("menu", _menu);
         }
-
-        public override void Dispose()
-        {
-            _menu.Dispose();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-        }
     }
 }

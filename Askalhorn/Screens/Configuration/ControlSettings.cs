@@ -98,19 +98,5 @@ namespace Askalhorn.Screens.Configuration
                 Settings.Configuration.Change();
             }
         }
-
-        public override void Dispose()
-        {
-            _menu.Dispose();
-            //_game.Components.ClearWithDispose();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-        }
     }
 }
