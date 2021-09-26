@@ -26,4 +26,12 @@ namespace Askalhorn.UI
             TextColor = Color.Black;
         }
     }
+
+    public class TitleCustomText : CustomText
+    {
+        public TitleCustomText(string text, Anchor anchor = Anchor.AutoCenter) : base(anchor, text)
+        {
+            
+        }
+    }
 }

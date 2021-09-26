@@ -22,6 +22,7 @@ using Askalhorn.Settings;
 using Askalhorn.UI;
 using Askalhorn.UI.Abilities;
 using Askalhorn.UI.Actions;
+using Askalhorn.UI.Characters;
 using Askalhorn.UI.Dialogs;
 using Askalhorn.UI.Effects;
 using Askalhorn.UI.Input;
