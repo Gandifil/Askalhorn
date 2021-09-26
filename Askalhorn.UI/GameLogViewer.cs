@@ -16,7 +16,7 @@ namespace Askalhorn.UI
 
         public void Write(string line)
         {
-            AddChild(new Paragraph(Anchor.AutoLeft, Area.Width - 50, line));
+            AddChild(new CustomText(Anchor.AutoLeft, (uint)(.8f*Area.Width), line));
             AddChild(new VerticalSpace(10));
             ScrollBar.ForceUpdateArea();
             ScrollBar.CurrentValue = ScrollBar.MaxValue -1;

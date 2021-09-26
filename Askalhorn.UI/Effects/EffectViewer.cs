@@ -11,10 +11,7 @@ namespace Askalhorn.UI.Effects
         {
             AddChild(new VerticalSpace(4));
             AddChild(new IconViewer(bind.Effect, Anchor.AutoCenter, 1F, -1F));
-            AddChild(new Paragraph(Anchor.AutoCenter, 1, bind.TurnCount.ToString(), true)
-            {
-                //TextScaleMultiplier = 0.8f,
-            });
+            AddChild(new CustomText(Anchor.AutoCenter, bind.TurnCount.ToString()));
             SetHeightBasedOnChildren = true;
         }
     }

@@ -52,6 +52,7 @@ namespace Askalhorn.Elements
             InputListeners.Input.KeyboardListener.Push(new NumericKeyboardListener());
             InputListeners.Input.MouseListener.Push(new MouseListener());
             InputListeners.Keyboard.KeyReleased += OnKeyReleased;
+            ScrollToEnd();
         }
 
         private void OnKeyReleased(object? sender, KeyboardEventArgs args)
@@ -115,6 +116,11 @@ namespace Askalhorn.Elements
             {
                 RegularFont = new StyleProp<GenericFont>(new GenericSpriteFont(Storage.Content.Load<SpriteFont>("fonts/GameLogsFont"))),
             });
+            ScrollToEnd();
+        }
+
+        private void ScrollToEnd()
+        {
             _output.ScrollBar.ForceUpdateArea();
             _output.ScrollBar.CurrentValue = _output.ScrollBar.MaxValue;
         }

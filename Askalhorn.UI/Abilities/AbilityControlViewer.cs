@@ -12,7 +12,7 @@ namespace Askalhorn.UI.Abilities
         {
             AddChild(new AbilityViewer(owner, ability, Anchor.CenterLeft, -1, 1F));
             
-            AddChild(new Paragraph(Anchor.TopRight, 500, ability.Name, true));
+            AddChild(new CustomText(Anchor.TopRight, ability.Name));
             
             AddChild(new AbilitySkillProgressBar(ability, Anchor.BottomRight, 0.8f, 0.5f));
             

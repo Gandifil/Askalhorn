@@ -48,7 +48,7 @@ namespace Askalhorn.Logging
             {
                 case LogEventLevel.Debug:
                 case LogEventLevel.Verbose:
-                    line = line.WithColor("LightGreen");
+                    line = line.WithColor("Green");
                     break;
                 case LogEventLevel.Warning:
                     line = line.WithColor("Orange");

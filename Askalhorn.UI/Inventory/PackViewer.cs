@@ -32,8 +32,8 @@ namespace Askalhorn.UI.Inventory
             icon.OnSecondaryPressed += DoubleClick;
             
             AddChild(icon);
-            AddChild(new Paragraph(Anchor.Center, 300, _pack.Item.Name));
-            _count = new Paragraph(Anchor.CenterRight, 150, "x" + _pack.Count);
+            AddChild(new CustomText(Anchor.Center, _pack.Item.Name));
+            _count = new CustomText(Anchor.CenterRight, "x" + _pack.Count);
             AddChild(_count);
             InputListeners.Mouse.MouseDragStart += OnMouseDragStart;
         }

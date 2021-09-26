@@ -8,7 +8,7 @@ namespace Askalhorn.UI.Journal
     {
         public QuestLine(IQuest quest, Anchor anchor, float width, float height) : base(anchor, width, height)
         {
-            AddChild(new Paragraph(Anchor.Center, 1, quest.Name, true));
+            AddChild(new CustomText(Anchor.Center, quest.Name));
         }
     }
 }

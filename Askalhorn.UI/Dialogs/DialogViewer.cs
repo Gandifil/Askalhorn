@@ -23,7 +23,7 @@ namespace Askalhorn.UI.Dialogs
         {
             _enumerator = dialog;
 
-            _text = new MLEM.Ui.Elements.Paragraph(Anchor.TopLeft, Storage.Content.GetGraphicsDevice().Viewport.Width / 2, "", true);
+            _text = new CustomText(Anchor.TopLeft, .5f, "");
             AddChild(_text);
 
             _image = new Image(Anchor.CenterRight, new Vector2(200, 200), _enumerator.Renderer.Region.ToMlem(), true);

@@ -8,9 +8,9 @@ namespace Askalhorn.UI.Journal
     {
         public QuestViewer(IQuest quest, Anchor anchor, float width, float height) : base(anchor, width, height)
         {
-            AddChild(new Paragraph(Anchor.AutoLeft, 600, quest.Name));
+            AddChild(new CustomText(Anchor.AutoLeft, .4f, quest.Name));
             AddChild(new VerticalSpace(30));
-            AddChild(new Paragraph(Anchor.AutoLeft, 600, quest.Description));
+            AddChild(new CustomText(Anchor.AutoLeft, .4f, quest.Description));
         }
     }
 }

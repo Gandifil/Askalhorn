@@ -14,7 +14,7 @@ namespace Askalhorn.UI.Abilities
         public AbilitiesWindow(Anchor anchor, float width, float height) : base(anchor, width, height, true)
         {
             InputListeners.Input.MouseListener.Push(new MouseListener());
-            AddChild(new Paragraph(Anchor.AutoCenter, 1, TITLE.ToString(), true));
+            AddChild(new CustomText(Anchor.AutoCenter, TITLE.ToString()));
             
             var owner = GameProcess.Instance.Player;
             foreach (var ability in owner.Abilities)
