@@ -20,6 +20,59 @@
             "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
             "positionExpression": {
                 "$type": "Askalhorn.Map.Local.StaticPosition, Askalhorn.Map",
+                "x": 47,
+                "y": 27
+            },
+            "builder": {
+                "$type": "Askalhorn.Characters.Builders.ChestBuilder, Askalhorn.Characters",
+                "loot": {
+                    "$type": "Askalhorn.Inventory.BagFillers.LootChooserList, Askalhorn.Inventory",
+                    "list":[
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "healPoition10"
+                            },
+                            "count": {
+                                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                                "value": 5
+                            }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "goldCoin"
+                            },
+                            "count": {
+                                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                                "value": 100
+                            }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "dagger01"
+                            }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "acolyteRobe"
+                            }
+                        }
+                    ]
+                    
+                }
+            }
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.StaticPosition, Askalhorn.Map",
                 "x": 54,
                 "y": 32
             },

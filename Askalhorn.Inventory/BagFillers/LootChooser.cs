@@ -12,10 +12,10 @@ namespace Askalhorn.Inventory.BagFillers
         public IExpression<uint> Count { get; }
 
         [JsonConstructor]
-        public LootChooser(IItem item, IExpression<uint> count)
+        public LootChooser(IItem item, IExpression<uint> count = null)
         {
             Item = item;
-            Count = count;
+            Count = count ?? new StaticExpression<uint>(1);
         }
         
         public void Fill(Random random, Bag bag)

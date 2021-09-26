@@ -19,8 +19,6 @@ namespace Askalhorn.Characters
             Renderer = new TextureRenderer("mage2");
             Controller = new BufferController();
             Abilities.Add(new HealMeditation());
-            Bag.Put(new ContentItem("dagger01"));
-            Bag.Put(new ContentItem("acolyteRobe"));
         }
 
         IJournal IHasReadOnlyJournal.Journal => Journal;
