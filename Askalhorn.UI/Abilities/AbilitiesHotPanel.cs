@@ -16,15 +16,16 @@ namespace Askalhorn.UI.Abilities
 
         public AbilitiesHotPanel(Anchor anchor, float x = .6f, float y = .1f) : base(anchor, x, y)
         {
-            ICharacter character = GameProcess.Instance.Player;
+            IPlayer player = GameProcess.Instance.Player;
             SetHeightBasedOnChildren = true;
-            
-            for (uint i = 0; i < ABILITIES_COUNT; i++)
-                slots[i] = new AbilitySlotViewer(character, i, Anchor.AutoInlineIgnoreOverflow, .1f, -1f);
-            
-            for (int i = 0; i < 3; i++)
-                slots[i+1].Ability = character.Abilities.ElementAt(i);
 
+            for (int i = 0; i < ABILITIES_COUNT; i++)
+            {
+                slots[i] = new AbilitySlotViewer(player, (uint)i, Anchor.AutoInlineIgnoreOverflow, .1f, -1f);
+                if (player.HotBindings[i] > 0)
+                    slots[i].Ability = player.Abilities.ElementAt(player.HotBindings[i] - 1);
+            }
+            
             foreach (var slot in slots)
                 AddChild(slot);
             

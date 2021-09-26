@@ -114,7 +114,7 @@ namespace Askalhorn.Characters
                 .Where(x => x.IsValid(this));
             
 
-        IEnumerable<IAbility> ICharacter.Abilities => Abilities;
+        IReadOnlyCollection<IAbility> ICharacter.Abilities => Abilities;
 
         [JsonIgnore]
         public List<Ability> Abilities { get; set; } = new List<Ability>()

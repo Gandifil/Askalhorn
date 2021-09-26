@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Askalhorn.Characters;
 using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Core;
@@ -11,7 +12,8 @@ namespace Askalhorn.UI.Abilities
 {
     public class AbilitySlotViewer: FixPanel
     {
-        private readonly ICharacter _owner;
+        private readonly IPlayer _owner;
+        private readonly uint _number;
         
         private IAbility _ability;
         private AbilityViewer _abilityViewer;
@@ -30,10 +32,11 @@ namespace Askalhorn.UI.Abilities
             }
         }
         
-        public AbilitySlotViewer(ICharacter owner, uint number, Anchor anchor, float width, float height): 
+        public AbilitySlotViewer(IPlayer owner, uint number, Anchor anchor, float width, float height): 
             base(anchor, width, height, false, 10)
         {
             _owner = owner;
+            _number = number;
             
             AddChild(new Paragraph(Anchor.BottomRight, 20, number.ToString())
             {
@@ -58,6 +61,8 @@ namespace Askalhorn.UI.Abilities
                 {
                     Ability = obj.Icon as IAbility;
                     obj.SuccesfullyDrop();
+                    _owner.HotBindings[(int) _number] =
+                        1 + _owner.Abilities.ToList().FindIndex(x => x.GetType() == Ability.GetType());
                 }
                 catch (ArgumentException e)
                 {

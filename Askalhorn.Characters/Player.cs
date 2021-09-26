@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Askalhorn.Characters.Abilities;
 using Askalhorn.Characters.Control;
+using Askalhorn.Combat;
 using Askalhorn.Dialogs;
 using Askalhorn.Inventory.Items;
 using Askalhorn.Plot;
@@ -29,6 +30,7 @@ namespace Askalhorn.Characters
             var buffer = Controller as BufferController;
             buffer.AddMove(move, this);
         }
-        
+
+        public List<int> HotBindings { get; set; } = new List<int>(new int[10]);
     }
 }

@@ -37,7 +37,7 @@ namespace Askalhorn.Characters
         
         IEnumerable<MovementMove> AvailableMovements { get; }
         
-        IEnumerable<IAbility> Abilities { get; }
+        IReadOnlyCollection<IAbility> Abilities { get; }
         
         IReadOnlyCollection<IEffect> Effects { get; }
         

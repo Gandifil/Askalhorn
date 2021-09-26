@@ -99,22 +99,5 @@ namespace Askalhorn.Core
             }
 #endif
         }
-        private object FindTarget(string name)
-        {
-            if (name == "me" || name == "this")
-                return Player;
-
-            return null;
-        }
-
-        private Type FindCommand(string name)
-        {
-            var type = typeof(ICommand);
-            return AppDomain.CurrentDomain
-                .GetAssemblies()//.Where(x => x.FullName?.StartsWith("Askalhorn.") ?? false)
-                .SelectMany(s => s.GetTypes())
-                .Where(p => type.IsAssignableFrom(p))
-                .First(p => p.Name.StartsWith(name));
-        }
     }
 }

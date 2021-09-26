@@ -1,10 +1,13 @@
-﻿using Askalhorn.Characters.Control;
+﻿using System.Collections.Generic;
+using Askalhorn.Characters.Control;
 using Askalhorn.Plot;
 
 namespace Askalhorn.Characters
 {
     public interface IPlayer: ICharacter, IHasReadOnlyJournal
     {
-        public void Make(IMove move);
+        void Make(IMove move);
+        
+        List<int> HotBindings { get; set; }
     }
 }
