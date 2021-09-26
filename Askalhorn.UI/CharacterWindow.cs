@@ -1,6 +1,7 @@
 ﻿using System;
 using Askalhorn.Characters;
 using Askalhorn.Combat;
+using Askalhorn.Text;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 
@@ -19,35 +20,47 @@ namespace Askalhorn.UI
         private static Panel BaseBox(ICharacter character)
         {
             var box = new FixPanel(Anchor.TopLeft, 0.5f, 0.3f);
-            box.AddChild(new Paragraph(Anchor.AutoCenter, 100, character.Name));
+            box.AddChild(new CustomText(Anchor.AutoCenter, character.Name));
+            box.AddChild(new CustomText(Anchor.AutoCenter, "Уровень: \t"+ character.Level));
             return box;
         }
 
         private static Panel PrimaryBox(ICharacter character)
         {
             var box = new FixPanel(Anchor.TopRight, 0.5f, 0.3f);
-            box.AddChild(new Paragraph(Anchor.AutoCenter, 1, "Уровень: \t"+ character.Level));
-            foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
+            box.AddChild(new CustomText(Anchor.AutoLeft, "Первичные характеристики"));
+            foreach (var type in (PrimaryType[]) Enum.GetValues(typeof(PrimaryType)))
             {
                 box.AddChild(new VerticalSpace(3));
-                box.AddChild(new Paragraph(Anchor.AutoLeft, 1, type+":\t" + character.Primary[type]));
+                var textPointer = new EnumTextPointer<PrimaryType>(type);
+                box.AddChild(new CustomText(Anchor.AutoLeft, $"{textPointer}:  {character.Primary[type].Value}"));
             }
             return box;
         }
+        
         private static Panel SecondaryBox(ICharacter character)
         {
             var box = new FixPanel(Anchor.BottomCenter, 1.0f, 0.7f);
-            foreach (var type in (SecondaryTypes[]) Enum.GetValues(typeof(SecondaryTypes)))
+            box.AddChild(new CustomText(Anchor.AutoLeft, "Вторичные характеристики"));
+            foreach (var type in (SecondaryType[]) Enum.GetValues(typeof(SecondaryType)))
             {
                 box.AddChild(new VerticalSpace(3));
-                box.AddChild(new Paragraph(Anchor.AutoLeft, 1, type+":\t" + character.Secondary[type]));
+                var textPointer = new EnumTextPointer<SecondaryType>(type);
+                box.AddChild(new CustomText(Anchor.AutoLeft, $"{textPointer}:  {character.Secondary[type].Value}"));
             }
-            foreach (var type in (DamageTypes[]) Enum.GetValues(typeof(DamageTypes)))
+            
+            box.AddChild(new CustomText(Anchor.AutoLeft, "Защита"));
+            foreach (var type in (DamageType[]) Enum.GetValues(typeof(DamageType)))
             {
                 box.AddChild(new VerticalSpace(3));
-                box.AddChild(new Paragraph(Anchor.AutoLeft, 1, type+":\t" + character.Protection[type]));
+                var textPointer = new EnumTextPointer<DamageType>(type)
+                {
+                    GrammaticalCase = GrammaticalCase.Genitive,
+                };
+                box.AddChild(new CustomText(Anchor.AutoLeft, $"Защита от {textPointer}:  {character.Protection[type].Value}"));
             }
             return box;
         }
+        
     }
 }

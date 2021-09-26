@@ -2,6 +2,7 @@
 using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Inventory.Items;
+using Askalhorn.Text;
 
 namespace Askalhorn.Characters.Items
 {
@@ -9,12 +10,14 @@ namespace Askalhorn.Characters.Items
     {
         public uint DamageValue { get; set; }
 
-        public DamageTypes DamageType { get; set; }
+        public DamageType DamageType { get; set; }
 
         public IImpact StrikeImpact { get; set; }
 
         protected override string PreDescription => $@"{base.PreDescription}
-Урон: {DamageValue} ({DamageType})";
+Урон: {DamageValue} ({new EnumTextPointer<DamageType>(DamageType)
+{
+    GrammaticalCase = GrammaticalCase.Genitive}})";
         
         public override ItemPurpose Type => ItemPurpose.Weapon;
     }

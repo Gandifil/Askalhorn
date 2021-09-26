@@ -1,0 +1,34 @@
+{
+    "MaxHP": {
+        "Nominative":"Максимум здоровья",
+        "Genitive":"истинного урона"
+    },
+    "RegenHP": {
+        "Nominative":"Восстановление здоровья",
+        "Genitive":"режущего оружия"
+    },
+    "MaxMagic": {
+        "Nominative":"Максимум магии",
+        "Genitive":"дробящего оружия"
+    },
+    "RegenMagic": {
+        "Nominative":"Восстановление магии",
+        "Genitive":"колющего оружия"
+    },
+    "Accuracy": {
+        "Nominative":"Меткость",
+        "Genitive":"огня"
+    },
+    "Dodge": {
+        "Nominative":"Уклонение",
+        "Genitive":"яда"
+    },
+    "PhysicalPower": {
+        "Nominative":"Физическая сила",
+        "Genitive":"магии"
+    },
+    "MagicPower": {
+        "Nominative":"Магическая сила",
+        "Genitive":"магии"
+    }
+}

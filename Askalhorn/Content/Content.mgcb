@@ -378,6 +378,24 @@
 /processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/actions.json
 
+#begin texts/enums/DamageType.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/enums/DamageType.json
+
+#begin texts/enums/PrimaryType.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/enums/PrimaryType.json
+
+#begin texts/enums/SecondaryType.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/enums/SecondaryType.json
+
 #begin texts/FindProvisionQuest.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor

@@ -24,50 +24,53 @@ namespace Askalhorn.Characters
         public string Name { get; set; }
         public IFraction Fraction { get; protected set; }
 
-        IAttributes<PrimaryTypes> ICharacter.Primary => Primary;
+        IAttributes<PrimaryType> ICharacter.Primary => Primary;
         [JsonIgnore]
-        public Attributes<PrimaryTypes> Primary { get; private set; }
+        public Attributes<PrimaryType> Primary { get; private set; }
 
-        IReadOnlyDictionary<PrimaryTypes, int> ICharacter.PrimaryBase => PrimaryBase;
-        public Dictionary<PrimaryTypes, int> PrimaryBase { get; set; } = new()
+        IReadOnlyDictionary<PrimaryType, int> ICharacter.PrimaryBase => PrimaryBase;
+        public Dictionary<PrimaryType, int> PrimaryBase { get; set; } = new()
         {
-            {PrimaryTypes.Strength, 0},
-            {PrimaryTypes.Agility, 0},
-            {PrimaryTypes.Endurance, 0},
-            {PrimaryTypes.Intelligence, 0},
-            {PrimaryTypes.Willpower, 0},
-            {PrimaryTypes.Luck, 0},
+            {PrimaryType.Strength, 0},
+            {PrimaryType.Agility, 0},
+            {PrimaryType.Endurance, 0},
+            {PrimaryType.Intelligence, 0},
+            {PrimaryType.Willpower, 0},
+            {PrimaryType.Luck, 0},
         };
         
         
-        IAttributes<SecondaryTypes> ICharacter.Secondary => Secondary;
+        IAttributes<SecondaryType> ICharacter.Secondary => Secondary;
         [JsonIgnore]
-        public Attributes<SecondaryTypes> Secondary { get; private set; }
+        public Attributes<SecondaryType> Secondary { get; private set; }
 
-        IReadOnlyDictionary<SecondaryTypes, int> ICharacter.SecondaryBase => SecondaryBase;
-        public Dictionary<SecondaryTypes, int> SecondaryBase { get; set; } = new()
+        IReadOnlyDictionary<SecondaryType, int> ICharacter.SecondaryBase => SecondaryBase;
+        public Dictionary<SecondaryType, int> SecondaryBase { get; set; } = new()
         {
-            {SecondaryTypes.MaxHP, 0},
-            {SecondaryTypes.RegenHP, 0},
-            {SecondaryTypes.MaxMagic, 0},
-            {SecondaryTypes.RegenMagic, 0},
-            {SecondaryTypes.Accuracy, 0},
-            {SecondaryTypes.Dodge, 0},
-            {SecondaryTypes.PhysicalPower, 0},
-            {SecondaryTypes.MagicPower, 0},
+            {SecondaryType.MaxHP, 0},
+            {SecondaryType.RegenHP, 0},
+            {SecondaryType.MaxMagic, 0},
+            {SecondaryType.RegenMagic, 0},
+            {SecondaryType.Accuracy, 0},
+            {SecondaryType.Dodge, 0},
+            {SecondaryType.PhysicalPower, 0},
+            {SecondaryType.MagicPower, 0},
         };
         
-        IAttributes<DamageTypes> ICharacter.Protection => Protection;
+        IAttributes<DamageType> ICharacter.Protection => Protection;
         [JsonIgnore]
-        public Attributes<DamageTypes> Protection { get; private set; }
+        public Attributes<DamageType> Protection { get; private set; }
 
-        IReadOnlyDictionary<DamageTypes, int> ICharacter.ProtectionBase => ProtectionBase;
-        public Dictionary<DamageTypes, int> ProtectionBase { get; set; } = new()
+        IReadOnlyDictionary<DamageType, int> ICharacter.ProtectionBase => ProtectionBase;
+        public Dictionary<DamageType, int> ProtectionBase { get; set; } = new()
         {
-            {DamageTypes.Clear, 0},
-            {DamageTypes.Phisical, 0},
-            {DamageTypes.Fire, 0},
-            {DamageTypes.Poison, 0},
+            {DamageType.Clear, 0},
+            {DamageType.Blade, 0},
+            {DamageType.Blunt, 0},
+            {DamageType.Piercing, 0},
+            {DamageType.Fire, 0},
+            {DamageType.Poison, 0},
+            {DamageType.Magic, 0},
         };
         
         ILinearParameter<int> ICharacter.Level => Level;
@@ -131,114 +134,114 @@ namespace Askalhorn.Characters
             SetupPrimaryRules();
             SetupSecondaryRules();
             SetupProtectionRules();
-            HP.Max = Secondary[SecondaryTypes.MaxHP];
-            MP.Max = Secondary[SecondaryTypes.MaxMagic];
+            HP.Max = Secondary[SecondaryType.MaxHP];
+            MP.Max = Secondary[SecondaryType.MaxMagic];
 
             EffectPool = new EffectPool(this, new List<EffectBind>());
         }
 
         private void SetupProtectionRules()
         {
-            Protection = new Attributes<DamageTypes>(ProtectionBase.ToDictionary(
+            Protection = new Attributes<DamageType>(ProtectionBase.ToDictionary(
                 x => x.Key, 
                 x=> new ObservedParameter<int>(x.Value)));
         }
 
         private void SetupPrimaryRules()
         {
-            var attrs = new Dictionary<PrimaryTypes, ObservedParameter<int>>();
-            foreach (var type in (PrimaryTypes[]) Enum.GetValues(typeof(PrimaryTypes)))
+            var attrs = new Dictionary<PrimaryType, ObservedParameter<int>>();
+            foreach (var type in (PrimaryType[]) Enum.GetValues(typeof(PrimaryType)))
             {
                 var parameter = new FunctionParameter<int>(() => 10 + Level.Value + PrimaryBase[type]);
                 Level.Changed += parameter.Update;
                 attrs[type] = parameter;
             }
             
-            Primary = new Attributes<PrimaryTypes>(attrs);
+            Primary = new Attributes<PrimaryType>(attrs);
         }
 
         private void SetupSecondaryRules()
         {
-            var attrs = new Dictionary<SecondaryTypes, ObservedParameter<int>>();
-            foreach (var type in (SecondaryTypes[]) Enum.GetValues(typeof(SecondaryTypes)))
+            var attrs = new Dictionary<SecondaryType, ObservedParameter<int>>();
+            foreach (var type in (SecondaryType[]) Enum.GetValues(typeof(SecondaryType)))
             {
                 FunctionParameter<int> parameter;
                 switch (type)
                 {
-                    case SecondaryTypes.MaxHP:
+                    case SecondaryType.MaxHP:
                         parameter = new FunctionParameter<int>(() => 
-                            Primary[PrimaryTypes.Endurance] * 20 + 
-                            Primary[PrimaryTypes.Strength] * 5 +
+                            Primary[PrimaryType.Endurance] * 20 + 
+                            Primary[PrimaryType.Strength] * 5 +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Strength].Changed += parameter.Update;
+                        Primary[PrimaryType.Endurance].Changed += parameter.Update;
+                        Primary[PrimaryType.Strength].Changed += parameter.Update;
                         break;
                     
-                    case SecondaryTypes.RegenHP:
+                    case SecondaryType.RegenHP:
                         parameter = new FunctionParameter<int>(() => 
-                            Convert.ToInt32(Primary[PrimaryTypes.Endurance] + 
-                                            Primary[PrimaryTypes.Willpower] * 0.2) +
+                            Convert.ToInt32(Primary[PrimaryType.Endurance] + 
+                                            Primary[PrimaryType.Willpower] * 0.2) +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
+                        Primary[PrimaryType.Endurance].Changed += parameter.Update;
+                        Primary[PrimaryType.Willpower].Changed += parameter.Update;
                         break;
                     
-                    case SecondaryTypes.MaxMagic:
+                    case SecondaryType.MaxMagic:
                         parameter = new FunctionParameter<int>(() => 
-                            Primary[PrimaryTypes.Willpower] * 10 + 
-                            Primary[PrimaryTypes.Intelligence] * 2 +
+                            Primary[PrimaryType.Willpower] * 10 + 
+                            Primary[PrimaryType.Intelligence] * 2 +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Intelligence].Changed += parameter.Update;
+                        Primary[PrimaryType.Willpower].Changed += parameter.Update;
+                        Primary[PrimaryType.Intelligence].Changed += parameter.Update;
                         break;
                     
-                    case SecondaryTypes.RegenMagic:
+                    case SecondaryType.RegenMagic:
                         parameter = new FunctionParameter<int>(() => 
-                            Convert.ToInt32(Primary[PrimaryTypes.Willpower] * 2 + 
-                                            Primary[PrimaryTypes.Endurance] * 0.4) +
+                            Convert.ToInt32(Primary[PrimaryType.Willpower] * 2 + 
+                                            Primary[PrimaryType.Endurance] * 0.4) +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
+                        Primary[PrimaryType.Willpower].Changed += parameter.Update;
+                        Primary[PrimaryType.Endurance].Changed += parameter.Update;
                         break;
                     
-                    case SecondaryTypes.Accuracy:
+                    case SecondaryType.Accuracy:
                         parameter = new FunctionParameter<int>(() => 
-                            Primary[PrimaryTypes.Agility] * 20 + 
-                            Primary[PrimaryTypes.Strength] * 5 + 
-                            Primary[PrimaryTypes.Luck] * 5 +
+                            Primary[PrimaryType.Agility] * 20 + 
+                            Primary[PrimaryType.Strength] * 5 + 
+                            Primary[PrimaryType.Luck] * 5 +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Agility].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Strength].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Luck].Changed += parameter.Update;
+                        Primary[PrimaryType.Agility].Changed += parameter.Update;
+                        Primary[PrimaryType.Strength].Changed += parameter.Update;
+                        Primary[PrimaryType.Luck].Changed += parameter.Update;
                         break;
                     
-                    case SecondaryTypes.Dodge:
+                    case SecondaryType.Dodge:
                         parameter = new FunctionParameter<int>(() => 
-                            Primary[PrimaryTypes.Agility] * 20 + 
-                            Primary[PrimaryTypes.Endurance] * 5 + 
-                            Primary[PrimaryTypes.Luck] * 5 +
+                            Primary[PrimaryType.Agility] * 20 + 
+                            Primary[PrimaryType.Endurance] * 5 + 
+                            Primary[PrimaryType.Luck] * 5 +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Agility].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Strength].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Luck].Changed += parameter.Update;
+                        Primary[PrimaryType.Agility].Changed += parameter.Update;
+                        Primary[PrimaryType.Strength].Changed += parameter.Update;
+                        Primary[PrimaryType.Luck].Changed += parameter.Update;
                         break;
                     
-                    case SecondaryTypes.PhysicalPower:
+                    case SecondaryType.PhysicalPower:
                         parameter = new FunctionParameter<int>(() => 
-                            Primary[PrimaryTypes.Strength] * 4 + 
-                            Primary[PrimaryTypes.Endurance] * 1 +
+                            Primary[PrimaryType.Strength] * 4 + 
+                            Primary[PrimaryType.Endurance] * 1 +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Agility].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Endurance].Changed += parameter.Update;
+                        Primary[PrimaryType.Agility].Changed += parameter.Update;
+                        Primary[PrimaryType.Endurance].Changed += parameter.Update;
                         break;
                     
-                    case SecondaryTypes.MagicPower:
+                    case SecondaryType.MagicPower:
                         parameter = new FunctionParameter<int>(() => 
-                            Primary[PrimaryTypes.Intelligence] * 4 + 
-                            Primary[PrimaryTypes.Willpower] * 1 +
+                            Primary[PrimaryType.Intelligence] * 4 + 
+                            Primary[PrimaryType.Willpower] * 1 +
                             SecondaryBase[type]);
-                        Primary[PrimaryTypes.Intelligence].Changed += parameter.Update;
-                        Primary[PrimaryTypes.Willpower].Changed += parameter.Update;
+                        Primary[PrimaryType.Intelligence].Changed += parameter.Update;
+                        Primary[PrimaryType.Willpower].Changed += parameter.Update;
                         break;
                     
                     
@@ -249,7 +252,7 @@ namespace Askalhorn.Characters
                 attrs[type] = parameter;
             }
             
-            Secondary = new Attributes<SecondaryTypes>(attrs);
+            Secondary = new Attributes<SecondaryType>(attrs);
 
             OnDisposed += o =>
             {
@@ -265,8 +268,8 @@ namespace Askalhorn.Characters
                 Dispose(); // Die!
             else
             {
-                HP.Current.Value += Secondary[SecondaryTypes.RegenHP].Value;
-                MP.Current.Value += Secondary[SecondaryTypes.RegenMagic].Value;
+                HP.Current.Value += Secondary[SecondaryType.RegenHP].Value;
+                MP.Current.Value += Secondary[SecondaryType.RegenMagic].Value;
                 
                 EffectPool.Turn();
                 foreach (var ability in Abilities)

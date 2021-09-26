@@ -1,6 +1,6 @@
 ﻿namespace Askalhorn.Combat
 {
-    public enum SecondaryTypes
+    public enum SecondaryType
     {
         MaxHP,
         RegenHP,

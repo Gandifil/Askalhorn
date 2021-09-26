@@ -8,7 +8,7 @@ namespace Askalhorn.Characters.Effects
 {
     internal class ProtectEffect: IEffect
     {
-        public DamageTypes Type { get; set; }
+        public DamageType Type { get; set; }
 
         public int Value { get; set; }
 

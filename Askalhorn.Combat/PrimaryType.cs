@@ -1,6 +1,6 @@
 ﻿namespace Askalhorn.Combat
 {
-    public enum PrimaryTypes
+    public enum PrimaryType
     {
         Strength,
         Agility,

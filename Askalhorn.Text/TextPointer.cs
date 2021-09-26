@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common;
+﻿using System;
+using Askalhorn.Common;
 using Newtonsoft.Json;
 
 namespace Askalhorn.Text
@@ -6,9 +7,11 @@ namespace Askalhorn.Text
     [JsonConverter(typeof(TextPointerConverter))]
     public class TextPointer
     {
-        public readonly string Name;
-
-        public readonly string Index;
+        public string Name { get; }
+        
+        public string Index { get; }
+        
+        public GrammaticalCase? GrammaticalCase { get; set; } = null;
 
         [JsonConstructor]
         public TextPointer(string name, string index)
@@ -16,12 +19,21 @@ namespace Askalhorn.Text
             Name = name;
             Index = index;
         }
-
-        public override string ToString()
+        
+        public string Extract(string color = null)
         {
             var filePath = $"texts/{Name}";
             var texts = Storage.Content.Load<TextFile>(filePath);
-            return texts[Index];
+            var gcase = GrammaticalCase ?? Text.GrammaticalCase.Nominative;
+            var line = texts[Index].Words[gcase.ToString()];
+            if (!string.IsNullOrEmpty(color))
+                line = line.WithColor(color);
+            return line;
+        }
+        
+        public override string ToString()
+        {
+            return Extract();
         }
     }
 }

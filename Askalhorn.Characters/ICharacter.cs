@@ -23,17 +23,17 @@ namespace Askalhorn.Characters
         
         ILinearParameter<int> Level { get; }
         
-        IAttributes<PrimaryTypes> Primary { get; }
+        IAttributes<PrimaryType> Primary { get; }
         
-        IReadOnlyDictionary<PrimaryTypes, int> PrimaryBase { get; }
+        IReadOnlyDictionary<PrimaryType, int> PrimaryBase { get; }
         
-        IAttributes<SecondaryTypes> Secondary { get; }
+        IAttributes<SecondaryType> Secondary { get; }
         
-        IReadOnlyDictionary<SecondaryTypes, int> SecondaryBase { get; }
+        IReadOnlyDictionary<SecondaryType, int> SecondaryBase { get; }
         
-        IAttributes<DamageTypes> Protection { get; }
+        IAttributes<DamageType> Protection { get; }
         
-        IReadOnlyDictionary<DamageTypes, int> ProtectionBase { get; }
+        IReadOnlyDictionary<DamageType, int> ProtectionBase { get; }
         
         IEnumerable<MovementMove> AvailableMovements { get; }
         

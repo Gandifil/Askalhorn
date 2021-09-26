@@ -64,7 +64,7 @@ namespace Askalhorn.Characters.Abilities
                   },
                   Second = new SecondaryExpression
                   {
-                      Type = SecondaryTypes.MagicPower,
+                      Type = SecondaryType.MagicPower,
                   }
               };
         }

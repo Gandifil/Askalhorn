@@ -6,7 +6,7 @@ namespace Askalhorn.Characters.Interpretators
 {
     internal class SecondaryExpression: IExpression<float>
     {
-        public SecondaryTypes Type { get; set; }
+        public SecondaryType Type { get; set; }
 
         public override string ToString()
         {

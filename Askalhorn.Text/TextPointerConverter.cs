@@ -6,7 +6,7 @@ namespace Askalhorn.Text
     public class TextPointerConverter : JsonConverter<TextPointer>
     {
         private const char SEPARATOR = ':';
-        
+
         public override void WriteJson(JsonWriter writer, TextPointer? value, JsonSerializer serializer)
         {
             writer.WriteValue(value.Name + SEPARATOR + value.Index);

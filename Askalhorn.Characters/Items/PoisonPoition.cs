@@ -30,8 +30,8 @@ namespace Askalhorn.Characters.Items
             Value = value;
             TurnCount = turnCount;
             
-            Name = new MockTextPointer($"Ядовитое зелье -{value}");
-            Description = new MockTextPointer($"Забирает {value} HP в течении {turnCount} ходов");
+            Name = new MockSimpleTextPointer($"Ядовитое зелье -{value}");
+            Description = new MockSimpleTextPointer($"Забирает {value} HP в течении {turnCount} ходов");
             Renderer = new TextureRenderer("items", new(2, 0), new(32));
         }
     }

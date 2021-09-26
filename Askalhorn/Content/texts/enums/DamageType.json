@@ -1,0 +1,30 @@
+{
+    "Clear": {
+        "Nominative":"истинный",
+        "Genitive":"истинного урона"
+    },
+    "Blade": {
+        "Nominative":"режущее оружие",
+        "Genitive":"режущего оружия"
+    },
+    "Blunt": {
+        "Nominative":"дробящее оружие",
+        "Genitive":"дробящего оружия"
+    },
+    "Piercing": {
+        "Nominative":"колющее оружие",
+        "Genitive":"колющего оружия"
+    },
+    "Fire": {
+        "Nominative":"огонь",
+        "Genitive":"огня"
+    },
+    "Poison": {
+        "Nominative":"яд",
+        "Genitive":"яда"
+    },
+    "Magic": {
+        "Nominative":"магия",
+        "Genitive":"магии"
+    }
+}

@@ -1,10 +1,13 @@
 ﻿namespace Askalhorn.Combat
 {
-    public enum DamageTypes
+    public enum DamageType
     {
         Clear,
-        Phisical,
+        Blade,
+        Blunt,
+        Piercing,
         Fire,
         Poison,
+        Magic,
     }
 }

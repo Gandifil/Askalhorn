@@ -1,10 +1,10 @@
 ﻿namespace Askalhorn.Text
 {
-    public class MockTextPointer: TextPointer
+    public class MockSimpleTextPointer: TextPointer
     {
         private readonly string _value;
         
-        public MockTextPointer(string value) : base("name", "index")
+        public MockSimpleTextPointer(string value) : base("name", "index")
         {
             _value = value;
         }

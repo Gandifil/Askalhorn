@@ -59,7 +59,7 @@ namespace Askalhorn.Characters.Abilities
                 First = new StaticExpression<float>(0.1f),
                 Second = new SecondaryExpression()
                 {
-                    Type = SecondaryTypes.MagicPower,
+                    Type = SecondaryType.MagicPower,
                 }
             };
 
@@ -81,7 +81,7 @@ namespace Askalhorn.Characters.Abilities
                         healEffect,
                         new ProtectEffect()
                         {
-                            Type = DamageTypes.Phisical,
+                            Type = DamageType.Piercing,
                             Value = 10,
                         },
                     }

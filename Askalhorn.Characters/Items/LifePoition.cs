@@ -25,8 +25,8 @@ namespace Askalhorn.Characters.Items
         {
             Value = value;
             
-            Name = new MockTextPointer($"Лечебное зелье +{value}");
-            Description = new MockTextPointer($"Восстанавливает {value} HP");
+            Name = new MockSimpleTextPointer($"Лечебное зелье +{value}");
+            Description = new MockSimpleTextPointer($"Восстанавливает {value} HP");
             Renderer = new TextureRenderer("items", new(0), new(32));
         }
     }

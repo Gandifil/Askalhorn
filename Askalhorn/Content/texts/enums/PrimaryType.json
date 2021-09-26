@@ -1,0 +1,26 @@
+{
+    "Strength": {
+        "Nominative":"Сила",
+        "Genitive":"истинного урона"
+    },
+    "Agility": {
+        "Nominative":"Ловкость",
+        "Genitive":"режущего оружия"
+    },
+    "Endurance": {
+        "Nominative":"Выносливость",
+        "Genitive":"дробящего оружия"
+    },
+    "Intelligence": {
+        "Nominative":"Интеллект",
+        "Genitive":"колющего оружия"
+    },
+    "Willpower": {
+        "Nominative":"Сила воли",
+        "Genitive":"огня"
+    },
+    "Luck": {
+        "Nominative":"Удача",
+        "Genitive":"яда"
+    }
+}
