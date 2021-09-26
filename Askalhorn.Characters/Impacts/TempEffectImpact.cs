@@ -5,13 +5,16 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Impacts
 {
-    public class EffectImpact: IImpact
+    public class TempEffectImpact: IImpact
     {
-        public readonly Effect effect;
+        public readonly IEffect effect;
 
-        public EffectImpact(Effect effect)
+        public uint TurnCount { get; set; }
+
+        public TempEffectImpact(IEffect effect, uint turnCount)
         {
             this.effect = effect;
+            TurnCount = turnCount;
         }
         public string Description => "";
         public TextureRegion2D TextureRegion => throw new NotImplementedException();
@@ -22,7 +25,7 @@ namespace Askalhorn.Characters.Impacts
             if (character is null)
                 throw new ArgumentNullException(nameof(target));
 
-            character.Effects.Add(effect);
+            character.EffectPool.Add(new TempEffectBind(effect, TurnCount));
         }
     }
 }

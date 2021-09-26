@@ -1,9 +1,14 @@
-﻿using Askalhorn.Render;
+﻿using Askalhorn.Common;
+using Askalhorn.Render;
 
 namespace Askalhorn.Characters.Effects
 {
     public interface IEffect: IIcon
     {
-        uint TurnCount { get; }
+        void Turn(Character character);
+        
+        void Subscribe(Character character){}
+        
+        void Unsubscribe(Character character){}
     }
 }

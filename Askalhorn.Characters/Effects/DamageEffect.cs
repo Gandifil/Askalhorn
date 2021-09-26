@@ -1,25 +1,27 @@
-﻿using Askalhorn.Characters.Impacts;
+﻿using System;
+using Askalhorn.Characters.Impacts;
 using Askalhorn.Common;
 using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects
 {
-    internal class DamageEffect: Effect
+    internal class DamageEffect: IEffect
     {
         public readonly IImpact impact;
         
-        public DamageEffect(uint value, uint time) : base(time)
+        public DamageEffect(uint value)
         {
             impact = new DamageImpact((int) value);
         }
 
-        public override void Tick(Character character)
+        public void Turn(Character character)
         {
             impact.On(character);
         }
 
-        public override string TooltipText => "''";
-        public override TextureRenderer Renderer => null;
+        public string TooltipText => "''";
+        public event Action OnChanged;
+        public TextureRenderer Renderer => null;
     }
 }

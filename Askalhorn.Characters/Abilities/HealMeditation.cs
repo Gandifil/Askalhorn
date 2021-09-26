@@ -70,29 +70,26 @@ namespace Askalhorn.Characters.Abilities
             var healEffect = new ImpactEffect(
                 CurrentModification == 1 ? 
                     new HealImpact((int)HealAbsValue.Generate(character, new Random())) :
-                new HealPercentImpact{ Value = HealPercent}, EffectTurn);
+                new HealPercentImpact{ Value = HealPercent});
 
             if (CurrentModification == 0)
             {
-                new EffectImpact(new CollectionEffect(EffectTurn)
+                new TempEffectImpact(new CollectionEffect()
                 {
-                    Effects = new List<Effect>()
+                    Effects = new List<IEffect>()
                     {
                         healEffect,
-                        new ProtectEffect(EffectTurn)
+                        new ProtectEffect()
                         {
                             Type = DamageTypes.Phisical,
                             Value = 10,
                         },
                     }
-                }).On(character);
+                }, EffectTurn).On(character);
             }
             else
             { 
-                new EffectImpact(new CollectionEffect(EffectTurn)
-                {
-                    Effects = new List<Effect>{healEffect}
-                }).On(character);
+                new TempEffectImpact(healEffect, EffectTurn).On(character);
             }
         }
     }

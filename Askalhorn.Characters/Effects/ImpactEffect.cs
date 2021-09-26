@@ -1,24 +1,26 @@
-﻿using Askalhorn.Common;
+﻿using System;
+using Askalhorn.Common;
 using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects
 {
-    public class ImpactEffect: Effect
+    public class ImpactEffect: IEffect
     {
         public readonly IImpact Impact;
         
-        public ImpactEffect(IImpact impact, uint time) : base(time)
+        public ImpactEffect(IImpact impact)
         {
             Impact = impact;
         }
 
-        public override void Tick(Character character)
+        public void Turn(Character character)
         {
             Impact.On(character);
         }
 
-        public override string TooltipText => Impact.Description + " каждый ход";
-        public override TextureRenderer Renderer => new(Impact.TextureRegion);
+        public string TooltipText => Impact.Description + " каждый ход";
+        public event Action OnChanged;
+        public TextureRenderer Renderer => new(Impact.TextureRegion);
     }
 }

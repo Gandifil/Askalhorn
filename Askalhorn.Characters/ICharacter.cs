@@ -39,7 +39,7 @@ namespace Askalhorn.Characters
         
         IReadOnlyCollection<IAbility> Abilities { get; }
         
-        IReadOnlyCollection<IEffect> Effects { get; }
+        IEffectPool EffectPool { get; }
         
         Dialog Dialog { get; }
 

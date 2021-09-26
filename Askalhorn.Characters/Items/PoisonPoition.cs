@@ -16,7 +16,9 @@ namespace Askalhorn.Characters.Items
         public uint Value { get; }
         public uint TurnCount { get; }
         public override ItemRarity ItemRarity => ItemRarity.Rare;
-        protected override IImpact Impact => new EffectImpact(new ImpactEffect(new DamageImpact((int)Value), TurnCount));
+        protected override IImpact Impact => new TempEffectImpact(
+            new ImpactEffect(new DamageImpact((int)Value)),
+            TurnCount);
 
         public bool Equals(IItem? other)
         {

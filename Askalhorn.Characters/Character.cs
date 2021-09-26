@@ -92,12 +92,15 @@ namespace Askalhorn.Characters
         
         public IController Controller { get; set; }
 
-        IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
+        //IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
+        IEffectPool ICharacter.EffectPool => EffectPool;
+
+        public EffectPool EffectPool { get; }
         public Dialog Dialog { get; set; }
         public Costume Costume { get; } = new Costume();
-
-        [JsonIgnore]
-        public readonly Pool Effects;
+        //
+        // [JsonIgnore]
+        // public readonly EffectPool Effects;
 
         private static readonly List<Point> Variants = new List<Point>
         {
@@ -131,7 +134,7 @@ namespace Askalhorn.Characters
             HP.Max = Secondary[SecondaryTypes.MaxHP];
             MP.Max = Secondary[SecondaryTypes.MaxMagic];
 
-            Effects = new Pool(this);
+            EffectPool = new EffectPool(this, new List<EffectBind>());
         }
 
         private void SetupProtectionRules()
@@ -265,7 +268,7 @@ namespace Askalhorn.Characters
                 HP.Current.Value += Secondary[SecondaryTypes.RegenHP].Value;
                 MP.Current.Value += Secondary[SecondaryTypes.RegenMagic].Value;
                 
-                Effects.Turn();
+                EffectPool.Turn();
                 foreach (var ability in Abilities)
                     ability.Turn();
 
