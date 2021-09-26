@@ -12,5 +12,10 @@
     "itemRarity": 2,
     "weight": 0.5,
     "damageValue": 20,
-    "damageType": 1
+    "damageType": 1,
+    "effect": {
+        "$type": "Askalhorn.Characters.Effects.ProtectEffect, Askalhorn.Characters",
+        "type": 1,
+        "Value": 10
+    }
 }

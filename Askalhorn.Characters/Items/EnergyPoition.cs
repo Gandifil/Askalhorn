@@ -14,7 +14,7 @@ namespace Askalhorn.Characters.Items
     {
         public uint Value { get; }
         
-        public override ItemRarity ItemRarity { get; } = ItemRarity.Rare;
+        public override ItemRarity ItemRarity => ItemRarity.Rare;
         protected override IImpact Impact => new AddLevelEnergyImpact((int)Value);
 
         public EnergyPoition(uint value)

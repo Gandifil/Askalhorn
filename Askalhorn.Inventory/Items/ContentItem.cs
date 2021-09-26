@@ -46,6 +46,9 @@ namespace Askalhorn.Inventory.Items
         [JsonIgnore]
         public IImpact Impact => _item.Impact;
 
+        [JsonIgnore]
+        public IItem InnerItem => _item;
+
         public bool Equals(IItem? other)
         {
             if (other is null)

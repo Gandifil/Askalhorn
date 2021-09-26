@@ -14,9 +14,9 @@ namespace Askalhorn.Inventory
             Type = a;
         }
 
-        public event Action<IItem> OnPutOn;
+        public event Action<Slot> OnPutOn;
 
-        public event Action<IItem> OnTakeOff;
+        public event Action<Slot> OnTakeOff;
 
         public bool IsValid(IItem item)
         {
@@ -31,7 +31,7 @@ namespace Askalhorn.Inventory
             var result = TakeOff();
 
             Item = item;
-            OnPutOn?.Invoke(item);
+            OnPutOn?.Invoke(this);
                 
             return result;
         }
@@ -45,7 +45,7 @@ namespace Askalhorn.Inventory
                 var result = Item;
                 
                 Item = null;
-                OnTakeOff?.Invoke(result);
+                OnTakeOff?.Invoke(this);
 
                 return result;
             }

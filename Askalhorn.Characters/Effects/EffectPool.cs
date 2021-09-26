@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Askalhorn.Characters.Items;
+using Askalhorn.Inventory;
+using Askalhorn.Inventory.Items;
 
 namespace Askalhorn.Characters.Effects
 {
@@ -20,8 +23,15 @@ namespace Askalhorn.Characters.Effects
         public EffectPool(Character character, List<EffectBind> binds) 
         {
             _character = character;
+            _character.Costume.PutOnItem += OnPutOnItem;
             foreach (var bind in binds)
                 Add(bind);
+        }
+
+        private void OnPutOnItem(Slot obj)
+        {
+            if ((obj.Item.InnerItem as IPuttable)?.Effect is not null)
+                Add(new ItemEffectBind(obj));
         }
 
         public void Add(EffectBind bind)

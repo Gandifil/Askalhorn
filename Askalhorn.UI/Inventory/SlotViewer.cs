@@ -19,7 +19,7 @@ namespace Askalhorn.UI.Inventory
         {
             _slot = slot;
             if (_slot.Item is not null)
-                PutOn(_slot.Item);
+                PutOn(_slot);
             _slot.OnPutOn += PutOn;
             _slot.OnTakeOff += TakeOff;
             
@@ -65,16 +65,16 @@ namespace Askalhorn.UI.Inventory
             DrawColor = new StyleProp<Color>();
         }
 
-        private void PutOn(IItem item)
+        private void PutOn(Slot slot)
         {
-            var icon = new IconViewer(item, Anchor.Center, 1f, 1f);
+            var icon = new IconViewer(slot.Item, Anchor.Center, 1f, 1f);
             icon.OnMouseEnter += EnableSelecting;
             icon.OnMouseExit += DisableSelecting;
             
             AddChild(icon);
         }
 
-        private void TakeOff(IItem item)
+        private void TakeOff(Slot slot)
         {
             RemoveChildren();
         }

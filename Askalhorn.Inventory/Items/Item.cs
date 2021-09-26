@@ -34,11 +34,14 @@ namespace Askalhorn.Inventory.Items
         
         public TextPointer Description { get; set; }
         
-        public virtual ItemPurpose Type { get; }
-        public virtual ItemRarity ItemRarity { get; }
+        public virtual ItemPurpose Type { get; set; }
+        public virtual ItemRarity ItemRarity { get; set; }
         public virtual float Weight { get; set; }
 
         protected virtual IImpact Impact { get; }
+
+        public IItem InnerItem => this;
+
 
         IImpact IItem.Impact => Impact;
     }

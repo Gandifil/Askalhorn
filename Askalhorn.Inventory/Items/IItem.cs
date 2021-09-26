@@ -16,5 +16,7 @@ namespace Askalhorn.Inventory.Items
         float Weight { get; }
         
         IImpact Impact { get; }
+        
+        IItem InnerItem { get; }
     }
 }

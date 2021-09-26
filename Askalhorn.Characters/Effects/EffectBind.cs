@@ -8,6 +8,9 @@ namespace Askalhorn.Characters.Effects
         
         public EffectBind(IEffect effect)
         {
+            if (effect is null)
+                throw new ArgumentException(nameof(effect));
+            
             Effect = effect;
         }
 
