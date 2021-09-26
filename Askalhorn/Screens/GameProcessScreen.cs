@@ -11,6 +11,7 @@ using Askalhorn.Components;
 using Askalhorn.Core;
 using Askalhorn.Dialogs;
 using Askalhorn.Elements;
+using Askalhorn.Inventory;
 using Askalhorn.Map;
 using Askalhorn.Map.Actions;
 using Askalhorn.Map.Builds;
@@ -59,35 +60,74 @@ namespace AmbrosiaGame.Screens
             : base(game)
         {
             this.GameProcess = gameProcess;
+            
+            _options = Configuration.Options;
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
             GameProcess.OnTurned += UpdateActions;
             GameProcess.OnTurned += LookAtPlayer;
+
+            OpenBagImpact.OnBagOpened += OnBagOpened;
+            DialogImpact.OnDialogOpened += OnDialogOpened;
             
-            OpenBagImpact.OnBagOpened += bag =>
-            {
-                Game.UiSystem.Add("sda1", new ExchangeWindow(bag, GameProcess.Player.Bag));
-            };
-            
-            DialogImpact.OnDialogOpened += d =>
-            {
-                Game.UiSystem.Add("sda2", new DialogViewer(d, Anchor.Center, .9f, .5f));
-            };
             Location.Current.OnChange += UpdateMap;
             Location.Current.OnChange += UpdateActions;
             Location.Current.OnChange += LookAtPlayer;
             
-            _options = Configuration.Options;
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 1280, 1024);
+            camera = new OrthographicCamera(viewportAdapter);
+            LookAtPlayer();
+            
+            mapRenderer = new TiledMapRenderer(GraphicsDevice);
+            UpdateMap();
+            
+            InputListeners.Keyboard.KeyReleased += KeyRelease;
+            
+            Game.UiSystem.Add("GameLog", new GameLogViewer());
+
+            movements = new MovementTiles(camera);
+            
+            abilities = new AbilitiesHotPanel(Anchor.BottomRight);
+            Game.UiSystem.Add("Abilities", abilities);
+                
+            effects = new EffectsViewer(GameProcess.Player, Anchor.TopLeft, 1f, .1f);
+            GameProcess.OnTurned += effects.Update;
+            Game.UiSystem.Add("Effects", effects);
+            
+            actions = new ActionsViewer();
+            Game.UiSystem.Add("Actions", actions);
+            UpdateActions();
         }
 
         public override void Dispose()
         {
             movements.Dispose();
+            InputListeners.Keyboard.KeyReleased -= KeyRelease;
             GameProcess.OnTurned -= UpdateActions;
             GameProcess.OnTurned -= LookAtPlayer;
+
+            OpenBagImpact.OnBagOpened-= OnBagOpened;
+            DialogImpact.OnDialogOpened -= OnDialogOpened;
             Location.Current.OnChange -= UpdateMap;
             Location.Current.OnChange -= UpdateActions;
             Location.Current.OnChange -= LookAtPlayer;
             
             base.Dispose();
+        }
+
+        private void OnDialogOpened(DialogEnumerator obj)
+        {
+            Game.UiSystem.Add("sda2", new DialogViewer(obj, Anchor.Center, .9f, .5f));
+        }
+
+        private void OnBagOpened(Bag bag)
+        {
+            Game.UiSystem.Add("Exchange_Window", new ExchangeWindow(bag, GameProcess.Player.Bag));
         }
 
         private void UpdateActions()
@@ -115,36 +155,6 @@ namespace AmbrosiaGame.Screens
         private void UpdateMap()
         {
             mapRenderer.LoadMap(Location.Current.Location.TiledMap);
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            var viewportAdapter = new BoxingViewportAdapter(Game.Window, GraphicsDevice, 1280, 1024);
-            camera = new OrthographicCamera(viewportAdapter);
-            LookAtPlayer();
-            
-            mapRenderer = new TiledMapRenderer(GraphicsDevice);
-            UpdateMap();
-            
-            InputListeners.Keyboard.KeyReleased += KeyRelease;
-            
-            Game.UiSystem.Add("GameLog", new GameLogViewer());
-
-            movements = new MovementTiles(camera);
-            
-            abilities = new AbilitiesHotPanel(Anchor.BottomRight);
-            Game.UiSystem.Add("Abilities", abilities);
-                
-            effects = new EffectsViewer(GameProcess.Player, Anchor.TopLeft, 1f, .1f);
-            GameProcess.OnTurned += effects.Update;
-            Game.UiSystem.Add("Effects", effects);
-            
-            actions = new ActionsViewer();
-            Game.UiSystem.Add("Actions", actions);
-            UpdateActions();
         }
 
         private void MovePlayer(Point shift)

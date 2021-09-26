@@ -30,7 +30,6 @@ namespace Askalhorn.UI
         public MovementTiles(OrthographicCamera camera)
         {
             Instance = this;
-            
             _camera = camera;
             
             this.texture = Storage.Content.Load<Texture2D>("images/selection");
@@ -43,8 +42,6 @@ namespace Askalhorn.UI
         {
             GameProcess.Instance.OnTurned -= UpdateMovements;
             InputListeners.Mouse.MouseClicked -= OnMouseClicked;
-            
-            texture?.Dispose();
         }
 
         private void OnMouseClicked(object? sender, MouseEventArgs e)
