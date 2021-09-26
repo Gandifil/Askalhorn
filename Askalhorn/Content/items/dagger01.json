@@ -1,0 +1,16 @@
+{
+    "$type": "Askalhorn.Characters.Items.Weapon, Askalhorn.Characters",
+    "name": "items:Dagger_Name",
+    "description": "items:Dagger_Description",
+    "renderer": {
+        "fileName": "effects", 
+        "position": {
+            "x": 1,
+            "y": 1
+        }
+    },
+    "itemRarity": 2,
+    "weight": 0.5,
+    "damageValue": 20,
+    "damageType": 1
+}

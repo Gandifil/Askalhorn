@@ -227,6 +227,12 @@
 /processorParam:TextureFormat=Color
 /build:images/Test.png
 
+#begin items/dagger01.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
+/build:items/dagger01.json
+
 #begin items/goldCoin.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor

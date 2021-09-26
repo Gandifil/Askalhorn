@@ -9,14 +9,16 @@ namespace Askalhorn.Inventory.Items
     public abstract class Item : IItem
     {
         private static string[] RarityColors = {"White", "Green", "Orange"};
-
-        public string TooltipText =>
-            @$"{Name}
+        
+        protected virtual string PreDescription =>
+@$"{Name}
 Тип: {Type}
 Редкость: {new TextPointer("rarity", ItemRarity.ToString()).ToString().WithColor(RarityColors[(int) ItemRarity])}
-Вес: {Weight} кг
-{Description}
-";
+Вес: {Weight} кг";
+
+        public string TooltipText =>
+@$"{PreDescription}
+{Description}";
 
         public event Action OnChanged;
 
@@ -32,11 +34,11 @@ namespace Askalhorn.Inventory.Items
         
         public TextPointer Description { get; set; }
         
-        public abstract ItemPurpose Type { get; }
-        public abstract ItemRarity ItemRarity { get; }
-        public abstract float Weight { get; }
+        public virtual ItemPurpose Type { get; }
+        public virtual ItemRarity ItemRarity { get; }
+        public virtual float Weight { get; set; }
 
-        protected abstract IImpact Impact { get; }
+        protected virtual IImpact Impact { get; }
 
         IImpact IItem.Impact => Impact;
     }
