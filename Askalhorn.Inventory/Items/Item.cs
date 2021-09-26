@@ -6,7 +6,7 @@ using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Inventory.Items
 {
-    public abstract class Item : IItem
+    public class Item : IItem
     {
         private static string[] RarityColors = {"White", "Green", "Orange"};
         

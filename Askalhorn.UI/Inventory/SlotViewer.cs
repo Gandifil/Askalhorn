@@ -37,6 +37,7 @@ namespace Askalhorn.UI.Inventory
 
         private void OnMouseDragStart(object? sender, MouseEventArgs e)
         {
+            if (DisplayArea.Contains(e.Position.ToVector2()))
             if (_slot.Item is not null)
             {
                 var element = new DragAndDrop(_slot.Item);

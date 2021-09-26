@@ -1,0 +1,20 @@
+{
+    "$type": "Askalhorn.Characters.Items.PuttableItem, Askalhorn.Characters",
+    "name": "items:AcolyteRobe_Name",
+    "description": "items:AcolyteRobe_Description",
+    "renderer": {
+        "fileName": "body", 
+        "position": {
+            "x": 0,
+            "y": 0
+        }
+    },
+    "type": 2,
+    "itemRarity": 0,
+    "weight": 1.5,
+    "effect": {
+        "$type": "Askalhorn.Characters.Effects.ProtectEffect, Askalhorn.Characters",
+        "type": 1,
+        "Value": 15
+    }
+}

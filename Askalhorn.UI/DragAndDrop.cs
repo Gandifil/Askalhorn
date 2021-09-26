@@ -10,7 +10,6 @@ using MonoGame.Extended.Input.InputListeners;
 
 namespace Askalhorn.UI
 {
-    
     public class DragAndDrop: Image
     {
         public static event Action<DragAndDrop> OnDrop;
