@@ -20,6 +20,23 @@ namespace Askalhorn.Inventory
                 founded.Add(count);
         }
 
+        public void Put(Pack pack)
+        {
+            Put(pack.Item, pack.Count);
+        }
+
+        public IItem Pull(IItem item, uint count = 1)
+        {
+            var founded = Find(item);
+            founded.Remove(count);
+            return item;
+        }
+
+        public IItem Pull(Pack pack)
+        {
+            return Pull(pack.Item, pack.Count);
+        }
+
         public bool IsEmpty => !_packs.Any();
 
         private void Add(Pack pack)
@@ -35,17 +52,18 @@ namespace Askalhorn.Inventory
             OnChanged?.Invoke();
         }
 
-        public IItem Pull(IItem item, uint count = 1)
-        {
-            var founded = Find(item);
-            founded.Remove(count);
-            return item;
-        }
-
         public bool Contains(IItem item, uint count = 1)
         {
             var founded = Find(item);
             return founded is null ? false : founded.Count >= count;
+        }
+
+        public void MergeTo(Bag bag)
+        {
+            foreach (var pack in _packs)
+                bag.Put(pack.Item, pack.Count);
+            _packs.Clear();
+            OnChanged?.Invoke();
         }
 
         private Pack Find(IItem item)

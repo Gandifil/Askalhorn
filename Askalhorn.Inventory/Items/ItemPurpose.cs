@@ -7,12 +7,12 @@
         Body,
         Hands,
         Boots,
-        Amulet,
+        Amulet, // = 5
         Bracelet,
         Ring,
         Shield,
         Weapon,
-        Poition,
+        Poition,// = 10
         Resource,
         Currency,
     }

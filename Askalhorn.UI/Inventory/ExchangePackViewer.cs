@@ -13,10 +13,10 @@ namespace Askalhorn.UI.Inventory
             _target = target;
         }
 
-        protected override void DoubleClick(Element element)
+        protected override void SecondaryPressed(Element element)
         {
-            _target.Put(_pack.Item);
-            _pack.Remove();
+            _target.Put(_pack);
+            _pack.Remove(_pack.Count);
         }
     }
 }

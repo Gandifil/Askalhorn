@@ -19,7 +19,6 @@ namespace Askalhorn.UI.Inventory
             base(anchor, x, y)
         {
             _bag = bag;
-            InputListeners.Input.MouseListener.Push(new MouseListener());
             
             _filtersBar = new FiltersBar(Anchor.AutoCenter, 1, 0.1f);
             _filtersBar.OnChanged += ResetPacks;
@@ -33,6 +32,15 @@ namespace Askalhorn.UI.Inventory
             DragAndDrop.OnDrop += DropItem;
 
             ResetPacks();
+        }
+
+        public override void Dispose()
+        {
+            _bag.OnChanged -= ResetPacks;
+            DragAndDrop.OnDrop -= DropItem;
+            _filtersBar.OnChanged -= ResetPacks;
+            
+            base.Dispose();
         }
 
         private void DropItem(DragAndDrop element)
@@ -50,26 +58,11 @@ namespace Askalhorn.UI.Inventory
             }
         }
 
-        public override void Dispose()
-        {
-            InputListeners.Input.MouseListener.Pop();
-            
-            base.Dispose();
-
-            _bag.OnChanged -= ResetPacks;
-
-            DragAndDrop.OnDrop -= DropItem;
-            _filtersBar.OnChanged -= ResetPacks;
-        }
-
         private void ResetPacks()
         {
-            //_packsPanel.RecursiveDisposeChildren();
             _packsPanel.RemoveChildren();
             foreach (var pack in _bag.Items.Where(x => _filtersBar.Predicate(x.Item)))
-            {
                 _packsPanel.AddChild(CreatePackViewer(pack));
-            }
         }
 
         protected virtual PackViewer CreatePackViewer(Pack pack)

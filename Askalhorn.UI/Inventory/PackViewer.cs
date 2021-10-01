@@ -24,18 +24,23 @@ namespace Askalhorn.UI.Inventory
             CanBeMoused = true;
             OnMouseEnter += SetSelecting;
             OnMouseExit += SetUnselecting;
-            OnSecondaryPressed += DoubleClick;
+            OnSecondaryPressed += SecondaryPressed;
 
             var icon = new IconViewer(_pack.Item, Anchor.CenterLeft, 0.1f, 1f);
             icon.OnMouseEnter += SetSelecting;
             icon.OnMouseExit += SetUnselecting;
-            icon.OnSecondaryPressed += DoubleClick;
+            icon.OnSecondaryPressed += SecondaryPressed;
             
             AddChild(icon);
             AddChild(new CustomText(Anchor.Center, _pack.Item.Name));
             _count = new CustomText(Anchor.CenterRight, "x" + _pack.Count);
             AddChild(_count);
             InputListeners.Mouse.MouseDragStart += OnMouseDragStart;
+        }
+
+        protected virtual void SecondaryPressed(Element element)
+        {
+            GameProcess.Instance.Player.Make(new UseItemMove(_pack.Item));
         }
 
         public override void Dispose()
@@ -54,11 +59,6 @@ namespace Askalhorn.UI.Inventory
                 element.OnSuccesfullyDrop += () => { _pack.Remove();};
                 element.Show(Root.System);
             }
-        }
-
-        protected virtual void DoubleClick(Element element)
-        {
-            GameProcess.Instance.Player.Make(new UseItemMove(_pack.Item));
         }
 
         private void SetSelecting(Element element)

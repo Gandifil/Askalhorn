@@ -179,6 +179,18 @@
 /processorParam:TextureFormat=Color
 /build:images/items.png
 
+#begin images/items/resources.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/items/resources.png
+
 #begin images/mage2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -250,6 +262,12 @@
 /processor:JsonContentProcessor
 /processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
 /build:items/dagger01.json
+
+#begin items/essenceOfDarkness.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
+/build:items/essenceOfDarkness.json
 
 #begin items/goldCoin.json
 /importer:JsonContentImporter

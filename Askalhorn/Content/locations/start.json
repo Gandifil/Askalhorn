@@ -63,6 +63,13 @@
                                 "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
                                 "contentName": "acolyteRobe"
                             }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "essenceOfDarkness"
+                            }
                         }
                     ]
                     

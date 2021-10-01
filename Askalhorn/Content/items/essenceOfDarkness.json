@@ -1,0 +1,15 @@
+{
+    "$type": "Askalhorn.Inventory.Items.Item, Askalhorn.Inventory",
+    "name": "items:EssenceOfDarkness_Name",
+    "description": "items:EssenceOfDarkness_Description",
+    "renderer": {
+        "fileName": "items/resources", 
+        "position": {
+            "x": 0,
+            "y": 0
+        }
+    },
+    "type": 11,
+    "itemRarity": 1,
+    "weight": 0.25
+}

@@ -16,7 +16,7 @@ namespace Askalhorn.Characters.Control.Moves
         
         public bool IsValid(ICharacter character)
         {
-            return character.Bag.Items.Any(x => x.Item == Item);
+            return Item.Impact is not null && character.Bag.Items.Any(x => x.Item == Item);
         }
 
         public void Make(Character character)
