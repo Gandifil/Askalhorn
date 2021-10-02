@@ -1,0 +1,15 @@
+{
+    "$type": "Askalhorn.Inventory.Items.Item, Askalhorn.Inventory",
+    "name": "items:CursedBone_Name",
+    "description": "items:CursedBone_Description",
+    "renderer": {
+        "fileName": "items/resources", 
+        "position": {
+            "x": 1,
+            "y": 0
+        }
+    },
+    "type": 11,
+    "itemRarity": 0,
+    "weight": 0.15
+}

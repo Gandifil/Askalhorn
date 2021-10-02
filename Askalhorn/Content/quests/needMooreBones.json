@@ -1,0 +1,15 @@
+{
+    "Name": "quests/needMooreBones:name",
+    "Description": "quests/needMooreBones:description",
+    "Steps": [
+        {
+            "Name": "pushBones",
+            "Description": "quests/needMooreBones:middle"
+        },
+        {
+            "Name": "end",
+            "NameOfLastStep": "pushBones",
+            "Description": "quests/needMooreBones:end"
+        }
+    ]
+}

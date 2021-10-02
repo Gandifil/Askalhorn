@@ -55,6 +55,27 @@
                     }
                 },
                 {
+                    "line": "Лови мешок с костями (отдать 50 костей)",
+                    "target": 6,
+                    "requirement": {
+                        "$type": "Askalhorn.Common.Interpetators.Conjunction, Askalhorn.Common",
+                        "list": [
+                            {
+                                "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
+                                "item": {
+                                    "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                    "contentName": "cursedBone"
+                                }
+                            },
+                            {
+                                "$type": "Askalhorn.Plot.QuestRequirement, Askalhorn.Plot",
+                                "quest": "needMooreBones",
+                                "step": "pushBones"
+                            }
+                        ]
+                    }
+                },
+                {
                     "line": "Пока",
                     "target": -1
                 }
@@ -169,12 +190,69 @@
                         "$type": "Askalhorn.Plot.Impacts.CompleteQuestImpact, Askalhorn.Plot",
                         "quest": "FindProvision"
                     }
+                },
+                {
+                    "text": "Несмотря на то, что ты неплохо мне помог, мне все равно не хватает ингридиентов для зелий. Может быть ты поубиваешь нежить которая успела добраться до пристани во время атаки? Некоторые кости скелетов пропитаны темной энергией, мне нужно штук 50 таких.",
+                    "impact": {
+                        "$type": "Askalhorn.Plot.Impacts.StartQuestImpact, Askalhorn.Plot",
+                        "quest": "needMooreBones"
+                    }
                 }
             ],
             "answers": 
             [
                 {
-                    "line": "Все, я пошел",
+                    "line": "Прощай",
+                    "target": -1
+                }
+            ]
+        },
+        {
+            "paragraphs":
+            [
+                {
+                    "text": "Дай рассмотреть их внимательно... Ага, сойдет, приемлимого качества.",
+                    "impact": {
+                        "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
+                        "item": {
+                            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                            "contentName": "cursedBone"
+                        },
+                        "count": {
+                            "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                            "value": 50
+                        }
+                    }
+                },
+                {
+                    "text": "Спасибо, ты мне сильно помог. Забирай свое золото.",
+                    "impact": {
+                        "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
+                        "item": {
+                            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                            "contentName": "goldCoin"
+                        },
+                        "count": {
+                            "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                            "value": 100
+                        }
+                    }
+                },
+                {
+                    "text": "Я запомню, что ты помог мне.",
+                    "impact": {
+                        "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
+                        "impact": {
+                            "$type": "Askalhorn.Plot.Impacts.CompleteQuestImpact, Askalhorn.Plot",
+                            "quest": "needMooreBones"
+                        }
+                    }
+                }
+            ],
+            "answers": 
+            [
+                {
+                    "line": "Прощай",
                     "target": -1
                 }
             ]

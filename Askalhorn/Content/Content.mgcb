@@ -257,6 +257,12 @@
 /processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
 /build:items/acolyteRobe.json
 
+#begin items/cursedBone.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
+/build:items/cursedBone.json
+
 #begin items/dagger01.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
@@ -372,6 +378,12 @@
 /processorParam:ContentType=Askalhorn.Plot.QuestFileReader, Askalhorn.Plot
 /build:quests/FindProvision.json
 
+#begin quests/needMooreBones.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Plot.QuestFileReader, Askalhorn.Plot
+/build:quests/needMooreBones.json
+
 #begin sounds/forcepush.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -449,6 +461,12 @@
 /processor:JsonContentProcessor
 /processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/journal.json
+
+#begin texts/quests/needMooreBones.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/quests/needMooreBones.json
 
 #begin texts/questState.json
 /importer:JsonContentImporter
