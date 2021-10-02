@@ -126,7 +126,6 @@ namespace Askalhorn.Characters
         public List<Ability> Abilities { get; set; } = new List<Ability>()
         {
             new Strike(),
-            new FireBall(),
         };
         
         public Character()
