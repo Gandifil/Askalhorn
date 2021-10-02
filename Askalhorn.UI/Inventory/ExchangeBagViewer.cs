@@ -10,12 +10,19 @@ namespace Askalhorn.UI.Inventory
         public ExchangeBagViewer(string title, Bag target, Bag bag, Anchor anchor, float x, float y) : base(bag, anchor, x, y)
         {
             _target = target;
-            //AddChild(new TitleCustomText(title, Anchor.TopCenter));
         }
 
         protected override PackViewer CreatePackViewer(Pack pack)
         {
-            return new ExchangePackViewer(_target, pack, Anchor.AutoCenter, 1f, 0.1f);
+            var viewer = new ExchangePackViewer(pack, Anchor.AutoCenter, 1f, 0.1f);
+            viewer.Pressed += ViewerOnPressed;
+            return viewer;
+        }
+
+        private void ViewerOnPressed(Pack _pack)
+        {
+            _target.Put(_pack);
+            _pack.Remove(_pack.Count);
         }
     }
 }

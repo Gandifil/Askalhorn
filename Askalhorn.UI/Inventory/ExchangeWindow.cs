@@ -13,6 +13,8 @@ namespace Askalhorn.UI.Inventory
             base(anchor, width, height)
         {
             InputListeners.Input.MouseListener.Push(new MouseListener());
+            InputListeners.Input.KeyboardListener.Push(new NumericKeyboardListener());
+            InputListeners.Keyboard.KeyReleased += KeyboardOnKeyReleased;
             AddChild(new ExchangeBagViewer("Контейнер", right, left, Anchor.CenterLeft, 0.45f, 0.9f));
             AddChild(new ExchangeBagViewer("Инвентарь", left, right, Anchor.CenterRight, 0.45f, 0.9f));
             AddChild(new Button(Anchor.BottomLeft, new Vector2(0.45f, 0.04f), "Взять все")
@@ -29,8 +31,15 @@ namespace Askalhorn.UI.Inventory
             });
         }
 
+        private void KeyboardOnKeyReleased(object? sender, KeyboardEventArgs e)
+        {
+            
+        }
+
         public override void Dispose()
         {
+            InputListeners.Keyboard.KeyReleased -= KeyboardOnKeyReleased;
+            InputListeners.Input.KeyboardListener.Pop();
             InputListeners.Input.MouseListener.Pop();
             
             base.Dispose();
