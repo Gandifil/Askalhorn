@@ -7,21 +7,8 @@ namespace Askalhorn.Utils
         where T:IComparable<T>, IConvertible, IEquatable<T>
     {
         IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Current => Current;
-
-        private ObservedParameter<T> _current;
-
-        public ObservedParameter<T> Current
-        {
-            get
-            {
-                return _current;
-            }
-            set
-            {
-                _current = value;
-                _current.Changed += ResetValue;
-            }
-        }
+        
+        public ObservedParameter<T> Current { get; }
 
         IObservedParameter<T> ILimitedValue<IObservedParameter<T>>.Max => Max;
 
@@ -42,7 +29,15 @@ namespace Askalhorn.Utils
             }
         }
 
+        public ObservedLimitedValue(T value)
+        {
+            Current = new ObservedParameter<T>(value);
+            Current.Changed += ResetValue;
+        }
+
         private readonly T zero = (T) (object) 0;
+
+        private T _oldMax = (T) (object) 0;
 
         private void ResetValue()
         {
@@ -51,6 +46,11 @@ namespace Askalhorn.Utils
             
             if (Current.Value.CompareTo(Max.Value) > 0)
                 Current.Value = Max.Value;
+            
+            if (_oldMax.CompareTo(zero) != 0)
+                if (_oldMax.Equals(Current.Value))
+                    Current.Value = Max.Value;
+            _oldMax = _max.Value;
         }
 
         [JsonIgnore]

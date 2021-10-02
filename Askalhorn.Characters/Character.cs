@@ -81,17 +81,11 @@ namespace Askalhorn.Characters
 
         ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
         
-        public ObservedLimitedValue<int> HP { get; } = new()
-        {
-            Current = new ObservedParameter<int>(int.MaxValue),
-        };
+        public ObservedLimitedValue<int> HP { get; } = new(int.MaxValue);
 
         ILimitedValue<IObservedParameter<int>> ICharacter.MP => MP;
         
-        public ObservedLimitedValue<int> MP { get; } = new()
-        {
-            Current = new ObservedParameter<int>(int.MaxValue),
-        };
+        public ObservedLimitedValue<int> MP { get; } = new(int.MaxValue);
         
         public IController Controller { get; set; }
 
@@ -134,6 +128,7 @@ namespace Askalhorn.Characters
             SetupSecondaryRules();
             SetupProtectionRules();
             HP.Max = Secondary[SecondaryType.MaxHP];
+            //HP.Current.Value = HP.Max.Value;
             MP.Max = Secondary[SecondaryType.MaxMagic];
 
             EffectPool = new EffectPool(this, new List<EffectBind>());
