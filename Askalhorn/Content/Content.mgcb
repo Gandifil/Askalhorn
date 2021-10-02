@@ -263,6 +263,12 @@
 /processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
 /build:items/dagger01.json
 
+#begin items/energyPoition25.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
+/build:items/energyPoition25.json
+
 #begin items/essenceOfDarkness.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
@@ -425,6 +431,12 @@
 /processor:JsonContentProcessor
 /processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/FindProvisionQuest.json
+
+#begin texts/inventory.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/inventory.json
 
 #begin texts/items.json
 /importer:JsonContentImporter

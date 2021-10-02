@@ -5,7 +5,18 @@
             "paragraphs":
             [
                 {
-                    "text": "О, откуда ты здесь появился? Впрочем неважно."
+                    "text": "О, откуда ты здесь появился? Впрочем неважно.",
+                    "impact": {
+                        "$type": "Askalhorn.Inventory.Impacts.GiveItemImpact, Askalhorn.Inventory",
+                        "item": {
+                            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                            "contentName": "energyPoition25"
+                        },
+                        "count": {
+                            "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                            "value": 5
+                        }
+                    }
                 },
                 {
                     "text": "Мне нужен один важный ингредиент из сундука неподолеку. К сожалению, там ошивается скелет "
@@ -20,6 +31,27 @@
                         "$type": "Askalhorn.Plot.QuestRequirement, Askalhorn.Plot",
                         "quest": "FindProvision",
                         "isInversed": true
+                    }
+                },
+                {
+                    "line": "Это было не так сложно как казалось. (отдать  эссенцию тьмы)",
+                    "target": 5,
+                    "requirement": {
+                        "$type": "Askalhorn.Common.Interpetators.Conjunction, Askalhorn.Common",
+                        "list": [
+                            {
+                                "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
+                                "item": {
+                                    "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                    "contentName": "essenceOfDarkness"
+                                }
+                            },
+                            {
+                                "$type": "Askalhorn.Plot.QuestRequirement, Askalhorn.Plot",
+                                "quest": "FindProvision",
+                                "step": "pushBones"
+                            }
+                        ]
                     }
                 },
                 {
@@ -92,6 +124,49 @@
                     "text": "Сундук за углом от главного входа в монастырь. Иди в противоположную сторону от забора и ты его найдешь.",
                     "impact": {
                         "$type": "Askalhorn.Plot.Impacts.StartQuestImpact, Askalhorn.Plot",
+                        "quest": "FindProvision"
+                    }
+                }
+            ],
+            "answers": 
+            [
+                {
+                    "line": "Все, я пошел",
+                    "target": -1
+                }
+            ]
+        },
+        {
+            "paragraphs":
+            [
+                {
+                    "text": "Спасибо, что принес эссенцию, благодаря ей я смогу снабдить воинов монастыря зельями.",
+                    "impact": {
+                        "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
+                        "item": {
+                            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                            "contentName": "essenceOfDarkness"
+                        }
+                    }
+                },
+                {
+                    "text": "Вот прими несколько из них, они помогут стать сильнее.",
+                    "impact": {
+                        "$type": "Askalhorn.Inventory.Impacts.GiveItemImpact, Askalhorn.Inventory",
+                        "item": {
+                            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                            "contentName": "energyPoition25",
+                            "count": {
+                                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                                "value": 5
+                            }
+                        }
+                    }
+                },
+                {
+                    "text": "Эссенция тьмы появляется в местах, где мне нежити или темной энергии. Очистив ее можно получить неплохую основу для магических артефактов.... Вот прими несколько из них, они помогут стать сильнее.",
+                    "impact": {
+                        "$type": "Askalhorn.Plot.Impacts.CompleteQuestImpact, Askalhorn.Plot",
                         "quest": "FindProvision"
                     }
                 }

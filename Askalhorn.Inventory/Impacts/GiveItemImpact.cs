@@ -2,10 +2,12 @@
 using Askalhorn.Common;
 using Askalhorn.Common.Interpetators;
 using Askalhorn.Inventory.Items;
+using Askalhorn.Text;
 using MonoGame.Extended.TextureAtlases;
 using Newtonsoft.Json;
+using Serilog;
 
-namespace Askalhorn.Inventory
+namespace Askalhorn.Inventory.Impacts
 {
     public class GiveItemImpact: IImpact
     {
@@ -20,7 +22,7 @@ namespace Askalhorn.Inventory
         public GiveItemImpact(IItem item, IExpression<uint> count)
         {
             Item = item;
-            Count = count;
+            Count = count ?? new StaticExpression<uint>(1);
         }
 
         [CommandConstructor]
@@ -35,8 +37,11 @@ namespace Askalhorn.Inventory
             var wBag = target as IHasBag;
             if (wBag is null)
                 throw new ArgumentNullException(nameof(target), "Target must be a " + nameof(IHasBag));
+
+            var count = Count.Generate(null, new Random());
+            wBag.Bag.Put(Item, count);
             
-            wBag.Bag.Put(Item, Count.Generate(null, new Random()));
+            Log.Information(new TextPointer("inventory", "Add_Item").ToString(), Item.Name, count);
         }
     }
 }

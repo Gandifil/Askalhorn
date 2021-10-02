@@ -1,0 +1,4 @@
+{
+    "Add_Item": "Получено {name} x{count}",
+    "Remove_Item": "Отдано {name} x{count}"
+}

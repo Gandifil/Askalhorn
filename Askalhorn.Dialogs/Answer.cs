@@ -1,4 +1,5 @@
-﻿using Askalhorn.Common.Interpetators;
+﻿using System.Collections.Generic;
+using Askalhorn.Common.Interpetators;
 
 namespace Askalhorn.Dialogs
 {
@@ -8,6 +9,6 @@ namespace Askalhorn.Dialogs
         
         public int Target { get; set; }
 
-        public BoolExpression Requirement { get; set; }
+        public IExpression<bool> Requirement { get; set; }
     }
 }

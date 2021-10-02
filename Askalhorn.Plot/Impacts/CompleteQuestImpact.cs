@@ -1,7 +1,9 @@
 ﻿using System;
 using Askalhorn.Common;
+using Askalhorn.Text;
 using MonoGame.Extended.TextureAtlases;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace Askalhorn.Plot.Impacts
 {
@@ -30,6 +32,8 @@ namespace Askalhorn.Plot.Impacts
 
             var quest = objWithJournal.Journal.Find(Quest);
             quest.Complete(Step);
+            
+            Log.Information(new TextPointer("journal", "Complete_Quest").ToString(), (quest as IQuest).Name);
         }
     }
 }
