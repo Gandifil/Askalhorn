@@ -1,10 +1,13 @@
-﻿using Askalhorn.Common;
+﻿using System.Linq;
+using Askalhorn.Common;
 using Askalhorn.Dialogs;
+using Askalhorn.UI.Input;
 using Microsoft.Xna.Framework;
 using MLEM.Extended.Extensions;
 using MLEM.Ui;
 using MLEM.Ui.Elements;
 using MonoGame.Extended.Content;
+using MonoGame.Extended.Input.InputListeners;
 using Serilog;
 
 namespace Askalhorn.UI.Dialogs
@@ -34,24 +37,33 @@ namespace Askalhorn.UI.Dialogs
 
             UpdateState();
             _enumerator.OnChanded += UpdateState;
-            _enumerator.OnEnd += Close;
+            _enumerator.OnEnd += this.Close;
             Log.Debug("DialogViewer init");
-        }
-
-        private void Close()
-        {
-            if (Root.Element == this)
-                System.Remove(Root.Name);
+            
+            InputListeners.Input.KeyboardListener.Push(new NumericKeyboardListener());
+            InputListeners.Input.MouseListener.Push(new MouseListener());
+            InputListeners.Keyboard.NumericKeyReleased += OnNumericKeyReleased;
         }
 
         public override void Dispose()
         {
+            InputListeners.Keyboard.NumericKeyReleased -= OnNumericKeyReleased;
+            InputListeners.Input.KeyboardListener.Pop();
+            InputListeners.Input.MouseListener.Pop();
+            
             _enumerator.OnChanded -= UpdateState;
-            _enumerator.OnEnd -= Close;
+            _enumerator.OnEnd -= this.Close;
             
             Log.Debug("DialogViewer disposed");
             
             base.Dispose();
+        }
+
+        private void OnNumericKeyReleased(object? sender, int number)
+        {
+            number--;
+            if (number < _enumerator.Answers.Count())
+                _enumerator.Choose(_enumerator.Answers.ElementAt(number));
         }
 
         public override void Update(GameTime time)

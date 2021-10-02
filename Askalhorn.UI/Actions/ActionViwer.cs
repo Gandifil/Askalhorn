@@ -14,25 +14,24 @@ namespace Askalhorn.UI.Actions
         private readonly IAction _action;
         private readonly Keys _key;
         
-        private KeyboardState _previousState;
+        private KeyboardListener _listener;
         
-        public ActionViwer(IAction action, Keys key, Anchor anchor, float width, float height): 
+        public ActionViwer(IAction action, KeyboardListener listener, Keys key, Anchor anchor, float width, float height): 
             base(action, anchor, width, height)
         {
             _action = action;
+            _listener = listener;
 
             _key = key;
 
             OnPressed += _ => Use();
-            
-            _previousState = Keyboard.GetState();
-            
-            InputListeners.Keyboard.KeyReleased += OnKeyReleased;
+
+            listener.KeyReleased += OnKeyReleased;
         }
 
         public override void Dispose()
         {
-            InputListeners.Keyboard.KeyReleased -= OnKeyReleased;
+            _listener.KeyReleased -= OnKeyReleased;
             
             base.Dispose();
         }
