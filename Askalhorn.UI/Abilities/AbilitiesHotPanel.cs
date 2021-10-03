@@ -48,7 +48,8 @@ namespace Askalhorn.UI.Abilities
         public override void Dispose()
         {
             var player = GameProcess.Instance.Player;
-            player.HotKeys.BindingsChanged -= HotKeysOnBindingsChanged;
+            if (player is not null)
+                player.HotKeys.BindingsChanged -= HotKeysOnBindingsChanged;
             InputListeners.Keyboard.NumericKeyReleased -= OnNumericKeyReleased;
             
             base.Dispose();

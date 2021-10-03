@@ -135,6 +135,12 @@ namespace AmbrosiaGame.Screens
         {
             actions.Clear();
 
+            if (GameProcess.Player is null)
+            {
+                ScreenManager.LoadScreen(new MainMenuScreen(Game));
+                return;
+            }
+                
             var build = Location.Current.Location[GameProcess.Player.Position].Build as IActionable;
             if (build is not null)
                 if (build.Action is not null)
@@ -149,7 +155,8 @@ namespace AmbrosiaGame.Screens
         
         private void LookAtPlayer()
         {
-            camera.LookAt(GameProcess.Player.Position.RenderVector);
+            if (GameProcess.Player is not null)
+                camera.LookAt(GameProcess.Player.Position.RenderVector);
         }
 
 

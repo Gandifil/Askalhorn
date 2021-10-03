@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Askalhorn.Characters.Impacts;
+using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Render;
 using Microsoft.Xna.Framework.Audio;
@@ -11,7 +12,7 @@ namespace Askalhorn.Characters.Abilities
     {
         public override string Name => "Удар";
         
-        public override string Description => "Удар";
+        public override string Description => "Наносит удар, наносящий урон в размере физической силы персонажа";
         public override TextureRenderer Renderer => new TextureRenderer("effects", new(1, 1));
         public override IAbility.TargetType Type => IAbility.TargetType.Character;
         public override int Radius => 1;
@@ -25,7 +26,8 @@ namespace Askalhorn.Characters.Abilities
 
         public override void Use(Character character, Character target)
         {
-            new DamageImpact(10).On(target);
+            var amount = character.Secondary[SecondaryType.PhysicalPower].Value;
+            new DamageImpact(amount).On(target);
         }
     }
 }

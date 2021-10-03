@@ -72,7 +72,9 @@ namespace Askalhorn.UI
         private void UpdateMovements()
         {
             AvailableAbilities = new List<UseAbilityMove>();
-            AvailableMovements = GameProcess.Instance.Player.AvailableMovements;
+            
+            if (GameProcess.Instance.Player is not null)
+                AvailableMovements = GameProcess.Instance.Player.AvailableMovements;
         }
         
         public IMove CheckClick(Point point, Matrix matrix)
