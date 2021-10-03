@@ -8,6 +8,6 @@ namespace Askalhorn.Characters
     {
         void Make(IMove move);
         
-        List<int> HotBindings { get; set; }
+        HotKeys HotKeys { get; }
     }
 }

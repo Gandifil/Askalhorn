@@ -61,8 +61,7 @@ namespace Askalhorn.UI.Abilities
                 {
                     Ability = obj.Icon as IAbility;
                     obj.SuccesfullyDrop();
-                    _owner.HotBindings[(int) _number] =
-                        1 + _owner.Abilities.ToList().FindIndex(x => x.GetType() == Ability.GetType());
+                    _owner.HotKeys.Set(_owner, Ability, (int) _number);
                 }
                 catch (ArgumentException e)
                 {

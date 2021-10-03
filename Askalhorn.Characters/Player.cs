@@ -18,7 +18,6 @@ namespace Askalhorn.Characters
             Fraction = new NamedFraction("Player");
             Renderer = new TextureRenderer("mage2");
             Controller = new BufferController();
-            Abilities.Add(new HealMeditation());
         }
 
         IJournal IHasReadOnlyJournal.Journal => Journal;
@@ -30,6 +29,6 @@ namespace Askalhorn.Characters
             buffer.AddMove(move, this);
         }
 
-        public List<int> HotBindings { get; set; } = new List<int>(new int[10]);
+        public HotKeys HotKeys { get; set; } = new();
     }
 }

@@ -16,14 +16,16 @@ namespace Askalhorn.UI.Abilities
 
         public AbilitiesHotPanel(Anchor anchor, float x = .6f, float y = .1f) : base(anchor, x, y)
         {
-            IPlayer player = GameProcess.Instance.Player;
+            var player = GameProcess.Instance.Player;
             SetHeightBasedOnChildren = true;
 
+            player.HotKeys.BindingsChanged += HotKeysOnBindingsChanged;
+            var abilities = player.HotKeys.GetAbilities(player);
             for (int i = 0; i < ABILITIES_COUNT; i++)
             {
                 slots[i] = new AbilitySlotViewer(player, (uint)i, Anchor.AutoInlineIgnoreOverflow, .1f, -1f);
-                if (player.HotBindings[i] > 0)
-                    slots[i].Ability = player.Abilities.ElementAt(player.HotBindings[i] - 1);
+                if (abilities[i] is not null)
+                    slots[i].Ability = abilities[i];
             }
             
             foreach (var slot in slots)
@@ -32,8 +34,21 @@ namespace Askalhorn.UI.Abilities
             InputListeners.Keyboard.NumericKeyReleased += OnNumericKeyReleased;
         }
 
+        private void HotKeysOnBindingsChanged()
+        {
+            var player = GameProcess.Instance.Player;
+            var abilities = player.HotKeys.GetAbilities(player);
+            for (int i = 0; i < ABILITIES_COUNT; i++)
+            {
+                if (abilities[i] is not null)
+                    slots[i].Ability = abilities[i];
+            }
+        }
+
         public override void Dispose()
         {
+            var player = GameProcess.Instance.Player;
+            player.HotKeys.BindingsChanged -= HotKeysOnBindingsChanged;
             InputListeners.Keyboard.NumericKeyReleased -= OnNumericKeyReleased;
             
             base.Dispose();
