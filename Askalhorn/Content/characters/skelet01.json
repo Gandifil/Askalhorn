@@ -12,11 +12,18 @@
         "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
         "item": {
             "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
-            "contentName": "healPoition10"
+            "contentName": "cursedBone"
         },
         "count": {
-            "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
-            "value": 25
+            "$type": "Askalhorn.Common.Interpetators.RandomRangeInterpretator`1[[System.UInt32]], Askalhorn.Common",
+            "first": {
+                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                "value": 1
+            },
+            "second": {
+                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                "value": 5
+            }
         }
     }
 }

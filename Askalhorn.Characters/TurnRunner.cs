@@ -24,8 +24,9 @@ namespace Askalhorn.Characters
             var list = Location.Current.Location.GameObjects.ToList();
             
             // on Turn() objects can dispose themself;
-            for (int i = list.Count - 1; i >= 0; i--)
-                list[i].Turn();
+            foreach (var obj in list)
+                if (Location.Current.Location.GameObjects.Contains(obj))
+                    obj.Turn();
         }
     }
 }

@@ -27,7 +27,8 @@ namespace Askalhorn.Common.Interpetators
                     return (T)(object) random.Next(range.Item1, range.Item2);
                 
                 case Tuple<uint, uint> range:
-                    return (T)(object) random.Next((int)range.Item1, (int)range.Item2);
+                    var value = (uint)random.Next((int)range.Item1, (int)range.Item2);
+                    return (T) (object) value;
                 
                 case Tuple<float, float> range:
                     return (T)(object) random.NextSingle(range.Item1, range.Item2);
