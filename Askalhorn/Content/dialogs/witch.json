@@ -162,11 +162,11 @@
                         "$type": "Askalhorn.Inventory.Impacts.GiveItemImpact, Askalhorn.Inventory",
                         "item": {
                             "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
-                            "contentName": "energyPoition25",
-                            "count": {
-                                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
-                                "value": 5
-                            }
+                            "contentName": "energyPoition25"
+                        },
+                        "count": {
+                            "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                            "value": 5
                         }
                     }
                 },
@@ -213,7 +213,7 @@
                 {
                     "text": "Спасибо, ты мне сильно помог. Забирай свое золото.",
                     "impact": {
-                        "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
+                        "$type": "Askalhorn.Inventory.Impacts.GiveItemImpact, Askalhorn.Inventory",
                         "item": {
                             "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
                             "contentName": "goldCoin"
@@ -227,11 +227,8 @@
                 {
                     "text": "Я запомню, что ты помог мне.",
                     "impact": {
-                        "$type": "Askalhorn.Inventory.Impacts.RemoveItemImpact, Askalhorn.Inventory",
-                        "impact": {
-                            "$type": "Askalhorn.Plot.Impacts.CompleteQuestImpact, Askalhorn.Plot",
-                            "quest": "needMooreBones"
-                        }
+                        "$type": "Askalhorn.Plot.Impacts.CompleteQuestImpact, Askalhorn.Plot",
+                        "quest": "needMooreBones"
                     }
                 }
             ],

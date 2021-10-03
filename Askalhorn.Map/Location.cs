@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Askalhorn.Common;
 using Askalhorn.Map.Builds;
 using Askalhorn.Map.Local;
@@ -99,6 +100,25 @@ namespace Askalhorn.Map
         IReadOnlyCollection<IGameObject> ILocation.GameObjects => GameObjects;
 
         public List<IGameObject> GameObjects { get; } = new();
+
+        public IPosition FindFreeSpaceForBuild(IPosition position)
+        {
+            if (FreeForBuild(position.Point))
+                return position;
+            
+            for (uint x = position.X - 1; x <= position.X + 1; x++)
+            for (uint y = position.Y - 1; y <= position.Y + 1; y++)
+            {
+                if (x == position.X && y == position.Y)
+                    continue;
+
+                var pos = new Position(x, y);
+                if (FreeForBuild(pos.Point))
+                    return pos;
+            }
+
+            throw new ArgumentException("Can't find near free space");
+        }
 
         public IGameObject FindNear(IPosition position, Func<IGameObject, bool> p)
         {

@@ -1,4 +1,6 @@
-﻿using Askalhorn.Render;
+﻿using Askalhorn.Map;
+using Askalhorn.Map.Local;
+using Askalhorn.Render;
 using Microsoft.Xna.Framework;
 
 namespace Askalhorn.Characters.Builds
@@ -8,8 +10,8 @@ namespace Askalhorn.Characters.Builds
         public LootContainer(Character character)
             : base(character.Name, true, character.Bag)
         {
-            Position = character.Position;
-            Renderer = new TextureRenderer("grassland_tiles", new Point(0, 4));
+            Position = (Position)Location.Current.Location.FindFreeSpaceForBuild(character.Position);
+            Renderer = new TextureRenderer("builds/containers", new Point(0, 0));
         }
 
         public override bool IsStatic => false;

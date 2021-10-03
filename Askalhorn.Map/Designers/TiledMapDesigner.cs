@@ -30,16 +30,16 @@ namespace Askalhorn.Map.Designers
                 if (layer.Name == "teleports")
                     foreach (var obj in layer.Objects)
                     {
-                        location.Add(new GlobalTeleport
-                        {
-                            Location = new LocationInfo
-                            {
-                                PipelineName = obj.Type,
-                                Seed = 0,
-                            },
-                            Position = new Position((obj.Position / 32).ToPoint()),
-                            Place = Convert.ToUInt32((string?) obj.Name),
-                        });
+                        // location.Add(new GlobalTeleport
+                        // {
+                        //     Location = new LocationInfo
+                        //     {
+                        //         PipelineName = obj.Type,
+                        //         Seed = 0,
+                        //     },
+                        //     Position = new Position((obj.Position / 32).ToPoint()),
+                        //     Place = Convert.ToUInt32((string?) obj.Name),
+                        // });
                     }
                 if (layer.Name == "places")
                     foreach (var obj in layer.Objects)

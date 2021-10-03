@@ -7,5 +7,23 @@
             "x": 2,
             "y": 0
         }
+    },
+    "loot": {
+        "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+        "item": {
+            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+            "contentName": "cursedBone"
+        },
+        "count": {
+            "$type": "Askalhorn.Common.Interpetators.RandomRangeInterpretator`1[[System.UInt32]], Askalhorn.Common",
+            "first": {
+                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                "value": 5
+            },
+            "second": {
+                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                "value": 10
+            }
+        }
     }
 }
