@@ -20,6 +20,8 @@ Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=admin      
 UninstallDisplayIcon={app}\{#SetupSetting("AppName")}.exe
+;SetupIconFile=Icon.ico
+;SourceDir=D:\Gandifil\Documents\Projects\Askalhorn\Askalhorn
 
 [Languages]
 Name: english; MessagesFile: compiler:Default.isl
@@ -31,6 +33,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: "bin\Release\net5.0\publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+; Source: "Icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#SetupSetting("AppName")}"; Filename: "{app}\{#SetupSetting("AppName")}.exe"; WorkingDir: "{app}"
