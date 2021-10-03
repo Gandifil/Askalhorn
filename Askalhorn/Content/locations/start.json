@@ -87,6 +87,86 @@
                 "$type": "Askalhorn.Characters.Builders.CharacterBuilder, Askalhorn.Characters",
                 "name": "skelet01"
             }
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.MultipleSpawner, Askalhorn.Map",
+            "spawner": {
+                "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+                "positionExpression": {
+                    "$type": "Askalhorn.Map.Local.InsideSquarePosition, Askalhorn.Map",
+                    "rect": {
+                        "x": 60,
+                        "y": 40,
+                        "width": 20,
+                        "height": 20
+                    }
+                },
+                "builder": {
+                    "$type": "Askalhorn.Characters.Builders.CharacterBuilder, Askalhorn.Characters",
+                    "name": "skelet01"
+                }
+            },
+            "count": 10
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.MultipleSpawner, Askalhorn.Map",
+            "spawner": {
+                "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+                "positionExpression": {
+                    "$type": "Askalhorn.Map.Local.InsideSquarePosition, Askalhorn.Map",
+                    "rect": {
+                        "x": 60,
+                        "y": 40,
+                        "width": 20,
+                        "height": 20
+                    }
+                },
+                "builder": {
+                    "$type": "Askalhorn.Characters.Builders.CharacterBuilder, Askalhorn.Characters",
+                    "name": "skelet01"
+                }
+            },
+            "count": 10
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.MultipleSpawner, Askalhorn.Map",
+            "spawner": {
+                "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+                "positionExpression": {
+                    "$type": "Askalhorn.Map.Local.InsideSquarePosition, Askalhorn.Map",
+                    "rect": {
+                        "x": 50,
+                        "y": 55,
+                        "width": 20,
+                        "height": 10
+                    }
+                },
+                "builder": {
+                    "$type": "Askalhorn.Characters.Builders.CharacterBuilder, Askalhorn.Characters",
+                    "name": "skelet02"
+                }
+            },
+            "count": 5
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.MultipleSpawner, Askalhorn.Map",
+            "spawner": {
+                "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+                "positionExpression": {
+                    "$type": "Askalhorn.Map.Local.InsideSquarePosition, Askalhorn.Map",
+                    "rect": {
+                        "x": 70,
+                        "y": 60,
+                        "width": 9,
+                        "height": 9
+                    }
+                },
+                "builder": {
+                    "$type": "Askalhorn.Characters.Builders.CharacterBuilder, Askalhorn.Characters",
+                    "name": "skelet03"
+                }
+            },
+            "count": 3
         }
     ]
 }

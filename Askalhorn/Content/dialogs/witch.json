@@ -5,21 +5,7 @@
             "paragraphs":
             [
                 {
-                    "text": "О, откуда ты здесь появился? Впрочем неважно.",
-                    "impact": {
-                        "$type": "Askalhorn.Inventory.Impacts.GiveItemImpact, Askalhorn.Inventory",
-                        "item": {
-                            "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
-                            "contentName": "energyPoition25"
-                        },
-                        "count": {
-                            "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
-                            "value": 5
-                        }
-                    }
-                },
-                {
-                    "text": "Мне нужен один важный ингредиент из сундука неподолеку. К сожалению, там ошивается скелет "
+                    "text": "Привет."
                 }
             ],
             "answers": 

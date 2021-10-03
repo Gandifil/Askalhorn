@@ -123,13 +123,11 @@ namespace AmbrosiaGame.Screens
 
         private void OnDialogOpened(DialogEnumerator obj)
         {
-            //Game.UiSystem.Add("sda2", new DialogViewer(obj, Anchor.Center, .9f, .5f));
             Game.ElementSlot.SwitchTo(() => new DialogViewer(obj, Anchor.Center, .9f, .5f));
         }
 
         private void OnBagOpened(Bag bag)
         {
-            //Game.UiSystem.Add("Exchange_Window", new ExchangeWindow(bag, GameProcess.Player.Bag));
             Game.ElementSlot.SwitchTo(() => new ExchangeWindow(bag, GameProcess.Player.Bag));
         }
 

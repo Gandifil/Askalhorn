@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Askalhorn.Characters.Control.Moves;
 using Askalhorn.Common;
 using Askalhorn.Map;
+using Askalhorn.Map.Local;
 using Microsoft.Xna.Framework;
 using MLEM.Pathfinding;
 
@@ -41,9 +43,14 @@ namespace Askalhorn.Characters.Control
                     };
                 else
                 {
-                    var pathfinder = new AStar2((pos, nextPos) => 1, 
+                    var location = Location.Current.Location;
+                    var pathfinder = new AStar2((pos, nextPos) => location.Contain(new Position(pos)) && location[pos].DynamicObject is null ? 1 : Int32.MaxValue, 
                         false);
-                    var path = pathfinder.FindPath(character.Position.Point, target.Position.Point);
+                    var path = pathfinder.FindPath(character.Position.Point, target.Position.Point, null, 10, 100);
+                    if (path is null)
+                        return new List<IMove>();
+                    if (path.Count < 2)
+                        return new List<IMove>();
                     path.Pop();
                     return new List<IMove>{ new MovementToMove(path.Pop())};
                 }

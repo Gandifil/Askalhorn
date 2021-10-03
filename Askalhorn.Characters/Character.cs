@@ -270,7 +270,8 @@ namespace Askalhorn.Characters
                     ability.Turn();
 
                 foreach (var move in Controller.Decide(this))
-                    move.Make(this);
+                  //  if (move.IsValid(this))
+                        move.Make(this);
             }
         }
 
