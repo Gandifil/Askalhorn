@@ -293,12 +293,6 @@
 /processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
 /build:items/essenceOfDarkness.json
 
-#begin items/goldCoin.json
-/importer:JsonContentImporter
-/processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
-/build:items/goldCoin.json
-
 #begin items/healPoition10.json
 /importer:JsonContentImporter
 /processor:JsonContentProcessor
@@ -377,12 +371,6 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:music/KOLARD BEATS - WAKE FROM ETERNAL SLEEP.mp3
-
-#begin player.json
-/importer:JsonContentImporter
-/processor:JsonContentProcessor
-/processorParam:ContentType=TestGame.Resources.PlayerInfo
-/build:player.json
 
 #begin quests/FindProvision.json
 /importer:JsonContentImporter
@@ -491,4 +479,30 @@
 /processor:JsonContentProcessor
 /processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/rarity.json
+
+#begin maps/castle_tiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:maps/castle_tiles.png
+
+#begin maps/castle_tiles.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:maps/castle_tiles.tsx
+
+#begin maps/floor_tiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/build:maps/floor_tiles.png
+
+#begin maps/floor_tiles.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:maps/floor_tiles.tsx
+
+#begin items/goldCoin.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
+/build:items/goldCoin.json
 

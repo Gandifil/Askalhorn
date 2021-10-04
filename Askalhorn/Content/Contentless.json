@@ -1,0 +1,31 @@
+﻿{
+  "exclude": [
+    "obj/",
+    "bin/"
+  ],
+  "logSkipped": true,
+  "overrides": {
+    ".ogg": {
+      "importer": "OggImporter",
+      "processor": "SongProcessor"
+    },
+    ".wav": {
+      "processor": "SoundEffectProcessor"
+    },
+    ".txt": {
+      "copy": true
+    },
+    "items/*.json": {
+      "importer": "JsonContentImporter",
+      "processor": "JsonContentProcessor",
+      "processorParams": {
+        "ContentType": "Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory"
+      }
+    },
+    "TestFile.png": {
+      "processorParams": {
+        "TextureFormat": "Compressed"
+      }
+    }
+  }
+}

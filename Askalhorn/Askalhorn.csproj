@@ -24,6 +24,7 @@
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Contentless" Version="3.0.5" />
     <PackageReference Include="MLEM" Version="5.0.0" />
     <PackageReference Include="MLEM.Extended" Version="5.0.0" />
     <PackageReference Include="MLEM.Ui" Version="5.0.0" />
