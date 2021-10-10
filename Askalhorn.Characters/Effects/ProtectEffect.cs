@@ -2,6 +2,7 @@
 using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Render;
+using Askalhorn.Text;
 using MonoGame.Extended.TextureAtlases;
 
 namespace Askalhorn.Characters.Effects
@@ -30,5 +31,7 @@ namespace Askalhorn.Characters.Effects
         {
             character.Protection[Type].Addition.Value -= Value;
         }
+
+        public string Description => @$"+{Value} к защите от {EnumTextPointer<DamageType>.Get(Type, GrammaticalCase.Genitive)}";
     }
 }

@@ -10,5 +10,7 @@ namespace Askalhorn.Characters.Effects
         void Subscribe(Character character){}
         
         void Unsubscribe(Character character){}
+        
+        string Description { get; }
     }
 }

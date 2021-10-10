@@ -9,5 +9,14 @@ namespace Askalhorn.Text
             :base($"enums/{typeof(T).Name}", value.ToString())
         {
         }
+
+        public static string Get(T value, GrammaticalCase? grammaticalCase = null)
+        {
+            var pointer = new EnumTextPointer<T>(value)
+            {
+                GrammaticalCase = grammaticalCase,
+            };
+            return pointer.ToString();
+        }
     }
 }

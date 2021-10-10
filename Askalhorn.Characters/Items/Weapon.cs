@@ -14,10 +14,9 @@ namespace Askalhorn.Characters.Items
 
         public IImpact StrikeImpact { get; set; }
 
-        protected override string PreDescription => $@"{base.PreDescription}
-Урон: {DamageValue} ({new EnumTextPointer<DamageType>(DamageType)
-{
-    GrammaticalCase = GrammaticalCase.Genitive}})";
+        protected override string PreDescription => 
+$@"Урон: {DamageValue} ({EnumTextPointer<DamageType>.Get(DamageType, GrammaticalCase.Genitive)})
+{base.PreDescription}";
         
         public override ItemPurpose Type => ItemPurpose.Weapon;
     }

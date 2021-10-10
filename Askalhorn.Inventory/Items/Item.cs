@@ -10,14 +10,14 @@ namespace Askalhorn.Inventory.Items
     {
         private static string[] RarityColors = {"White", "Green", "Orange"};
         
-        protected virtual string PreDescription =>
-@$"{Name}
-Тип: {Type}
-Редкость: {new TextPointer("rarity", ItemRarity.ToString()).ToString().WithColor(RarityColors[(int) ItemRarity])}
-Вес: {Weight} кг";
+        protected virtual string PreDescription => @$"";
 
         public string TooltipText =>
-@$"{PreDescription}
+@$"{Name}
+Тип: {EnumTextPointer<ItemPurpose>.Get(Type)}
+Редкость: {new TextPointer("rarity", ItemRarity.ToString()).ToString().WithColor(RarityColors[(int) ItemRarity])}
+Вес: {Weight} кг 
+{PreDescription}
 {Description}";
 
         public event Action OnChanged;

@@ -19,6 +19,8 @@ namespace Askalhorn.Characters.Effects
             Impact.On(character);
         }
 
+        public string Description => Impact.Description + " каждый ход";
+
         public string TooltipText => Impact.Description + " каждый ход";
         public event Action OnChanged;
         public TextureRenderer Renderer => new(Impact.TextureRegion);

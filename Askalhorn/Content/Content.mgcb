@@ -506,3 +506,9 @@
 /processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
 /build:items/goldCoin.json
 
+#begin texts/enums/ItemPurpose.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
+/build:texts/enums/ItemPurpose.json
+

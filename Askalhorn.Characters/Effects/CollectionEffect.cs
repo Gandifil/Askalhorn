@@ -26,6 +26,8 @@ namespace Askalhorn.Characters.Effects
                 effect.Unsubscribe(character);
         }
 
+        public string Description => string.Join('\n', Effects.Select(x => x.Description));
+
         public void Turn(Character character)
         {
             foreach (var effect in Effects)

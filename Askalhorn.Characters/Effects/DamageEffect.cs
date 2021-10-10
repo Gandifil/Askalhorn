@@ -20,6 +20,8 @@ namespace Askalhorn.Characters.Effects
             impact.On(character);
         }
 
+        public string Description { get; }
+
         public string TooltipText => "''";
         public event Action OnChanged;
         public TextureRenderer Renderer => null;
