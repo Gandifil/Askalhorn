@@ -10,7 +10,7 @@ using MonoGame.Extended.Input.InputListeners;
 
 namespace Askalhorn.UI.Inventory
 {
-    public class PackViewer: FixPanel
+    public class PackViewer: SubFixPanel
     {
         protected readonly Pack _pack;
         private readonly Paragraph _count;
