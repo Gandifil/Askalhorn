@@ -9,6 +9,7 @@ namespace Askalhorn.Characters.Impacts
     {
         public readonly int Value;
 
+        [CommandConstructor]
         public AddLevelEnergyImpact(int value)
         {
             this.Value = value;

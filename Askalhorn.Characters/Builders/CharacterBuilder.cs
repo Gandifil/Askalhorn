@@ -1,4 +1,5 @@
 ﻿using System;
+using Askalhorn.Combat;
 using Askalhorn.Common;
 using Askalhorn.Dialogs;
 using Askalhorn.Map;
@@ -26,12 +27,11 @@ namespace Askalhorn.Characters.Builders
                 Position = position,
                 Renderer = prototype.Renderer,
                 Controller = prototype.Controller,
+                Level = new Cultivation(prototype.Level),
                 Dialog = string.IsNullOrEmpty(prototype.Dialog)
                     ? null
                     : Storage.Content.Load<Dialog>("dialogs/" + prototype.Dialog),
             };
-
-            character.Level.Base.Value = prototype.Level;
 
             if (prototype.Loot is not null)
             {

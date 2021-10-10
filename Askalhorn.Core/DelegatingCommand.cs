@@ -40,6 +40,9 @@ namespace Askalhorn.Core
                         case "UInt32":
                             results.Add(Convert.ToUInt32(queue.Dequeue()));
                             break;
+                        case "Int32":
+                            results.Add(Convert.ToInt32(queue.Dequeue()));
+                            break;
                         default:
                             throw new ArgumentException("Unknown type " + typeName);
                             break;

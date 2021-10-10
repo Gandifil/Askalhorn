@@ -21,7 +21,7 @@ namespace Askalhorn.Characters
         
         ILimitedValue<IObservedParameter<int>> MP { get; }
         
-        ILinearParameter<int> Level { get; }
+        ICultivation Level { get; }
         
         IAttributes<PrimaryType> Primary { get; }
         

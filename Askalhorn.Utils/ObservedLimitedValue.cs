@@ -55,5 +55,10 @@ namespace Askalhorn.Utils
 
         [JsonIgnore]
         public float Percent => (float)(Current.Value.ToDouble(null) / Max.Value.ToDouble(null));
+
+        public override string ToString()
+        {
+            return $"{Current}/{Max}";
+        }
     }
 }

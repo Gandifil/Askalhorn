@@ -38,7 +38,11 @@ namespace Askalhorn.Render
             mp.Draw(batch, target.ToPoint() + new Point(0, 10), character.MP.Percent);
             
             // level
-            batch.DrawString(font, character.Level.ToString(),target + new Vector2(-10, 0), Color.Chocolate);
+            var text = character.Level.Level.ToString();
+            var textSize = font.MeasureString(text);
+            target.X -= textSize.X + 5;
+            
+            batch.DrawString(font, text, target, Color.Chocolate);
         }
     }
 }

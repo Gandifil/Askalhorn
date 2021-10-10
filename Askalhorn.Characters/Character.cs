@@ -73,11 +73,8 @@ namespace Askalhorn.Characters
             {DamageType.Magic, 0},
         };
         
-        ILinearParameter<int> ICharacter.Level => Level;
-        public LevelParameter Level { get; } = new()
-        {
-            Base = new ObservedParameter<int>(1),
-        };
+        ICultivation ICharacter.Level => Level;
+        public Cultivation Level { get; set; } = new();
 
         ILimitedValue<IObservedParameter<int>> ICharacter.HP => HP;
         
@@ -146,8 +143,8 @@ namespace Askalhorn.Characters
             var attrs = new Dictionary<PrimaryType, ObservedParameter<int>>();
             foreach (var type in (PrimaryType[]) Enum.GetValues(typeof(PrimaryType)))
             {
-                var parameter = new FunctionParameter<int>(() => 10 + Level.Value + PrimaryBase[type]);
-                Level.Changed += parameter.Update;
+                var parameter = new FunctionParameter<int>(() => 10 + Level.Level.Value + PrimaryBase[type]);
+                Level.Level.Changed += parameter.Update;
                 attrs[type] = parameter;
             }
             
@@ -242,7 +239,8 @@ namespace Askalhorn.Characters
                     default:
                         continue;
                 }
-                parameter.Changed += Level.Update;
+                
+                Level.Level.Changed += parameter.Update;
                 attrs[type] = parameter;
             }
             

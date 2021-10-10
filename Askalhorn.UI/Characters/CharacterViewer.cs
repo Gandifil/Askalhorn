@@ -13,14 +13,15 @@ namespace Askalhorn.UI.Characters
         {
             AddChild(new TitleCustomText(character.Name));
             AddChild(new VerticalSpace(10));
-            AddChild(new CustomText(Anchor.AutoCenter, "Уровень: \t"+ character.Level));
+            AddChild(new CustomText(Anchor.AutoCenter, "Уровень: \t"+ character.Level.Level));
             var textureRenderer = character.Renderer as TextureRenderer;
             if (textureRenderer is not null)
             {
                 AddChild(new Image(Anchor.AutoCenter, new Vector2(.7f, -1f), textureRenderer.Region.ToMlem()));
             }
-            AddChild(new CustomText(Anchor.AutoCenter, $"HP: {character.HP.Current}/{character.HP.Max}"));
-            AddChild(new CustomText(Anchor.AutoCenter, $"MP: {character.MP.Current}/{character.MP.Max}"));
+            AddChild(new CustomText(Anchor.AutoCenter, $"HP: {character.HP}"));
+            AddChild(new CustomText(Anchor.AutoCenter, $"MP: {character.MP}"));
+            AddChild(new CustomText(Anchor.AutoCenter, $"Культивация: {character.Level.Energy}"));
             
         }
     }
