@@ -53,7 +53,8 @@ namespace Askalhorn.Core
             
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.All
+                TypeNameHandling = TypeNameHandling.All,
+                ObjectCreationHandling = ObjectCreationHandling.Replace,
             };
             
             using (var file = new StreamReader(filename + ".json"))

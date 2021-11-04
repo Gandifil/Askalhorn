@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Askalhorn.Utils;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Combat
 {
@@ -14,6 +15,13 @@ namespace Askalhorn.Combat
         public ILimitedValue<IObservedParameter<int>> Energy  => _energy;
 
         private readonly ObservedLimitedValue<int> _energy;
+        
+        [JsonConstructor]
+        public Cultivation(LinearParameter<int> level, ObservedLimitedValue<int> energy)
+        {
+            _level = level;
+            _energy = energy;
+        }
 
         public Cultivation(int level = 1)
         {

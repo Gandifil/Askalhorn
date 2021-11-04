@@ -112,11 +112,10 @@ namespace Askalhorn.Characters
             
 
         IReadOnlyCollection<IAbility> ICharacter.Abilities => Abilities;
-
-        [JsonIgnore]
-        public List<Ability> Abilities { get; set; } = new List<Ability>()
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public List<Ability> Abilities { get; set; } = new()
         {
-            new Strike(),
+           new Strike(),
         };
         
         public Character()
@@ -125,9 +124,8 @@ namespace Askalhorn.Characters
             SetupSecondaryRules();
             SetupProtectionRules();
             HP.Max = Secondary[SecondaryType.MaxHP];
-            //HP.Current.Value = HP.Max.Value;
             MP.Max = Secondary[SecondaryType.MaxMagic];
-
+            
             EffectPool = new EffectPool(this, new List<EffectBind>());
         }
 
