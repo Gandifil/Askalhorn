@@ -1,24 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using Askalhorn.Characters.Items;
 using Askalhorn.Inventory;
-using Askalhorn.Inventory.Items;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Characters.Effects
 {
-    public interface IEffectPool
+    public class EffectPoolConverter : JsonConverter<EffectPool>
     {
-        IReadOnlyCollection<EffectBind> Binds { get; }
-    }
+        public override void WriteJson(JsonWriter writer, EffectPool? value, JsonSerializer serializer)
+        {
+            serializer.Serialize(writer, value.Binds);
+        }
 
-    public class EffectPool : IEffectPool
+        public override EffectPool? ReadJson(JsonReader reader, Type objectType, EffectPool? existingValue, bool hasExistingValue,
+            JsonSerializer serializer)
+        {
+            var binds = serializer.Deserialize<List<EffectBind>>(reader);
+            return new EffectPool(existingValue.Character, binds);
+        }
+    }
+    
+    [JsonConverter(typeof(EffectPoolConverter))]
+    public class  EffectPool : IEffectPool
     {
-        IReadOnlyCollection<EffectBind> IEffectPool.Binds => _binds;
+        public IReadOnlyCollection<EffectBind> Binds => _binds;
         private readonly  List<EffectBind> _binds = new List<EffectBind>();
         
         private readonly Character _character;
+
+        [JsonIgnore] 
+        public Character Character => _character;
 
         public EffectPool(Character character, List<EffectBind> binds) 
         {

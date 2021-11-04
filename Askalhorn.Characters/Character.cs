@@ -86,15 +86,11 @@ namespace Askalhorn.Characters
         
         public IController Controller { get; set; }
 
-        //IReadOnlyCollection<IEffect> ICharacter.Effects => Effects;
         IEffectPool ICharacter.EffectPool => EffectPool;
 
-        public EffectPool EffectPool { get; }
+        public EffectPool EffectPool { get; set; }
         public Dialog Dialog { get; set; }
         public Costume Costume { get; } = new Costume();
-        //
-        // [JsonIgnore]
-        // public readonly EffectPool Effects;
 
         private static readonly List<Point> Variants = new List<Point>
         {

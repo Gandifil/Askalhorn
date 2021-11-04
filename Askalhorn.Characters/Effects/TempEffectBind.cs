@@ -1,12 +1,15 @@
-﻿namespace Askalhorn.Characters.Effects
+﻿using Newtonsoft.Json;
+
+namespace Askalhorn.Characters.Effects
 {
     public class TempEffectBind: EffectBind
     {
         public uint TurnCount { get; private set; }
         
-        public TempEffectBind(IEffect effect, uint count) : base(effect)
+        [JsonConstructor]
+        public TempEffectBind(IEffect effect, uint turnCount) : base(effect)
         {
-            TurnCount = count;
+            TurnCount = turnCount;
         }
 
         public override void Turn(Character character)

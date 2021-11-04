@@ -18,7 +18,7 @@ namespace Askalhorn.Characters
             Fraction = new NamedFraction("Player");
             Renderer = new TextureRenderer("mage2");
             Controller = new BufferController();
-            //Abilities.Add(new HealMeditation());
+            Abilities.Add(new HealMeditation());
         }
 
         IJournal IHasReadOnlyJournal.Journal => Journal;

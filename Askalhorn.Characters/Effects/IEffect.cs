@@ -1,5 +1,6 @@
 ﻿using Askalhorn.Common;
 using Askalhorn.Render;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Characters.Effects
 {
@@ -11,6 +12,7 @@ namespace Askalhorn.Characters.Effects
         
         void Unsubscribe(Character character){}
         
+        [JsonIgnore]
         string Description { get; }
     }
 }

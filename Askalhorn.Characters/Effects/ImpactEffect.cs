@@ -2,6 +2,7 @@
 using Askalhorn.Common;
 using Askalhorn.Render;
 using MonoGame.Extended.TextureAtlases;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Characters.Effects
 {
@@ -19,10 +20,14 @@ namespace Askalhorn.Characters.Effects
             Impact.On(character);
         }
 
+        [JsonIgnore]
         public string Description => Impact.Description + " каждый ход";
 
+        [JsonIgnore]
         public string TooltipText => Impact.Description + " каждый ход";
         public event Action OnChanged;
+        
+        [JsonIgnore]
         public TextureRenderer Renderer => new(Impact.TextureRegion);
     }
 }
