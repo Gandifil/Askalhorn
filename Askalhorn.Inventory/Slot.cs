@@ -7,7 +7,7 @@ namespace Askalhorn.Inventory
     {
         public readonly ItemPurpose Type;
         
-        public IItem Item { get; private set; }
+        public IItem Item { get; set; }
 
         public Slot(ItemPurpose a)
         {

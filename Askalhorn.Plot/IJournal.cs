@@ -2,8 +2,9 @@
 
 namespace Askalhorn.Plot
 {
-    public interface IJournal: IEnumerable<IQuest>
+    public interface IJournal
     {
+        IReadOnlyCollection<IQuest> Quests { get; }
         IQuest Find(string name);
     }
 }

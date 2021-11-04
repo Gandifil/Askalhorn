@@ -19,13 +19,13 @@ namespace Askalhorn.UI.Journal
             AddChild(filter);
 
             List = new QuestListViewer(Anchor.AutoCenter, 1f, .9f);
-            List.SetupQuests(journal);
+            List.SetupQuests(journal.Quests);
             AddChild(List);
         }
 
         private void SearchQuests(QuestState state)
         {
-            List.SetupQuests(state == QuestState.None ? _journal : _journal.Where(x => x.State == state));
+            List.SetupQuests(state == QuestState.None ? _journal.Quests : _journal.Quests.Where(x => x.State == state));
         }
     }
 }

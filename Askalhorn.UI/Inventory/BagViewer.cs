@@ -61,7 +61,7 @@ namespace Askalhorn.UI.Inventory
         private void ResetPacks()
         {
             _packsPanel.RemoveChildren();
-            foreach (var pack in _bag.Items.Where(x => _filtersBar.Predicate(x.Item)))
+            foreach (var pack in _bag.Packs.Where(x => _filtersBar.Predicate(x.Item)))
                 _packsPanel.AddChild(CreatePackViewer(pack));
         }
 

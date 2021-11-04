@@ -16,8 +16,8 @@ namespace Askalhorn.UI.Journal
             list.List.OnOpened += OpenQuest;
             AddChild(list);
             
-            if (journal.Any())
-                OpenQuest(journal.First());
+            if (journal.Quests.Any())
+                OpenQuest(journal.Quests.First());
         }
 
         private QuestViewer _quest = null;

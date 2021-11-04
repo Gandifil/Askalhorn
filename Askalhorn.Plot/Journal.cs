@@ -11,6 +11,8 @@ namespace Askalhorn.Plot
     public class Journal: IJournal
     {
         private readonly List<IQuest> _quests = new List<IQuest>();
+
+        public IReadOnlyCollection<IQuest> Quests => _quests;
             
         [JsonConstructor]
         public Journal(List<IQuest> quests)
@@ -39,11 +41,6 @@ namespace Askalhorn.Plot
         public Quest Find(string name)
         {
             return _quests.Find(x => (x as Quest).ContentName == name) as Quest;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _quests.GetEnumerator();
         }
     }
 }

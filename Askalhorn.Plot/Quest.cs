@@ -49,37 +49,39 @@ namespace Askalhorn.Plot
 
                 if (step is null)
                     throw new ArgumentOutOfRangeException(nameof(value), "Failed to find step");
-                
-                if (step.NameOfLastStep != _currentStep)
+
+                if (_currentStep is null || step.NameOfLastStep == _currentStep)
+                {
+                    _currentStep = value;
+                    _questStep = step;
+                }
+                else
                     throw new InvalidOperationException( "Next.NameOfLastStep must be equals a current.");
-                
-                _currentStep = value;
-                _questStep = step;
             }
         }
 
-        public readonly string ContentName;
+        public string ContentName { get; }
         private readonly QuestFile _quest;
 
         [JsonConstructor]
-        public Quest(string contentName, string step, QuestState state)
+        public Quest(string contentName, string currentStep, QuestState state)
         {
+            var filePath = $"quests/{contentName}";
+            _quest = Storage.Content.Load<QuestFile>(filePath);
+            
             ContentName = contentName;
             State = state;
-            CurrentStep = step;
-            
-            var filePath = $"quests/{ContentName}";
-            _quest = Storage.Content.Load<QuestFile>(filePath);
+            CurrentStep = currentStep;
         }
 
         public Quest(string contentName, string step = null)
         {
-            ContentName = contentName;
-            State = QuestState.InProgress;
-            
-            var filePath = $"quests/{ContentName}";
+            var filePath = $"quests/{contentName}";
             _quest = Storage.Content.Load<QuestFile>(filePath);
             
+            ContentName = contentName;
+            State = QuestState.InProgress;
+
             if (step is null)
             {
                 _questStep = _quest.Steps.Find(x => string.IsNullOrEmpty(x.NameOfLastStep));

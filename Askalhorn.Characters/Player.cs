@@ -22,7 +22,7 @@ namespace Askalhorn.Characters
         }
 
         IJournal IHasReadOnlyJournal.Journal => Journal;
-        public Journal Journal { get;  } = new (new List<IQuest>());
+        public Journal Journal { get; set; } = new (new List<IQuest>());
         
         public void Make(IMove move)
         {

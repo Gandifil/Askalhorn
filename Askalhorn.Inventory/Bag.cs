@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using Askalhorn.Inventory.Items;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Inventory
 {
     public class Bag
     {
-        private readonly List<Pack> _packs = new();
+        [JsonIgnore]
+        private readonly List<Pack> _packs;
 
-        public IReadOnlyCollection<Pack> Items => _packs;
+        public IReadOnlyCollection<Pack> Packs => _packs;
+
+        [JsonConstructor]
+        public Bag(List<Pack> packs = null)
+        {
+            _packs = packs ?? new List<Pack>();
+            foreach (var pack in _packs)
+                pack.OnCountSetNull += Remove;
+        }
 
         public void Put(IItem item, uint count = 1)
         {
@@ -36,8 +46,6 @@ namespace Askalhorn.Inventory
         {
             return Pull(pack.Item, pack.Count);
         }
-
-        public bool IsEmpty => !_packs.Any();
 
         private void Add(Pack pack)
         {
@@ -71,6 +79,7 @@ namespace Askalhorn.Inventory
             return _packs.Find(x => item.Equals(x.Item));
         }
 
+        [Newtonsoft.Json.JsonIgnore]
         public float Weight => _packs.Select(x => x.Count * x.Item.Weight).Sum();
         public event Action OnChanged;
     }
