@@ -299,12 +299,6 @@
 /processorParam:ContentType=Askalhorn.Inventory.Items.ItemReader, Askalhorn.Inventory
 /build:items/healPoition10.json
 
-#begin locations/start.json
-/importer:JsonContentImporter
-/processor:JsonContentProcessor
-/processorParam:ContentType=Askalhorn.Map.LocationPipelineReader, Askalhorn.Map
-/build:locations/start.json
-
 #begin maps/64x64.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -316,11 +310,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/64x64.png
-
-#begin maps/castle.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:maps/castle.tmx
 
 #begin maps/dungeon_tiles.tsx
 /importer:TiledMapTilesetImporter
@@ -343,11 +332,6 @@
 /importer:TiledMapTilesetImporter
 /processor:TiledMapTilesetProcessor
 /build:maps/grassland_tiles.tsx
-
-#begin maps/start.tmx
-/importer:TiledMapImporter
-/processor:TiledMapProcessor
-/build:maps/start.tmx
 
 #begin maps/temple.tmx
 /importer:TiledMapImporter
@@ -511,4 +495,38 @@
 /processor:JsonContentProcessor
 /processorParam:ContentType=Askalhorn.Text.TextFileReader, Askalhorn.Text
 /build:texts/enums/ItemPurpose.json
+
+#begin locations/templeBasement.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Map.LocationPipelineReader, Askalhorn.Map
+/build:locations/templeBasement.json
+
+#begin locations/templeFloor1.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Map.LocationPipelineReader, Askalhorn.Map
+/build:locations/templeFloor1.json
+
+#begin maps/templeFloor1.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/templeFloor1.tmx
+
+#begin locations/templeDungeon.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Map.LocationPipelineReader, Askalhorn.Map
+/build:locations/templeDungeon.json
+
+#begin locations/templeOutdoors.json
+/importer:JsonContentImporter
+/processor:JsonContentProcessor
+/processorParam:ContentType=Askalhorn.Map.LocationPipelineReader, Askalhorn.Map
+/build:locations/templeOutdoors.json
+
+#begin maps/start.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/start.tmx
 

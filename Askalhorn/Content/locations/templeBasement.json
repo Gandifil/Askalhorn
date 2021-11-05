@@ -1,0 +1,106 @@
+{
+    "generator": {
+        "$type": "Askalhorn.Map.Generators.OneRoomGenerator, Askalhorn.Map",
+        "width": 10,
+        "height": 10
+    },
+    "designer": {
+        "$type": "Askalhorn.Map.Designers.WhiteCastleDesigner, Askalhorn.Map"
+    },
+    "spawners": [
+        {
+            "$type": "Askalhorn.Map.Spawners.LabelSpawner, Askalhorn.Map",
+            "name": "basementDoor",
+            "x": 3,
+            "y": 3
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.LabelPosition, Askalhorn.Map",
+                "name": "basementDoor"
+            },
+            "gameObject": {
+                "$type": "Askalhorn.Map.Builds.GlobalTeleport, Askalhorn.Map",
+                "location": {
+                    "pipelineName": "templeFloor1",
+                    "label": "basementDoor"
+                }
+            }
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.BuilderSpawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.StaticPosition, Askalhorn.Map",
+                "x": 1,
+                "y": 1
+            },
+            "builder": {
+                "$type": "Askalhorn.Characters.Builders.ChestBuilder, Askalhorn.Characters",
+                "loot": {
+                    "$type": "Askalhorn.Inventory.BagFillers.LootChooserList, Askalhorn.Inventory",
+                    "list":[
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "healPoition10"
+                            },
+                            "count": {
+                                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                                "value": 5
+                            }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "goldCoin"
+                            },
+                            "count": {
+                                "$type": "Askalhorn.Common.Interpetators.StaticExpression`1[[System.UInt32]], Askalhorn.Common",
+                                "value": 100
+                            }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "dagger01"
+                            }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "acolyteRobe"
+                            }
+                        },
+                        {
+                            "$type": "Askalhorn.Inventory.BagFillers.LootChooser, Askalhorn.Inventory",
+                            "item": {
+                                "$type": "Askalhorn.Inventory.Items.ContentItem, Askalhorn.Inventory",
+                                "contentName": "essenceOfDarkness"
+                            }
+                        }
+                    ]
+                    
+                }
+            }
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.StaticPosition, Askalhorn.Map",
+                "x": 4,
+                "y": 1
+            },
+            "gameObject": {
+                "$type": "Askalhorn.Map.Builds.GlobalTeleport, Askalhorn.Map",
+                "location": {
+                    "pipelineName": "templeDungeon",
+                    "place": 0
+                }
+            }
+        }]
+}

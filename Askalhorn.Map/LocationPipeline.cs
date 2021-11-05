@@ -25,8 +25,9 @@ namespace Askalhorn.Map
             var cells = Generator.Create(random, out places);
 
             var location = Designer.FormLocation(random, ref cells);
+            int i = 0;
             foreach (var place in places)
-                location.Places.Add(new Position(place));
+                location.Labels.Add("place" + i++, new Position(place));
             
             foreach (var spawner in Spawners)
                 spawner.Initialize(location, random, args, IsLoading);

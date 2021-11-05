@@ -1,0 +1,11 @@
+{
+    "generator": {
+        "$type": "Askalhorn.Map.Generators.OneRoomGenerator, Askalhorn.Map",
+        "width": 10,
+        "height": 10
+    },
+    "designer": {
+        "$type": "Askalhorn.Map.Designers.WhiteCastleDesigner, Askalhorn.Map"
+    },
+    "spawners": []
+}

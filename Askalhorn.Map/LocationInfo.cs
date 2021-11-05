@@ -5,6 +5,8 @@ namespace Askalhorn.Map
     public class LocationInfo
     {
         public string PipelineName { get; set; }
+        
+        public string Label { get; set; }
 
         public int Seed { get; set; }
 

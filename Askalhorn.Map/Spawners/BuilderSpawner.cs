@@ -5,25 +5,25 @@ using Newtonsoft.Json;
 
 namespace Askalhorn.Map.Spawners
 {
-    internal class Spawner: ISpawner
+    internal class BuilderSpawner: ISpawner
     {
         public IExpression<Position> PositionExpression { get;}
 
-        public IGameObject GameObject { get;}
+        public IGameObjectBuilder Builder { get;}
 
         [JsonConstructor]
-        public Spawner(IExpression<Position> positionExpression, IGameObject gameObject)
+        public BuilderSpawner(IExpression<Position> positionExpression, IGameObjectBuilder builder)
         {
             PositionExpression = positionExpression;
-            GameObject = gameObject;
+            Builder = builder;
         }
         
         public void Initialize(Location location, Random random, int[] args, bool isLoading)
         {
-            GameObject.Position = PositionExpression.Generate(location, random);
+            var obj = Builder.Build(PositionExpression.Generate(location, random));
             
-            if (!isLoading || GameObject.IsStatic)
-                location.Add(GameObject);
+            if (!isLoading || obj.IsStatic)
+                location.Add(obj);
         }
     }
 }

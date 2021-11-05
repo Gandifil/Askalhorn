@@ -23,8 +23,6 @@ namespace Askalhorn.Map.Builds
 
         public LocationInfo Location { get; set; }
 
-        public uint Place { get; set; }
-
-        public IAction Action => new TransferAction(new EnterLocationImpact(Location, Place));
+        public IAction Action => new TransferAction(new EnterLocationImpact(Location));
     }
 }

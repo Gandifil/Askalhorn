@@ -13,13 +13,20 @@ namespace Askalhorn.Map
     public class Location: ILocation
     {
         public TiledMap TiledMap { get; }
-        
+
+        public readonly Dictionary<string, IPosition> Labels = new();
+
         ICell ILocation.this[IPosition position] => Cells[position.X, position.Y];
         
-        public Cell this[IPosition position] => Cells[position.X, position.Y];
-        public Cell this[Point position] => Cells[position.X, position.Y];
+        public Cell this[IPosition position] => this[position.Point];
 
-        public readonly List<Position> Places = new();
+        public Rectangle Rectangle => new Rectangle(0, 0, Cells.GetLength(0), Cells.GetLength(1));
+        public Cell this[Point point] => Rectangle.Contains(point) 
+                ? Cells[point.X, point.Y]
+                : new Cell
+                {
+                    IsWall = true,
+                };
 
         public IReadOnlyCollection<IBuild> Builds => GameObjects.Where(x => x is IBuild).Select(x => x as IBuild).ToList();
 
@@ -122,13 +129,13 @@ namespace Askalhorn.Map
 
         public IGameObject FindNear(IPosition position, Func<IGameObject, bool> p)
         {
-            for (uint x = position.X - 1; x <= position.X + 1; x++)
-            for (uint y = position.Y - 1; y <= position.Y + 1; y++)
+            for (int x = (int)position.X - 1; x <= position.X + 1; x++)
+            for (int y = (int)position.Y - 1; y <= position.Y + 1; y++)
             {
                 if (x == position.X && y == position.Y)
                     continue;
                 
-                var cell = Cells[(int) x, (int) y];
+                var cell = this[new Point(x, y)];
                 if (cell.Build is not null && p(cell.Build))
                     return cell.Build;
 

@@ -33,14 +33,13 @@ namespace Askalhorn.Core
             Location.Current.Change(
                 new Player()
                 {
-                    Position = new Position(1, 1),
                 },
                 new LocationInfo
                 {
-                    PipelineName = "start",
+                    PipelineName = "templeOutdoors",
+                    Label = "start",
                     Seed = 10,
-                },
-                0);
+                });
         }
 
         /// <summary>

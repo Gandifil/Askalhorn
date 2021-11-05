@@ -1,0 +1,36 @@
+{
+    "designer": {
+        "$type": "Askalhorn.Map.Designers.TiledMapDesigner, Askalhorn.Map",
+        "name": "templeFloor1"
+    },
+    "spawners":[
+        {
+            "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.LabelPosition, Askalhorn.Map",
+                "name": "templeDoor"
+            },
+            "gameObject": {
+                "$type": "Askalhorn.Map.Builds.GlobalTeleport, Askalhorn.Map",
+                "location": {
+                    "pipelineName": "templeOutdoors",
+                    "label": "templeDoor"
+                }
+            }
+        },
+        {
+            "$type": "Askalhorn.Map.Spawners.Spawner, Askalhorn.Map",
+            "positionExpression": {
+                "$type": "Askalhorn.Map.Local.LabelPosition, Askalhorn.Map",
+                "name": "basementDoor"
+            },
+            "gameObject": {
+                "$type": "Askalhorn.Map.Builds.GlobalTeleport, Askalhorn.Map",
+                "location": {
+                    "pipelineName": "templeBasement",
+                    "label": "basementDoor"
+                }
+            }
+        }
+    ]
+}

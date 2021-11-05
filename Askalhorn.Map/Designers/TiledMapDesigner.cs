@@ -26,25 +26,12 @@ namespace Askalhorn.Map.Designers
         private void Initialize(Location location)
         {
             foreach (var layer in location.TiledMap.ObjectLayers)
-            {
-                if (layer.Name == "teleports")
+                if (layer.Name == "labels")
                     foreach (var obj in layer.Objects)
                     {
-                        // location.Add(new GlobalTeleport
-                        // {
-                        //     Location = new LocationInfo
-                        //     {
-                        //         PipelineName = obj.Type,
-                        //         Seed = 0,
-                        //     },
-                        //     Position = new Position((obj.Position / 32).ToPoint()),
-                        //     Place = Convert.ToUInt32((string?) obj.Name),
-                        // });
+                        var pos = new Position((obj.Position / 32).ToPoint());
+                        location.Labels.Add(obj.Name, pos);
                     }
-                if (layer.Name == "places")
-                    foreach (var obj in layer.Objects)
-                        location.Places.Add(new Position((obj.Position / 32).ToPoint()));
-            }
         }
     }
 }

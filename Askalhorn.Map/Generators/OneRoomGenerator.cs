@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json;
 
 namespace Askalhorn.Map.Generators
 {
@@ -9,6 +10,7 @@ namespace Askalhorn.Map.Generators
 
         protected readonly uint Height;
 
+        [JsonConstructor]
         public OneRoomGenerator(uint width, uint height)
         {
             this.Width = width;

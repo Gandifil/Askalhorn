@@ -14,13 +14,10 @@ namespace Askalhorn.Map.Impacts
 
         internal readonly LocationInfo NextLocation;
 
-        public readonly uint Place;
-
         [JsonConstructor]
-        public EnterLocationImpact(LocationInfo nextLocation, uint place = 0)
+        public EnterLocationImpact(LocationInfo nextLocation)
         {
             NextLocation = nextLocation;
-            Place = place;
         }
         
         public void On(object target)
@@ -31,7 +28,7 @@ namespace Askalhorn.Map.Impacts
 
             //Log.Information<string>("{Name} enter to another location", character.Name);
 
-            Location.Current.Change(gameObject, NextLocation, Place);
+            Location.Current.Change(gameObject, NextLocation);
         }
     }
 }

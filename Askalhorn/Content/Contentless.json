@@ -15,6 +15,13 @@
     ".txt": {
       "copy": true
     },
+    "locations/*.json": {
+      "importer": "JsonContentImporter",
+      "processor": "JsonContentProcessor",
+      "processorParams": {
+        "ContentType": "Askalhorn.Map.LocationPipelineReader, Askalhorn.Map"
+      }
+    },
     "items/*.json": {
       "importer": "JsonContentImporter",
       "processor": "JsonContentProcessor",

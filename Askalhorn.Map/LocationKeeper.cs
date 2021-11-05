@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Askalhorn.Map.Local;
 
 namespace Askalhorn.Map
 {
@@ -18,11 +19,11 @@ namespace Askalhorn.Map
 
         public event Action OnChange;
 
-        public void Change(GameObject target, LocationInfo info, uint placeIndex)
+        public void Change(GameObject target, LocationInfo info)
         {
             Info = info;
             Location = info.Generate(false);
-            target.Position = Location.Places[(int)placeIndex];
+            target.Position = Location.Labels[info.Label] as Position;
             Location.Add(target);
             OnChange?.Invoke();
         }

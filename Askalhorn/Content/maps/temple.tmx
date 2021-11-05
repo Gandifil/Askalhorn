@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="isometric" renderorder="right-down" width="110" height="98" tilewidth="64" tileheight="32" infinite="0" nextlayerid="22" nextobjectid="6">
+<map version="1.5" tiledversion="1.7.2" orientation="isometric" renderorder="right-down" width="110" height="98" tilewidth="64" tileheight="32" infinite="0" nextlayerid="23" nextobjectid="9">
  <tileset firstgid="1" source="grassland_tiles.tsx"/>
  <tileset firstgid="673" source="castle_tiles.tsx"/>
  <tileset firstgid="689" source="floor_tiles.tsx"/>
@@ -1941,14 +1941,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="teleports">
-  <object id="1" name="0" type="castle" x="1152" y="1024" width="121" height="19">
-   <text wrap="1">castle</text>
+ <objectgroup id="22" name="labels">
+  <object id="6" name="start" x="1036.75" y="1316.25" width="121" height="19">
+   <text wrap="1">Спавн игрока</text>
   </object>
- </objectgroup>
- <objectgroup id="7" name="places">
-  <object id="4" x="1048.25" y="1287.42" width="121" height="19">
-   <text wrap="1" color="#ff0000">Игрок</text>
+  <object id="7" name="templeDoor" type="templeFloor1" x="1164" y="1028" width="121" height="19">
+   <text wrap="1">внутрь</text>
   </object>
  </objectgroup>
 </map>
